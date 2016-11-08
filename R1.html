@@ -48,7 +48,7 @@
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Section</span> <span class="id" type="var">constructive_propositional_logic</span>.<br/>
+<span class="id" type="keyword">Section</span> <a name="constructive_propositional_logic"><span class="id" type="section">constructive_propositional_logic</span></a>.<br/>
 
 <br/>
 </div>
@@ -60,7 +60,7 @@ Mechanizm sekcji nie będzie nas na razie interesował. Użyjemy go,
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">P</span> <span class="id" type="var">Q</span> <span class="id" type="var">R</span> : <span class="id" type="keyword">Prop</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <a name="constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a name="constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a name="constructive_propositional_logic.R"><span class="id" type="variable">R</span></a> : <span class="id" type="keyword">Prop</span>.<br/>
 
 <br/>
 </div>
@@ -154,7 +154,7 @@ Zapis <span class="inlinecode"><span class="id" type="var">x</span></span> <span
 <span class="comment">(*&nbsp;===&gt;&nbsp;2&nbsp;:&nbsp;nat&nbsp;*)</span><br/>
 
 <br/>
-<span class="id" type="keyword">Check</span> <span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 <span class="comment">(*&nbsp;===&gt;&nbsp;P&nbsp;:&nbsp;Prop&nbsp;*)</span><br/>
 
 <br/>
@@ -346,7 +346,7 @@ Jeżeli czytałeś uważnie, zauważyłeś zapewne stwierdzenie,
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">impl_refl</span> : <span class="id" type="var">P</span> → <span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="impl_refl"><span class="id" type="lemma">impl_refl</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">dowód_na_to_</span>ż<span class="id" type="var">e_P_zachodzi</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">exact</span> <span class="id" type="var">dowód_na_to_</span>ż<span class="id" type="var">e_P_zachodzi</span>.<br/>
@@ -456,7 +456,7 @@ Słowo kluczowe <span class="inlinecode"><span class="id" type="keyword">Theorem
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">impl_refl'</span> : <span class="id" type="var">P</span> → <span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="impl_refl'"><span class="id" type="lemma">impl_refl'</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">assumption</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -538,7 +538,7 @@ Wspomnieliśmy wcześniej, że zdania logiczne są typami,
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">modus_ponens</span> : (<span class="id" type="var">P</span> → <span class="id" type="var">Q</span>) → <span class="id" type="var">P</span> → <span class="id" type="var">Q</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="modus_ponens"><span class="id" type="lemma">modus_ponens</span></a> : (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>) → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">apply</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">assumption</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -611,7 +611,7 @@ Implikacja jest operatorem łączącym w prawo (ang. right
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">impl_trans</span> : (<span class="id" type="var">P</span> → <span class="id" type="var">Q</span>) → (<span class="id" type="var">Q</span> → <span class="id" type="var">R</span>) → (<span class="id" type="var">P</span> → <span class="id" type="var">R</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="impl_trans"><span class="id" type="lemma">impl_trans</span></a> : (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>) → (<a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a>) → (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a>).<br/>
 
 <br/>
 </div>
@@ -621,7 +621,7 @@ Implikacja jest operatorem łączącym w prawo (ang. right
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">impl_permute</span> : (<span class="id" type="var">P</span> → <span class="id" type="var">Q</span> → <span class="id" type="var">R</span>) → (<span class="id" type="var">Q</span> → <span class="id" type="var">P</span> → <span class="id" type="var">R</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="impl_permute"><span class="id" type="lemma">impl_permute</span></a> : (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a>) → (<a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a>).<br/>
 
 <br/>
 </div>
@@ -631,7 +631,7 @@ Implikacja jest operatorem łączącym w prawo (ang. right
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">impl_dist</span> : (<span class="id" type="var">P</span> → <span class="id" type="var">Q</span> → <span class="id" type="var">R</span>) → ((<span class="id" type="var">P</span> → <span class="id" type="var">Q</span>) → (<span class="id" type="var">P</span> → <span class="id" type="var">R</span>)).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="impl_dist"><span class="id" type="lemma">impl_dist</span></a> : (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a>) → ((<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>) → (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a>)).<br/>
 
 <br/>
 </div>
@@ -641,7 +641,7 @@ Implikacja jest operatorem łączącym w prawo (ang. right
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">modus_ponens'</span> : (<span class="id" type="var">P</span> → <span class="id" type="var">Q</span>) → <span class="id" type="var">P</span> → <span class="id" type="var">Q</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="modus_ponens'"><span class="id" type="lemma">modus_ponens'</span></a> : (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>) → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>.<br/>
 
 <br/>
 </div>
@@ -653,7 +653,7 @@ Implikacja jest operatorem łączącym w prawo (ang. right
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">ex_falso</span> : <span class="id" type="var">False</span> → <span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="ex_falso"><span class="id" type="lemma">ex_falso</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -697,7 +697,7 @@ Implikacja jest operatorem łączącym w prawo (ang. right
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">truth</span> : <span class="id" type="var">True</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="truth"><span class="id" type="lemma">truth</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">trivial</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -742,7 +742,7 @@ Jeżeli przyjrzymy się skonstruowanemu prooftermowi, dostrzeżemy
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Check</span> ¬<span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 <span class="comment">(*&nbsp;===&gt;&nbsp;~&nbsp;P&nbsp;:&nbsp;Prop&nbsp;*)</span><br/>
 
 <br/>
@@ -813,10 +813,10 @@ Definicja negacji w Coqu opiera się właśnie na powyższym spostrzeżeniu:
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">P_notP</span> : ¬<span class="id" type="var">P</span> → <span class="id" type="var">P</span> → <span class="id" type="var">False</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="P_notP"><span class="id" type="lemma">P_notP</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">HnotP</span> <span class="id" type="var">HP</span>.<br/>
-&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">not</span> <span class="id" type="keyword">in</span> <span class="id" type="var">HnotP</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#not"><span class="id" type="definition">not</span></a> <span class="id" type="keyword">in</span> <span class="id" type="var">HnotP</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">HnotP</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -840,9 +840,9 @@ Taktyka <span class="inlinecode"><span class="id" type="tactic">unfold</span></s
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">P_notP'</span> : ¬<span class="id" type="var">P</span> → <span class="id" type="var">P</span> → 42 = 666.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="P_notP'"><span class="id" type="lemma">P_notP'</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → 42 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> 666.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">cut</span> <span class="id" type="var">False</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">cut</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">inversion</span> 1.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">assumption</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -898,7 +898,7 @@ Taktyką, która czasem przydaje się w dowodzeniu negacji i radzeniu
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">not_False</span> : ¬<span class="id" type="var">False</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="not_False"><span class="id" type="lemma">not_False</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a>.<br/>
 
 <br/>
 </div>
@@ -908,7 +908,7 @@ Taktyką, która czasem przydaje się w dowodzeniu negacji i radzeniu
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">not_True</span> : ¬<span class="id" type="var">True</span> → <span class="id" type="var">False</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="not_True"><span class="id" type="lemma">not_True</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a>.<br/>
 
 <br/>
 </div>
@@ -918,7 +918,7 @@ Taktyką, która czasem przydaje się w dowodzeniu negacji i radzeniu
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">dbl_neg_intro</span> : <span class="id" type="var">P</span> → ~~<span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="dbl_neg_intro"><span class="id" type="lemma">dbl_neg_intro</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~~</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 
 <br/>
 </div>
@@ -928,7 +928,7 @@ Taktyką, która czasem przydaje się w dowodzeniu negacji i radzeniu
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">triple_neg_rev</span> : ~~~<span class="id" type="var">P</span> → ¬<span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="triple_neg_rev"><span class="id" type="lemma">triple_neg_rev</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~~~</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 
 <br/>
 </div>
@@ -940,7 +940,7 @@ Taktyką, która czasem przydaje się w dowodzeniu negacji i radzeniu
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">and_intro</span> : <span class="id" type="var">P</span> → <span class="id" type="var">Q</span> → <span class="id" type="var">P</span> ∧ <span class="id" type="var">Q</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="and_intro"><span class="id" type="lemma">and_intro</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">split</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
@@ -973,7 +973,7 @@ Symbol <span class="inlinecode">∧</span> oznacza koniunkcję dwóch zdań logi
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">and_proj1</span> : <span class="id" type="var">P</span> ∧ <span class="id" type="var">Q</span> → <span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="and_proj1"><span class="id" type="lemma">and_proj1</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">assumption</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -993,7 +993,7 @@ Aby udowodnić koniunkcję, użyliśmy taktyki <span class="inlinecode"><span cl
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">and_proj1'</span> : <span class="id" type="var">P</span> ∧ <span class="id" type="var">Q</span> → <span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="and_proj1'"><span class="id" type="lemma">and_proj1'</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">HPQ</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">HPQ</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">HP</span> <span class="id" type="var">HQ</span>]. <span class="id" type="tactic">assumption</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -1022,7 +1022,7 @@ Podobnie jak w przypadku taktyki <span class="inlinecode"><span class="id" type=
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">and_proj2</span> : <span class="id" type="var">P</span> ∧ <span class="id" type="var">Q</span> → <span class="id" type="var">Q</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="and_proj2"><span class="id" type="lemma">and_proj2</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>.<br/>
 
 <br/>
 </div>
@@ -1032,7 +1032,7 @@ Podobnie jak w przypadku taktyki <span class="inlinecode"><span class="id" type=
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">and3_intro</span> : <span class="id" type="var">P</span> → <span class="id" type="var">Q</span> → <span class="id" type="var">R</span> → <span class="id" type="var">P</span> ∧ <span class="id" type="var">Q</span> ∧ <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="and3_intro"><span class="id" type="lemma">and3_intro</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a>.<br/>
 
 <br/>
 </div>
@@ -1042,7 +1042,7 @@ Podobnie jak w przypadku taktyki <span class="inlinecode"><span class="id" type=
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">and3_proj</span> : <span class="id" type="var">P</span> ∧ <span class="id" type="var">Q</span> ∧ <span class="id" type="var">R</span> → <span class="id" type="var">Q</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="and3_proj"><span class="id" type="lemma">and3_proj</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>.<br/>
 
 <br/>
 </div>
@@ -1052,7 +1052,7 @@ Podobnie jak w przypadku taktyki <span class="inlinecode"><span class="id" type=
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">noncontradiction</span> : ~(<span class="id" type="var">P</span> ∧ ¬<span class="id" type="var">P</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="noncontradiction"><span class="id" type="lemma">noncontradiction</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~(</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">)</span></a>.<br/>
 
 <br/>
 </div>
@@ -1089,7 +1089,7 @@ Jak widać, równoważność <span class="inlinecode"><span class="id" type="var
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">iff_intro</span> : (<span class="id" type="var">P</span> → <span class="id" type="var">Q</span>) → (<span class="id" type="var">Q</span> → <span class="id" type="var">P</span>) → (<span class="id" type="var">P</span> ↔ <span class="id" type="var">Q</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="iff_intro"><span class="id" type="lemma">iff_intro</span></a> : (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>) → (<a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>) → (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">)</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">split</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">apply</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">assumption</span>.<br/>
@@ -1106,7 +1106,7 @@ Do rozbijania równoważności będących celem służy, tak jak w
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">iff_proj1</span> : (<span class="id" type="var">P</span> ↔ <span class="id" type="var">Q</span>) → (<span class="id" type="var">P</span> → <span class="id" type="var">Q</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="iff_proj1"><span class="id" type="lemma">iff_proj1</span></a> : (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">)</span></a> → (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>).<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">HPQ</span> <span class="id" type="var">HQP</span>].<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">HPQ</span>. <span class="id" type="tactic">assumption</span>.<br/>
@@ -1126,7 +1126,7 @@ Równoważnosć znajdującą się w kontekście możemy zaś, tak jak
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">iff_refl</span> : <span class="id" type="var">P</span> ↔ <span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="iff_refl"><span class="id" type="lemma">iff_refl</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 
 <br/>
 </div>
@@ -1136,7 +1136,7 @@ Równoważnosć znajdującą się w kontekście możemy zaś, tak jak
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">iff_symm</span> : (<span class="id" type="var">P</span> ↔ <span class="id" type="var">Q</span>) → (<span class="id" type="var">Q</span> ↔ <span class="id" type="var">P</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="iff_symm"><span class="id" type="lemma">iff_symm</span></a> : (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">)</span></a> → (<a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">)</span></a>.<br/>
 
 <br/>
 </div>
@@ -1146,7 +1146,7 @@ Równoważnosć znajdującą się w kontekście możemy zaś, tak jak
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">iff_trans</span>: (<span class="id" type="var">P</span> ↔ <span class="id" type="var">Q</span>) → (<span class="id" type="var">Q</span> ↔ <span class="id" type="var">R</span>) → (<span class="id" type="var">P</span> ↔ <span class="id" type="var">R</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="iff_trans"><span class="id" type="lemma">iff_trans</span></a>: (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">)</span></a> → (<a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">)</span></a> → (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">)</span></a>.<br/>
 
 <br/>
 </div>
@@ -1156,7 +1156,7 @@ Równoważnosć znajdującą się w kontekście możemy zaś, tak jak
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">iff_not</span> : (<span class="id" type="var">P</span> ↔ <span class="id" type="var">Q</span>) → (~<span class="id" type="var">P</span> ↔ ¬<span class="id" type="var">Q</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="iff_not"><span class="id" type="lemma">iff_not</span></a> : (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">)</span></a> → (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a><a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">)</span></a>.<br/>
 
 <br/>
 </div>
@@ -1166,7 +1166,7 @@ Równoważnosć znajdującą się w kontekście możemy zaś, tak jak
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">curry_uncurry</span> : (<span class="id" type="var">P</span> → <span class="id" type="var">Q</span> → <span class="id" type="var">R</span>) ↔ (<span class="id" type="var">P</span> ∧ <span class="id" type="var">Q</span> → <span class="id" type="var">R</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="curry_uncurry"><span class="id" type="lemma">curry_uncurry</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a>).<br/>
 
 <br/>
 </div>
@@ -1178,7 +1178,7 @@ Równoważnosć znajdującą się w kontekście możemy zaś, tak jak
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">or_left</span> : <span class="id" type="var">P</span> → <span class="id" type="var">P</span> ∨ <span class="id" type="var">Q</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="or_left"><span class="id" type="lemma">or_left</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">left</span>. <span class="id" type="tactic">assumption</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -1195,7 +1195,7 @@ Symbol <span class="inlinecode">∨</span> oznacza alternatywę (zwaną też cza
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">or_comm_impl</span> : <span class="id" type="var">P</span> ∨ <span class="id" type="var">Q</span> → <span class="id" type="var">Q</span> ∨ <span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="or_comm_impl"><span class="id" type="lemma">or_comm_impl</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">p</span> | <span class="id" type="var">q</span>].<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">right</span>. <span class="id" type="tactic">assumption</span>.<br/>
@@ -1233,7 +1233,7 @@ Zauważmy, że użycie taktyki destruct zmieniło nam ilość celów.
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">or_right</span> : <span class="id" type="var">Q</span> → <span class="id" type="var">P</span> ∨ <span class="id" type="var">Q</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="or_right"><span class="id" type="lemma">or_right</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>.<br/>
 
 <br/>
 </div>
@@ -1243,7 +1243,7 @@ Zauważmy, że użycie taktyki destruct zmieniło nam ilość celów.
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">or_big</span> : <span class="id" type="var">Q</span> → <span class="id" type="var">P</span> ∨ <span class="id" type="var">Q</span> ∨ <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="or_big"><span class="id" type="lemma">or_big</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a>.<br/>
 
 <br/>
 </div>
@@ -1253,7 +1253,7 @@ Zauważmy, że użycie taktyki destruct zmieniło nam ilość celów.
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">or3_comm_impl</span> : <span class="id" type="var">P</span> ∨ <span class="id" type="var">Q</span> ∨ <span class="id" type="var">R</span> → <span class="id" type="var">R</span> ∨ <span class="id" type="var">Q</span> ∨ <span class="id" type="var">P</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="or3_comm_impl"><span class="id" type="lemma">or3_comm_impl</span></a> : <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.R"><span class="id" type="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a>.<br/>
 
 <br/>
 </div>
@@ -1263,19 +1263,21 @@ Zauważmy, że użycie taktyki destruct zmieniło nam ilość celów.
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">or_impl</span> : ¬<span class="id" type="var">P</span> ∨ <span class="id" type="var">Q</span> → (<span class="id" type="var">P</span> → <span class="id" type="var">Q</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="or_impl"><span class="id" type="lemma">or_impl</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a><a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">→</span></a> (<a class="idref" href="R1.html#constructive_propositional_logic.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#constructive_propositional_logic.Q"><span class="id" type="variable">Q</span></a>).<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-<a name="lab42"></a><h1 class="section">Konstruktywny rachunek predykatów</h1>
+<a name="lab42"></a><h1 class="section">Konstruktywny rachunek predykatów (alfa)</h1>
+<a name="lab43"></a><h2 class="section">TO NAPRAWDĘ JEST WERSJA ALFA. NIE CZYTAĆ BO RAK MÓZGU</h2>
 
+    GWARANTOWANY 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">End</span> <span class="id" type="var">constructive_propositional_logic</span>.<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R1.html#constructive_propositional_logic"><span class="id" type="section">constructive_propositional_logic</span></a>.<br/>
 
 <br/>
 </div>
@@ -1292,14 +1294,126 @@ Komenda <span class="inlinecode"><span class="id" type="keyword">End</span></spa
     Zajmiemy się teraz konstruktywnym rachunkiem predykatów. Jest on
     rozszerzeniem omawianego poprzednio konstruktywnego rachunku zdań
     o predykaty oraz kwantyfikatory, które pozwolą
-    nam wyrażać takie zależności, jak "każdy" oraz "istnieje". Predykaty
-    możemy interpretować jako "właściwości obiektów". 
+    nam wyrażać takie zależności jak "każdy" oraz "istnieje". Predykaty
+    możemy interpretować jako "właściwości obiektów".
+
+<div class="paragraph"> </div>
+
+    Zobaczmy o co chodzi na przykładzie relacji <span class="inlinecode">≤</span> (mniejszy
+    lub równy; w Coqu zwie się ona <span class="inlinecode"><span class="id" type="var">le</span></span>). 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">or_introl_pred</span> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <span class="id" type="var">A</span> → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">x</span> <span class="id" type="var">y</span> : <span class="id" type="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">P</span> <span class="id" type="var">x</span> → <span class="id" type="var">P</span> <span class="id" type="var">x</span> ∨ <span class="id" type="var">P</span> <span class="id" type="var">y</span>.<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#le"><span class="id" type="inductive">le</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;le&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;nat&nbsp;-&gt;&nbsp;Prop&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jest to funkcja, która bierze dwa argumenty i zwraca pewne zdanie
+    logiczne. Tak możemy zapisać zdanie "zero jest mniejsze lub równe każdej
+    liczbie naturalnej": 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">SearchAbout</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#le"><span class="id" type="inductive">le</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Print</span> <span class="id" type="var">le_n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Check</span> (<span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="R1.html#n"><span class="id" type="variable">n</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<='_x"><span class="id" type="notation">)</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;forall&nbsp;n&nbsp;:&nbsp;nat,&nbsp;0&nbsp;&lt;=&nbsp;n<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Prop&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Obiekt <span class="inlinecode"><span class="id" type="keyword">∀</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span>,</span> <span class="inlinecode">0</span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" type="var">n</span></span> jest zdaniem logicznym wyrażającym
+    powyższą zależność. Zapis <span class="inlinecode"><span class="id" type="keyword">∀</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span>...</span> możemy odczytać "dla
+    każdej liczby natualnej n...". 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="le_0_n"><span class="id" type="lemma">le_0_n</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="R1.html#n"><span class="id" type="variable">n</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span>. <span class="id" type="tactic">auto</span>. <span class="id" type="keyword">Print</span> <span class="id" type="var">le</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Check</span> (<span class="id" type="keyword">∀</span> <span class="id" type="var">P</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <span class="id" type="keyword">Prop</span>, <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> 5).<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;forall&nbsp;P&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;Prop,&nbsp;P&nbsp;5<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Prop&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Obiekt <span class="inlinecode"><span class="id" type="keyword">∀</span></span> <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="keyword">Prop</span>,</span> <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">5</span> to funkcja, która jako
+    argument przyjmuje funkcję z liczb naturalnych w zdania
+    (<span class="inlinecode"><span class="id" type="var">nat</span></span> to typ liczb naturalnych), a zwraca <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">5</span>, czyli
+    zdanie, które głosi, że <span class="inlinecode">5</span> ma właściwość <span class="inlinecode"><span class="id" type="var">P</span></span>. Cały ten
+    obiekt jest typu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>, a zatem jest zdaniem logicznym.
+    Możemy go interpretować jako stwierdzenie "liczba 5 ma
+    każdą właściwość, którą mogą mieć liczby naturalne".
+
+<div class="paragraph"> </div>
+
+    Interpretacja obliczeniowa kwantyfikatora <span class="inlinecode"><span class="id" type="keyword">∀</span></span> jest podobna
+    jak implikacji, lecz nieco bardziej ogólna. Implikacje możemy
+    interpretować jako funkcje, które przekształcają dowód poprzednika
+    w dowód następnika. Podobnie kwantyfikację uniwersalną możemy
+    zinterpretować jako funkcję zależną (czyli taką, której
+    przeciwdziedzina zależy od dziedziny), która bierze na wejścu
+    obiekty potrzebne do wyrażenia naszego zdania, a zwraca jego
+    dowód.
+
+<div class="paragraph"> </div>
+
+    Przyjrzyjmy się o co chodzi z tą zależnością na przykładzie
+    naszego zdania, które jest rzecz jasna nieprawdziwe — istnieją
+    takie właściwości liczb naturalnych, których <span class="inlinecode">5</span> nie posiada
+    (np. "bycie równym 42"). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="not_true"><span class="id" type="lemma">not_true</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">(</span></a><span class="id" type="keyword">∀</span> <span class="id" type="var">P</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <span class="id" type="keyword">Prop</span>, <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> 5).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">specialize</span> (<span class="id" type="var">H</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> ⇒ <a class="idref" href="R1.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> 42<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">)</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">simpl</span> <span class="id" type="keyword">in</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Taktyką przydatną w pracy z kwantyfikacją uniwersalną jest
+    <span class="inlinecode"><span class="id" type="tactic">specialize</span></span>. Jeżeli mamy jakąś hipotezę kwantyfikowaną
+    uniwersalnie, to możemy zamienić ją na bardziej konkretną,
+    zastępując którąś ze zmiennych konkretnym termem.
+
+<div class="paragraph"> </div>
+
+    W naszym przypadku zastąpiliśmy zmienną <span class="inlinecode"><span class="id" type="var">P</span></span>, reprezentującą
+    dowolny  predykat na liczbach naturalnych, funkcją <span class="inlinecode"><span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">:</span>
+    <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode">42</span>. Funkcja ta bierze liczbę naturalną <span class="inlinecode"><span class="id" type="var">n</span></span> i zwraca
+    zdanie, które głosi "n jest równe 42". 
+</div>
+<div class="code">
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*Powinieneś&nbsp;dobrze&nbsp;zrozumieć,&nbsp;co&nbsp;robic&nbsp;ta&nbsp;funkcja:&nbsp;nie&nbsp;jest&nbsp;to<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;funkcja&nbsp;boolowska&nbsp;ani&nbsp;funkcja,&nbsp;która&nbsp;cokolwiek&nbsp;porównuje.&nbsp;Jest<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="or_introl_pred"><span class="id" type="lemma">or_introl_pred</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a> → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">x</span> <span class="id" type="var">y</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a> → <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a> ∨ <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="R1.html#y"><span class="id" type="variable">y</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">left</span>. <span class="id" type="tactic">assumption</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -1338,53 +1452,14 @@ Komenda <span class="inlinecode"><span class="id" type="keyword">End</span></spa
 
 <div class="paragraph"> </div>
 
-    Interpretacja obliczeniowa kwantyfikatora <span class="inlinecode"><span class="id" type="keyword">∀</span></span> jest podobna
-    jak implikacji, lecz nieco bardziej ogólna. Implikacje możemy
-    interpretować jako funkcje, które przekształcają dowód poprzednika
-    w dowód następnika. Podobnie kwantyfikację uniwersalną możemy
-    zinterpretować jako funkcję zależną, czyli taką, której
-    przeciwdziedzina zależy od dziedziny.
-
+    
 <div class="paragraph"> </div>
 
-    Zobaczmy o co chodzi na nieco prostszym przykładzie: 
+ Ćwiczenie 9 
 </div>
 <div class="code">
-
-<br/>
-<span class="id" type="keyword">Check</span> (<span class="id" type="keyword">∀</span> <span class="id" type="var">P</span> : <span class="id" type="var">nat</span> → <span class="id" type="keyword">Prop</span>, <span class="id" type="var">P</span> 5).<br/>
-<span class="comment">(*&nbsp;===&gt;&nbsp;forall&nbsp;P&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;Prop,&nbsp;P&nbsp;5<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Prop&nbsp;*)</span><br/>
-
-<br/>
-</div>
-
-<div class="doc">
-Obiekt <span class="inlinecode"><span class="id" type="keyword">∀</span></span> <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="keyword">Prop</span>,</span> <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">5</span> to funkcja, która jako
-    argument przyjmuje funkcję z liczb naturalnych w zdania
-    (<span class="inlinecode"><span class="id" type="var">nat</span></span> to typ liczb naturalnych), a zwraca <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">5</span>, czyli
-    zdanie, które głosi, że <span class="inlinecode">5</span> ma właściwość <span class="inlinecode"><span class="id" type="var">P</span></span>. Cały ten
-    obiekt jest typu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>, a zatem jest zdaniem logicznym.
-    Możemy go interpretować jako stwierdzenie "liczba 5 ma
-    każdą właściwość, którą mogą mieć liczby naturalne". 
-</div>
-<div class="code">
-
-<br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">stupid</span> : ¬ (<span class="id" type="keyword">∀</span> <span class="id" type="var">P</span> : <span class="id" type="var">nat</span> → <span class="id" type="keyword">Prop</span>, <span class="id" type="var">P</span> 5).<br/>
-<span class="id" type="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">specialize</span> (<span class="id" type="var">H</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">_</span> ⇒ <span class="id" type="var">False</span>)). <span class="id" type="tactic">simpl</span> <span class="id" type="keyword">in</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">assumption</span>.<br/>
-<span class="id" type="keyword">Qed</span>.<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-Ćwiczenie 9 
-</div>
-<div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">diamond</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">P</span> <span class="id" type="var">Q</span> <span class="id" type="var">R</span> <span class="id" type="var">S</span> : <span class="id" type="keyword">Prop</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">P</span> → <span class="id" type="var">Q</span>) ∨ (<span class="id" type="var">P</span> → <span class="id" type="var">R</span>) → (<span class="id" type="var">Q</span> → <span class="id" type="var">S</span>) → (<span class="id" type="var">R</span> → <span class="id" type="var">S</span>) → <span class="id" type="var">P</span> → <span class="id" type="var">S</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="diamond"><span class="id" type="lemma">diamond</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">P</span> <span class="id" type="var">Q</span> <span class="id" type="var">R</span> <span class="id" type="var">S</span> : <span class="id" type="keyword">Prop</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#R"><span class="id" type="variable">R</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">→</span></a> (<a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#S"><span class="id" type="variable">S</span></a>) → (<a class="idref" href="R1.html#R"><span class="id" type="variable">R</span></a> → <a class="idref" href="R1.html#S"><span class="id" type="variable">S</span></a>) → <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#S"><span class="id" type="variable">S</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">H0</span>. <span class="id" type="tactic">apply</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">assumption</span>.<br/>
@@ -1392,8 +1467,8 @@ Obiekt <span class="inlinecode"><span class="id" type="keyword">∀</span></span
 <span class="id" type="keyword">Qed</span>.<br/>
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">ex_intro</span> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <span class="id" type="var">A</span> → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">x</span> : <span class="id" type="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">P</span> <span class="id" type="var">x</span> → <span class="id" type="tactic">∃</span> <span class="id" type="var">y</span> : <span class="id" type="var">A</span>, <span class="id" type="var">P</span> <span class="id" type="var">y</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="ex_intro"><span class="id" type="lemma">ex_intro</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a> → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">x</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">y</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="R1.html#y"><span class="id" type="variable">y</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -1423,8 +1498,8 @@ Zdań egzystencjalnych dowodzimy przy pomocy taktyki 'exists'.
 Ćwiczenie 10. 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">ex_exercise</span> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> <span class="id" type="var">Q</span> : <span class="id" type="var">A</span> → <span class="id" type="keyword">Prop</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="tactic">∃</span> <span class="id" type="var">x</span> : <span class="id" type="var">A</span>, <span class="id" type="var">P</span> <span class="id" type="var">x</span> ∧ <span class="id" type="var">Q</span> <span class="id" type="var">x</span>) → (<span class="id" type="tactic">∃</span> <span class="id" type="var">y</span> : <span class="id" type="var">A</span>, <span class="id" type="var">P</span> <span class="id" type="var">y</span>) ∧ (<span class="id" type="tactic">∃</span> <span class="id" type="var">z</span> : <span class="id" type="var">A</span>, <span class="id" type="var">Q</span> <span class="id" type="var">z</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="ex_exercise"><span class="id" type="lemma">ex_exercise</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> <span class="id" type="var">Q</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a> → <span class="id" type="keyword">Prop</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">x</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a> ∧ <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a>) → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">y</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="R1.html#y"><span class="id" type="variable">y</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">z</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="R1.html#z"><span class="id" type="variable">z</span></a>).<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">x</span> <span class="id" type="var">H</span>]. <span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
 </div>
