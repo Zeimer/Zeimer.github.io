@@ -23,7 +23,7 @@
     z których zdecydowanie ważniejsze są te pierwsze. 
 <div class="paragraph"> </div>
 
-<a name="lab44"></a><h1 class="section">Typy induktywne</h1>
+<a name="lab48"></a><h1 class="section">Typy induktywne</h1>
 
 <div class="paragraph"> </div>
 
@@ -38,9 +38,9 @@
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Inductive</span> <span class="id" type="var">bool</span> : <span class="id" type="keyword">Set</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">true</span> : <span class="id" type="var">bool</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">false</span> : <span class="id" type="var">bool</span>.<br/>
+<span class="id" type="keyword">Inductive</span> <a name="bool"><span class="id" type="inductive">bool</span></a> : <span class="id" type="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="true"><span class="id" type="constructor">true</span></a> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="false"><span class="id" type="constructor">false</span></a> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>.<br/>
 
 <br/>
 </div>
@@ -87,10 +87,10 @@ Naszym pierwszym przykładem będzie typ <span class="inlinecode"><span class="i
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Definition</span> <span class="id" type="var">negb</span> (<span class="id" type="var">b</span> : <span class="id" type="var">bool</span>) : <span class="id" type="var">bool</span> :=<br/>
-<span class="id" type="keyword">match</span> <span class="id" type="var">b</span> <span class="id" type="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">true</span> ⇒ <span class="id" type="var">false</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">false</span> ⇒ <span class="id" type="var">true</span><br/>
+<span class="id" type="keyword">Definition</span> <a name="negb"><span class="id" type="definition">negb</span></a> (<span class="id" type="var">b</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>) : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#b"><span class="id" type="variable">b</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a> ⇒ <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a> ⇒ <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a><br/>
 <span class="id" type="keyword">end</span>.<br/>
 
 <br/>
@@ -110,7 +110,7 @@ Mając typ induktywny, możemy definiować funkcje. Podstawowym
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Eval</span> <span class="id" type="tactic">compute</span> <span class="id" type="keyword">in</span> <span class="id" type="var">negb</span> <span class="id" type="var">true</span>.<br/>
+<span class="id" type="keyword">Eval</span> <span class="id" type="tactic">compute</span> <span class="id" type="keyword">in</span> <a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a>.<br/>
 <span class="comment">(*&nbsp;==&gt;&nbsp;false&nbsp;:&nbsp;bool&nbsp;*)</span><br/>
 
 <br/>
@@ -140,7 +140,7 @@ Odpalenie danej funkcji w Coqu jest dość toporne — wymaga to
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">negb_involutive</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b</span> : <span class="id" type="var">bool</span>, <span class="id" type="var">negb</span> (<span class="id" type="var">negb</span> <span class="id" type="var">b</span>) = <span class="id" type="var">b</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="negb_involutive"><span class="id" type="lemma">negb_involutive</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>, <a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="R2.html#b"><span class="id" type="variable">b</span></a>) = <a class="idref" href="R2.html#b"><span class="id" type="variable">b</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">b</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">reflexivity</span>.<br/>
@@ -173,7 +173,7 @@ Nasze twierdzenie głosi, że funkcja <span class="inlinecode"><span class="id" 
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">negb_involutive'</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b</span> : <span class="id" type="var">bool</span>, <span class="id" type="var">negb</span> (<span class="id" type="var">negb</span> <span class="id" type="var">b</span>) = <span class="id" type="var">b</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="negb_involutive'"><span class="id" type="lemma">negb_involutive'</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>, <a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="R2.html#b"><span class="id" type="variable">b</span></a>) = <a class="idref" href="R2.html#b"><span class="id" type="variable">b</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">b</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">reflexivity</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -190,7 +190,7 @@ Zauważmy, że nie musimy używać taktyki <span class="inlinecode"><span class=
     żeby rozwiązać je oba za jednym zamachem. 
 <div class="paragraph"> </div>
 
-<a name="lab45"></a><h4 class="section">Ćwiczenie 1.</h4>
+<a name="lab49"></a><h4 class="section">Ćwiczenie 1.</h4>
  Zdefiniuj funkcje <span class="inlinecode"><span class="id" type="var">andb</span></span> (koniunkcja boolowska) oraz <span class="inlinecode"><span class="id" type="var">orb</span></span>
     (alternatywa boolowska). Napisz i udowodnij twierdzenie,
     które mówi, że funkcje te są przemienne. 
@@ -198,29 +198,29 @@ Zauważmy, że nie musimy używać taktyki <span class="inlinecode"><span class=
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Definition</span> <span class="id" type="var">andb</span> (<span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <span class="id" type="var">bool</span>) : <span class="id" type="var">bool</span> :=<br/>
-<span class="id" type="keyword">match</span> <span class="id" type="var">b1</span> <span class="id" type="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">true</span> ⇒ <span class="id" type="var">b2</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">false</span> ⇒ <span class="id" type="var">false</span><br/>
+<span class="id" type="keyword">Definition</span> <a name="andb"><span class="id" type="definition">andb</span></a> (<span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>) : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a> ⇒ <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a> ⇒ <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a><br/>
 <span class="id" type="keyword">end</span>.<br/>
 
 <br/>
-<span class="id" type="keyword">Definition</span> <span class="id" type="var">orb</span> (<span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <span class="id" type="var">bool</span>) : <span class="id" type="var">bool</span> :=<br/>
-<span class="id" type="keyword">match</span> <span class="id" type="var">b1</span> <span class="id" type="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">true</span> ⇒ <span class="id" type="var">true</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">false</span> ⇒ <span class="id" type="var">b2</span><br/>
+<span class="id" type="keyword">Definition</span> <a name="orb"><span class="id" type="definition">orb</span></a> (<span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>) : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a> ⇒ <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a> ⇒ <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a><br/>
 <span class="id" type="keyword">end</span>.<br/>
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">andb_comm</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <span class="id" type="var">bool</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">andb</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> = <span class="id" type="var">andb</span> <span class="id" type="var">b2</span> <span class="id" type="var">b1</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_comm"><span class="id" type="lemma">andb_comm</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#andb"><span class="id" type="definition">andb</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> = <a class="idref" href="R2.html#andb"><span class="id" type="definition">andb</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">b1</span>, <span class="id" type="var">b2</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">reflexivity</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">orb_comm</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <span class="id" type="var">bool</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">orb</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> = <span class="id" type="var">orb</span> <span class="id" type="var">b2</span> <span class="id" type="var">b1</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_comm"><span class="id" type="lemma">orb_comm</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#orb"><span class="id" type="definition">orb</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> = <a class="idref" href="R2.html#orb"><span class="id" type="definition">orb</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">b1</span>, <span class="id" type="var">b2</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">reflexivity</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -229,14 +229,14 @@ Zauważmy, że nie musimy używać taktyki <span class="inlinecode"><span class=
 </div>
 
 <div class="doc">
-<a name="lab46"></a><h2 class="section">Notacje</h2>
+<a name="lab50"></a><h2 class="section">Notacje</h2>
 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Notation</span> "b1 &amp;&amp; b2" := (<span class="id" type="var">andb</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span>).<br/>
-<span class="id" type="keyword">Notation</span> "b1 || b2" := (<span class="id" type="var">orb</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span>).<br/>
+<span class="id" type="keyword">Notation</span> <a name="::x_'&&'_x"><span class="id" type="notation">"</span></a>b1 &amp;&amp; b2" := (<a class="idref" href="R2.html#andb"><span class="id" type="definition">andb</span></a> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span>).<br/>
+<span class="id" type="keyword">Notation</span> <a name="::x_'||'_x"><span class="id" type="notation">"</span></a>b1 || b2" := (<a class="idref" href="R2.html#orb"><span class="id" type="definition">orb</span></a> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span>).<br/>
 
 <br/>
 </div>
@@ -246,14 +246,14 @@ Coq dysponuje również potężnym systemem notacji, które pozwalają
     nam uprościć sposób zapisywania funkcji, typów czy predykatów. 
 <div class="paragraph"> </div>
 
-<a name="lab47"></a><h1 class="section">Ltac — język taktyk</h1>
+<a name="lab51"></a><h1 class="section">Ltac — język taktyk</h1>
 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">andb_dist_orb</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> <span class="id" type="var">b3</span> : <span class="id" type="var">bool</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">b1</span> &amp;&amp; (<span class="id" type="var">b2</span> || <span class="id" type="var">b3</span>) = (<span class="id" type="var">b1</span> &amp;&amp; <span class="id" type="var">b2</span>) || (<span class="id" type="var">b1</span> &amp;&amp; <span class="id" type="var">b3</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_dist_orb"><span class="id" type="lemma">andb_dist_orb</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> <span class="id" type="var">b3</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="R2.html#::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="R2.html#b3"><span class="id" type="variable">b3</span></a><a class="idref" href="R2.html#::x_'||'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="R2.html#::x_'||'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a><a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="R2.html#::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="R2.html#::x_'||'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="R2.html#b3"><span class="id" type="variable">b3</span></a><a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">)</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">b1</span>, <span class="id" type="var">b2</span>, <span class="id" type="var">b3</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">reflexivity</span>.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -291,14 +291,14 @@ Powyższe twierdzenie mówi, że koniunkcja boolowska jest rozdzielna
 <br/>
 <span class="id" type="keyword">Ltac</span> <span class="id" type="var">solve_bool</span> := <span class="id" type="tactic">intros</span>;<br/>
 <span class="id" type="keyword">match</span> <span class="id" type="keyword">goal</span> <span class="id" type="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">b</span> : <span class="id" type="var">bool</span> |- <span class="id" type="var">_</span> ⇒ <span class="id" type="tactic">destruct</span> <span class="id" type="var">b</span>; <span class="id" type="var">solve_bool</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">b</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a> |- <span class="id" type="var">_</span> ⇒ <span class="id" type="tactic">destruct</span> <span class="id" type="var">b</span>; <span class="id" type="var">solve_bool</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span> ⇒ <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">reflexivity</span><br/>
 <span class="id" type="keyword">end</span>.<br/>
 
 <br/>
 <span class="id" type="keyword">Ltac</span> <span class="id" type="var">solve_bool2</span> :=<br/>
 <span class="id" type="keyword">match</span> <span class="id" type="keyword">goal</span> <span class="id" type="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" type="keyword">∀</span> <span class="id" type="var">b</span> : <span class="id" type="var">bool</span>, <span class="id" type="var">_</span> ⇒ <span class="id" type="tactic">destruct</span> <span class="id" type="var">b</span>; <span class="id" type="var">solve_bool2</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" type="keyword">∀</span> <span class="id" type="var">b</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>, <span class="id" type="var">_</span> ⇒ <span class="id" type="tactic">destruct</span> <span class="id" type="var">b</span>; <span class="id" type="var">solve_bool2</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span> ⇒ <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">reflexivity</span><br/>
 <span class="id" type="keyword">end</span>.<br/>
 
@@ -360,8 +360,8 @@ Definicje taktyk zaczynają się od słowa kluczowego <span class="inlinecode"><
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">andb_dist_orb'</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> <span class="id" type="var">b3</span> : <span class="id" type="var">bool</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">b1</span> &amp;&amp; (<span class="id" type="var">b2</span> || <span class="id" type="var">b3</span>) = (<span class="id" type="var">b1</span> &amp;&amp; <span class="id" type="var">b2</span>) || (<span class="id" type="var">b1</span> &amp;&amp; <span class="id" type="var">b3</span>).<br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_dist_orb'"><span class="id" type="lemma">andb_dist_orb'</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> <span class="id" type="var">b3</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="R2.html#::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="R2.html#b3"><span class="id" type="variable">b3</span></a><a class="idref" href="R2.html#::x_'||'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="R2.html#::x_'||'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a><a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="R2.html#::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="R2.html#::x_'||'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="R2.html#b3"><span class="id" type="variable">b3</span></a><a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">)</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="var">solve_bool</span>.<br/>
 <span class="id" type="keyword">Restart</span>.<br/>
@@ -369,8 +369,8 @@ Definicje taktyk zaczynają się od słowa kluczowego <span class="inlinecode"><
 <span class="id" type="keyword">Qed</span>.<br/>
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <span class="id" type="var">not_true</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <span class="id" type="var">bool</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">b1</span> &amp;&amp; <span class="id" type="var">b2</span> = <span class="id" type="var">b1</span> || <span class="id" type="var">b2</span>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="not_true"><span class="id" type="lemma">not_true</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="R2.html#::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">try</span> <span class="id" type="var">solve_bool</span>.<br/>
 <span class="id" type="keyword">Abort</span>.<br/>
