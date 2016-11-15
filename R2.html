@@ -23,7 +23,7 @@
     z których zdecydowanie ważniejsze są te pierwsze. 
 <div class="paragraph"> </div>
 
-<a name="lab50"></a><h1 class="section">Typy induktywne</h1>
+<a name="lab56"></a><h1 class="section">Typy induktywne</h1>
 
 <div class="paragraph"> </div>
 
@@ -190,7 +190,7 @@ Zauważmy, że nie musimy używać taktyki <span class="inlinecode"><span class=
     żeby rozwiązać je oba za jednym zamachem. 
 <div class="paragraph"> </div>
 
-<a name="lab51"></a><h4 class="section">Ćwiczenie 1.</h4>
+<a name="lab57"></a><h4 class="section">Ćwiczenie 1.</h4>
  Zdefiniuj funkcje <span class="inlinecode"><span class="id" type="var">andb</span></span> (koniunkcja boolowska) oraz <span class="inlinecode"><span class="id" type="var">orb</span></span>
     (alternatywa boolowska). Napisz i udowodnij twierdzenie,
     które mówi, że funkcje te są przemienne. 
@@ -229,7 +229,7 @@ Zauważmy, że nie musimy używać taktyki <span class="inlinecode"><span class=
 </div>
 
 <div class="doc">
-<a name="lab52"></a><h2 class="section">Notacje</h2>
+<a name="lab58"></a><h2 class="section">Notacje</h2>
 
 </div>
 <div class="code">
@@ -246,7 +246,7 @@ Coq dysponuje również potężnym systemem notacji, które pozwalają
     nam uprościć sposób zapisywania funkcji, typów czy predykatów. 
 <div class="paragraph"> </div>
 
-<a name="lab53"></a><h1 class="section">Ltac — język taktyk</h1>
+<a name="lab59"></a><h1 class="section">Ltac — język taktyk</h1>
 
 </div>
 <div class="code">
@@ -381,41 +381,6 @@ Definicje taktyk zaczynają się od słowa kluczowego <span class="inlinecode"><
 <div class="doc">
 Jak widzimy, napisana przez nas taktyka nie jest magiczna
     i nie potrafi udowodnić nieprawdziwego twierdzenia. 
-</div>
-<div class="code">
-
-<br/>
-
-<br/>
-
-<br/>
-<span class="id" type="var">Czym</span> <span class="id" type="var">jest</span> <span class="id" type="var">typ</span> <span class="id" type="var">induktywny</span>? <span class="id" type="var">Mo</span>ż<span class="id" type="var">emy</span> <span class="id" type="var">go</span> <span class="id" type="var">sobie</span> <span class="id" type="var">wyobrazi</span>ć <span class="id" type="var">jako</span> <span class="id" type="var">przestrze</span>ń,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">w</span> <span class="id" type="var">której</span> <span class="id" type="var">znajduj</span>ą <span class="id" type="var">si</span>ę <span class="id" type="var">drzewka</span> <span class="id" type="var">reprezentuj</span>ą<span class="id" type="var">ce</span> <span class="id" type="var">warto</span>ś<span class="id" type="var">ci</span> <span class="id" type="var">tego</span> <span class="id" type="var">typu</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">sk</span>ł<span class="id" type="var">adaj</span>ą<span class="id" type="var">ce</span> <span class="id" type="var">si</span>ę <span class="id" type="var">z</span> <span class="id" type="var">konstruktorów</span>.<br/>
-&nbsp;&nbsp;&nbsp;2. <span class="id" type="var">Przyk</span>ł<span class="id" type="var">ady</span>: <span class="id" type="var">False</span>, <span class="id" type="var">unit</span>, <span class="id" type="var">bool</span>, <span class="id" type="var">nat</span>, <span class="id" type="var">list</span>, <span class="id" type="var">tree</span> (?), <span class="id" type="var">even</span>, <span class="id" type="var">T</span> *)<br/>
-<br/>
-<span class="id" type="keyword">Inductive</span> <span class="id" type="var">False</span> : <span class="id" type="keyword">Prop</span> := .<br/>
-
-<br/>
-<span class="id" type="keyword">Inductive</span> <span class="id" type="var">T</span> : <span class="id" type="keyword">Set</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">e</span> : <span class="id" type="var">T</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">c</span> : <span class="id" type="var">bool</span> → <span class="id" type="var">T</span> → <span class="id" type="var">T</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">d</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">T</span> → <span class="id" type="var">T</span> → <span class="id" type="var">T</span>.<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-Intuicyjnie typ to rodzaj metki, która mówi nam, z jakim rodzajem
-    obiektu mamy do czynienia. Z języków imperatywnych, jak C lub Java,
-    kojarzysz zapewne takie typy jak int (liczba całkowita, 32-bitowa),
-    string (łańcuch znaków) lub float (liczba zmiennoprzecinkowa). W
-    językach tych typy te są określane jako typy podstawowe (ang.
-    primitive types) i przeciwstawiane ... 
-<div class="paragraph"> </div>
-
- Typy w Coqu są czymś zupełnie innym niż w językach imperatywnych jak
-    C lub Java. 
 </div>
 <div class="code">
 </div>
