@@ -171,23 +171,6 @@ Uwaga techniczna: w komentarzach postaci <span class="comment">(*&nbsp;===&gt;&n
     dzieje w trakcie dowodu lub dlaczego Coq nie chce zaakceptować
     jakiejś definicji, użyj komendy <span class="inlinecode"><span class="id" type="keyword">Check</span></span>, żeby sprawdzić,
     z jakimi typami masz do czyenienia. 
-</div>
-<div class="code">
-
-<br/>
-<span class="id" type="keyword">Check</span> <span class="id" type="keyword">Prop</span>.<br/>
-<span class="comment">(*&nbsp;===&gt;&nbsp;Prop&nbsp;:&nbsp;Type&nbsp;*)</span><br/>
-
-<br/>
-</div>
-
-<div class="doc">
-Jeżeli czytałeś uważnie, zauważyłeś zapewne stwierdzenie,
-    że typy są termami. W połączeniu ze stwierdzeniem, że
-    każdy term ma swój typ, zrodzić musi się pytanie: jakiego
-    typu są typy? Nie będziemy się na razie przejmować tym
-    dość technicznym zagadnieniem. Wystarczy ci na razie wiedzieć,
-    że <span class="inlinecode"><span class="id" type="keyword">Prop</span></span> jest typu <span class="inlinecode"><span class="id" type="keyword">Type</span></span>. 
 <div class="paragraph"> </div>
 
 <a name="lab10"></a><h1 class="section">Typy a zbiory</h1>
@@ -1601,7 +1584,8 @@ Jego dowód wygląda dość schematycznie. Taktyka <span class="inlinecode"><spa
 <div class="paragraph"> </div>
 
     Odpowiedź na szczęście brzmi "tak". Z pomocą przychodzą nam kombinatory
-    taktyk, czyli taktyki, które mogą przyjmować jako argumenty inne
+    taktyk (ang. tacticals), czyli taktyki, które mogą przyjmować jako
+    argumenty inne
     taktyki. Dzięki temu możemy łączyć proste taktyki w nieco bardziej
     skomplikowane lub jedynie zmieniać niektóre aspekty ich zachowań. 
 <div class="paragraph"> </div>
@@ -1684,7 +1668,7 @@ Najbardziej podstawowym kombinatorem jest <span class="inlinecode">;</span> (śr
 
     Praktyka pokazuje jednak, że naszym ostatecznym
     celem powinna być pełna automatyzacja, tzn. sytuacja, w
-    której dowód każdego twierdzenia (poza zupełnie balnymi)
+    której dowód każdego twierdzenia (poza zupełnie banalnymi)
     będzie się sprowadzał, jak w powyższym przykładzie, do
     użycia jednej, specjalnie dla niego stworzonej taktyki.
     Ma to swoje uzasadnienie:
@@ -1713,7 +1697,19 @@ Najbardziej podstawowym kombinatorem jest <span class="inlinecode">;</span> (śr
 
 <div class="paragraph"> </div>
 
-<a name="lab49"></a><h2 class="section"><span class="inlinecode">||</span> (alternatywa)</h2>
+<a name="lab49"></a><h4 class="section">Ćwiczenie XXX. Udowodnij za pomocą jednej (złożonej) taktyki.</h4>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="or_comm_ex"><span class="id" type="lemma">or_comm_ex</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">P</span> <span class="id" type="var">Q</span> : <span class="id" type="keyword">Prop</span>, <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab50"></a><h2 class="section"><span class="inlinecode">||</span> (alternatywa)</h2>
 
 </div>
 <div class="code">
@@ -1758,7 +1754,7 @@ Innym przydatnym kombinatorem jest <span class="inlinecode">||</span>, który b�
     <span class="inlinecode"><span class="id" type="tactic">apply</span></span> <span class="inlinecode"><span class="id" type="var">H</span></span> będzie miało taki sam efekt, jak <span class="inlinecode"><span class="id" type="tactic">apply</span></span> <span class="inlinecode"><span class="id" type="var">H0</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab50"></a><h2 class="section"><span class="inlinecode"><span class="id" type="tactic">idtac</span></span>, <span class="inlinecode"><span class="id" type="tactic">do</span></span> oraz <span class="inlinecode"><span class="id" type="tactic">repeat</span></span></h2>
+<a name="lab51"></a><h2 class="section"><span class="inlinecode"><span class="id" type="tactic">idtac</span></span>, <span class="inlinecode"><span class="id" type="tactic">do</span></span> oraz <span class="inlinecode"><span class="id" type="tactic">repeat</span></span></h2>
 
 </div>
 <div class="code">
@@ -1789,7 +1785,7 @@ Innym przydatnym kombinatorem jest <span class="inlinecode">||</span>, który b�
 <div class="paragraph"> </div>
 
     W naszym przypadku użycie taktyki <span class="inlinecode"><span class="id" type="tactic">do</span></span> <span class="inlinecode">3</span> <span class="inlinecode"><span class="id" type="tactic">right</span></span> sprawi, że
-    przy wyborze członu alternatywy, który chcemu udowodnić,
+    przy wyborze członu alternatywy, którego chcemy dowodzić,
     trzykrotnie pójdziemy w prawo. Zauważmy, że taktyka <span class="inlinecode"><span class="id" type="tactic">do</span></span> <span class="inlinecode">4</span> <span class="inlinecode"><span class="id" type="tactic">right</span></span>
     zawiodłaby, gdyż po 3 użyciach <span class="inlinecode"><span class="id" type="tactic">right</span></span> cel nie byłby już
     alternatywą, więc kolejne użycie <span class="inlinecode"><span class="id" type="tactic">right</span></span> zawiodłoby, a wtedy
@@ -1812,9 +1808,9 @@ Kombinator <span class="inlinecode"><span class="id" type="tactic">repeat</span>
     zawiedzie, lub nie zrobi postępu. Formalnie: <span class="inlinecode"><span class="id" type="tactic">repeat</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span> używa
     na obecnym celu taktyki <span class="inlinecode"><span class="id" type="var">t</span></span>. Jeżeli <span class="inlinecode"><span class="id" type="var">t</span></span> rozwiąże cel, to
     <span class="inlinecode"><span class="id" type="tactic">repeat</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span> kończy się sukcesem. Jeżeli <span class="inlinecode"><span class="id" type="var">t</span></span> zawiedzie lub nie
-    zrobi postępu, to <span class="inlinecode"><span class="id" type="tactic">repeat</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span> również kończy się sukcesem (ta
-    taktyka nigdy nie zawodzi). Jeżeli <span class="inlinecode"><span class="id" type="var">t</span></span> zrobi jakiś postęp, to
-    na każdym wygenerowaym przez nią celu zostanie użyte <span class="inlinecode"><span class="id" type="tactic">repeat</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span>.
+    zrobi postępu, to <span class="inlinecode"><span class="id" type="tactic">repeat</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span> również kończy się sukcesem.
+    Jeżeli <span class="inlinecode"><span class="id" type="var">t</span></span> zrobi jakiś postęp, to na każdym wygenerowaym przez
+    nią celu zostanie użyte <span class="inlinecode"><span class="id" type="tactic">repeat</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span>.
 
 <div class="paragraph"> </div>
 
@@ -1826,16 +1822,84 @@ Kombinator <span class="inlinecode"><span class="id" type="tactic">repeat</span>
     działanie sukcesem. 
 <div class="paragraph"> </div>
 
-<a name="lab51"></a><h2 class="section"><span class="inlinecode"><span class="id" type="tactic">try</span></span> i <span class="inlinecode"><span class="id" type="tactic">fail</span></span> (TODO)</h2>
+<a name="lab52"></a><h2 class="section"><span class="inlinecode"><span class="id" type="tactic">try</span></span> i <span class="inlinecode"><span class="id" type="tactic">fail</span></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="iff_intro4"><span class="id" type="lemma">iff_intro4</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">P</span> <span class="id" type="var">Q</span> : <span class="id" type="keyword">Prop</span>, (<a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a>) → (<a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a>) → (<a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">)</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">split</span>; <span class="id" type="tactic">intros</span>; <span class="id" type="tactic">try</span> (<span class="id" type="tactic">apply</span> <span class="id" type="var">H0</span>; <span class="id" type="tactic">assumption</span>; <span class="id" type="tactic">fail</span>);<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">try</span> (<span class="id" type="tactic">apply</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">assumption</span>; <span class="id" type="tactic">fail</span>).<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" type="tactic">try</span></span> jest kombinatorem, który zmienia zachowanie przekazanej mu
+    taktyki. Jeżeli <span class="inlinecode"><span class="id" type="var">t</span></span> zawiedzie, to <span class="inlinecode"><span class="id" type="tactic">try</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span> zadziała jak <span class="inlinecode"><span class="id" type="tactic">idtac</span></span>,
+    czyli nic nie zrobi i skończy się sukcesem. Jeżeli <span class="inlinecode"><span class="id" type="var">t</span></span> skończy się
+    sukcesem, to <span class="inlinecode"><span class="id" type="tactic">try</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span> również skończy się sukcesem i będzie miało
+    taki sam efekt, jak <span class="inlinecode"><span class="id" type="var">t</span></span>. Tak więc, podobnie jak <span class="inlinecode"><span class="id" type="tactic">repeat</span></span>, <span class="inlinecode"><span class="id" type="tactic">try</span></span>
+    nigdy nie zawodzi.
 
 <div class="paragraph"> </div>
 
-<a name="lab52"></a><h1 class="section">Zadania (beta)</h1>
+    <span class="inlinecode"><span class="id" type="tactic">fail</span></span> jest przeciwieństwem <span class="inlinecode"><span class="id" type="tactic">idtac</span></span> — jest to taktyka, która zawsze
+    zawodzi. Sama w sobie jest bezużyteczna, ale w tandemie z <span class="inlinecode"><span class="id" type="tactic">try</span></span>
+    oraz średnikiem daje nam pełną kontrolę nad tym, czy taktyka
+    zakończy się sukcesem, czy zawiedzie, a także czy dokona postępu.
+
+<div class="paragraph"> </div>
+
+    Częstym sposobem użycia <span class="inlinecode"><span class="id" type="tactic">try</span></span> i <span class="inlinecode"><span class="id" type="tactic">fail</span></span> jest <span class="inlinecode"><span class="id" type="tactic">try</span></span> <span class="inlinecode">(<span class="id" type="var">t</span>;</span> <span class="inlinecode"><span class="id" type="tactic">fail</span>)</span>. Taktyka
+    ta na obecnym celu używa <span class="inlinecode"><span class="id" type="var">t</span></span>. Jeżeli <span class="inlinecode"><span class="id" type="var">t</span></span>
+    rozwiąże cel, to <span class="inlinecode"><span class="id" type="tactic">fail</span></span> nie zostanie wywołane i całe <span class="inlinecode"><span class="id" type="tactic">try</span></span> <span class="inlinecode">(<span class="id" type="var">t</span>;</span> <span class="inlinecode"><span class="id" type="tactic">fail</span>)</span>
+    zadziała tak jak <span class="inlinecode"><span class="id" type="var">t</span></span>, czyli rozwiąże cel. Jeżeli <span class="inlinecode"><span class="id" type="var">t</span></span> nie rozwiąże celu,
+    to na wygenerowanych podcelach wywoływane zostanie <span class="inlinecode"><span class="id" type="tactic">fail</span></span>, które
+    zawiedzie — dzięki temu <span class="inlinecode"><span class="id" type="var">t</span>;</span> <span class="inlinecode"><span class="id" type="tactic">fail</span></span> również zawiedzie, nie dokonując
+    żadnych zmian w celu (nie dokona postępu), a całe <span class="inlinecode"><span class="id" type="tactic">try</span></span> <span class="inlinecode">(<span class="id" type="var">t</span>;</span> <span class="inlinecode"><span class="id" type="tactic">fail</span>)</span>
+    zakończy się sukcesem, również nie dokonując w celu żadnych zmian.
+    Wobec tego działanie <span class="inlinecode"><span class="id" type="tactic">try</span></span> <span class="inlinecode">(<span class="id" type="var">t</span>;</span> <span class="inlinecode"><span class="id" type="tactic">fail</span>)</span> można podsumować tak: "jeżeli <span class="inlinecode"><span class="id" type="var">t</span></span>
+    rozwiąże cel to użyj jej, a jeżeli nie, to nic nie rób".
+
+<div class="paragraph"> </div>
+
+    Postaraj się dokładnie zrozumieć, jak opis ten ma się do powyższego
+    przykładu — spróbuj usunąć jakieś <span class="inlinecode"><span class="id" type="tactic">try</span></span>, <span class="inlinecode"><span class="id" type="tactic">fail</span></span> lub średnik i zobacz,
+    co się stanie.
+
+<div class="paragraph"> </div>
+
+    Oczywiście przykład ten jest bardzo sztuczny — najlepszym pomysłem
+    udowodnienia tego twierdzenia jest użycie ogólnej postaci średnika
+    <span class="inlinecode"><span class="id" type="var">t</span>;</span> <span class="inlinecode"><span class="id" type="var">t1</span></span> <span class="inlinecode">|</span> <span class="inlinecode">...</span> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">tn</span></span>, tak jak w przykładzie <span class="inlinecode"><span class="id" type="var">iff_intro''</span></span>. Idiom
+    <span class="inlinecode"><span class="id" type="tactic">try</span></span> <span class="inlinecode">(<span class="id" type="var">t</span>;</span> <span class="inlinecode"><span class="id" type="tactic">fail</span>)</span> najlepiej sprawdza się, gdy użycie średnika w ten
+    sposób jest niepraktyczne, czyli gdy celów jest dużo, a rozwiązać
+    automatycznie potrafimy tylko część z nich. Możemy użyć go wtedy,
+    żeby pozbyć się prostszych przypadków nie zaśmiecając sobie jednak
+    kontekstu w pozostałych przypadkach. Idiom ten jest też dużo
+    bardziej odporny na przyszłe zmiany w programie, gdyż użycie go
+    nie wymaga wiedzy o tym, ile podcelów zostanie wygenerowanych.
+
+<div class="paragraph"> </div>
+
+    Przedstawione kombinatory są najbardziej użyteczne i stąd
+    najpowszechniej używane. Nie są to jednak wszystkie kombinatory
+    — jest ich znacznie więcej. Opisy taktyk i kombinatorów
+    z biblioteki standardowej znajdziesz tu:
+    https://coq.inria.fr/refman/tactic-index.html 
+<div class="paragraph"> </div>
+
+<a name="lab53"></a><h1 class="section">Zadania (beta)</h1>
  Uwaga: niektóre zadania mogą pokrywać się z ćwiczeniami, które
-    występują w tekście. 
+    występują w tekście.
+    Uwaga TODO: dodać ćwiczenia do sekcji Kombinatory taktyk. 
 <div class="paragraph"> </div>
 
-<a name="lab53"></a><h2 class="section">Konstruktywny rachunek zdań.</h2>
+<a name="lab54"></a><h2 class="section">Konstruktywny rachunek zdań.</h2>
 
 </div>
 <div class="code">
@@ -1856,6 +1920,8 @@ Komenda <span class="inlinecode"><span class="id" type="keyword">Hypotheses</spa
     które przeprowadzamy. 
 </div>
 <div class="code">
+
+<br/>
 
 <br/>
 <span class="comment">(*&nbsp;Przemienność&nbsp;*)</span><br/>
@@ -1880,6 +1946,10 @@ Komenda <span class="inlinecode"><span class="id" type="keyword">Hypotheses</spa
 
 <br/>
 <span class="id" type="keyword">Theorem</span> <a name="imp_dist_imp"><span class="id" type="lemma">imp_dist_imp</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R1.html#exercises_propositional.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#exercises_propositional.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#exercises_propositional.R"><span class="id" type="variable">R</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">(</span></a>(<a class="idref" href="R1.html#exercises_propositional.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#exercises_propositional.Q"><span class="id" type="variable">Q</span></a>) → (<a class="idref" href="R1.html#exercises_propositional.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#exercises_propositional.R"><span class="id" type="variable">R</span></a>)).<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Kuryfikacja&nbsp;*)</span><br/>
+<span class="id" type="keyword">Theorem</span> <a name="curry"><span class="id" type="lemma">curry</span></a> : (<a class="idref" href="R1.html#exercises_propositional.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="R1.html#exercises_propositional.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#exercises_propositional.R"><span class="id" type="variable">R</span></a>) → (<a class="idref" href="R1.html#exercises_propositional.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#exercises_propositional.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#exercises_propositional.R"><span class="id" type="variable">R</span></a>).<br/>
 
 <br/>
 <span class="id" type="keyword">Theorem</span> <a name="uncurry"><span class="id" type="lemma">uncurry</span></a> : (<a class="idref" href="R1.html#exercises_propositional.P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#exercises_propositional.Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#exercises_propositional.R"><span class="id" type="variable">R</span></a>) → (<a class="idref" href="R1.html#exercises_propositional.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="R1.html#exercises_propositional.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#exercises_propositional.R"><span class="id" type="variable">R</span></a>).<br/>
@@ -1952,7 +2022,7 @@ W praktyce komenda <span class="inlinecode"><span class="id" type="keyword">Hypo
     mimo że nie napisaliśmy jej explicite. 
 <div class="paragraph"> </div>
 
-<a name="lab54"></a><h2 class="section">Konstruktywny rachunek predykatów.</h2>
+<a name="lab55"></a><h2 class="section">Konstruktywny rachunek predykatów.</h2>
 
 </div>
 <div class="code">
@@ -1963,7 +2033,7 @@ W praktyce komenda <span class="inlinecode"><span class="id" type="keyword">Hypo
 <span class="id" type="keyword">Hypotheses</span> <a name="exercises_predicate.P"><span class="id" type="variable">P</span></a> <a name="exercises_predicate.Q"><span class="id" type="variable">Q</span></a> <a name="exercises_predicate.R"><span class="id" type="variable">R</span></a> <a name="exercises_predicate.S"><span class="id" type="variable">S</span></a> : <a class="idref" href="R1.html#exercises_predicate.A"><span class="id" type="variable">A</span></a> → <span class="id" type="keyword">Prop</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Projekcje&nbsp;i&nbsp;injekcje.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Projekcje&nbsp;*)</span><br/>
 <span class="id" type="keyword">Theorem</span> <a name="forall_and_proj1"><span class="id" type="lemma">forall_and_proj1</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> : <a class="idref" href="R1.html#exercises_predicate.A"><span class="id" type="variable">A</span></a>, <a class="idref" href="R1.html#exercises_predicate.P"><span class="id" type="variable">P</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a> ∧ <a class="idref" href="R1.html#exercises_predicate.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a>) → (<span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> : <a class="idref" href="R1.html#exercises_predicate.A"><span class="id" type="variable">A</span></a>, <a class="idref" href="R1.html#exercises_predicate.P"><span class="id" type="variable">P</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a>).<br/>
 
@@ -2023,7 +2093,7 @@ W przyszłości pojawi się krótkie wyjaśnienie dotyczące tego
 </div>
 
 <div class="doc">
-<a name="lab55"></a><h2 class="section">Klasyczny rachunek zdań (i predykatów).</h2>
+<a name="lab56"></a><h2 class="section">Klasyczny rachunek zdań (i predykatów).</h2>
 
 </div>
 <div class="code">
