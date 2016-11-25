@@ -1494,11 +1494,13 @@ Gdy zdanie kwantyfikowane egzystencjalnie znajdzie się w naszych
 </li>
 <li> udowodnienie zdania egzystencjalnego wymaga wskazania obiektu i
       podania dowodu żądanej własności, więc dowód takiego zdania
-      możemy rozbić, uzyskując ten obiekt i dowód jego własności
-
+      możemy rozbić, uzyskując ten obiekt i dowód jego własności 
 </li>
 </ul>
-    Takie konstruowanie i dekonstruowanie dowodów (i innych termów)
+
+<div class="paragraph"> </div>
+
+ Takie konstruowanie i dekonstruowanie dowodów (i innych termów)
     będzie naszym chlebem powszednim w logice konstruktywnej i w Coqu.
     Wynika ono z samej natury konstrukcji: zasady konstruowania termów
     danego typu są ściśle określone, więc możemy dokonywać dekonstrukcji,
@@ -1540,7 +1542,7 @@ Gdy zdanie kwantyfikowane egzystencjalnie znajdzie się w naszych
 
 </div>
 <div class="code">
-<span class="id" type="keyword">Theorem</span> <a name="ex_dist"><span class="id" type="lemma">ex_dist</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> <span class="id" type="var">Q</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a> → <span class="id" type="keyword">Prop</span>),<br/>
+<span class="id" type="keyword">Theorem</span> <a name="ex_or_dist"><span class="id" type="lemma">ex_or_dist</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> <span class="id" type="var">Q</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a> → <span class="id" type="keyword">Prop</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">x</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a> ∨ <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">x</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">x</span> : <a class="idref" href="R1.html#A"><span class="id" type="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a>).<br/>
 
@@ -1697,19 +1699,33 @@ Najbardziej podstawowym kombinatorem jest <span class="inlinecode">;</span> (śr
 
 <div class="paragraph"> </div>
 
-<a name="lab49"></a><h4 class="section">Ćwiczenie XXX. Udowodnij za pomocą jednej (złożonej) taktyki.</h4>
+ Następujące ćwiczenia rozwiąż najpierw najpierw z jak największym
+    zrozumieniem, a następnie zautomatyzuj tak, aby całość była
+    rozwiązywana w jednym kroku przez pojedynczą (złożoną) taktykę. 
+<div class="paragraph"> </div>
+
+<a name="lab49"></a><h4 class="section">Ćwiczenie XXX.</h4>
 
 </div>
 <div class="code">
-
-<br/>
 <span class="id" type="keyword">Theorem</span> <a name="or_comm_ex"><span class="id" type="lemma">or_comm_ex</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">P</span> <span class="id" type="var">Q</span> : <span class="id" type="keyword">Prop</span>, <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a>.<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-<a name="lab50"></a><h2 class="section"><span class="inlinecode">||</span> (alternatywa)</h2>
+<a name="lab50"></a><h4 class="section">Ćwiczenie XXX</h4>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Theorem</span> <a name="diamond"><span class="id" type="lemma">diamond</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">P</span> <span class="id" type="var">Q</span> <span class="id" type="var">R</span> <span class="id" type="var">S</span> : <span class="id" type="keyword">Prop</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#R"><span class="id" type="variable">R</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">→</span></a> (<a class="idref" href="R1.html#Q"><span class="id" type="variable">Q</span></a> → <a class="idref" href="R1.html#S"><span class="id" type="variable">S</span></a>) → (<a class="idref" href="R1.html#R"><span class="id" type="variable">R</span></a> → <a class="idref" href="R1.html#S"><span class="id" type="variable">S</span></a>) → <a class="idref" href="R1.html#P"><span class="id" type="variable">P</span></a> → <a class="idref" href="R1.html#S"><span class="id" type="variable">S</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab51"></a><h2 class="section"><span class="inlinecode">||</span> (alternatywa)</h2>
 
 </div>
 <div class="code">
@@ -1754,7 +1770,7 @@ Innym przydatnym kombinatorem jest <span class="inlinecode">||</span>, który b�
     <span class="inlinecode"><span class="id" type="tactic">apply</span></span> <span class="inlinecode"><span class="id" type="var">H</span></span> będzie miało taki sam efekt, jak <span class="inlinecode"><span class="id" type="tactic">apply</span></span> <span class="inlinecode"><span class="id" type="var">H0</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab51"></a><h2 class="section"><span class="inlinecode"><span class="id" type="tactic">idtac</span></span>, <span class="inlinecode"><span class="id" type="tactic">do</span></span> oraz <span class="inlinecode"><span class="id" type="tactic">repeat</span></span></h2>
+<a name="lab52"></a><h2 class="section"><span class="inlinecode"><span class="id" type="tactic">idtac</span></span>, <span class="inlinecode"><span class="id" type="tactic">do</span></span> oraz <span class="inlinecode"><span class="id" type="tactic">repeat</span></span></h2>
 
 </div>
 <div class="code">
@@ -1822,7 +1838,7 @@ Kombinator <span class="inlinecode"><span class="id" type="tactic">repeat</span>
     działanie sukcesem. 
 <div class="paragraph"> </div>
 
-<a name="lab52"></a><h2 class="section"><span class="inlinecode"><span class="id" type="tactic">try</span></span> i <span class="inlinecode"><span class="id" type="tactic">fail</span></span></h2>
+<a name="lab53"></a><h2 class="section"><span class="inlinecode"><span class="id" type="tactic">try</span></span> i <span class="inlinecode"><span class="id" type="tactic">fail</span></span></h2>
 
 </div>
 <div class="code">
@@ -1893,13 +1909,13 @@ Kombinator <span class="inlinecode"><span class="id" type="tactic">repeat</span>
     https://coq.inria.fr/refman/tactic-index.html 
 <div class="paragraph"> </div>
 
-<a name="lab53"></a><h1 class="section">Zadania (beta)</h1>
+<a name="lab54"></a><h1 class="section">Zadania (beta)</h1>
  Uwaga: niektóre zadania mogą pokrywać się z ćwiczeniami, które
     występują w tekście.
     Uwaga TODO: dodać ćwiczenia do sekcji Kombinatory taktyk. 
 <div class="paragraph"> </div>
 
-<a name="lab54"></a><h2 class="section">Konstruktywny rachunek zdań.</h2>
+<a name="lab55"></a><h2 class="section">Konstruktywny rachunek zdań.</h2>
 
 </div>
 <div class="code">
@@ -2022,7 +2038,7 @@ W praktyce komenda <span class="inlinecode"><span class="id" type="keyword">Hypo
     mimo że nie napisaliśmy jej explicite. 
 <div class="paragraph"> </div>
 
-<a name="lab55"></a><h2 class="section">Konstruktywny rachunek predykatów.</h2>
+<a name="lab56"></a><h2 class="section">Konstruktywny rachunek predykatów.</h2>
 
 </div>
 <div class="code">
@@ -2093,7 +2109,7 @@ W przyszłości pojawi się krótkie wyjaśnienie dotyczące tego
 </div>
 
 <div class="doc">
-<a name="lab56"></a><h2 class="section">Klasyczny rachunek zdań (i predykatów).</h2>
+<a name="lab57"></a><h2 class="section">Klasyczny rachunek zdań (i predykatów).</h2>
 
 </div>
 <div class="code">

@@ -5,7 +5,7 @@
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="MyStyles.js"></script>
 </head>
-<h1 class="libtitle">R2: Indukcja i rekursja (alfa</h1>
+<h1 class="libtitle">R2: Indukcja i rekursja</h1>
 
 <div class="code">
 </div>
@@ -23,7 +23,7 @@
     tworzenia funkcji, które konstruują i dekonstruują ich termy. 
 <div class="paragraph"> </div>
 
-<a name="lab57"></a><h1 class="section">Sorty</h1>
+<a name="lab58"></a><h1 class="section">Sorty</h1>
 
 <div class="paragraph"> </div>
 
@@ -101,7 +101,7 @@ Oczywiście w przypadku typu <span class="inlinecode"><span class="id" type="var
     specyfikacją — niektóre typy są przecież zdaniami. 
 <div class="paragraph"> </div>
 
-<a name="lab58"></a><h1 class="section">Hierarchia uniwersów</h1>
+<a name="lab59"></a><h1 class="section">Hierarchia uniwersów</h1>
 
 <div class="paragraph"> </div>
 
@@ -214,10 +214,364 @@ Co oznacza ten dziwny napis? Otóż w Coqu mamy do czynienia nie z
     Brawo! Czytając tę sekcję, dotarłeś do króliczej nory i posiadłeś
     wiedzę tajemną, której prawie na pewno nigdy ani nigdzie nie użyjesz.
     Możemy zatem przejść do meritum. 
+<div class="paragraph"> </div>
+
+<a name="lab60"></a><h1 class="section">Typy induktywne</h1>
+
+<div class="paragraph"> </div>
+
+ W Coqu są trzy główne rodzaje typów: produkt zależny, typy induktywne
+    i typy koinduktywne. Z pierwszym z nich już się zetknęliśmy, drugi
+    poznamy w tym rozdziale, trzeci na razie pominiemy.
+
+<div class="paragraph"> </div>
+
+    Typ induktywny definiuje się przy pomocy zbioru konstruktorów, które
+    służą, jak sama nazwa wskazuje, do budowania termów tego typu.
+    Konstruktory te są funkcjami (być może zależnymi), których
+    przeciwdziedziną jest definiowany typ, ale niczego nie
+    obliczają — nadają jedynie termom ich "kształt". W szczególności, nie
+    mają nic wspólnego z konstruktorami w takich językach jak C++ lub Java
+    — nie mogą przetwarzać swoich argumentów, alokować pamięci, dokonywać
+    operacji wejścia/wyjścia etc.
+
+<div class="paragraph"> </div>
+
+    Tym, co jest ważne w przypadku konstruktorów, jest ich ilość, nazwy
+    oraz ilość i typy przyjmowanych argumentów. To te cztery rzeczy decydują
+    o tym, jakie "kształty" będą miały termy danego typu, a więc i czym
+    będzie sam typ. W ogolności każdy term jest skończonym, ukorzenionym
+    drzewem, którego kształt zależy od charakterystyki konstruktorów tak:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> każdy konstruktor to inny rodzaj węzła (nazwa konstruktora to nazwa
+      węzła)
+
+</li>
+<li> konstruktory nierekurencyjne to liście, a rekurencyjne — węzły
+      wewnętrzne
+
+</li>
+<li> argumenty konstruktorów to dane przechowywane w danym węźle 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Typ induktywny można wyobrażać sobie jako przestrzeń zawierającą
+    te i tylko te drzewa, które można zrobić przy pomocy jego
+    konstruktorów. Nie przejmuj się, jeżeli opis ten wydaje ci się
+    dziwny — sposób definiowania typów induktywnych i ich wartości
+    w Coqu jest diametralnie różny od sposobu definiowania klas i
+    obiektów w językach imperatywnych i wymaga przyzwyczajenia się
+    do niego. Zobaczmy, jak powyższy opis ma się do konkretnych
+    przykładów. 
+<div class="paragraph"> </div>
+
+<a name="lab61"></a><h2 class="section">Enumeracje</h2>
+
+<div class="paragraph"> </div>
+
+ Najprostszym rodzajem typów induktywnych są enumeracje, czyli typy,
+    których wszystkie konstruktory są stałymi. 
 </div>
 <div class="code">
 
 <br/>
+<span class="id" type="keyword">Inductive</span> <a name="bool"><span class="id" type="inductive">bool</span></a> : <span class="id" type="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="true"><span class="id" type="constructor">true</span></a> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="false"><span class="id" type="constructor">false</span></a> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Definicja typu induktywnego ma następującą postać: najpierw występuje
+    słowo kluczowe <span class="inlinecode"><span class="id" type="keyword">Inductive</span></span>, następnie nazwa typu, a po dwukropku sort
+    (<span class="inlinecode"><span class="id" type="keyword">Set</span></span>, <span class="inlinecode"><span class="id" type="keyword">Prop</span></span> lub <span class="inlinecode"><span class="id" type="keyword">Type</span></span>). Następnie wymieniamy konstruktory typu —
+    dla czytelności każdy w osobnej linii. Mają one swoje unikalne nazwy i
+    są funkcjami, których przeciwdziedziną jest definiowany typ. W naszym
+    przypadku mamy 2 konstruktory, zwane <span class="inlinecode"><span class="id" type="var">true</span></span> oraz <span class="inlinecode"><span class="id" type="var">false</span></span>, które są
+    funkcjami zeroargumentowymi.
+
+<div class="paragraph"> </div>
+
+    Uwaga: należy odróżnić symbole <span class="inlinecode">:=</span> oraz <span class="inlinecode">=</span>. Pierwszy z nich służy
+    do definiowania, a drugi do zapisywania równości.
+
+<div class="paragraph"> </div>
+
+    Zapis <span class="inlinecode"><span class="id" type="var">name</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" type="var">term</span></span> oznacza "niech od teraz <span class="inlinecode"><span class="id" type="var">name</span></span> będzie inną nazwą
+    dla <span class="inlinecode"><span class="id" type="var">term</span></span>". Jest to komenda, a nie zdanie logiczne. Od teraz jeżeli
+    natkniemy się na nazwę <span class="inlinecode"><span class="id" type="var">name</span></span>, będziemy mogli odwinąć jej definicję i
+    wstawić w jej miejsce <span class="inlinecode"><span class="id" type="var">term</span></span>. Przykład: <span class="inlinecode"><span class="id" type="keyword">Definition</span></span> <span class="inlinecode"><span class="id" type="var">five</span></span> <span class="inlinecode">:=</span> <span class="inlinecode">5</span>.
+    Antyprzykład: <span class="inlinecode">2</span> <span class="inlinecode">:=</span> <span class="inlinecode">5</span> (błąd składni).
+
+<div class="paragraph"> </div>
+
+    Zapis <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">b</span></span> oznacza "<span class="inlinecode"><span class="id" type="var">a</span></span> jest równe <span class="inlinecode"><span class="id" type="var">b</span></span>". Jest to zdanie logiczne,
+    a nie komenda. Zdanie to rzecz jasna nie musi być prawdziwe. Przykład
+    <span class="inlinecode">2</span> <span class="inlinecode">=</span> <span class="inlinecode">5</span>. Antyprzykład: <span class="inlinecode"><span class="id" type="var">five</span></span> <span class="inlinecode">=</span> <span class="inlinecode">5</span> (jeżeli <span class="inlinecode"><span class="id" type="var">five</span></span> nie jest zdefiniowane,
+    to dostajemy komunikat w stylu "nie znaleziono nazwy <span class="inlinecode"><span class="id" type="var">five</span></span>"). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="negb"><span class="id" type="definition">negb</span></a> (<span class="id" type="var">b</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>) : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#b"><span class="id" type="variable">b</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a> ⇒ <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a> ⇒ <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Definicja funkcji wygląda tak: najpierw mamy słowo kluczowe <span class="inlinecode"><span class="id" type="keyword">Definition</span></span>
+    (jeżeli funkcja nie jest rekurencyjna), następnie argumenty funkcji
+    w postaci <span class="inlinecode">(<span class="id" type="var">name</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">type</span>)</span>; po dwukropku przeciwdziedzina, a po symbolu
+    <span class="inlinecode">:=</span> ciało funkcji.
+
+<div class="paragraph"> </div>
+
+    Podstawowym narzędziem służącym do definiowania funkcji jest
+    "dopasowywanie do wzorca" (ang. pattern matching; w dalszej części
+    będę używał nazwy angielskiej). Pozwala ono sprawdzić, którego
+    konstruktora użyto do zrobienia dopasowywanej wartości. Podobnym
+    konstruktem występującym w językach imperatywnych jest instrukcja
+    switch, ale pattern matching jest od niej dużo potężniejszy.
+
+<div class="paragraph"> </div>
+
+    Nasza funkcja działa następująco: sprawdzamy, którym konstruktorem
+    zrobiono argument <span class="inlinecode"><span class="id" type="var">b</span></span> — jeżeli było to <span class="inlinecode"><span class="id" type="var">true</span></span>, zwracamy <span class="inlinecode"><span class="id" type="var">false</span></span>, a
+    gdy było to <span class="inlinecode"><span class="id" type="var">false</span></span>, zwracamy <span class="inlinecode"><span class="id" type="var">true</span></span>.
+
+<div class="paragraph"> </div>
+
+    Zanim odpalimy naszą funkcję, powinniśmy zadać sobie pytanie: w jaki
+    sposób programy są wykonywane? W celu lepszego zrozumienia tego
+    zagadnienia porównamy ewaluację programów napisanych w językach
+    imperatywnych oraz funkcyjnych.
+
+<div class="paragraph"> </div>
+
+    Rozważmy bardzo uproszczony model: interpreter wykonuje program,
+    który nie dokonuje operacji wejścia/wyjścia, napisany w jakimś
+    języku imperatywnym. W tej sytuacji działanie interpretera
+    sprowadza się do tego, że czyta on kod programu instrukcja po
+    instrukcji, a następnie w zależności od przeczytanej instrukcji
+    odpowiednio zmienia swój stan.
+
+<div class="paragraph"> </div>
+
+    W języku czysto funkcyjnym taki model ewaluacji jest niemożliwy,
+    gdyż nie dysponujemy globalnym stanem. Zamiast tego, w Coqu
+    wykonanie programu polega na jego redukcji. O co chodzi?
+    Przypomnijmy najpierw, że program to term, którego typem jest
+    specyfikacja, czyli typ sortu <span class="inlinecode"><span class="id" type="keyword">Set</span></span>. Termy mogą być redukowane,
+    czyli zamieniane na równoważne, ale prostsze, przy użyciu jednej
+    z kilku reguł redukcji. Prześledźmy wykonanie programu <span class="inlinecode"><span class="id" type="var">negb</span></span> <span class="inlinecode"><span class="id" type="var">true</span></span>
+    krok po kroku. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Eval</span> <span class="id" type="tactic">cbv</span> <span class="id" type="keyword">delta</span> <span class="id" type="keyword">in</span> <a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;=&nbsp;(fun&nbsp;b&nbsp;:&nbsp;bool&nbsp;=&gt;&nbsp;match&nbsp;b&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;true&nbsp;=&gt;&nbsp;false<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;false&nbsp;=&gt;&nbsp;true<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end)&nbsp;true<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;bool&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Redukcja delta odwija definicje. Żeby użyć jakiejś redukcji, używamy
+    komendy <span class="inlinecode"><span class="id" type="keyword">Eval</span></span> <span class="inlinecode"><span class="id" type="tactic">cbv</span></span> <span class="inlinecode"><span class="id" type="var">redukcje</span></span> <span class="inlinecode"><span class="id" type="keyword">in</span></span> <span class="inlinecode"><span class="id" type="var">term</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Eval</span> <span class="id" type="tactic">cbv</span> <span class="id" type="keyword">delta</span> <span class="id" type="keyword">beta</span> <span class="id" type="keyword">in</span> <a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;=&nbsp;match&nbsp;true&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;true&nbsp;=&gt;&nbsp;false<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;false&nbsp;=&gt;&nbsp;true<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;bool&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Redukcja beta podstawia argument do funkcji. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Eval</span> <span class="id" type="tactic">cbv</span> <span class="id" type="keyword">delta</span> <span class="id" type="keyword">beta</span> <span class="id" type="keyword">iota</span> <span class="id" type="keyword">in</span> <a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+<span class="comment">(*&nbsp;===&nbsp;=&nbsp;false&nbsp;:&nbsp;bool&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Redukcja jota dopasowuje term do wzorca i zamienia go na term
+    znajdujący się po prawej stronie <span class="inlinecode">⇒</span> dla dopasowanego przypadku. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Eval</span> <span class="id" type="tactic">cbv</span> <span class="id" type="keyword">in</span> <a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;=&nbsp;false&nbsp;:&nbsp;bool&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Żeby zredukować term za jednym zamachem, możemy pominąć nazwy
+    redukcji występujące po <span class="inlinecode"><span class="id" type="tactic">cbv</span></span> — w taki wypadku zostaną zaaplikowane
+    wszystkie możliwe redukcje, czyli program zostanie wykonany. Do
+    jego wykonania możemy też użyć komend <span class="inlinecode"><span class="id" type="keyword">Eval</span></span> <span class="inlinecode"><span class="id" type="tactic">simpl</span></span> oraz <span class="inlinecode"><span class="id" type="keyword">Eval</span></span>
+    <span class="inlinecode"><span class="id" type="tactic">compute</span></span> (a od wersji Coqa 8.5 także <span class="inlinecode"><span class="id" type="keyword">Eval</span></span> <span class="inlinecode"><span class="id" type="var">cbn</span></span>).
+
+<div class="paragraph"> </div>
+
+    Jak widać, wykonanie programu w Coqu jest dość toporne. Wynika to
+    z faktu, że Coq nie został stworzony do wykonywania programów, a
+    jedynie do ich definiowania i dowodzenia ich poprawności. Aby użyć
+    programu napisanego w Coqu w świecie rzeczywistym, stosuje się
+    zazwyczaj mechanizm ekstrakcji, który pozwala z programu napisanego
+    w Coqu atuomatycznie uzyskać program w Scheme, OCamlu lub Haskellu,
+    które są od Coqa dużo szybsze i dużo powszechniej używane. My jednak
+    nie będziemy się tym przejmować. 
+
+<div class="paragraph"> </div>
+
+    Zdefiniowawszy naszą funkcję, możemy zadać sobie pytanie:
+    czy definicja jest poprawna? Gdybyśmy pisali w jednym z
+    języków imperatywnych, moglibyśmy napisać dla niej testy
+    jednostkowe, polegające np. na tym, że generujemy losowo
+    wejście funkcji i sprawdzamy, czy wynik posiada żądaną przez
+    nas właściwość. Coq umożliwia nam coś dużo silniejszego:
+    możemy wyrazić przy pomocy twierdzenia, że funkcja posiada
+    interesującą nas własność, a następnie spróbować je udowodnić.
+    Jeżeli nam się powiedzie, mamy całkowitą pewność, że funkcja
+    rzeczywiście posiada żądaną własność. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="negb_involutive"><span class="id" type="lemma">negb_involutive</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>, <a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="R2.html#b"><span class="id" type="variable">b</span></a>) = <a class="idref" href="R2.html#b"><span class="id" type="variable">b</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Nasze twierdzenie głosi, że funkcja <span class="inlinecode"><span class="id" type="var">negb</span></span> jest inwolucją,
+    tzn. że dwukrotne jej zaaplikowanie do danego argumentu
+    nie zmienia go, lub też, innymi słowy, że <span class="inlinecode"><span class="id" type="var">negb</span></span> jest
+    swoją własną odwrotnością.
+
+<div class="paragraph"> </div>
+
+    Dowód przebiega w następujący sposób: taktyką <span class="inlinecode"><span class="id" type="tactic">intro</span></span>
+    wprowadzamy zmienną <span class="inlinecode"><span class="id" type="var">b</span></span> do kontekstu, a następnie
+    używamy taktyki <span class="inlinecode"><span class="id" type="tactic">destruct</span></span>, aby sprawdzić, którym
+    konstruktorem została zrobiona. Ponieważ typ <span class="inlinecode"><span class="id" type="var">bool</span></span> ma
+    dwa konstruktory, taktyka ta generuje nam dwa podcele:
+    musimy udowodnić twierdzenie osobno dla przypadku, gdy
+    <span class="inlinecode"><span class="id" type="var">b</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">true</span></span> oraz dla <span class="inlinecode"><span class="id" type="var">b</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">false</span></span>. Potem przy pomocy
+    taktyki <span class="inlinecode"><span class="id" type="tactic">simpl</span></span> obliczamy wartość naszej funkcji —
+    zauważ, że byłoby to niemożliwe, gdyby argument był
+    postaci <span class="inlinecode"><span class="id" type="var">b</span></span>, ale jest jak najbardziej możliwe, gdy jest
+    on postaci <span class="inlinecode"><span class="id" type="var">true</span></span> albo <span class="inlinecode"><span class="id" type="var">false</span></span>. Na koniec używamy taktyki
+    <span class="inlinecode"><span class="id" type="tactic">reflexivity</span></span>, która potrafi udowodnić cel postaci
+    <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">a</span></span>.
+
+<div class="paragraph"> </div>
+
+    <span class="inlinecode"><span class="id" type="tactic">destruct</span></span> jest taktykowym odpowiednikiem pattern matchingu
+    i bardzo często jest używany, gdy mamy do czynienia z czymś,
+    co zostało za jego pomocą zdefiniowane.
+
+<div class="paragraph"> </div>
+
+    Być może poczułeś dyskomfort spowodowany tym, że cel postaci
+    <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">a</span></span> można udowodnić dwoma różnymi taktykami (<span class="inlinecode"><span class="id" type="tactic">reflexivity</span></span>
+    oraz <span class="inlinecode"><span class="id" type="tactic">trivial</span></span>) albo że termy można redukować na cztery różne
+    sposoby (<span class="inlinecode"><span class="id" type="keyword">Eval</span></span> <span class="inlinecode"><span class="id" type="tactic">simpl</span></span>, <span class="inlinecode"><span class="id" type="keyword">Eval</span></span> <span class="inlinecode"><span class="id" type="tactic">compute</span></span>, <span class="inlinecode"><span class="id" type="keyword">Eval</span></span> <span class="inlinecode"><span class="id" type="tactic">cbv</span></span>, <span class="inlinecode"><span class="id" type="keyword">Eval</span></span> <span class="inlinecode"><span class="id" type="var">cbn</span></span>).
+    Niestety, będziesz musiał się do tego przyzwyczaić — język
+    taktyka Coqa jest strasznie zabałaganiony i niesie ze sobą
+    spory bagaż swej mrocznej przeszłości. Na szczęście od niedawna
+    trawją prace nad jego ucywilizowaniem, czego pierwsze efekty
+    widać już od wersji 8.5. W chwilach desperacji uratować może
+    cię jedynie dokumentacja:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> https://coq.inria.fr/refman/tactic-index.html
+
+</li>
+<li> https://coq.inria.fr/refman/Reference-Manual010.html 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="negb_involutive'"><span class="id" type="lemma">negb_involutive'</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>, <a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="R2.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="R2.html#b"><span class="id" type="variable">b</span></a>) = <a class="idref" href="R2.html#b"><span class="id" type="variable">b</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">b</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zauważmy, że nie musimy używać taktyki <span class="inlinecode"><span class="id" type="tactic">intro</span></span>, żeby wprowadzić
+    <span class="inlinecode"><span class="id" type="var">b</span></span> do kontekstu: taktyka <span class="inlinecode"><span class="id" type="tactic">destruct</span></span> sama jest w stanie wykryć,
+    że nie ma jej w kontekście i wprowadzić ją tam przed rozbiciem
+    jej na konstruktory. Zauważmy też, że oba podcele rozwiązaliśmy
+    w ten sam sposób, więc możemy użyć kombinatora <span class="inlinecode">;</span> (średnika),
+    żeby rozwiązać je oba za jednym zamachem. 
+<div class="paragraph"> </div>
+
+<a name="lab62"></a><h4 class="section">Ćwiczenie</h4>
+ Zdefiniuj funkcje <span class="inlinecode"><span class="id" type="var">andb</span></span> (koniunkcja boolowska) oraz <span class="inlinecode"><span class="id" type="var">orb</span></span>
+    (alternatywa boolowska). Napisz i udowodnij twierdzenia,
+    które mówią, że funkcje te są łączne i przemienne. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab63"></a><h2 class="section">Konstruktory rekurencyjne</h2>
+
+<div class="paragraph"> </div>
+
+<a name="lab64"></a><h2 class="section">Konstruktory polimorficzne</h2>
+
+<div class="paragraph"> </div>
+
+<a name="lab65"></a><h2 class="section">Typy induktywne — pełna moc</h2>
+
+</div>
+<div class="code">
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
