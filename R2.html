@@ -308,6 +308,12 @@ Definicja typu induktywnego ma następującą postać: najpierw występuje
 
 <div class="paragraph"> </div>
 
+    Definicję tę możemy udczytać następująco: "<span class="inlinecode"><span class="id" type="var">true</span></span> jest typu <span class="inlinecode"><span class="id" type="var">bool</span></span>,
+    <span class="inlinecode"><span class="id" type="var">false</span></span> jest typu <span class="inlinecode"><span class="id" type="var">bool</span></span> i nie ma żadnych więcej wartości typu
+    <span class="inlinecode"><span class="id" type="var">bool</span></span>".
+
+<div class="paragraph"> </div>
+
     Uwaga: należy odróżnić symbole <span class="inlinecode">:=</span> oraz <span class="inlinecode">=</span>. Pierwszy z nich służy
     do definiowania, a drugi do zapisywania równości.
 
@@ -322,7 +328,7 @@ Definicja typu induktywnego ma następującą postać: najpierw występuje
 <div class="paragraph"> </div>
 
     Zapis <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">b</span></span> oznacza "<span class="inlinecode"><span class="id" type="var">a</span></span> jest równe <span class="inlinecode"><span class="id" type="var">b</span></span>". Jest to zdanie logiczne,
-    a nie komenda. Zdanie to rzecz jasna nie musi być prawdziwe. Przykład
+    a nie komenda. Zdanie to rzecz jasna nie musi być prawdziwe. Przykład:
     <span class="inlinecode">2</span> <span class="inlinecode">=</span> <span class="inlinecode">5</span>. Antyprzykład: <span class="inlinecode"><span class="id" type="var">five</span></span> <span class="inlinecode">=</span> <span class="inlinecode">5</span> (jeżeli <span class="inlinecode"><span class="id" type="var">five</span></span> nie jest zdefiniowane,
     to dostajemy komunikat w stylu "nie znaleziono nazwy <span class="inlinecode"><span class="id" type="var">five</span></span>"). 
 </div>
@@ -350,18 +356,32 @@ Definicja funkcji wygląda tak: najpierw mamy słowo kluczowe <span class="inlin
     "dopasowywanie do wzorca" (ang. pattern matching; w dalszej części
     będę używał nazwy angielskiej). Pozwala ono sprawdzić, którego
     konstruktora użyto do zrobienia dopasowywanej wartości. Podobnym
-    konstruktem występującym w językach imperatywnych jest instrukcja
+    tworem występującym w językach imperatywnych jest instrukcja
     switch, ale pattern matching jest od niej dużo potężniejszy.
 
 <div class="paragraph"> </div>
 
     Nasza funkcja działa następująco: sprawdzamy, którym konstruktorem
     zrobiono argument <span class="inlinecode"><span class="id" type="var">b</span></span> — jeżeli było to <span class="inlinecode"><span class="id" type="var">true</span></span>, zwracamy <span class="inlinecode"><span class="id" type="var">false</span></span>, a
-    gdy było to <span class="inlinecode"><span class="id" type="var">false</span></span>, zwracamy <span class="inlinecode"><span class="id" type="var">true</span></span>.
+    gdy było to <span class="inlinecode"><span class="id" type="var">false</span></span>, zwracamy <span class="inlinecode"><span class="id" type="var">true</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab62"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
-    Zanim odpalimy naszą funkcję, powinniśmy zadać sobie pytanie: w jaki
+ Zdefiniuj funkcje <span class="inlinecode"><span class="id" type="var">andb</span></span> (koniunkcja boolowska) i <span class="inlinecode"><span class="id" type="var">orb</span></span> (alternatywa
+    boolowska). 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zanim odpalimy naszą funkcję, powinniśmy zadać sobie pytanie: w jaki
     sposób programy są wykonywane? W celu lepszego zrozumienia tego
     zagadnienia porównamy ewaluację programów napisanych w językach
     imperatywnych oraz funkcyjnych.
@@ -382,8 +402,8 @@ Definicja funkcji wygląda tak: najpierw mamy słowo kluczowe <span class="inlin
     wykonanie programu polega na jego redukcji. O co chodzi?
     Przypomnijmy najpierw, że program to term, którego typem jest
     specyfikacja, czyli typ sortu <span class="inlinecode"><span class="id" type="keyword">Set</span></span>. Termy mogą być redukowane,
-    czyli zamieniane na równoważne, ale prostsze, przy użyciu jednej
-    z kilku reguł redukcji. Prześledźmy wykonanie programu <span class="inlinecode"><span class="id" type="var">negb</span></span> <span class="inlinecode"><span class="id" type="var">true</span></span>
+    czyli zamieniane na równoważne, ale prostsze, przy użyciu
+    reguł redukcji. Prześledźmy wykonanie programu <span class="inlinecode"><span class="id" type="var">negb</span></span> <span class="inlinecode"><span class="id" type="var">true</span></span>
     krok po kroku. 
 </div>
 <div class="code">
@@ -446,11 +466,17 @@ Redukcja jota dopasowuje term do wzorca i zamienia go na term
     redukcji występujące po <span class="inlinecode"><span class="id" type="tactic">cbv</span></span> — w taki wypadku zostaną zaaplikowane
     wszystkie możliwe redukcje, czyli program zostanie wykonany. Do
     jego wykonania możemy też użyć komend <span class="inlinecode"><span class="id" type="keyword">Eval</span></span> <span class="inlinecode"><span class="id" type="tactic">simpl</span></span> oraz <span class="inlinecode"><span class="id" type="keyword">Eval</span></span>
-    <span class="inlinecode"><span class="id" type="tactic">compute</span></span> (a od wersji Coqa 8.5 także <span class="inlinecode"><span class="id" type="keyword">Eval</span></span> <span class="inlinecode"><span class="id" type="var">cbn</span></span>).
+    <span class="inlinecode"><span class="id" type="tactic">compute</span></span> (a od wersji Coqa 8.5 także <span class="inlinecode"><span class="id" type="keyword">Eval</span></span> <span class="inlinecode"><span class="id" type="var">cbn</span></span>). 
+<div class="paragraph"> </div>
+
+<a name="lab63"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
-    Jak widać, wykonanie programu w Coqu jest dość toporne. Wynika to
+ Zredukuj "ręcznie" programy <span class="inlinecode"><span class="id" type="var">andb</span></span> <span class="inlinecode"><span class="id" type="var">false</span></span> <span class="inlinecode"><span class="id" type="var">false</span></span> oraz <span class="inlinecode"><span class="id" type="var">orb</span></span> <span class="inlinecode"><span class="id" type="var">false</span></span> <span class="inlinecode"><span class="id" type="var">true</span></span>. 
+<div class="paragraph"> </div>
+
+ Jak widać, wykonanie programu w Coqu jest dość toporne. Wynika to
     z faktu, że Coq nie został stworzony do wykonywania programów, a
     jedynie do ich definiowania i dowodzenia ich poprawności. Aby użyć
     programu napisanego w Coqu w świecie rzeczywistym, stosuje się
@@ -500,12 +526,14 @@ Nasze twierdzenie głosi, że funkcja <span class="inlinecode"><span class="id" 
     dwa konstruktory, taktyka ta generuje nam dwa podcele:
     musimy udowodnić twierdzenie osobno dla przypadku, gdy
     <span class="inlinecode"><span class="id" type="var">b</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">true</span></span> oraz dla <span class="inlinecode"><span class="id" type="var">b</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">false</span></span>. Potem przy pomocy
-    taktyki <span class="inlinecode"><span class="id" type="tactic">simpl</span></span> obliczamy wartość naszej funkcji —
-    zauważ, że byłoby to niemożliwe, gdyby argument był
-    postaci <span class="inlinecode"><span class="id" type="var">b</span></span>, ale jest jak najbardziej możliwe, gdy jest
-    on postaci <span class="inlinecode"><span class="id" type="var">true</span></span> albo <span class="inlinecode"><span class="id" type="var">false</span></span>. Na koniec używamy taktyki
-    <span class="inlinecode"><span class="id" type="tactic">reflexivity</span></span>, która potrafi udowodnić cel postaci
-    <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">a</span></span>.
+    taktyki <span class="inlinecode"><span class="id" type="tactic">simpl</span></span> redukujemy (czyli wykonujemy) programy
+    <span class="inlinecode"><span class="id" type="var">negb</span></span> <span class="inlinecode">(<span class="id" type="var">negb</span></span> <span class="inlinecode"><span class="id" type="var">true</span>)</span> i <span class="inlinecode"><span class="id" type="var">negb</span></span> <span class="inlinecode">(<span class="id" type="var">negb</span></span> <span class="inlinecode"><span class="id" type="var">false</span>)</span>. zauważ, że
+    byłoby to niemożliwe, gdyby argument był postaci <span class="inlinecode"><span class="id" type="var">b</span></span>
+    (nie można wtedy zaaplikować żadnej redukcji), ale jest
+    jak najbardziej możliwe, gdy jest on postaci <span class="inlinecode"><span class="id" type="var">true</span></span> albo
+    <span class="inlinecode"><span class="id" type="var">false</span></span> (wtedy redukcja przebiega jak w przykładzie). Na
+    koniec używamy taktyki <span class="inlinecode"><span class="id" type="tactic">reflexivity</span></span>, która potrafi udowodnić
+    cel postaci <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">a</span></span>.
 
 <div class="paragraph"> </div>
 
@@ -522,7 +550,7 @@ Nasze twierdzenie głosi, że funkcja <span class="inlinecode"><span class="id" 
     Niestety, będziesz musiał się do tego przyzwyczaić — język
     taktyka Coqa jest strasznie zabałaganiony i niesie ze sobą
     spory bagaż swej mrocznej przeszłości. Na szczęście od niedawna
-    trawją prace nad jego ucywilizowaniem, czego pierwsze efekty
+    trwają prace nad jego ucywilizowaniem, czego pierwsze efekty
     widać już od wersji 8.5. W chwilach desperacji uratować może
     cię jedynie dokumentacja:
 
@@ -557,12 +585,120 @@ Zauważmy, że nie musimy używać taktyki <span class="inlinecode"><span class=
     żeby rozwiązać je oba za jednym zamachem. 
 <div class="paragraph"> </div>
 
-<a name="lab62"></a><h4 class="section">Ćwiczenie</h4>
- Zdefiniuj funkcje <span class="inlinecode"><span class="id" type="var">andb</span></span> (koniunkcja boolowska) oraz <span class="inlinecode"><span class="id" type="var">orb</span></span>
-    (alternatywa boolowska). Napisz i udowodnij twierdzenia,
-    które mówią, że funkcje te są łączne i przemienne. 
+<a name="lab64"></a><h4 class="section">Ćwiczenie</h4>
+
 </div>
 <div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_assoc"><span class="id" type="lemma">andb_assoc</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> <span class="id" type="var">b3</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#andb"><span class="id" type="definition">andb</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> (<a class="idref" href="R2.html#andb"><span class="id" type="definition">andb</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="R2.html#b3"><span class="id" type="variable">b3</span></a>) = <a class="idref" href="R2.html#andb"><span class="id" type="definition">andb</span></a> (<a class="idref" href="R2.html#andb"><span class="id" type="definition">andb</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a>) <a class="idref" href="R2.html#b3"><span class="id" type="variable">b3</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_comm"><span class="id" type="lemma">andb_comm</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#andb"><span class="id" type="definition">andb</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> = <a class="idref" href="R2.html#andb"><span class="id" type="definition">andb</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_assoc"><span class="id" type="lemma">orb_assoc</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> <span class="id" type="var">b3</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#orb"><span class="id" type="definition">orb</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> (<a class="idref" href="R2.html#orb"><span class="id" type="definition">orb</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="R2.html#b3"><span class="id" type="variable">b3</span></a>) = <a class="idref" href="R2.html#orb"><span class="id" type="definition">orb</span></a> (<a class="idref" href="R2.html#orb"><span class="id" type="definition">orb</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a>) <a class="idref" href="R2.html#b3"><span class="id" type="variable">b3</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_comm"><span class="id" type="lemma">orb_comm</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#orb"><span class="id" type="definition">orb</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> = <a class="idref" href="R2.html#orb"><span class="id" type="definition">orb</span></a> <a class="idref" href="R2.html#b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="R2.html#b1"><span class="id" type="variable">b1</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab65"></a><h2 class="section">Konstruktory rekurencyjne</h2>
+
+<div class="paragraph"> </div>
+
+ Powiedzieliśmy, że termy typów induktywnych są drzewami. W przypadku
+    enumeracji jest to słabo widoczne, gdyż drzewa te są zdegenerowane —
+    są to po prostu punkciki oznaczone nazwami konstruktorów. Efekt
+    rozgałęzienia możemy uzyskać, gdy jeden z konstruktorów będzie
+    rekurencyjny, tzn. gdy jako argument będzie przyjmował term typu,
+    który właśnie definiujemy. Naszym przykładem będą liczby naturalne
+    (choć i tutaj rozgałęzienie będzie nieco zdegenerowane ­- każdy term
+    będzie mógł mieć co najwyżej jedno). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="NatDef"><span class="id" type="module">NatDef</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Mechanizm modułów jest podobny do mechanizmu sekcji i na razie nie
+    będzie nas interesował — użyjemy go, żeby nie zaśmiecać głównej
+    przestrzeni nazw (mechanizm sekcji w tym przypadku by nie pomógł). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="NatDef.nat"><span class="id" type="inductive">nat</span></a> : <span class="id" type="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="NatDef.O"><span class="id" type="constructor">O</span></a> : <a class="idref" href="R2.html#nat"><span class="id" type="inductive">nat</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="NatDef.S"><span class="id" type="constructor">S</span></a> : <a class="idref" href="R2.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="R2.html#nat"><span class="id" type="inductive">nat</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="NatDef.::'0'"><span class="id" type="notation">"</span></a>0" := <a class="idref" href="R2.html#NatDef.O"><span class="id" type="constructor">O</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Uwaga: nazwa pierwszego konstruktora to duża litera O, a nie cyfra 0
+    — cyfry nie mogą być nazwami. Żeby obejść tę niedogodność, musimy
+    posłużyć się mechanizmem notacji — dzięki temu będziemy mogli pisać
+    0 zamiast O.
+
+<div class="paragraph"> </div>
+
+    Definicję tę możemy odczytać w następujący sposób: "<span class="inlinecode">0</span> jest liczbą
+    naturalną; jeżeli <span class="inlinecode"><span class="id" type="var">n</span></span> jest liczbą naturalną, to <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> również jest
+    liczbą naturalną". Konstruktor <span class="inlinecode"><span class="id" type="var">S</span></span> odpowiada tutaj dodawaniu jedynki:
+    <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">0</span> to 1, <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">0)</span> to 2, <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">0))</span> to 3 i tak dalej. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Check</span> (<a class="idref" href="R2.html#NatDef.S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="R2.html#NatDef.S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="R2.html#NatDef.S"><span class="id" type="constructor">S</span></a> 0))).<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;S&nbsp;(S&nbsp;(S&nbsp;0))&nbsp;:&nbsp;nat&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R2.html#NatDef"><span class="id" type="module">NatDef</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> 0)).<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;3&nbsp;:&nbsp;nat&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Ręczne liczenie ilości <span class="inlinecode"><span class="id" type="var">S</span></span> w każdej liczbie szybko staje się trudne
+    nawet dla małych liczb. Na szczęście standardowa biblioteka Coqa
+    udostępnia notacje, które pozwalają nam zapisywać liczby naturalne
+    przy pomocy dobrze znanych nam cyfr arabskich. Żeby uzyskać do nich
+    dostęp, musimy opuścić zdefiniowany przez nas moduł <span class="inlinecode"><span class="id" type="var">NatDef</span></span>, żeby
+    nasza definicja <span class="inlinecode"><span class="id" type="var">nat</span></span> nie przysłaniała tej bibliotecznej. Zaczniemy
+    za to nowy moduł, żebyśmy mogli swobodnie zredefiniować działania
+    na liczbach naturalnych z biblioteki standardowej. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="NatOps"><span class="id" type="module">NatOps</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="NatOps.plus"><span class="id" type="definition">plus</span></a> (<span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 ⇒ <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">n'</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="R2.html#plus"><span class="id" type="definition">plus</span></a> <span class="id" type="var">n'</span> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
 
 <br/>
 
@@ -570,15 +706,245 @@ Zauważmy, że nie musimy używać taktyki <span class="inlinecode"><span class=
 </div>
 
 <div class="doc">
-<a name="lab63"></a><h2 class="section">Konstruktory rekurencyjne</h2>
+W zapisie unarnym liczby naturalne możemy wyobrażać sobie jako kupki
+    <span class="inlinecode"><span class="id" type="var">S</span></span>-ów, więc dodawanie dwóch liczb sprowadza się do przerzucenia <span class="inlinecode"><span class="id" type="var">S</span></span>-ów
+    z jednej kupki na drugą.
 
 <div class="paragraph"> </div>
 
-<a name="lab64"></a><h2 class="section">Konstruktory polimorficzne</h2>
+    Definiowanie funkcji dla typów z konstruktorami rekurencyjnymi
+    wygląda podobnie jak dla enumeracji, ale występują drobne różnice:
+    jeżeli będziemy używać rekurencji, musimy zaznaczyć to za pomocą
+    słowa kluczowego <span class="inlinecode"><span class="id" type="keyword">Fixpoint</span></span> (zamiast wcześniejszego <span class="inlinecode"><span class="id" type="keyword">Definition</span></span>).
+    Zauważmy też, że jeżeli funkcja ma wiele argumentów tego samego typu,
+    możemy napisać <span class="inlinecode">(<span class="id" type="var">arg1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" type="var">argN</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">type</span>)</span> zamiast dłuższego <span class="inlinecode">(<span class="id" type="var">arg1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">type</span>)</span>
+    <span class="inlinecode">...</span> <span class="inlinecode">(<span class="id" type="var">argN</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">type</span>)</span>.
 
 <div class="paragraph"> </div>
 
-<a name="lab65"></a><h2 class="section">Typy induktywne — pełna moc</h2>
+    Jeżeli konstruktor typu induktywnego bierze jakieś argumenty, to wzorce,
+    które go dopasowują, stają się nieco bardziej skomplikowane: poza nazwą
+    konstruktora muszą też dopasowywać argumenty — w naszym przypadku używamy
+    zmiennej o nazwie <span class="inlinecode"><span class="id" type="var">n'</span></span>, która istnieje tylko lokalnie (tylko we wzorcu
+    dopasowania oraz po prawej stronie strzałki <span class="inlinecode">⇒</span>).
+
+<div class="paragraph"> </div>
+
+    Naszą funkcję zdefiniowaliśmy przy pomocy najbardziej elementarnego
+    rodzaju rekursji, jaki jest dostępny w Coqu: rekursji strukturalnej.
+    W przypadku takiej rekursji wywołania rekurencyjne mogą odbywać się
+    jedynie na na termach strukturalnie mniejszych, niż obecny argument
+    główny rekurencji. W naszym przypadku argumentem głównym jest <span class="inlinecode"><span class="id" type="var">n</span></span>
+    (bo on jest dopasowywany), zaś rekurencyjnych wywołań dokonujemy na
+    <span class="inlinecode"><span class="id" type="var">n'</span></span>, gdzie <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode"><span class="id" type="var">n'</span></span>. <span class="inlinecode"><span class="id" type="var">n'</span></span> jest strukturalnie mniejszy od <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode"><span class="id" type="var">n'</span></span>,
+    gdyż składa się z jednego <span class="inlinecode"><span class="id" type="var">S</span></span> mniej. Jeżeli wyobrazimy sobie nasze
+    liczby jako kupki <span class="inlinecode"><span class="id" type="var">S</span></span>-ów, to wywołania rekurencyjne możemy robić
+    jedynie po zdjęciu z kupki co najmniej jednego <span class="inlinecode"><span class="id" type="var">S</span></span>.
+
+<div class="paragraph"> </div>
+
+    Podobnie jak w przypadku funkcji <span class="inlinecode"><span class="id" type="var">negb</span></span>, tak i tym razem w celu
+    sprawdzenia poprawności naszej definicji spróbujemy udowodnić, że
+    posiada ona właściwości, których się spodziewamy. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.plus_O_n"><span class="id" type="lemma">plus_O_n</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.plus"><span class="id" type="definition">plus</span></a> 0 <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> = <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Tak prosty dowód nie powinien nas dziwić — wszakże twierdzenie to
+    wynika wprost z definicji (spróbuj zredukować "ręcznie" wyrażenie
+    <span class="inlinecode">0</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">n</span></span>). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.plus_n_O_try1"><span class="id" type="lemma">plus_n_O_try1</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.plus"><span class="id" type="definition">plus</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> 0 = <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">f_equal</span>.<br/>
+<span class="id" type="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Tym razem nie jest już tak prosto — <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">0</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">n</span></span> nie wynika z definicji
+    przez prostą redukcję, gdyż argumentem głównym funkcji <span class="inlinecode"><span class="id" type="var">plus</span></span> jest
+    jej pierwszy argument, czyli <span class="inlinecode"><span class="id" type="var">n</span></span>. Żeby móc zredukować to wyrażenie,
+    musimy rozbić <span class="inlinecode"><span class="id" type="var">n</span></span>. Pokazanie, że <span class="inlinecode">0</span> <span class="inlinecode">+</span> <span class="inlinecode">0</span> <span class="inlinecode">=</span> <span class="inlinecode">0</span> jest trywialne, ale
+    drugi przypadek jest już beznadziejny. Ponieważ funkcje zachowują
+    równość (czyli <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">b</span></span> implikuje <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">b</span></span>), to aby pokazać, że
+    <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">b</span></span>, wystarczyć pokazać, że <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">b</span></span> — w ten właśnie sposób
+    działa taktyka <span class="inlinecode"><span class="id" type="tactic">f_equal</span></span>. Nie pomogła nam ona jednak — po jej
+    użyciu mamy do pokazania to samo, co na początku, czyli <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">0</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">n</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.plus_n_O"><span class="id" type="lemma">plus_n_O</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.plus"><span class="id" type="definition">plus</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> 0 = <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">induction</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">f_equal</span>. <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Do udowodnienia tego twierdzenia musimy posłużyć się indukcją.
+    Indukcja jest sposobem dowodzenia właściwości typów induktywnych
+    i funkcji rekurencyjnych, który działa mniej więcej tak: żeby
+    udowodnić, że każdy term typu <span class="inlinecode"><span class="id" type="var">A</span></span> posiada własność <span class="inlinecode"><span class="id" type="var">P</span></span>, pokazujemy
+    najpierw, że konstruktory nierekurencyjne posiadają tę własność
+    dla dowolnych argumentów, a następnie, że konstruktory rekurencyjne
+    zachowują tę własność.
+
+<div class="paragraph"> </div>
+
+    W przypadku liczb naturalnych indukcja wygląda tak: żeby pokazać,
+    że każda liczba naturalna ma własność <span class="inlinecode"><span class="id" type="var">P</span></span>, najpierw należy
+    pokazać, że zachodzi <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">0</span>, a następnie, że jeżeli zachodzi <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span>,
+    to zachodzi także <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode"><span class="id" type="var">n</span>)</span>. Z tych dwóch reguł możemy zbudować
+    dowód na to, że <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> zachodzi dla dowolnego <span class="inlinecode"><span class="id" type="var">n</span></span>.
+
+<div class="paragraph"> </div>
+
+    Ten sposób rozumowania możemy zrealizować w Coqu przy pomocy
+    taktyki <span class="inlinecode"><span class="id" type="tactic">induction</span></span>. Działa ona podobnie do <span class="inlinecode"><span class="id" type="tactic">destruct</span></span>, czyli
+    rozbija podany term na konstruktory, ale w przypadku konstruktorów
+    rekurencyjnych robi coś jeszcze — daje nam założenie indukcyjne,
+    które mówi, że dowodzone przez nas twierdzenie zachodzi dla
+    rekurencyjnych argumentów konstruktora. Właśnie tego było nam
+    trzeba: założenie indukcyjne pozwala nam dokończyć dowód. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.plus_comm"><span class="id" type="lemma">plus_comm</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.plus"><span class="id" type="definition">plus</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="R2.html#NatOps.plus"><span class="id" type="definition">plus</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">n</span> <span class="id" type="keyword">as</span> [| <span class="id" type="var">n'</span>]; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="R2.html#NatOps.plus_n_O"><span class="id" type="lemma">plus_n_O</span></a>. <span class="id" type="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">m</span> <span class="id" type="keyword">as</span> [| <span class="id" type="var">m'</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">rewrite</span> <a class="idref" href="R2.html#NatOps.plus_n_O"><span class="id" type="lemma">plus_n_O</span></a>. <span class="id" type="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">rewrite</span> <span class="id" type="var">IHn'</span>. <span class="id" type="tactic">rewrite</span> &lt;- <span class="id" type="var">IHm'</span>. <span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">rewrite</span> <span class="id" type="var">IHn'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Pojedyncza indukcja nie zawsze wystarcza, co obrazuje powyższy przypadek.
+    Zauważmy, że przed użyciem <span class="inlinecode"><span class="id" type="tactic">induction</span></span> nie musimy wprowadzać zmiennych
+    do kontekstu — taktyka ta robi to sama, podobnie jak <span class="inlinecode"><span class="id" type="tactic">destruct</span></span>.
+    Również podobnie jak <span class="inlinecode"><span class="id" type="tactic">destruct</span></span>, możemy przekazać jej wzorzec, którym
+    nadajemy nazwy argumentom konstruktorów, na które rozbijany jest term.
+
+<div class="paragraph"> </div>
+
+    W ogólności wzorzec ma postać <span class="inlinecode">[<span class="id" type="var">a11</span></span> <span class="inlinecode">..</span> <span class="inlinecode"><span class="id" type="var">a1n</span></span> <span class="inlinecode">|</span> <span class="inlinecode">...</span> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">am1</span></span> <span class="inlinecode">..</span> <span class="inlinecode"><span class="id" type="var">amk</span>]</span>. Pionowa
+    kreska oddziela argumenty poszczególnych konstruktorów: <span class="inlinecode"><span class="id" type="var">a11</span></span> <span class="inlinecode">..</span> <span class="inlinecode"><span class="id" type="var">a1n</span></span>
+    to argumenty pierwszego konstruktora, zaś <span class="inlinecode"><span class="id" type="var">am1</span></span> <span class="inlinecode">..</span> <span class="inlinecode"><span class="id" type="var">amk</span></span> to argumenty
+    m-tego konstruktora. <span class="inlinecode"><span class="id" type="var">nat</span></span> ma dwa konstruktory, z czego pierwszy nie
+    bierze argumentów, a drugi bierze jeden, więc nasz wzorzec ma postać
+    <span class="inlinecode">[|</span> <span class="inlinecode"><span class="id" type="var">n'</span>]</span>. Dzięki temu nie musimy polegać na domyślnych nazwach nadawanych
+    argumentom przez Coqa, które często wprowadzają zamęt.
+
+<div class="paragraph"> </div>
+
+    Jeżeli damy taktyce <span class="inlinecode"><span class="id" type="tactic">rewrite</span></span> nazwę hipotezy lub twierdzenia, którego
+    konkluzją jest <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">b</span></span>, to zamienia ona w obecnym podcelu wszystkie
+    wystąpienia <span class="inlinecode"><span class="id" type="var">a</span></span> na <span class="inlinecode"><span class="id" type="var">b</span></span> oraz generuje tyle podcelów, ile przesłanek ma
+    użyta hipoteza lub twierdzenie. W naszym przypadku użyliśmy udowodnionego
+    uprzednio twierdzenia <span class="inlinecode"><span class="id" type="var">plus_n_O</span></span>, które nie ma przesłanek, czego efektem
+    było po prostu przepisanie <span class="inlinecode"><span class="id" type="var">plus</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span> <span class="inlinecode">0</span> na <span class="inlinecode"><span class="id" type="var">m</span></span>.
+
+<div class="paragraph"> </div>
+
+    Przepisywać możemy też w drugą stronę pisząc <span class="inlinecode"><span class="id" type="tactic">rewrite</span></span> <span class="inlinecode">&lt;-</span>. Wtedy jeżeli
+    konkluzją danego <span class="inlinecode"><span class="id" type="tactic">rewrite</span></span> twierdzenia lub hipotezy jest <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">b</span></span>, to
+    w celu wszystkie <span class="inlinecode"><span class="id" type="var">b</span></span> zostaną zastąpione przez <span class="inlinecode"><span class="id" type="var">a</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab66"></a><h4 class="section">Ćwiczenie. Zdefiniuj mnożenie i udowodnij jego właściwości.</h4>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.mult_0_l"><span class="id" type="lemma">mult_0_l</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.mult"><span class="id" type="definition">mult</span></a> 0 <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> = 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.mult_0_r"><span class="id" type="lemma">mult_0_r</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.mult"><span class="id" type="definition">mult</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> 0 = 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.mult_1_l"><span class="id" type="lemma">mult_1_l</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.mult"><span class="id" type="definition">mult</span></a> 1 <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> = <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.mult_1_r"><span class="id" type="lemma">mult_1_r</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.mult"><span class="id" type="definition">mult</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> 1 = <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jeżeli ćwiczenie było za proste i czytałeś podrozdział o kombinatorach
+    taktyk, to spróbuj udowodnić:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> dwa pierwsze twierdzenia używając nie więcej niż 2 taktyk
+
+</li>
+<li> trzecie bez użycia indukcji, używając nie więcej niż 4 taktyk
+
+</li>
+<li> czwarte używając nie więcej niż 4 taktyk 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Wszystkie dowody powinny być nie dłuższe niż pół linijki. 
+<div class="paragraph"> </div>
+
+<a name="lab67"></a><h4 class="section">Ćwiczenie. Uwaga, trudne.</h4>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="NatOps.plus'"><span class="id" type="definition">plus'</span></a> (<span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 ⇒ <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">m'</span> ⇒ <a class="idref" href="R2.html#plus'"><span class="id" type="definition">plus'</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>) <span class="id" type="var">m'</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.plus'_is_plus"><span class="id" type="lemma">plus'_is_plus</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="R2.html#NatOps.plus"><span class="id" type="definition">plus</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R2.html#NatOps"><span class="id" type="module">NatOps</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab68"></a><h2 class="section">Typy polimorficzne</h2>
+
+<div class="paragraph"> </div>
+
+<a name="lab69"></a><h2 class="section">Typy induktywne — pełna moc</h2>
 
 </div>
 <div class="code">
