@@ -1242,6 +1242,296 @@ Typ <span class="inlinecode"><span class="id" type="var">rational</span></span> 
 <div class="doc">
 <a name="lab71"></a><h2 class="section">Typy induktywne — pełna moc</h2>
 
+<div class="paragraph"> </div>
+
+ Połączenie funkcji zależnych, konstruktorów rekurencyjnych i
+    polimorfizmu pozwala nam na opisywanie (prawie) dowolnych typów.
+    Jednym z najbardziej podstawowych i najbardziej przydatnych
+    narzędzi w programowaniu funkcyjnym (i w ogóle w życiu) są listy. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="MyList"><span class="id" type="module">MyList</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="MyList.list"><span class="id" type="inductive">list</span></a> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) : <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MyList.nil"><span class="id" type="constructor">nil</span></a> : <a class="idref" href="R2.html#list"><span class="id" type="inductive">list</span></a> <span class="id" type="var">A</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MyList.cons"><span class="id" type="constructor">cons</span></a> : <span class="id" type="var">A</span> → <a class="idref" href="R2.html#list"><span class="id" type="inductive">list</span></a> <span class="id" type="var">A</span> → <a class="idref" href="R2.html#list"><span class="id" type="inductive">list</span></a> <span class="id" type="var">A</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Lista przechowuje wartości pewnego ustalonego typu <span class="inlinecode"><span class="id" type="var">A</span></span> (a więc nie
+    można np. trzymać w jednej liście jednocześnie wartości typu <span class="inlinecode"><span class="id" type="var">bool</span></span> i
+    <span class="inlinecode"><span class="id" type="var">nat</span></span>) i może mieć jedną z dwóch postaci: może być pusta (konstruktor
+    <span class="inlinecode"><span class="id" type="var">nil</span></span>) albo składać się z głowy i ogona (konstruktor <span class="inlinecode"><span class="id" type="var">cons</span></span>). Głowa
+    listy to wartość typu <span class="inlinecode"><span class="id" type="var">A</span></span>, zaś jej ogon to inna lista przechowująca
+    wartości typu <span class="inlinecode"><span class="id" type="var">A</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#MyList.nil"><span class="id" type="constructor">nil</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;nil&nbsp;:&nbsp;forall&nbsp;A&nbsp;:&nbsp;Type,&nbsp;list&nbsp;A&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#MyList.cons"><span class="id" type="constructor">cons</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;cons&nbsp;:&nbsp;forall&nbsp;A&nbsp;:&nbsp;Type,&nbsp;A&nbsp;-&gt;&nbsp;list&nbsp;A&nbsp;-&gt;&nbsp;list&nbsp;A&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" type="var">Arguments</span> <a class="idref" href="R2.html#MyList.nil"><span class="id" type="constructor">nil</span></a> [<span class="id" type="var">A</span>].<br/>
+<span class="id" type="var">Arguments</span> <a class="idref" href="R2.html#MyList.cons"><span class="id" type="constructor">cons</span></a> [<span class="id" type="var">A</span>] <span class="id" type="var">_</span> <span class="id" type="var">_</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jak już wspomnieliśmy, jeżeli typ induktywny ma argument (w naszym
+    przypadku <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span></span>), to argument ten jest też pierwszym argumentem
+    każdego z konstruktorów. W przypadku konstruktora <span class="inlinecode"><span class="id" type="var">cons</span></span> podawanie
+    argumentu <span class="inlinecode"><span class="id" type="var">A</span></span> jest zbędne, gdyż kolejnym jego argumentem jest wartość
+    tego typu. Wobec tego Coq może sam go wywnioskować, jeżeli mu każemy.
+
+<div class="paragraph"> </div>
+
+    Robimy to za pomocą komendy <span class="inlinecode"><span class="id" type="var">Arguments</span></span> <span class="inlinecode"><span class="id" type="var">konstruktor</span></span> <span class="inlinecode"><span class="id" type="var">argumenty</span></span>.
+    Argumenty w nawiasach kwadratowych Coq będzie traktował jako domyślne,
+    a te oznaczone podkreślnikiem trzeba będzie zawsze podawać ręcznie.
+    Nazwa argumentu domyślnego musi być taka sama jak w definicji typu
+    (w naszym przypadku w definicji <span class="inlinecode"><span class="id" type="var">list</span></span> argumentem nazywa się <span class="inlinecode"><span class="id" type="var">A</span></span>,
+    więc tak też musimy go nazwać w komendzie arguments). Musimy wypisać
+    wszystkie argumenty danego konstruktora — ich ilość możemy sprawdzić
+    np. komendą <span class="inlinecode"><span class="id" type="keyword">Check</span></span>.
+
+<div class="paragraph"> </div>
+
+    Warto w tym momencie zauważyć, że Coq zna typy wszystkich termów,
+    które zostały skonstruowane — gdyby tak nie było, nie mógłby
+    sam uzupełniać argumentów domyślnych, a komenda <span class="inlinecode"><span class="id" type="keyword">Check</span></span> nie mogłaby
+    działać. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="MyList.::'[]'"><span class="id" type="notation">"</span></a>[]" := <a class="idref" href="R2.html#MyList.nil"><span class="id" type="constructor">nil</span></a>.<br/>
+<span class="id" type="keyword">Infix</span> <a name="MyList.::x_'::'_x"><span class="id" type="notation">"</span></a>::" := (<a class="idref" href="R2.html#MyList.cons"><span class="id" type="constructor">cons</span></a>) (<span class="id" type="tactic">at</span> <span class="id" type="keyword">level</span> 60, <span class="id" type="tactic">right</span> <span class="id" type="keyword">associativity</span> ).<br/>
+
+<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#MyList.::'[]'"><span class="id" type="notation">[]</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode"></span>&nbsp;:&nbsp;list&nbsp;?254&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" type="keyword">Check</span> 0 <a class="idref" href="R2.html#MyList.::x_'::'_x"><span class="id" type="notation">::</span></a> 1 <a class="idref" href="R2.html#MyList.::x_'::'_x"><span class="id" type="notation">::</span></a> 2 <a class="idref" href="R2.html#MyList.::x_'::'_x"><span class="id" type="notation">::</span></a> <a class="idref" href="R2.html#MyList.nil"><span class="id" type="constructor">nil</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode">0;</span> <span class="inlinecode">1;</span> <span class="inlinecode">2</span>&nbsp;:&nbsp;list&nbsp;nat&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Nazwy <span class="inlinecode"><span class="id" type="var">nil</span></span> i <span class="inlinecode"><span class="id" type="var">cons</span></span> są zdecydowanie za długie w porównaniu do swej
+    częstości występowania. Dzięki powyższym eleganckim notacjom
+    zaoszczędzimy sobie trochę pisania. Jeżeli jednak notacje utrudniają
+    nam np. odczytanie celu, który mamy udowodnić, możemy je wyłączyć
+    odznaczając w CoqIDE View &gt; Display Notations. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="MyList.::'['_x_']'"><span class="id" type="notation">"</span></a>[ x ]" := (<a class="idref" href="R2.html#MyList.cons"><span class="id" type="constructor">cons</span></a> <span class="id" type="var">x</span> <a class="idref" href="R2.html#MyList.nil"><span class="id" type="constructor">nil</span></a>).<br/>
+<span class="id" type="keyword">Notation</span> <a name="MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">"</span></a>[ x ; y ; .. ; z ]" :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="R2.html#MyList.cons"><span class="id" type="constructor">cons</span></a> <span class="id" type="var">x</span> (<a class="idref" href="R2.html#MyList.cons"><span class="id" type="constructor">cons</span></a> <span class="id" type="var">y</span> .. (<a class="idref" href="R2.html#MyList.cons"><span class="id" type="constructor">cons</span></a> <span class="id" type="var">z</span> <a class="idref" href="R2.html#MyList.nil"><span class="id" type="constructor">nil</span></a>) .. )).<br/>
+
+<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#MyList.::'['_x_']'"><span class="id" type="notation">[</span></a>5<a class="idref" href="R2.html#MyList.::'['_x_']'"><span class="id" type="notation">]</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode">5</span>&nbsp;:&nbsp;list&nbsp;nat&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">[</span></a>0<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">;</span></a> 1<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">;</span></a> 2<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">;</span></a> 3<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">]</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode">0;</span> <span class="inlinecode">1;</span> <span class="inlinecode">2;</span> <span class="inlinecode">3</span>&nbsp;:&nbsp;list&nbsp;nat&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zauważ, że system notacji Coqa jest bardzo silny — ostatnia notacja
+    (ta zawierająca <span class="inlinecode">..</span>) jest rekurencyjna. W innych językach tego typu
+    notacje są zazwyczaj wbudowane w język i ograniczają się do podstawowych
+    typów, takich jak listy.
+
+<div class="paragraph"> </div>
+
+    Wynik <span class="inlinecode">[]</span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode">?254</span> (lub podobny) wyświetlony przez Coqa dla <span class="inlinecode">[]</span>
+    mówi nam, że <span class="inlinecode">[]</span> jest listą pewnego ustalonego typu, ale Coq jeszcze
+    nie wie, jakiego (bo ma za mało informacji, bo wywnioskować argument
+    domyślny konstruktora <span class="inlinecode"><span class="id" type="var">nil</span></span>). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="MyList.app"><span class="id" type="definition">app</span></a> {<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">l1</span> <span class="id" type="var">l2</span> : <a class="idref" href="R2.html#MyList.list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>) : <a class="idref" href="R2.html#MyList.list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#l1"><span class="id" type="variable">l1</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#MyList.::'[]'"><span class="id" type="notation">[]</span></a> ⇒ <a class="idref" href="R2.html#l2"><span class="id" type="variable">l2</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">h</span> <a class="idref" href="R2.html#MyList.::x_'::'_x"><span class="id" type="notation">::</span></a> <span class="id" type="var">t</span> <a class="idref" href="R2.html#MyList.::x_'::'_x"><span class="id" type="notation">⇒</span></a> <span class="id" type="var">h</span> <a class="idref" href="R2.html#MyList.::x_'::'_x"><span class="id" type="notation">::</span></a> <a class="idref" href="R2.html#app"><span class="id" type="definition">app</span></a> <span class="id" type="var">t</span> <a class="idref" href="R2.html#l2"><span class="id" type="variable">l2</span></a><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="MyList.::x_'++'_x"><span class="id" type="notation">"</span></a>l1 ++ l2" := (<a class="idref" href="R2.html#MyList.app"><span class="id" type="definition">app</span></a> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Funkcje na listach możemy definiować analogicznie do funkcji na
+    liczbach naturalnych. Zaczniemy od słowa kluczowego <span class="inlinecode"><span class="id" type="keyword">Fixpoint</span></span>,
+    gdyż będziemy potrzebować rekurencji. Pierwszym argumentem naszej
+    funkcji będzie typ <span class="inlinecode"><span class="id" type="var">A</span></span> — musimy go wymienić, bo inaczej nie będziemy
+    mogli mieć argumentów typu <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> (pamiętaj, że samo <span class="inlinecode"><span class="id" type="var">list</span></span>
+    jest rodziną typów, a nie typem). Zapis <span class="inlinecode">{<span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span>}</span> oznacza,
+    że Coq ma traktować <span class="inlinecode"><span class="id" type="var">A</span></span> jako argument domyślny — jest to szybszy
+    sposób, niż użycie komendy <span class="inlinecode"><span class="id" type="var">Arguments</span></span>.
+
+<div class="paragraph"> </div>
+
+    Nasz funkcja ma za zadanie dokleić na końcu (ang. append) pierwszej
+    listy drugą listę. Definicja jest dość intuicyjna: doklejenie jakiejś
+    listy na koniec listy pustej daje pierwszą listę, a doklejenie listy
+    na koniec listy mającej głowę i ogon jest doklejeniem jej na koniec
+    ogona. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Eval</span> <span class="id" type="tactic">compute</span> <span class="id" type="keyword">in</span> <a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">[</span></a>1<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">;</span></a> 2<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">;</span></a> 3<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">]</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">[</span></a>4<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">;</span></a> 5<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">;</span></a> 6<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">]</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode">[1;</span> <span class="inlinecode">2;</span> <span class="inlinecode">3;</span> <span class="inlinecode">4;</span> <span class="inlinecode">5;</span> <span class="inlinecode">6]</span>&nbsp;:&nbsp;list&nbsp;nat&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Wynik działania naszej funkcji wygląda poprawnie, ale niech cię
+    nie zwiodą ładne oczka — jedynym sposobem ustalenia poprawności
+    naszego kodu jest udowodnienie, że posiada on pożądane przez
+    nas właściwości. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyList.app_nil_l"><span class="id" type="lemma">app_nil_l</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <a class="idref" href="R2.html#MyList.list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#MyList.::'[]'"><span class="id" type="notation">[]</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="R2.html#l"><span class="id" type="variable">l</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="R2.html#l"><span class="id" type="variable">l</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyList.app_nil_r"><span class="id" type="lemma">app_nil_r</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <a class="idref" href="R2.html#MyList.list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#l"><span class="id" type="variable">l</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="R2.html#MyList.::'[]'"><span class="id" type="notation">[]</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="R2.html#l"><span class="id" type="variable">l</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">l</span> <span class="id" type="keyword">as</span> [| <span class="id" type="var">h</span> <span class="id" type="var">t</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">rewrite</span> <span class="id" type="var">IHt</span>. <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Sposoby dowodzenia są analogiczne jak w przypadku liczb naturalnych.
+    Pierwsze twierdzenie zachodzi na mocy samej definicji funkcji <span class="inlinecode"><span class="id" type="var">app</span></span>
+    i dowód sprowadza się do wykonania programu za pomocą taktyki <span class="inlinecode"><span class="id" type="tactic">simpl</span></span>.
+    Drugie jest analogiczne do twierdzenia <span class="inlinecode"><span class="id" type="var">plus_n_0</span></span>, z tą różnicą, że
+    w drugim celu zamiast <span class="inlinecode"><span class="id" type="tactic">f_equal</span></span> posłużyliśmy się taktyką <span class="inlinecode"><span class="id" type="tactic">rewrite</span></span>.
+
+<div class="paragraph"> </div>
+
+    Zauważ też, że zmianie uległa postać wzorca przekazanego taktyce
+    <span class="inlinecode"><span class="id" type="tactic">induction</span></span> — teraz ma on postać <span class="inlinecode">[|</span> <span class="inlinecode"><span class="id" type="var">h</span></span> <span class="inlinecode"><span class="id" type="var">t</span>]</span>, gdyż <span class="inlinecode"><span class="id" type="var">list</span></span> ma 2
+    konstruktory, z których pierwszy, <span class="inlinecode"><span class="id" type="var">nil</span></span>, nie bierze argumentów
+    (argumenty domyślne nie są wymieniane we wzorcach), zaś drugi, <span class="inlinecode"><span class="id" type="var">cons</span></span>,
+    ma dwa argumenty — głowę, tutaj nazwaną <span class="inlinecode"><span class="id" type="var">h</span></span> (jako skrót od ang. head)
+    oraz ogon, tutaj nazwany <span class="inlinecode"><span class="id" type="var">t</span></span> (jako skrót od ang. tail). 
+<div class="paragraph"> </div>
+
+<a name="lab72"></a><h4 class="section">Ćwiczenie</h4>
+ Pokaż, że <span class="inlinecode"><span class="id" type="var">app</span></span> jest łączne. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyList.app_assoc"><span class="id" type="lemma">app_assoc</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l1</span> <span class="id" type="var">l2</span> <span class="id" type="var">l3</span> : <a class="idref" href="R2.html#MyList.list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#l1"><span class="id" type="variable">l1</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R2.html#l2"><span class="id" type="variable">l2</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="R2.html#l3"><span class="id" type="variable">l3</span></a><a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R2.html#l1"><span class="id" type="variable">l1</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="R2.html#l2"><span class="id" type="variable">l2</span></a><a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="R2.html#l3"><span class="id" type="variable">l3</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab73"></a><h4 class="section">Ćwiczenie</h4>
+ Pokaż, że <span class="inlinecode"><span class="id" type="var">app</span></span> nie jest przemienne. Wskazówka: może ci się
+    przydać taktyka <span class="inlinecode"><span class="id" type="tactic">specialize</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyList.app_not_comm"><span class="id" type="lemma">app_not_comm</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l1</span> <span class="id" type="var">l2</span> : <a class="idref" href="R2.html#MyList.list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#l1"><span class="id" type="variable">l1</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="R2.html#l2"><span class="id" type="variable">l2</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="R2.html#l2"><span class="id" type="variable">l2</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="R2.html#l1"><span class="id" type="variable">l1</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab74"></a><h4 class="section">Ćwiczenie</h4>
+ Zdefiniuj funkcję <span class="inlinecode"><span class="id" type="var">length</span></span>, która oblicza długość listy. Jaki
+    powinien być jej typ? 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab75"></a><h4 class="section">Ćwiczenie</h4>
+ Udowodnij poprawność swojej implementacji funkcji <span class="inlinecode"><span class="id" type="var">length</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyList.length_nil"><span class="id" type="lemma">length_nil</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#MyList.length"><span class="id" type="definition">length</span></a> (@<a class="idref" href="R2.html#MyList.nil"><span class="id" type="constructor">nil</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>) = 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyList.length_cons"><span class="id" type="lemma">length_cons</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">h</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">t</span> : <a class="idref" href="R2.html#MyList.list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#MyList.length"><span class="id" type="definition">length</span></a> (<a class="idref" href="R2.html#h"><span class="id" type="variable">h</span></a> <a class="idref" href="R2.html#MyList.::x_'::'_x"><span class="id" type="notation">::</span></a> <a class="idref" href="R2.html#t"><span class="id" type="variable">t</span></a><a class="idref" href="R2.html#MyList.::x_'::'_x"><span class="id" type="notation">)</span></a> ≠ 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyList.app_length"><span class="id" type="lemma">app_length</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l1</span> <span class="id" type="var">l2</span> : <a class="idref" href="R2.html#MyList.list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#MyList.length"><span class="id" type="definition">length</span></a> (<a class="idref" href="R2.html#l1"><span class="id" type="variable">l1</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="R2.html#l2"><span class="id" type="variable">l2</span></a><a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">)</span></a> = <a class="idref" href="R2.html#MyList.length"><span class="id" type="definition">length</span></a> <a class="idref" href="R2.html#l1"><span class="id" type="variable">l1</span></a> + <a class="idref" href="R2.html#MyList.length"><span class="id" type="definition">length</span></a> <a class="idref" href="R2.html#l2"><span class="id" type="variable">l2</span></a>.<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Do list jeszcze wrócimy — planuję prędzej czy później dodać masywny
+    zestaw ćwiczeń, polegający w zasadzie na reimplementacji biblioteki
+    standardowej. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R2.html#MyList"><span class="id" type="module">MyList</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab76"></a><h2 class="section">Rekordy, klasy i struktury matematyczne</h2>
+
 </div>
 <div class="code">
 </div>
