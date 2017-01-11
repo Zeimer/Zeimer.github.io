@@ -1334,7 +1334,14 @@ Nazwy <span class="inlinecode"><span class="id" type="var">nil</span></span> i <
     częstości występowania. Dzięki powyższym eleganckim notacjom
     zaoszczędzimy sobie trochę pisania. Jeżeli jednak notacje utrudniają
     nam np. odczytanie celu, który mamy udowodnić, możemy je wyłączyć
-    odznaczając w CoqIDE View &gt; Display Notations. 
+    odznaczając w CoqIDE View &gt; Display Notations.
+
+<div class="paragraph"> </div>
+
+    Wynik <span class="inlinecode">[]</span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode">?254</span> (lub podobny) wyświetlony przez Coqa dla <span class="inlinecode">[]</span>
+    mówi nam, że <span class="inlinecode">[]</span> jest listą pewnego ustalonego typu, ale Coq jeszcze
+    nie wie, jakiego (bo ma za mało informacji, bo wywnioskować argument
+    domyślny konstruktora <span class="inlinecode"><span class="id" type="var">nil</span></span>). 
 </div>
 <div class="code">
 
@@ -1358,14 +1365,7 @@ Nazwy <span class="inlinecode"><span class="id" type="var">nil</span></span> i <
 Zauważ, że system notacji Coqa jest bardzo silny — ostatnia notacja
     (ta zawierająca <span class="inlinecode">..</span>) jest rekurencyjna. W innych językach tego typu
     notacje są zazwyczaj wbudowane w język i ograniczają się do podstawowych
-    typów, takich jak listy.
-
-<div class="paragraph"> </div>
-
-    Wynik <span class="inlinecode">[]</span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode">?254</span> (lub podobny) wyświetlony przez Coqa dla <span class="inlinecode">[]</span>
-    mówi nam, że <span class="inlinecode">[]</span> jest listą pewnego ustalonego typu, ale Coq jeszcze
-    nie wie, jakiego (bo ma za mało informacji, bo wywnioskować argument
-    domyślny konstruktora <span class="inlinecode"><span class="id" type="var">nil</span></span>). 
+    typów, takich jak listy. 
 </div>
 <div class="code">
 
@@ -1532,8 +1532,108 @@ Do list jeszcze wrócimy — planuję prędzej czy później dodać masywny
 <div class="doc">
 <a name="lab76"></a><h2 class="section">Rekordy, klasy i struktury matematyczne</h2>
 
+<div class="paragraph"> </div>
+
+ W wielu językach programowania występują typy rekordów (ang. record
+    types). Charakteryzują się one tym, że mają z góry określoną ilość
+    pól o potencjalnie różnych typach. W językach imperatywnych rekordy
+    wyewoluowały zaś w obiekty, które różnią się od rekordów tym, że mogą
+    zawierać również funkcje, których dziedziną jest obiekt, w którym
+    funkcja się znajduje.
+
+<div class="paragraph"> </div>
+
+    W Coqu mamy do dyspozycji rekordy, ale nie obiekty. Trzeba tu po raz
+    kolejny pochwalić siłę systemu typów Coqa — o ile w większości języków
+    rekordy są osobnym konstruktem językowym, o tyle w Coqu mogą być one z
+    łatwością reprezentowane przez typy induktywne z jednym konstruktorem
+    (wraz z odpowiednimi projekcjami, które dekonstruują rekord). 
 </div>
 <div class="code">
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="rational2"><span class="id" type="module">rational2</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Record</span> <a name="rational2.rational"><span class="id" type="record">rational</span></a> : <span class="id" type="keyword">Set</span> :=<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="rational2.sign"><span class="id" type="projection">sign</span></a> : <a class="idref" href="R2.html#rational2.bool"><span class="id" type="inductive">bool</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="rational2.numerator"><span class="id" type="projection">numerator</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="rational2.denominator"><span class="id" type="projection">denominator</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="rational2.denominator_not_zero"><span class="id" type="projection">denominator_not_zero</span></a> : <a class="idref" href="R2.html#denominator"><span class="id" type="method">denominator</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">≠</span></a> 0<br/>
+<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">}</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Z typem induktywnym o jednym konstruktorze już się zetknęliśmy,
+    próbując zdefiniować liczby wymierne. Powyższa definicja używająca
+    rekordu ma drobną przewagę nad poprzednią, w której słowo kluczowe
+    <span class="inlinecode"><span class="id" type="keyword">Inductive</span></span> pada explicité:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> wygląda ładniej
+
+</li>
+<li> ma projekcje 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#rational2.sign"><span class="id" type="projection">sign</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;sign&nbsp;:&nbsp;rational&nbsp;-&gt;&nbsp;bool&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#rational2.denominator_not_zero"><span class="id" type="projection">denominator_not_zero</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;denominator_not_zero<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;r&nbsp;:&nbsp;rational,&nbsp;denominator&nbsp;r&nbsp;&lt;&gt;&nbsp;0&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Dzięki projekcjom mamy dostęp do poszczególnych pól rekordu bez
+    konieczności jego dekonstruowania — nie musimy używać konstruktu
+    <span class="inlinecode"><span class="id" type="keyword">match</span></span> ani taktyki <span class="inlinecode"><span class="id" type="tactic">destruct</span></span>, jeżeli nie chcemy. Często bywa to
+    bardzo wygodne.
+
+<div class="paragraph"> </div>
+
+    Projekcję <span class="inlinecode"><span class="id" type="var">sign</span></span> możemy interpretować jako funkcję, która bierze
+    liczbę wymierną <span class="inlinecode"><span class="id" type="var">r</span></span> i zwraca jej znak, zaś projekcja <span class="inlinecode"><span class="id" type="var">denominator_</span></span>
+    <span class="inlinecode"><span class="id" type="var">not_zero</span></span> mówi nam, że mianownik żadnej liczb wymiernej nie jest
+    zerem.
+
+<div class="paragraph"> </div>
+
+    Pozwa tymi wizualno-praktycznymi drobnostkami, obie definicje są
+    równoważne (w szczególności, powyższa definicja, podobnie jak
+    poprzednia, nie jest dobrą reprezentacją liczb wymiernych). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R2.html#rational2"><span class="id" type="module">rational2</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab77"></a><h4 class="section">Ćwiczenie</h4>
+ Zdefiniuj typ induktywny reprezentujący datę i napisz ręcznie
+    wszystkie projekcje. Następnie zdefiniuj rekord reprezentujący
+    datę i zachwyć się tym, ile czasu i głupiego pisania zaoszczędziłbyś,
+    gdybyś od razu użył rekordu... 
+</div>
+<div class="code">
+
+<br/>
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
