@@ -1510,10 +1510,6 @@ Sposoby dowodzenia są analogiczne jak w przypadku liczb naturalnych.
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#MyList.length"><span class="id" type="definition">length</span></a> (<a class="idref" href="R2.html#l1"><span class="id" type="variable">l1</span></a> <a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="R2.html#l2"><span class="id" type="variable">l2</span></a><a class="idref" href="R2.html#MyList.::x_'++'_x"><span class="id" type="notation">)</span></a> = <a class="idref" href="R2.html#MyList.length"><span class="id" type="definition">length</span></a> <a class="idref" href="R2.html#l1"><span class="id" type="variable">l1</span></a> + <a class="idref" href="R2.html#MyList.length"><span class="id" type="definition">length</span></a> <a class="idref" href="R2.html#l2"><span class="id" type="variable">l2</span></a>.<br/>
 
 <br/>
-
-<br/>
-
-<br/>
 </div>
 
 <div class="doc">
@@ -1530,10 +1526,7 @@ Do list jeszcze wrócimy — planuję prędzej czy później dodać masywny
 </div>
 
 <div class="doc">
-<a name="lab76"></a><h2 class="section">Rekordy, klasy i struktury matematyczne</h2>
-
-<div class="paragraph"> </div>
-
+<a name="lab76"></a><h2 class="section">Rekordy</h2>
  W wielu językach programowania występują typy rekordów (ang. record
     types). Charakteryzują się one tym, że mają z góry określoną ilość
     pól o potencjalnie różnych typach. W językach imperatywnych rekordy
@@ -1606,9 +1599,9 @@ Dzięki projekcjom mamy dostęp do poszczególnych pól rekordu bez
 <div class="paragraph"> </div>
 
     Projekcję <span class="inlinecode"><span class="id" type="var">sign</span></span> możemy interpretować jako funkcję, która bierze
-    liczbę wymierną <span class="inlinecode"><span class="id" type="var">r</span></span> i zwraca jej znak, zaś projekcja <span class="inlinecode"><span class="id" type="var">denominator_</span></span>
-    <span class="inlinecode"><span class="id" type="var">not_zero</span></span> mówi nam, że mianownik żadnej liczb wymiernej nie jest
-    zerem.
+    liczbę wymierną <span class="inlinecode"><span class="id" type="var">r</span></span> i zwraca jej znak, zaś projekcja
+    <span class="inlinecode"><span class="id" type="var">denominator_not_zero</span></span> mówi nam, że mianownik żadnej liczb wymiernej
+    nie jest zerem.
 
 <div class="paragraph"> </div>
 
@@ -1634,6 +1627,189 @@ Dzięki projekcjom mamy dostęp do poszczególnych pól rekordu bez
 <div class="code">
 
 <br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab78"></a><h2 class="section">Klasy</h2>
+ Mechanizmem ułatwiającym życie jeszcze bardziej niż rekordy są klasy.
+    Niech nie zmyli cię ta nazwa — nie mają one nic wspólnego z klasami
+    znanymi z języków imperatywnych. Bliżej im raczej do interfejsów,
+    od których są zresztą dużo silniejsze.
+
+<div class="paragraph"> </div>
+
+    W językach imperatywnych interfejs możemy zaimplementować zazwyczaj
+    definiując nowy typ. W Coqu możemy uczynić typ instancją klasy w
+    dowolnym miejscu — nawet jeżeli to nie my go zdefiniowaliśmy. Co
+    więcej, instancjami klas mogą być nie tylko typy, ale dowolne termy.
+    Klasy są w Coqu pełnoprawnym tworem — mogą mieć argumenty, zawierać
+    inne klasy, być przekazywane jako argumenty do funkcji etc. Używa się
+    ich zazwyczaj dwojako:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> zamiast rekordów (zwiększa to nieco czytelność)
+
+</li>
+<li> jako interfejsy 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Class</span> <a name="EqDec"><span class="id" type="record">EqDec</span></a> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) : <span class="id" type="keyword">Type</span> :=<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="eq_dec"><span class="id" type="projection">eq_dec</span></a> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="eq_dec_spec"><span class="id" type="projection">eq_dec_spec</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>, <a class="idref" href="R2.html#eq_dec"><span class="id" type="method">eq_dec</span></a> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="R2.html#y"><span class="id" type="variable">y</span></a> = <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="R2.html#y"><span class="id" type="variable">y</span></a><br/>
+<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">}</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Nie będziemy po raz trzeci powtarzać (kulawej) definicji liczb
+    wymiernych — użycie do tego klas zamiast rekordów sprowadza się
+    do zamienienia słowa kluczowego <span class="inlinecode"><span class="id" type="keyword">Record</span></span> na <span class="inlinecode"><span class="id" type="keyword">Class</span></span> w poprzedniej
+    definicji.
+
+<div class="paragraph"> </div>
+
+    Przyjrzyjmmy się za to wykorzystaniu klasy w roli interfejsu.
+    Argument <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span></span> po nazwie klasy mówi nam, że nasz interfejs
+    będą mogły implementować typy. Dalej zapis <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span></span> mówi nam, że
+    nasza klasa jest typem — klasy, jako ulepszone rekordy, są typami
+    induktywnymi z jednym konstruktorem.
+
+<div class="paragraph"> </div>
+
+    Nasza klasa ma dwa pola, które będzie musiał podać użytkownik chcący
+    uczynić swój typ jej instancją: funkcję <span class="inlinecode"><span class="id" type="var">eq_dec</span></span> oraz jej specyfikację,
+    która mówi nam, że <span class="inlinecode"><span class="id" type="var">eq_dec</span></span> zwraca <span class="inlinecode"><span class="id" type="var">true</span></span> wtedy i tylko wtedy, gdy jej
+    argumenty są równe.
+
+<div class="paragraph"> </div>
+
+    Wobec tego typy będące instancjami <span class="inlinecode"><span class="id" type="var">EqDec</span></span> można interpretować jako
+    typy, dla których równość elementów można sprawdzić za pomocą jakiegoś
+    algorytmu. Nie wszystkie typy posiadają tę własność — problematyczne
+    są szczególnie te, których elementy są w jakiś sposób "nieskończone". 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Instance</span> <a name="EqDec_bool"><span class="id" type="instance">EqDec_bool</span></a> : <a class="idref" href="R2.html#EqDec"><span class="id" type="class">EqDec</span></a> <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a> :=<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#eq_dec"><span class="id" type="method">eq_dec</span></a> := <span class="id" type="keyword">fun</span> <span class="id" type="var">b</span> <span class="id" type="var">b'</span> : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#b"><span class="id" type="variable">b</span></a>, <a class="idref" href="R2.html#b'"><span class="id" type="variable">b'</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a>, <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a> ⇒ <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a>, <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a> ⇒ <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span>, <span class="id" type="var">_</span> ⇒ <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+}.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">x</span>, <span class="id" type="var">y</span>; <span class="id" type="tactic">split</span>; <span class="id" type="tactic">trivial</span>; <span class="id" type="tactic">inversion</span> 1.<br/>
+<span class="id" type="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Instancje klas definiujemy przy pomocy słowa kluczowego <span class="inlinecode"><span class="id" type="keyword">Instance</span></span>.
+    Jeżeli używamy klasy jako interfejsu, który implementować mogą typy,
+    to zazwyczaj będziemy potrzebować tylko jednej instancji, więc jej
+    nazwa będzie niemal identyczna jak jej typ (dzięki temu łatwo będzie
+    ją zapamiętać).
+
+<div class="paragraph"> </div>
+
+    Po symbolu <span class="inlinecode">:=</span> w nawiasach klamrowych definiujemy pola, które
+    nie są dowodami. Całość, jako komenda, musi kończyć się kropką. Gdy
+    klasa nie zawiera żadnych pól będących dowodami, definicja jest
+    zakończona. W przeciwnym przypadku Coq przechodzi w tryb dowodzenia,
+    w którym każdemu polu będącemu dowodem odpowiada jeden podcel. Po
+    rozwiązaniu wszystkich podcelów instancja jest zdefiniowana.
+
+<div class="paragraph"> </div>
+
+    W naszym przypadku klasa ma dwa pola — funkcję i dowód na to, że
+    funkcja spełnia specyfikację — więc w nawiasach klamrowych musimy
+    podać jedynie funkcję. Zauważmy, że nie musimy koniecznie definiować
+    jej właśnie w tym miejscu — możemy zrobić to wcześniej, np. za pomocą
+    komendy <span class="inlinecode"><span class="id" type="keyword">Definition</span></span> albo <span class="inlinecode"><span class="id" type="keyword">Fixpoint</span></span>, a tutaj odnieść się do niej
+    używając jej nazwy.
+
+<div class="paragraph"> </div>
+
+    Ponieważ nasza klasa ma pole, które jest dowodem, Coq przechodzi w tryb
+    dowodzenia. Dowód, mimo iż wymaga rozpatrzenia ośmiu przypadków, mieści
+    się w jednej linijce — widać tutaj moc automatyzacji. Prześledźmy, co
+    się w nim dzieje.
+
+<div class="paragraph"> </div>
+
+    Najpierw rozbijamy wartości boolowskie <span class="inlinecode"><span class="id" type="var">x</span></span> i <span class="inlinecode"><span class="id" type="var">y</span></span>. Nie musimy wcześniej
+    wprowadzać ich do kontekstu taktyką <span class="inlinecode"><span class="id" type="tactic">intros</span></span>, gdyż <span class="inlinecode"><span class="id" type="tactic">destruct</span></span> sam potrafi
+    to zrobić. W wyniku tego dostajemy cztere podcele. W każdym z nich
+    taktyką <span class="inlinecode"><span class="id" type="tactic">split</span></span> rozbijamy równoważność na dwie implikacje. Sześć z nich
+    ma postać <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="var">P</span></span>, więc radzi sobie z nimi taktyka <span class="inlinecode"><span class="id" type="tactic">trivial</span></span>. Dwie
+    pozostałe mają przesłanki postaci <span class="inlinecode"><span class="id" type="var">false</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">true</span></span> albo <span class="inlinecode"><span class="id" type="var">true</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">false</span></span>,
+    które są sprzeczne na mocy omówionych wcześniej właściwości konstruktorów.
+    Taktyką <span class="inlinecode"><span class="id" type="tactic">inversion</span></span> <span class="inlinecode">1</span> wskazujemy, że pierwsza przesłanka implikacji
+    zawiera taką właśnie sprzeczną równość termów zrobionych różnymi
+    konstruktorami, a Coq załatwia za nas resztę.
+
+<div class="paragraph"> </div>
+
+    Jeżeli masz problem z odczytaniem tego dowodu, koniecznie przeczytaj
+    ponownie fragment rozdziału pierwszego dotyczący kombinatorów taktyk.
+    Jeżeli nie potrafisz wyobrazić sobie podcelów generowanych przez
+    kolejne taktyki, zastąp chwilowo średniki kropkami, a jeżeli to nie
+    pomaga, udowodnij całe twierdzenie bez automatyzacji.
+
+<div class="paragraph"> </div>
+
+    Dzięki takim ćwiczeniom prędzej czy później oswoisz się z tym sposobem
+    dowodzenia, choć nie jest to sztuka prosta — czytanie cudzych dowodów
+    jest równie trudne jak czytanie cudzych programów.
+
+<div class="paragraph"> </div>
+
+    Prawie nigdy zresztą nowopowstałe dowody nie są od razu zautomatyzowane
+    aż w takim stopniu — najpierw są przeprowadzone w części lub w całości
+    ręcznie. Automatyzacja jest wynikiem dostrzeżenia w dowodzie pewnych
+    powtarzających się wzorców. Proces ten przypomina trochę
+    refaktoryzację kodu — gdy dostrzeżemy powtarzające się fragmenty kodu,
+    przenosimy je do osobnych procedur. Analogicznie, gdy dostrzegamy
+    powtarzające się fragmenty dowodu, łączymy je kombinatorami taktyk
+    lub piszemy własne, zupełnie nowe taktyki (temat pisania własnych
+    taktyk poruszę prędzej czy później).
+
+<div class="paragraph"> </div>
+
+    Zauważ, że definicję instancji kończymy komendą <span class="inlinecode"><span class="id" type="keyword">Defined</span></span>, a nie <span class="inlinecode"><span class="id" type="keyword">Qed</span></span>,
+    jak to było w przypadku dowodów twierdzeń. Wynika to z faktu, że Coq
+    inaczej traktuje specyfikacje i programy, a inaczej zdania i dowody.
+    W przypadku dowodu liczy się sam fakt jego istnienia, a nie jego treść,
+    więc komenda <span class="inlinecode"><span class="id" type="keyword">Qed</span></span> każe Coqowi zapamiętać jedynie, że twierdzenie
+    udowodniono, a zapomnieć, jak dokładnie wyglądał proofterm. W przypadku
+    programów takie zachowanie jest niedopuszczalne, więc <span class="inlinecode"><span class="id" type="keyword">Defined</span></span> każe
+    Coqowi zapamiętać term ze wszystkimi szczegółami. 
+<div class="paragraph"> </div>
+
+<a name="lab79"></a><h4 class="section">Ćwiczenie</h4>
+ Zdefiniuj instancje klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span> dla typów <span class="inlinecode"><span class="id" type="var">unit</span></span> oraz <span class="inlinecode"><span class="id" type="var">nat</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab80"></a><h4 class="section">Ćwiczenie</h4>
+ Czy możliwe jest zdefiniowanie instancji klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span> dla typu
+    <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> lub sortu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>? 
+</div>
+<div class="code">
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
