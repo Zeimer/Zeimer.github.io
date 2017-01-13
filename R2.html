@@ -1741,7 +1741,10 @@ Instancje klas definiujemy przy pomocy słowa kluczowego <span class="inlinecode
     podać jedynie funkcję. Zauważmy, że nie musimy koniecznie definiować
     jej właśnie w tym miejscu — możemy zrobić to wcześniej, np. za pomocą
     komendy <span class="inlinecode"><span class="id" type="keyword">Definition</span></span> albo <span class="inlinecode"><span class="id" type="keyword">Fixpoint</span></span>, a tutaj odnieść się do niej
-    używając jej nazwy.
+    używając jej nazwy. W przypadku bardziej skomplikowanych definicji
+    jest to nawet lepsze wyjście, gdyż zyskujemy dzięki niemu kontrolę
+    nad tym, w którym miejscu rozwinąć definicję, dzięki czemu kontekst
+    i cel stają się czytelniejsze.
 
 <div class="paragraph"> </div>
 
@@ -1791,6 +1794,12 @@ Instancje klas definiujemy przy pomocy słowa kluczowego <span class="inlinecode
 
 <div class="paragraph"> </div>
 
+    Od teraz będę zakładał, że nie masz problemów ze zrozumieniem takich
+    dowodów i kolejne przykładowe dowody będę pisał w bardziej zwratej
+    formie.
+
+<div class="paragraph"> </div>
+
     Zauważ, że definicję instancji kończymy komendą <span class="inlinecode"><span class="id" type="keyword">Defined</span></span>, a nie <span class="inlinecode"><span class="id" type="keyword">Qed</span></span>,
     jak to było w przypadku dowodów twierdzeń. Wynika to z faktu, że Coq
     inaczej traktuje specyfikacje i programy, a inaczej zdania i dowody.
@@ -1798,16 +1807,113 @@ Instancje klas definiujemy przy pomocy słowa kluczowego <span class="inlinecode
     więc komenda <span class="inlinecode"><span class="id" type="keyword">Qed</span></span> każe Coqowi zapamiętać jedynie, że twierdzenie
     udowodniono, a zapomnieć, jak dokładnie wyglądał proofterm. W przypadku
     programów takie zachowanie jest niedopuszczalne, więc <span class="inlinecode"><span class="id" type="keyword">Defined</span></span> każe
-    Coqowi zapamiętać term ze wszystkimi szczegółami. 
+    Coqowi zapamiętać term ze wszystkimi szczegółami. Jeżeli nie wiesz,
+    której z tych dwóch komend użyć, użyj <span class="inlinecode"><span class="id" type="keyword">Defined</span></span>. 
 <div class="paragraph"> </div>
 
 <a name="lab79"></a><h4 class="section">Ćwiczenie</h4>
  Zdefiniuj instancje klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span> dla typów <span class="inlinecode"><span class="id" type="var">unit</span></span> oraz <span class="inlinecode"><span class="id" type="var">nat</span></span>. 
-<div class="paragraph"> </div>
+</div>
+<div class="code">
 
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
 <a name="lab80"></a><h4 class="section">Ćwiczenie</h4>
  Czy możliwe jest zdefiniowanie instancji klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span> dla typu
     <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> lub sortu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>? 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Instance</span> <a name="EqDec_option"><span class="id" type="instance">EqDec_option</span></a> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">_</span> : <a class="idref" href="R2.html#EqDec"><span class="id" type="class">EqDec</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>) : <a class="idref" href="R2.html#EqDec"><span class="id" type="class">EqDec</span></a> (<a class="idref" href="R2.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>) :=<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#eq_dec"><span class="id" type="method">eq_dec</span></a> := <span class="id" type="keyword">fun</span> <span class="id" type="var">opt1</span> <span class="id" type="var">opt2</span> : <a class="idref" href="R2.html#option"><span class="id" type="inductive">option</span></a> <span class="id" type="var">A</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#opt1"><span class="id" type="variable">opt1</span></a>, <a class="idref" href="R2.html#opt2"><span class="id" type="variable">opt2</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#Some"><span class="id" type="constructor">Some</span></a> <span class="id" type="var">a</span>, <a class="idref" href="R2.html#Some"><span class="id" type="constructor">Some</span></a> <span class="id" type="var">a'</span> ⇒ <a class="idref" href="R2.html#eq_dec"><span class="id" type="method">eq_dec</span></a> <span class="id" type="var">a</span> <span class="id" type="var">a'</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="R2.html#None"><span class="id" type="constructor">None</span></a>, <a class="idref" href="R2.html#None"><span class="id" type="constructor">None</span></a> ⇒ <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span>, <span class="id" type="var">_</span> ⇒ <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+}.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">x</span>, <span class="id" type="var">y</span>; <span class="id" type="tactic">split</span>; <span class="id" type="tactic">trivial</span>; <span class="id" type="tactic">try</span> (<span class="id" type="tactic">inversion</span> 1; <span class="id" type="tactic">fail</span>); <span class="id" type="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> (<a class="idref" href="R2.html#eq_dec_spec"><span class="id" type="method">eq_dec_spec</span></a> <span class="id" type="var">a</span> <span class="id" type="var">a0</span>) <span class="id" type="keyword">in</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">subst</span>. <span class="id" type="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> (<a class="idref" href="R2.html#eq_dec_spec"><span class="id" type="method">eq_dec_spec</span></a> <span class="id" type="var">a</span> <span class="id" type="var">a0</span>). <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Instancje klas mogą przyjmować argumenty, w tym również instancje innych
+    klas albo inne instancje tej samej klasy. Dzięki temu możemy wyrazić
+    ideę interfejsów warunkowych.
+
+<div class="paragraph"> </div>
+
+    W naszym przypadku typ <span class="inlinecode"><span class="id" type="var">option</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> może być instancją klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span>
+    jedynie pod warunkiem, że jego argument również jest instancją tej
+    klasy. Jest to konieczne, gdyż porównywanie termów typu <span class="inlinecode"><span class="id" type="var">option</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>
+    sprowadza się do porównywania termów typu <span class="inlinecode"><span class="id" type="var">A</span></span>.
+
+<div class="paragraph"> </div>
+
+    Zauważ, że kod <span class="inlinecode"><span class="id" type="var">eq_dec</span></span> <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode"><span class="id" type="var">a'</span></span> nie odwołuje się do definiowanej właśnie
+    funkcji <span class="inlinecode"><span class="id" type="var">eq_dec</span></span> dla typu <span class="inlinecode"><span class="id" type="var">option</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> — odnosi się do funkcji <span class="inlinecode"><span class="id" type="var">eq_dec</span></span>,
+    której dostarcza nam instancja <span class="inlinecode"><span class="id" type="var">_</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">EqDec</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>. Jak widać, nie musimy
+    nawet nadawać jej nazwy — Coqa interesuje tylko jej obecność.
+
+<div class="paragraph"> </div>
+
+    Na podstawie typów termów <span class="inlinecode"><span class="id" type="var">a</span></span> i <span class="inlinecode"><span class="id" type="var">a'</span></span>, które są Coqowi znane, potrafi
+    on wywnioskować, że <span class="inlinecode"><span class="id" type="var">eq_dec</span></span> <span class="inlinecode"><span class="id" type="var">a</span></span> <span class="inlinecode"><span class="id" type="var">a'</span></span> nie jest wywołaniem rekurencyjnym,
+    lecz odnosi się do instancji innej niż obecnie definiowana. Coq może
+    ją znaleźć i odnosić się do niej, mimo że my nie możemy (gdybyśmy
+    chcieli odnosić się do tej instancji, musielibyśmy zmienić nazwę z
+    <span class="inlinecode"><span class="id" type="var">_</span></span> na coś innego).
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+<a name="lab81"></a><h4 class="section">Ćwiczenie</h4>
+ Zdefiniuj instancję klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span> dla typu <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>. Wskazówka:
+    znajdź w bibliotece standardowej moduł, który zawiera twierdzenia
+    o właściwościach funkcji <span class="inlinecode"><span class="id" type="var">andb</span></span>. Jedna z nich przyda ci się. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab82"></a><h2 class="section">Podsumowanie — krótka lista przydatnych typów</h2>
+
+<div class="paragraph"> </div>
+
+ Moc typów induktywnych jest wielka. Dzięki nim możemy tworzyć enumeracje,
+    polimorficzne struktury danych, drzewa o najprzeróżniejszych kształtach,
+    spójniki logiczne, a nawet klasy, czyli interfejsy na sterydach.
+
+<div class="paragraph"> </div>
+
+    Jednak to jeszcze nie wszystko: za pomocą indukcji zdefiniować możemy
+    pary zależne; bardzo użyteczne zdania i predykaty; a także typy, które
+    pomogą nam reprezentować podtypy innych typów, dzięki czemu będziemy
+    mogli definiować specyfikacje, przez które nie prześliźnie się żaden
+    błąd.
+
+<div class="paragraph"> </div>
+
+    Może jednak podsumowanie w tym miejscu nie jest dobrym pomysłem? 
 </div>
 <div class="code">
 </div>
