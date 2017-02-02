@@ -922,7 +922,7 @@ Jeżeli ćwiczenie było za proste i czytałeś podrozdział o kombinatorach
  Wszystkie dowody powinny być nie dłuższe niż pół linijki. 
 <div class="paragraph"> </div>
 
-<a name="lab68"></a><h4 class="section">Ćwiczenie. Uwaga, trudne.</h4>
+<a name="lab68"></a><h4 class="section">Ćwiczenie.</h4>
 
 </div>
 <div class="code">
@@ -933,6 +933,18 @@ Jeżeli ćwiczenie było za proste i czytałeś podrozdział o kombinatorach
 &nbsp;&nbsp;&nbsp;&nbsp;| 0 ⇒ <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">m'</span> ⇒ <a class="idref" href="R2.html#plus'"><span class="id" type="definition">plus'</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>) <span class="id" type="var">m'</span><br/>
 <span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.plus'_n_0"><span class="id" type="lemma">plus'_n_0</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> 0 = <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.plus'_S"><span class="id" type="lemma">plus'_S</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.plus'"><span class="id" type="definition">plus'</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>) <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="R2.html#NatOps.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.plus'_0_n"><span class="id" type="lemma">plus'_0_n</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.plus'"><span class="id" type="definition">plus'</span></a> 0 <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> = <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="NatOps.plus'_comm"><span class="id" type="lemma">plus'_comm</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="R2.html#NatOps.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>.<br/>
 
 <br/>
 <span class="id" type="keyword">Theorem</span> <a name="NatOps.plus'_is_plus"><span class="id" type="lemma">plus'_is_plus</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#NatOps.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="R2.html#NatOps.plus"><span class="id" type="definition">plus</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a>.<br/>
@@ -1320,11 +1332,11 @@ Jak już wspomnieliśmy, jeżeli typ induktywny ma argument (w naszym
 
 <br/>
 <span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#MyList.::'[]'"><span class="id" type="notation">[]</span></a>.<br/>
-<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode"></span>&nbsp;:&nbsp;list&nbsp;?254&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode">[]</span>&nbsp;:&nbsp;list&nbsp;?254&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" type="keyword">Check</span> 0 <a class="idref" href="R2.html#MyList.::x_'::'_x"><span class="id" type="notation">::</span></a> 1 <a class="idref" href="R2.html#MyList.::x_'::'_x"><span class="id" type="notation">::</span></a> 2 <a class="idref" href="R2.html#MyList.::x_'::'_x"><span class="id" type="notation">::</span></a> <a class="idref" href="R2.html#MyList.nil"><span class="id" type="constructor">nil</span></a>.<br/>
-<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode">0;</span> <span class="inlinecode">1;</span> <span class="inlinecode">2</span>&nbsp;:&nbsp;list&nbsp;nat&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode">[0;</span> <span class="inlinecode">1;</span> <span class="inlinecode">2]</span>&nbsp;:&nbsp;list&nbsp;nat&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -1352,11 +1364,11 @@ Nazwy <span class="inlinecode"><span class="id" type="var">nil</span></span> i <
 
 <br/>
 <span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#MyList.::'['_x_']'"><span class="id" type="notation">[</span></a>5<a class="idref" href="R2.html#MyList.::'['_x_']'"><span class="id" type="notation">]</span></a>.<br/>
-<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode">5</span>&nbsp;:&nbsp;list&nbsp;nat&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode">[5]</span>&nbsp;:&nbsp;list&nbsp;nat&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">[</span></a>0<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">;</span></a> 1<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">;</span></a> 2<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">;</span></a> 3<a class="idref" href="R2.html#MyList.::'['_x_';'_x_';'_'..'_';'_x_']'"><span class="id" type="notation">]</span></a>.<br/>
-<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode">0;</span> <span class="inlinecode">1;</span> <span class="inlinecode">2;</span> <span class="inlinecode">3</span>&nbsp;:&nbsp;list&nbsp;nat&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;<span class="inlinecode">[0;</span> <span class="inlinecode">1;</span> <span class="inlinecode">2;</span> <span class="inlinecode">3]</span>&nbsp;:&nbsp;list&nbsp;nat&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -1823,8 +1835,30 @@ Instancje klas definiujemy przy pomocy słowa kluczowego <span class="inlinecode
 
 <div class="doc">
 <a name="lab80"></a><h4 class="section">Ćwiczenie</h4>
- Czy możliwe jest zdefiniowanie instancji klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span> dla typu
-    <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> lub sortu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>? 
+ Czy możliwe jest zdefiniowanie instancji klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span> dla typu:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" type="var">bool</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="var">bool</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">bool</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="var">nat</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="var">bool</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="var">nat</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="keyword">Prop</span></span> 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Jeżeli tak, udowodnij w Coqu. Jeżeli nie, zaargumentuj słownie. 
 </div>
 <div class="code">
 
@@ -1892,30 +1926,55 @@ Instancje klas mogą przyjmować argumenty, w tym również instancje innych
 <br/>
 
 <br/>
+
+<br/>
 </div>
 
 <div class="doc">
-<a name="lab82"></a><h2 class="section">Podsumowanie — krótka lista przydatnych typów</h2>
+<a name="lab82"></a><h1 class="section">Induktywne zdania i predykaty</h1>
 
 <div class="paragraph"> </div>
 
- Moc typów induktywnych jest wielka. Dzięki nim możemy tworzyć enumeracje,
-    polimorficzne struktury danych, drzewa o najprzeróżniejszych kształtach,
-    spójniki logiczne, a nawet klasy, czyli interfejsy na sterydach.
-
+ Wiemy, że słowo kluczowe <span class="inlinecode"><span class="id" type="keyword">Inductive</span></span> pozwala nam definiować nowe typy
+    (a nawet rodziny typów, jak w przypadku <span class="inlinecode"><span class="id" type="var">option</span></span>). Wiemy też, że zdania
+    są typami. Wobec tego nie powinno nas dziwić, że induktywnie możemy
+    definiować także zdania, spójniki logiczne, predykaty oraz relacje. 
 <div class="paragraph"> </div>
 
-    Jednak to jeszcze nie wszystko: za pomocą indukcji zdefiniować możemy
-    pary zależne; bardzo użyteczne zdania i predykaty; a także typy, które
-    pomogą nam reprezentować podtypy innych typów, dzięki czemu będziemy
-    mogli definiować specyfikacje, przez które nie prześliźnie się żaden
-    błąd.
+<a name="lab83"></a><h2 class="section">Induktywne zdania</h2>
 
-<div class="paragraph"> </div>
-
-    Może jednak podsumowanie w tym miejscu nie jest dobrym pomysłem? 
 </div>
 <div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="false_prop"><span class="id" type="inductive">false_prop</span></a> : <span class="id" type="keyword">Prop</span> := .<br/>
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="true_prop"><span class="id" type="inductive">true_prop</span></a> : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="obvious_proof"><span class="id" type="constructor">obvious_proof</span></a> : <a class="idref" href="R2.html#true_prop"><span class="id" type="inductive">true_prop</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="tricky_proof"><span class="id" type="constructor">tricky_proof</span></a> : <a class="idref" href="R2.html#true_prop"><span class="id" type="inductive">true_prop</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="weird_proof"><span class="id" type="constructor">weird_proof</span></a> : <a class="idref" href="R2.html#true_prop"><span class="id" type="inductive">true_prop</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="magical_proof"><span class="id" type="constructor">magical_proof</span></a> : <a class="idref" href="R2.html#true_prop"><span class="id" type="inductive">true_prop</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Induktywne definicje zdań nie są zbyt ciekawe, gdyż pozwalają definiować
+    jedynie zdania fałszywe (zero konstruktorów) lub prawdziwe (jeden lub
+    więcej konstruktorów). Pierwsze z naszych zdań jest fałszywe (a więc
+    rónoważne z <span class="inlinecode"><span class="id" type="var">False</span></span>), drugie zaś jest prawdziwe (czyli równoważne z <span class="inlinecode"><span class="id" type="var">True</span></span>)
+    i to na cztery sposoby! 
+<div class="paragraph"> </div>
+
+<a name="lab84"></a><h4 class="section">Ćwiczenie</h4>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Theorem</span> <a name="false_prop_iff_False"><span class="id" type="lemma">false_prop_iff_False</span></a> : <a class="idref" href="R2.html#false_prop"><span class="id" type="inductive">false_prop</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="true_prop_iff_True"><span class="id" type="lemma">true_prop_iff_True</span></a> : <a class="idref" href="R2.html#true_prop"><span class="id" type="inductive">true_prop</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a>.<br/>
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
