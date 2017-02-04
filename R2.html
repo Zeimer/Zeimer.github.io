@@ -1176,11 +1176,20 @@ Taktyką ułatwiającą pracę z <span class="inlinecode"><span class="id" type=
 
     W naszym przypadku hipoteza <span class="inlinecode"><span class="id" type="var">H0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">y</span></span> została przepisana nie tylko
     w celu, dając <span class="inlinecode"><span class="id" type="var">y</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">y</span></span>, ale także w hipotezie <span class="inlinecode"><span class="id" type="var">H</span></span>, dając
-    <span class="inlinecode"><span class="id" type="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">Some</span></span> <span class="inlinecode"><span class="id" type="var">y</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">Some</span></span> <span class="inlinecode"><span class="id" type="var">y</span></span>.
-
+    <span class="inlinecode"><span class="id" type="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">Some</span></span> <span class="inlinecode"><span class="id" type="var">y</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">Some</span></span> <span class="inlinecode"><span class="id" type="var">y</span></span>. 
 <div class="paragraph"> </div>
 
-    Dwie opisane właściwości, choć pozornie niewinne, a nawet przydatne,
+<a name="lab70"></a><h4 class="section">Ćwiczenie</h4>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Theorem</span> <a name="zero_not_one"><span class="id" type="lemma">zero_not_one</span></a> : 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">≠</span></a> 1.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Dwie opisane właściwości, choć pozornie niewinne, a nawet przydatne,
     mają bardzo istotne i daleko idące konsekwencje. Powoduję one na
     przykład, że nie istnieją typy ilorazowe. Dokładne znaczenie tego
     faktu omówimy później, zaś teraz musimy zadowolić się jedynie
@@ -1239,7 +1248,7 @@ Typ <span class="inlinecode"><span class="id" type="var">rational</span></span> 
     injektywności konstruktorów. 
 <div class="paragraph"> </div>
 
-<a name="lab70"></a><h4 class="section">Ćwiczenie.</h4>
+<a name="lab71"></a><h4 class="section">Ćwiczenie.</h4>
 
 </div>
 <div class="code">
@@ -1252,7 +1261,7 @@ Typ <span class="inlinecode"><span class="id" type="var">rational</span></span> 
 </div>
 
 <div class="doc">
-<a name="lab71"></a><h2 class="section">Typy induktywne — pełna moc</h2>
+<a name="lab72"></a><h2 class="section">Typy induktywne — pełna moc</h2>
 
 <div class="paragraph"> </div>
 
@@ -1465,7 +1474,7 @@ Sposoby dowodzenia są analogiczne jak w przypadku liczb naturalnych.
     oraz ogon, tutaj nazwany <span class="inlinecode"><span class="id" type="var">t</span></span> (jako skrót od ang. tail). 
 <div class="paragraph"> </div>
 
-<a name="lab72"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab73"></a><h4 class="section">Ćwiczenie</h4>
  Pokaż, że <span class="inlinecode"><span class="id" type="var">app</span></span> jest łączne. 
 </div>
 <div class="code">
@@ -1478,7 +1487,7 @@ Sposoby dowodzenia są analogiczne jak w przypadku liczb naturalnych.
 </div>
 
 <div class="doc">
-<a name="lab73"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab74"></a><h4 class="section">Ćwiczenie</h4>
  Pokaż, że <span class="inlinecode"><span class="id" type="var">app</span></span> nie jest przemienne. Wskazówka: może ci się
     przydać taktyka <span class="inlinecode"><span class="id" type="tactic">specialize</span></span>. 
 </div>
@@ -1492,7 +1501,7 @@ Sposoby dowodzenia są analogiczne jak w przypadku liczb naturalnych.
 </div>
 
 <div class="doc">
-<a name="lab74"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab75"></a><h4 class="section">Ćwiczenie</h4>
  Zdefiniuj funkcję <span class="inlinecode"><span class="id" type="var">length</span></span>, która oblicza długość listy. Jaki
     powinien być jej typ? 
 </div>
@@ -1504,7 +1513,7 @@ Sposoby dowodzenia są analogiczne jak w przypadku liczb naturalnych.
 </div>
 
 <div class="doc">
-<a name="lab75"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab76"></a><h4 class="section">Ćwiczenie</h4>
  Udowodnij poprawność swojej implementacji funkcji <span class="inlinecode"><span class="id" type="var">length</span></span>. 
 </div>
 <div class="code">
@@ -1538,7 +1547,7 @@ Do list jeszcze wrócimy — planuję prędzej czy później dodać masywny
 </div>
 
 <div class="doc">
-<a name="lab76"></a><h2 class="section">Rekordy</h2>
+<a name="lab77"></a><h2 class="section">Rekordy</h2>
  W wielu językach programowania występują typy rekordów (ang. record
     types). Charakteryzują się one tym, że mają z góry określoną ilość
     pól o potencjalnie różnych typach. W językach imperatywnych rekordy
@@ -1630,7 +1639,7 @@ Dzięki projekcjom mamy dostęp do poszczególnych pól rekordu bez
 </div>
 
 <div class="doc">
-<a name="lab77"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab78"></a><h4 class="section">Ćwiczenie</h4>
  Zdefiniuj typ induktywny reprezentujący datę i napisz ręcznie
     wszystkie projekcje. Następnie zdefiniuj rekord reprezentujący
     datę i zachwyć się tym, ile czasu i głupiego pisania zaoszczędziłbyś,
@@ -1644,7 +1653,7 @@ Dzięki projekcjom mamy dostęp do poszczególnych pól rekordu bez
 </div>
 
 <div class="doc">
-<a name="lab78"></a><h2 class="section">Klasy</h2>
+<a name="lab79"></a><h2 class="section">Klasy</h2>
  Mechanizmem ułatwiającym życie jeszcze bardziej niż rekordy są klasy.
     Niech nie zmyli cię ta nazwa — nie mają one nic wspólnego z klasami
     znanymi z języków imperatywnych. Bliżej im raczej do interfejsów,
@@ -1823,7 +1832,7 @@ Instancje klas definiujemy przy pomocy słowa kluczowego <span class="inlinecode
     której z tych dwóch komend użyć, użyj <span class="inlinecode"><span class="id" type="keyword">Defined</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab79"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab80"></a><h4 class="section">Ćwiczenie</h4>
  Zdefiniuj instancje klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span> dla typów <span class="inlinecode"><span class="id" type="var">unit</span></span> oraz <span class="inlinecode"><span class="id" type="var">nat</span></span>. 
 </div>
 <div class="code">
@@ -1834,7 +1843,7 @@ Instancje klas definiujemy przy pomocy słowa kluczowego <span class="inlinecode
 </div>
 
 <div class="doc">
-<a name="lab80"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab81"></a><h4 class="section">Ćwiczenie</h4>
  Czy możliwe jest zdefiniowanie instancji klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span> dla typu:
 
 <div class="paragraph"> </div>
@@ -1916,7 +1925,7 @@ Instancje klas mogą przyjmować argumenty, w tym również instancje innych
 
 <div class="paragraph"> </div>
 
-<a name="lab81"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab82"></a><h4 class="section">Ćwiczenie</h4>
  Zdefiniuj instancję klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span> dla typu <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>. Wskazówka:
     znajdź w bibliotece standardowej moduł, który zawiera twierdzenia
     o właściwościach funkcji <span class="inlinecode"><span class="id" type="var">andb</span></span>. Jedna z nich przyda ci się. 
@@ -1931,7 +1940,7 @@ Instancje klas mogą przyjmować argumenty, w tym również instancje innych
 </div>
 
 <div class="doc">
-<a name="lab82"></a><h1 class="section">Induktywne zdania i predykaty</h1>
+<a name="lab83"></a><h1 class="section">Induktywne zdania i predykaty</h1>
 
 <div class="paragraph"> </div>
 
@@ -1941,7 +1950,7 @@ Instancje klas mogą przyjmować argumenty, w tym również instancje innych
     definiować także zdania, spójniki logiczne, predykaty oraz relacje. 
 <div class="paragraph"> </div>
 
-<a name="lab83"></a><h2 class="section">Induktywne zdania</h2>
+<a name="lab84"></a><h2 class="section">Induktywne zdania</h2>
 
 </div>
 <div class="code">
@@ -1967,7 +1976,7 @@ Induktywne definicje zdań nie są zbyt ciekawe, gdyż pozwalają definiować
     i to na cztery sposoby! 
 <div class="paragraph"> </div>
 
-<a name="lab84"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab85"></a><h4 class="section">Ćwiczenie</h4>
 
 </div>
 <div class="code">
@@ -1975,6 +1984,262 @@ Induktywne definicje zdań nie są zbyt ciekawe, gdyż pozwalają definiować
 
 <br/>
 <span class="id" type="keyword">Theorem</span> <a name="true_prop_iff_True"><span class="id" type="lemma">true_prop_iff_True</span></a> : <a class="idref" href="R2.html#true_prop"><span class="id" type="inductive">true_prop</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab86"></a><h2 class="section">Induktywne predykaty</h2>
+
+<div class="paragraph"> </div>
+
+ Przypomnijmy, że predykaty to funkcje, których przeciwdziedziną jest
+    sort <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>, czyli funkcje zwracające zdania logiczne. Predykat
+    <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="keyword">Prop</span></span> można rozumieć jako właściwość, którą mogą posiadać
+    termy typu <span class="inlinecode"><span class="id" type="var">A</span></span>, zaś dla konkretnego <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span></span> zapis <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> interpretować
+    można "term <span class="inlinecode"><span class="id" type="var">x</span></span> posiada właściwóść <span class="inlinecode"><span class="id" type="var">P</span></span>".
+
+<div class="paragraph"> </div>
+
+    O ile istnieją tylko dwa rodzaje induktwynych zdań (prawdziwe i fałszywe),
+    o tyle induktywnie zdefiniowane predykaty są dużo bardziej ciekawe i
+    użyteczne, gdyż dla jednych termów mogą być prawdziwe, a dla innych nie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="even"><span class="id" type="inductive">even</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="even0"><span class="id" type="constructor">even0</span></a> : <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="evenSS"><span class="id" type="constructor">evenSS</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> → <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Predykat <span class="inlinecode"><span class="id" type="var">even</span></span> ma oznaczać właściwość "bycia liczbą parzystą". Jego
+    definicję można zinterpretować tak:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> "<span class="inlinecode">0</span> jest liczbą przystą"
+
+</li>
+<li> "jeżeli <span class="inlinecode"><span class="id" type="var">n</span></span> jest liczbą parzystą, to <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> również jest
+       liczbą parzystą" 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Jak widać, induktywna definicja parzystości różni się od powszechnie
+    używanej definicji, która głosi, że "liczba jest parzysta, gdy
+    dzieli się bez reszty przez 2". Różnica jest natury filozoficznej:
+    definicja induktywna mówi, jak konstruować liczby parzyste, podczas
+    gdy druga, "klasyczna" definicja mówi, jak sprawdzić, czy liczba
+    jest parzysta.
+
+<div class="paragraph"> </div>
+
+    Przez wzgląd na swą konstruktywność, w Coqu induktywne definicje
+    predykatów czy relacji są często dużo bardziej użyteczne od tych
+    nieinduktywnych, choć nie wszystko można zdefiniować induktywnie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="zero_is_even"><span class="id" type="lemma">zero_is_even</span></a> : <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> 0.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="R2.html#even0"><span class="id" type="constructor">even0</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jak możemy udowodnić, że <span class="inlinecode">0</span> jest liczbą parzystą? Posłuży nam
+    do tego konstruktor <span class="inlinecode"><span class="id" type="var">even0</span></span>, który wprost głosi, że <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">0</span>.
+    Nie daj się zwieść: <span class="inlinecode"><span class="id" type="var">even0</span></span>, pisane bez spacji, jest nazwą
+    konstruktora, podczas gdy <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">0</span>, ze spacją, jest zdaniem
+    (czyli termem typu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>), które można interpretować jako
+    "<span class="inlinecode">0</span> jest liczbą parzystą". 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="two_is_even"><span class="id" type="lemma">two_is_even</span></a> : <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> 2.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="R2.html#evenSS"><span class="id" type="constructor">evenSS</span></a>. <span class="id" type="tactic">apply</span> <a class="idref" href="R2.html#even0"><span class="id" type="constructor">even0</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jak możemy udowodnić, że <span class="inlinecode">2</span> jest parzyste? Konstruktor <span class="inlinecode"><span class="id" type="var">even0</span></span>
+    nam nie pomoże, gdyż jego postać (<span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">0</span>) nie pasuje do postaci
+    naszego twierdzenia (<span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">2</span>). Pozostaje nam jednak konstruktor
+    <span class="inlinecode"><span class="id" type="var">evenSS</span></span>.
+
+<div class="paragraph"> </div>
+
+    Jeżeli przypomnimy sobie, że <span class="inlinecode">2</span> to tak naprawdę <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">0)</span>,
+    natychmiast dostrzeżemy, że jego konkluzja pasuje do postaci naszego
+    twierdzenia. Możemy go więc zaaplikować (pamiętaj, że konstruktory są
+    jak zwykłe funkcje, tylko że niczego nie obliczają — nadają one typom
+    ich kształty). Teraz wystarczy pokazać, że <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">0</span> zachodzi, co już
+    potrafimy. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="four_is_even"><span class="id" type="lemma">four_is_even</span></a> : <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> 4.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>. <span class="id" type="tactic">constructor</span>. <span class="id" type="tactic">constructor</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jak pokazać, że <span class="inlinecode">4</span> jest parzyste? Tą samą metodą, która pokazaliśmy,
+    że <span class="inlinecode">2</span> jest parzyste. <span class="inlinecode">4</span> to <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">0)))</span>, więc możemy użyć
+    konstruktora <span class="inlinecode"><span class="id" type="var">evenSS</span></span>. Zamiast jednak pisać <span class="inlinecode"><span class="id" type="tactic">apply</span></span> <span class="inlinecode"><span class="id" type="var">evenSS</span></span>, możemy
+    użyć taktyki <span class="inlinecode"><span class="id" type="tactic">constructor</span></span>. Taktyka ta działa na celach, w których
+    chcemy skonstruować wartość jakiegoś typu induktywnego (a więc także
+    gdy dowodzimy twierdzeń o induktywnych predykatach). Szuka ona
+    konstruktora, który może zaaplikować na celu, i jeżeli znajdzie, to
+    aplikuje go, a gdy nie — zawodzi.
+
+<div class="paragraph"> </div>
+
+    W naszym przypadku pierwsze dwa użycia <span class="inlinecode"><span class="id" type="tactic">constructor</span></span> aplikują
+    konstruktor <span class="inlinecode"><span class="id" type="var">evenSS</span></span>, a trzecie — konstruktor <span class="inlinecode"><span class="id" type="var">even0</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="the_answer_is_even"><span class="id" type="lemma">the_answer_is_even</span></a> : <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> 42.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">repeat</span> <span class="id" type="tactic">constructor</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A co, gdy chcemy pokazać, że <span class="inlinecode">42</span> jest parzyste? Czy musimy 22 razy
+    napisać <span class="inlinecode"><span class="id" type="tactic">constructor</span></span>? Na szczęście nie — wystarczy posłużyć się
+    kombinatorem <span class="inlinecode"><span class="id" type="tactic">repeat</span></span> (jeżeli nie pamiętasz, jak działa, zajrzyj do
+    rozdziału 1). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="one_not_even_failed"><span class="id" type="lemma">one_not_even_failed</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> 1.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#not"><span class="id" type="definition">not</span></a>. <span class="id" type="tactic">intro</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="keyword">Abort</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="one_not_even"><span class="id" type="lemma">one_not_even</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> 1.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#not"><span class="id" type="definition">not</span></a>. <span class="id" type="tactic">intro</span>. <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A jak pokazać, że <span class="inlinecode">1</span> nie jest parzyste? Mając w kontekście dowód
+    na to, że <span class="inlinecode">1</span> jest parzyste (<span class="inlinecode"><span class="id" type="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">1</span>), możemy zastantowić się,
+    w jaki sposób dowód ten został zrobiony. Nie mógł zostać zrobiony
+    konstruktorem <span class="inlinecode"><span class="id" type="var">even0</span></span>, gdyż ten dowodzi, że <span class="inlinecode">0</span> jest parzyste, a
+    przecież przekonaliśmy się już, że <span class="inlinecode">0</span> to nie <span class="inlinecode">1</span>. Nie mógł też
+    zostać zrobiony konstruktorem <span class="inlinecode"><span class="id" type="var">evenSS</span></span>, gdyż ten ma w konkluzji
+    <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode"><span class="id" type="var">n</span>))</span>, podczas gdy <span class="inlinecode">1</span> jest postaci <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">0</span> — nie pasuje
+    on do konkluzji <span class="inlinecode"><span class="id" type="var">evenSS</span></span>, gdyż "ma za mało <span class="inlinecode"><span class="id" type="var">S</span></span>ów".
+
+<div class="paragraph"> </div>
+
+    Nasze rozumowanie prowadzi do wniosku, że za pomocą <span class="inlinecode"><span class="id" type="var">even0</span></span> i <span class="inlinecode"><span class="id" type="var">evenSS</span></span>,
+    które są jedynymi konstruktorami <span class="inlinecode"><span class="id" type="var">even</span></span>, nie można skonstruować <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">1</span>,
+    więc <span class="inlinecode">1</span> nie może być parzyste. Na podstawie wcześniejszych doświadczeń
+    mogłoby się nam wydawać, że <span class="inlinecode"><span class="id" type="tactic">destruct</span></span> załatwi sprawę, jednak tak nie
+    jest — taktyka ta jest w tym przypadku upośledzona i nie potrafi nam
+    pomóc. Zamiast tego możemy się posłużyć taktyką <span class="inlinecode"><span class="id" type="tactic">inversion</span></span>. Działa ona
+    dokładnie w sposób opisany w poprzednim akapicie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="three_not_even"><span class="id" type="lemma">three_not_even</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> 3.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">inversion</span> <span class="id" type="var">H1</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jak pokazać, że <span class="inlinecode">3</span> nie jest parzyste? Pomoże nam w tym, jak poprzednio,
+    inwersja. Tym razem jednak nie załatwia ona sprawy od razu. Jeżeli
+    zastanowimy się, jak można pokazać <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">3</span>, to dojdziemy do wniosku,
+    że można to zrobić konstruktorem <span class="inlinecode"><span class="id" type="var">evenSS</span></span>, gdyż <span class="inlinecode">3</span> to tak naprawdę
+    <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">1)</span>. To właśnie robi pierwsza inwersja: mówi nam, że <span class="inlinecode"><span class="id" type="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">3</span>
+    można uzyskać z zaaplikowania <span class="inlinecode"><span class="id" type="var">evenSS</span></span> do <span class="inlinecode">1</span>, jeżeli tylko mamy dowód
+    <span class="inlinecode"><span class="id" type="var">H1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">1</span> na to, że <span class="inlinecode">1</span> jest parzyste. Jak pokazać, że <span class="inlinecode">1</span> nie
+    jest parzyste, już wiemy. 
+<div class="paragraph"> </div>
+
+<a name="lab87"></a><h4 class="section">Ćwiczenie.</h4>
+ Zdefiniuj induktywny predykat <span class="inlinecode"><span class="id" type="var">odd</span></span>, który ma oznaczać "bycie liczbą
+    nieparzystą" i udowodnij, że zachowuje się on jak należy. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="one_odd"><span class="id" type="lemma">one_odd</span></a> : <a class="idref" href="R2.html#odd"><span class="id" type="inductive">odd</span></a> 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="seven_odd"><span class="id" type="lemma">seven_odd</span></a> : <a class="idref" href="R2.html#odd"><span class="id" type="inductive">odd</span></a> 7.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="zero_not_odd"><span class="id" type="lemma">zero_not_odd</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="R2.html#odd"><span class="id" type="inductive">odd</span></a> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="two_not_odd"><span class="id" type="lemma">two_not_odd</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="R2.html#odd"><span class="id" type="inductive">odd</span></a> 2.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab88"></a><h4 class="section">Ćwiczenie (chyba trudne).</h4>
+ To ćwiczenie dotyczy bardziej kombinatorów taktyk i automatyzacji,
+    niż definicji induktywnych. Przydać mogą ci się następujące taktyki,
+    których dotąd nie omawialiśmy:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" type="tactic">clear</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> usuwa <span class="inlinecode"><span class="id" type="var">x</span></span> z kontekstu (jeżeli mieliśmy w kontekście <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span></span>,
+      to teraz już go nie ma) lub zawodzi, gdy <span class="inlinecode"><span class="id" type="var">x</span></span> nie ma w kontekście
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="tactic">rename</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode"><span class="id" type="var">into</span></span> <span class="inlinecode"><span class="id" type="var">y</span></span> zmienia nazwę <span class="inlinecode"><span class="id" type="var">x</span></span> na <span class="inlinecode"><span class="id" type="var">y</span></span> (jeżeli mieliśmy w
+      kontekście <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span></span>, to teraz zamiast tego będziemy mieli <span class="inlinecode"><span class="id" type="var">y</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span></span>)
+      lub zawodzi, gdy <span class="inlinecode"><span class="id" type="var">x</span></span> nie ma w kontekście albo nazwa <span class="inlinecode"><span class="id" type="var">y</span></span> jest już
+      zajęta 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="satans_neighbour_not_even"><span class="id" type="lemma">satans_neighbour_not_even</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> 667.<br/>
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
