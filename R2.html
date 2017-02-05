@@ -1935,12 +1935,230 @@ Instancje klas mogą przyjmować argumenty, w tym również instancje innych
 <br/>
 
 <br/>
+</div>
+
+<div class="doc">
+<a name="lab83"></a><h4 class="section">Ćwiczenie</h4>
+ Niech <span class="inlinecode"><span class="id" type="var">A</span></span> i <span class="inlinecode"><span class="id" type="var">B</span></span> będą dowolnymi typami. Zastanów się, kiedy możliwe
+    jest zdefiniowanie instancji klasy <span class="inlinecode"><span class="id" type="var">EqDec</span></span> dla <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="var">B</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab84"></a><h2 class="section">Ważne typy induktywne</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="ImportantTypes"><span class="id" type="module">ImportantTypes</span></a>.<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-<a name="lab83"></a><h1 class="section">Induktywne zdania i predykaty</h1>
+<a name="lab85"></a><h3 class="section">Typ pusty</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="ImportantTypes.Empty_set"><span class="id" type="inductive">Empty_set</span></a> : <span class="id" type="keyword">Set</span> := .<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" type="var">Empty_set</span></span> jest, jak sama nazwa wskazuje, typem pustym. Jeżeli jakiś
+    term jest typu <span class="inlinecode"><span class="id" type="var">Empty_set</span></span>, to mamy sprzeczność. <span class="inlinecode"><span class="id" type="var">Empty_set</span></span> jest
+    odpowiednikiem <span class="inlinecode"><span class="id" type="var">False</span></span>, od którego różni się tym, że żyje w <span class="inlinecode"><span class="id" type="keyword">Set</span></span>, a
+    nie w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="ImportantTypes.create"><span class="id" type="definition">create</span></a> {<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">x</span> : <a class="idref" href="R2.html#ImportantTypes.Empty_set"><span class="id" type="inductive">Empty_set</span></a>) : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a> <span class="id" type="keyword">with</span> <span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jeżeli mamy term typu <span class="inlinecode"><span class="id" type="var">Empty_set</span></span>, to możemy w sposób niemal magiczny
+    wyczarować term dowolnego typu <span class="inlinecode"><span class="id" type="var">A</span></span>, używając pattern matchingu z
+    pustym wzorcem. 
+<div class="paragraph"> </div>
+
+<a name="lab86"></a><h4 class="section">Ćwiczenie</h4>
+ Udowodnij, że powyższa funkcja jest unikalna. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="ImportantTypes.create_unique"><span class="id" type="lemma">create_unique</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="R2.html#ImportantTypes.Empty_set"><span class="id" type="inductive">Empty_set</span></a> → <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> : <a class="idref" href="R2.html#ImportantTypes.Empty_set"><span class="id" type="inductive">Empty_set</span></a>, <a class="idref" href="R2.html#ImportantTypes.create"><span class="id" type="definition">create</span></a> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a> = <a class="idref" href="R2.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab87"></a><h4 class="section">Ćwiczenie</h4>
+ Pokaż, że nie istnieją funkcje z typu niepustego w pusty. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="ImportantTypes.no_fun_from_nonempty_to_empty"><span class="id" type="lemma">no_fun_from_nonempty_to_empty</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">a</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">f</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="R2.html#ImportantTypes.Empty_set"><span class="id" type="inductive">Empty_set</span></a>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab88"></a><h3 class="section">Singleton</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="ImportantTypes.unit"><span class="id" type="inductive">unit</span></a> : <span class="id" type="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="ImportantTypes.tt"><span class="id" type="constructor">tt</span></a> : <a class="idref" href="R2.html#unit"><span class="id" type="inductive">unit</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" type="var">unit</span></span> jest typem, który ma tylko jeden term, zwany <span class="inlinecode"><span class="id" type="var">tt</span></span> (nazwa ta
+    jest wzięta z sufitu). <span class="inlinecode"><span class="id" type="var">unit</span></span> jest odpowiednikiem <span class="inlinecode"><span class="id" type="var">True</span></span>, od którego
+    różni się tym, że żyje w <span class="inlinecode"><span class="id" type="keyword">Set</span></span>, a nie w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="ImportantTypes.delete"><span class="id" type="definition">delete</span></a> {<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">a</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>) : <a class="idref" href="R2.html#ImportantTypes.unit"><span class="id" type="inductive">unit</span></a> := <a class="idref" href="R2.html#ImportantTypes.tt"><span class="id" type="constructor">tt</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Funkcja <span class="inlinecode"><span class="id" type="var">delete</span></span> jest w pewien sposób "dualna" do napotkanej przez
+    nas wcześniej funkcji <span class="inlinecode"><span class="id" type="var">create</span></span>. Mając term typu <span class="inlinecode"><span class="id" type="var">Empty_set</span></span> mogliśmy
+    stworzyć term dowolnego innego typu, zaś mając term dowolnego typu
+    <span class="inlinecode"><span class="id" type="var">A</span></span>, możemy "zapomnieć o nim" albo "skasować go", wysyłając go
+    funkcją <span class="inlinecode"><span class="id" type="var">delete</span></span> w jedyny term typu <span class="inlinecode"><span class="id" type="var">unit</span></span>, czyli <span class="inlinecode"><span class="id" type="var">tt</span></span>.
+
+<div class="paragraph"> </div>
+
+    Uwaga: określenie "skasować" nie ma nic wspólnego z fizycznym
+    niszczeniem albo dealokacją pamięci. Jest to tylko metafora. 
+<div class="paragraph"> </div>
+
+<a name="lab89"></a><h4 class="section">Ćwiczenie</h4>
+ Pokaż, że funkcja <span class="inlinecode"><span class="id" type="var">delete</span></span> jest unikalna. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="ImportantTypes.delete_unique"><span class="id" type="lemma">delete_unique</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="R2.html#ImportantTypes.unit"><span class="id" type="inductive">unit</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>, <a class="idref" href="R2.html#ImportantTypes.delete"><span class="id" type="definition">delete</span></a> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a> = <a class="idref" href="R2.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab90"></a><h3 class="section">Produkt</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="ImportantTypes.prod"><span class="id" type="inductive">prod</span></a> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) : <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="ImportantTypes.pair"><span class="id" type="constructor">pair</span></a> : <span class="id" type="var">A</span> → <span class="id" type="var">B</span> → <a class="idref" href="R2.html#prod"><span class="id" type="inductive">prod</span></a> <span class="id" type="var">A</span> <span class="id" type="var">B</span>.<br/>
+
+<br/>
+<span class="id" type="var">Arguments</span> <a class="idref" href="R2.html#ImportantTypes.pair"><span class="id" type="constructor">pair</span></a> [<span class="id" type="var">A</span>] [<span class="id" type="var">B</span>] <span class="id" type="var">_</span> <span class="id" type="var">_</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Produkt typów <span class="inlinecode"><span class="id" type="var">A</span></span> i <span class="inlinecode"><span class="id" type="var">B</span></span> to typ, którego termami są pary. Pierwszy
+    element pary to term typu <span class="inlinecode"><span class="id" type="var">A</span></span>, a drugi to term typu <span class="inlinecode"><span class="id" type="var">B</span></span>. Produkt
+    jest odpowiednkiem koniunkcji logicznej, od której różni się tym,
+    że żyje w <span class="inlinecode"><span class="id" type="keyword">Type</span></span>, a nie w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>. Tym, co charakteryzuje produkt,
+    są projekcje:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" type="var">fst</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">∀</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span>,</span> <span class="inlinecode"><span class="id" type="var">prod</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="var">A</span></span> wyciąga z pary jej
+      pierwszy element
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">snd</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">∀</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span>,</span> <span class="inlinecode"><span class="id" type="var">prod</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" type="var">B</span></span> wyciąga z pary jej
+      drugi element 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a name="lab91"></a><h4 class="section">Ćwiczenie</h4>
+ Zdefiniuj projekcje i udowodnij poprawność swojej definicji. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="ImportantTypes.proj_spec"><span class="id" type="lemma">proj_spec</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">p</span> : <a class="idref" href="R2.html#ImportantTypes.prod"><span class="id" type="inductive">prod</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="R2.html#B"><span class="id" type="variable">B</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#p"><span class="id" type="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="R2.html#ImportantTypes.pair"><span class="id" type="constructor">pair</span></a> (<a class="idref" href="R2.html#ImportantTypes.fst"><span class="id" type="definition">fst</span></a> <a class="idref" href="R2.html#p"><span class="id" type="variable">p</span></a>) (<a class="idref" href="R2.html#ImportantTypes.snd"><span class="id" type="definition">snd</span></a> <a class="idref" href="R2.html#p"><span class="id" type="variable">p</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab92"></a><h3 class="section">Suma</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="ImportantTypes.sum"><span class="id" type="inductive">sum</span></a> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) : <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="ImportantTypes.inl"><span class="id" type="constructor">inl</span></a> : <span class="id" type="var">A</span> → <a class="idref" href="R2.html#sum"><span class="id" type="inductive">sum</span></a> <span class="id" type="var">A</span> <span class="id" type="var">B</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="ImportantTypes.inr"><span class="id" type="constructor">inr</span></a> : <span class="id" type="var">B</span> → <a class="idref" href="R2.html#sum"><span class="id" type="inductive">sum</span></a> <span class="id" type="var">A</span> <span class="id" type="var">B</span>.<br/>
+
+<br/>
+<span class="id" type="var">Arguments</span> <a class="idref" href="R2.html#ImportantTypes.inl"><span class="id" type="constructor">inl</span></a> [<span class="id" type="var">A</span>] [<span class="id" type="var">B</span>] <span class="id" type="var">_</span>.<br/>
+<span class="id" type="var">Arguments</span> <a class="idref" href="R2.html#ImportantTypes.inr"><span class="id" type="constructor">inr</span></a> [<span class="id" type="var">A</span>] [<span class="id" type="var">B</span>] <span class="id" type="var">_</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Suma <span class="inlinecode"><span class="id" type="var">A</span></span> i <span class="inlinecode"><span class="id" type="var">B</span></span> to typ, którego termy są albo termami typu <span class="inlinecode"><span class="id" type="var">A</span></span>,
+    zawiniętymi w konstruktor <span class="inlinecode"><span class="id" type="var">inl</span></span>, albo termami typu <span class="inlinecode"><span class="id" type="var">B</span></span>, zawiniętymi
+    w konstruktor <span class="inlinecode"><span class="id" type="var">inr</span></span>. Suma jest odpowiednikiem alternatywy/dysjunkcji
+    logicznej, od której różni się tym, że żyje w <span class="inlinecode"><span class="id" type="keyword">Type</span></span>, a nie w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>.
+    Suma, w przeciwieństwie do produktu, zdecydowanie nie ma projekcji. 
+<div class="paragraph"> </div>
+
+<a name="lab93"></a><h4 class="section">Ćwiczenie</h4>
+ Pokaż, że suma nie ma projekcji. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="ImportantTypes.sum_no_fst"><span class="id" type="lemma">sum_no_fst</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">proj</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>, <a class="idref" href="R2.html#ImportantTypes.sum"><span class="id" type="inductive">sum</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="R2.html#B"><span class="id" type="variable">B</span></a> → <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="ImportantTypes.sum_no_snd"><span class="id" type="lemma">sum_no_snd</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">proj</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>, <a class="idref" href="R2.html#ImportantTypes.sum"><span class="id" type="inductive">sum</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="R2.html#B"><span class="id" type="variable">B</span></a> → <a class="idref" href="R2.html#B"><span class="id" type="variable">B</span></a>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R2.html#ImportantTypes"><span class="id" type="module">ImportantTypes</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab94"></a><h1 class="section">Induktywne zdania i predykaty</h1>
 
 <div class="paragraph"> </div>
 
@@ -1950,7 +2168,7 @@ Instancje klas mogą przyjmować argumenty, w tym również instancje innych
     definiować także zdania, spójniki logiczne, predykaty oraz relacje. 
 <div class="paragraph"> </div>
 
-<a name="lab84"></a><h2 class="section">Induktywne zdania</h2>
+<a name="lab95"></a><h2 class="section">Induktywne zdania</h2>
 
 </div>
 <div class="code">
@@ -1976,7 +2194,7 @@ Induktywne definicje zdań nie są zbyt ciekawe, gdyż pozwalają definiować
     i to na cztery sposoby! 
 <div class="paragraph"> </div>
 
-<a name="lab85"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab96"></a><h4 class="section">Ćwiczenie</h4>
 
 </div>
 <div class="code">
@@ -1989,7 +2207,7 @@ Induktywne definicje zdań nie są zbyt ciekawe, gdyż pozwalają definiować
 </div>
 
 <div class="doc">
-<a name="lab86"></a><h2 class="section">Induktywne predykaty</h2>
+<a name="lab97"></a><h2 class="section">Induktywne predykaty</h2>
 
 <div class="paragraph"> </div>
 
@@ -2192,7 +2410,7 @@ Jak pokazać, że <span class="inlinecode">3</span> nie jest parzyste? Pomoże n
     jest parzyste, już wiemy. 
 <div class="paragraph"> </div>
 
-<a name="lab87"></a><h4 class="section">Ćwiczenie.</h4>
+<a name="lab98"></a><h4 class="section">Ćwiczenie.</h4>
  Zdefiniuj induktywny predykat <span class="inlinecode"><span class="id" type="var">odd</span></span>, który ma oznaczać "bycie liczbą
     nieparzystą" i udowodnij, że zachowuje się on jak należy. 
 </div>
@@ -2216,7 +2434,7 @@ Jak pokazać, że <span class="inlinecode">3</span> nie jest parzyste? Pomoże n
 </div>
 
 <div class="doc">
-<a name="lab88"></a><h4 class="section">Ćwiczenie (chyba trudne).</h4>
+<a name="lab99"></a><h4 class="section">Ćwiczenie (chyba trudne).</h4>
  To ćwiczenie dotyczy bardziej kombinatorów taktyk i automatyzacji,
     niż definicji induktywnych. Przydać mogą ci się następujące taktyki,
     których dotąd nie omawialiśmy:
@@ -2240,6 +2458,8 @@ Jak pokazać, że <span class="inlinecode">3</span> nie jest parzyste? Pomoże n
 
 <br/>
 <span class="id" type="keyword">Theorem</span> <a name="satans_neighbour_not_even"><span class="id" type="lemma">satans_neighbour_not_even</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> 667.<br/>
+
+<br/>
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
