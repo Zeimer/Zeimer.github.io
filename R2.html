@@ -2036,10 +2036,9 @@ Przypomnijmy, że komenda <span class="inlinecode"><span class="id" type="keywor
 </div>
 
 <div class="doc">
-<span class="inlinecode"><span class="id" type="var">Empty_set</span></span> jest, jak sama nazwa wskazuje, typem pustym. Jeżeli jakiś
-    term jest typu <span class="inlinecode"><span class="id" type="var">Empty_set</span></span>, to mamy sprzeczność. <span class="inlinecode"><span class="id" type="var">Empty_set</span></span> jest
-    odpowiednikiem <span class="inlinecode"><span class="id" type="var">False</span></span>, od którego różni się tym, że żyje w <span class="inlinecode"><span class="id" type="keyword">Set</span></span>, a
-    nie w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>. 
+<span class="inlinecode"><span class="id" type="var">Empty_set</span></span> jest, jak sama nazwa wskazuje, typem pustym. Żaden term
+    nie jest tego typu. Innymi słowy: jeżeli jakiś term jest typu <span class="inlinecode"><span class="id" type="var">Empty_set</span></span>,
+    to mamy sprzeczność. 
 </div>
 <div class="code">
 
@@ -2096,8 +2095,7 @@ Jeżeli mamy term typu <span class="inlinecode"><span class="id" type="var">Empt
 
 <div class="doc">
 <span class="inlinecode"><span class="id" type="var">unit</span></span> jest typem, który ma tylko jeden term, zwany <span class="inlinecode"><span class="id" type="var">tt</span></span> (nazwa ta
-    jest wzięta z sufitu). <span class="inlinecode"><span class="id" type="var">unit</span></span> jest odpowiednikiem <span class="inlinecode"><span class="id" type="var">True</span></span>, od którego
-    różni się tym, że żyje w <span class="inlinecode"><span class="id" type="keyword">Set</span></span>, a nie w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>. 
+    jest wzięta z sufitu). 
 </div>
 <div class="code">
 
@@ -2150,10 +2148,8 @@ Funkcja <span class="inlinecode"><span class="id" type="var">delete</span></span
 
 <div class="doc">
 Produkt typów <span class="inlinecode"><span class="id" type="var">A</span></span> i <span class="inlinecode"><span class="id" type="var">B</span></span> to typ, którego termami są pary. Pierwszy
-    element pary to term typu <span class="inlinecode"><span class="id" type="var">A</span></span>, a drugi to term typu <span class="inlinecode"><span class="id" type="var">B</span></span>. Produkt
-    jest odpowiednkiem koniunkcji logicznej, od której różni się tym,
-    że żyje w <span class="inlinecode"><span class="id" type="keyword">Type</span></span>, a nie w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>. Tym, co charakteryzuje produkt,
-    są projekcje:
+    element pary to term typu <span class="inlinecode"><span class="id" type="var">A</span></span>, a drugi to term typu <span class="inlinecode"><span class="id" type="var">B</span></span>. Tym, co
+    charakteryzuje produkt, są projekcje:
 
 <div class="paragraph"> </div>
 
@@ -2204,9 +2200,8 @@ Produkt typów <span class="inlinecode"><span class="id" type="var">A</span></sp
 <div class="doc">
 Suma <span class="inlinecode"><span class="id" type="var">A</span></span> i <span class="inlinecode"><span class="id" type="var">B</span></span> to typ, którego termy są albo termami typu <span class="inlinecode"><span class="id" type="var">A</span></span>,
     zawiniętymi w konstruktor <span class="inlinecode"><span class="id" type="var">inl</span></span>, albo termami typu <span class="inlinecode"><span class="id" type="var">B</span></span>, zawiniętymi
-    w konstruktor <span class="inlinecode"><span class="id" type="var">inr</span></span>. Suma jest odpowiednikiem alternatywy/dysjunkcji
-    logicznej, od której różni się tym, że żyje w <span class="inlinecode"><span class="id" type="keyword">Type</span></span>, a nie w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>.
-    Suma, w przeciwieństwie do produktu, zdecydowanie nie ma projekcji. 
+    w konstruktor <span class="inlinecode"><span class="id" type="var">inr</span></span>. Suma, w przeciwieństwie do produktu, zdecydowanie
+    nie ma projekcji. 
 <div class="paragraph"> </div>
 
 <a name="lab94"></a><h4 class="section">Ćwiczenie</h4>
@@ -2700,6 +2695,124 @@ Taktyka <span class="inlinecode"><span class="id" type="tactic">assert</span></s
 <br/>
 <span class="id" type="keyword">Theorem</span> <a name="even_is_double"><span class="id" type="lemma">even_is_double</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="R2.html#k"><span class="id" type="variable">k</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab104"></a><h2 class="section">Definicje stałych i spójników logicznych</h2>
+
+<div class="paragraph"> </div>
+
+ W rozdziale pierwszym dowiedzieliśmy się, że produkt zależny (typ,
+    którego termami są funkcje zależne), a więc i implikacja, jest
+    typem podstawowym/wbudowanym oraz że negacja jest zdefiniowana jako
+    implikowanie fałszu. Teraz, gdy wiemy już co nieco o typach induktywnych,
+    nadszedł czas by zapoznać się z definicjami spójników logicznych (i nie
+    tylko). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="MyConnectives"><span class="id" type="module">MyConnectives</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab105"></a><h3 class="section">Prawda i fałsz</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="MyConnectives.False"><span class="id" type="inductive">False</span></a> : <span class="id" type="keyword">Prop</span> := .<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Fałsz nie ma żadnych konstruktorów, a zatem nie może zostać w żaden
+    sposób skonstruowany, czyli udowodniony. Jego definicja jest bliźniaczo
+    podobna do czegoś, co już kiedyś widzieliśmy — tym czymś był <span class="inlinecode"><span class="id" type="var">Empty_set</span></span>,
+    czyli typ pusty. Nie jest to wcale przypadek. Natknęliśmy się (znowu) na
+    przykład korespondencji Curry'ego-Howarda.
+
+<div class="paragraph"> </div>
+
+    Przypomnijmy, że głosi ona (w sporym uproszczeniu), iż sorty <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>
+    i <span class="inlinecode"><span class="id" type="keyword">Set</span></span>/<span class="inlinecode"><span class="id" type="keyword">Type</span></span> są do siebie bardzo podobne. Jednym z tych podobieństw
+    było to, że dowody implikacji są funkcjami. Kolejnym jest fakt, że
+    <span class="inlinecode"><span class="id" type="var">False</span></span> jest odpowiednikiem <span class="inlinecode"><span class="id" type="var">Empty_set</span></span>, od którego różni się tym, że
+    żyje w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>, a nie w <span class="inlinecode"><span class="id" type="keyword">Set</span></span>.
+
+<div class="paragraph"> </div>
+
+    Ta definicja rzuca też trochę światła na sposób wnioskowania "ex falso
+    quodlibet" (z fałszu wynika wszystko), który poznaliśmy w rozdziale
+    pierwszym.
+
+<div class="paragraph"> </div>
+
+    Użycie taktyki <span class="inlinecode"><span class="id" type="tactic">destruct</span></span> lub <span class="inlinecode"><span class="id" type="tactic">inversion</span></span> na termie dowolnego typu
+    induktywnego to sprawdzenie, którym konstruktorem term ten został
+    zrobiony — generują one dokładnie tyle podcelów, ile jest możliwych
+    konstruktorów. Użycie ich na termie typu <span class="inlinecode"><span class="id" type="var">False</span></span> generuje zero
+    podcelów, co ma efekt natychmiastowego zakończenia dowodu. Dzięki
+    temu mając dowód <span class="inlinecode"><span class="id" type="var">False</span></span> możemy udowodnić cokolwiek. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="MyConnectives.True"><span class="id" type="inductive">True</span></a> : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MyConnectives.I"><span class="id" type="constructor">I</span></a> : <a class="idref" href="R2.html#True"><span class="id" type="inductive">True</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" type="var">True</span></span> jest odpowiednikiem <span class="inlinecode"><span class="id" type="var">unit</span></span>, od którego różni się tym, że żyje
+    w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>, a nie w <span class="inlinecode"><span class="id" type="keyword">Set</span></span>. Ma dokładnie jeden dowód, który w Coqu
+    nazwano, z zupełnie nieznanych powodów (zapewne dla hecy), <span class="inlinecode"><span class="id" type="var">I</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab106"></a><h3 class="section">Koniunkcja i dysjunkcja</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="MyConnectives.and"><span class="id" type="inductive">and</span></a> (<span class="id" type="var">P</span> <span class="id" type="var">Q</span> : <span class="id" type="keyword">Prop</span>) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MyConnectives.conj"><span class="id" type="constructor">conj</span></a> : <span class="id" type="var">P</span> → <span class="id" type="var">Q</span> → <a class="idref" href="R2.html#and"><span class="id" type="inductive">and</span></a> <span class="id" type="var">P</span> <span class="id" type="var">Q</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Dowód koniunkcji zdań <span class="inlinecode"><span class="id" type="var">P</span></span> i <span class="inlinecode"><span class="id" type="var">Q</span></span> to para dowodów: pierwszy element
+    pary jest dowodem <span class="inlinecode"><span class="id" type="var">P</span></span>, zaś drugi dowodem <span class="inlinecode"><span class="id" type="var">Q</span></span>. Koniunkcja jest
+    odpowiednkiem produktu, od którego różni się tym, że żyje w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>,
+    a nie w <span class="inlinecode"><span class="id" type="keyword">Type</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="MyConnectives.or"><span class="id" type="inductive">or</span></a> (<span class="id" type="var">P</span> <span class="id" type="var">Q</span> : <span class="id" type="keyword">Prop</span>) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MyConnectives.or_introl"><span class="id" type="constructor">or_introl</span></a> : <span class="id" type="var">P</span> → <a class="idref" href="R2.html#or"><span class="id" type="inductive">or</span></a> <span class="id" type="var">P</span> <span class="id" type="var">Q</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MyConnectives.or_intror"><span class="id" type="constructor">or_intror</span></a> : <span class="id" type="var">Q</span> → <a class="idref" href="R2.html#or"><span class="id" type="inductive">or</span></a> <span class="id" type="var">P</span> <span class="id" type="var">Q</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Dowód dysjunkcji zdań <span class="inlinecode"><span class="id" type="var">P</span></span> i <span class="inlinecode"><span class="id" type="var">Q</span></span> to dowód <span class="inlinecode"><span class="id" type="var">P</span></span> albo dowód <span class="inlinecode"><span class="id" type="var">Q</span></span> wraz ze
+    wskazaniem, którego zdania jest to dowód. Dysjunkcja jest odpowiednikiem
+    sumy, od której różni się tym, że żyje w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>, a nie w <span class="inlinecode"><span class="id" type="keyword">Type</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R2.html#MyConnectives"><span class="id" type="module">MyConnectives</span></a>.<br/>
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
