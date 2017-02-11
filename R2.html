@@ -802,6 +802,9 @@ Tym razem nie jest już tak prosto — <span class="inlinecode"><span class="id"
 <span class="id" type="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="id" type="keyword">Print</span> <span class="id" type="var">plus_n_O</span>.<br/>
+
+<br/>
 </div>
 
 <div class="doc">
@@ -2813,6 +2816,169 @@ Dowód dysjunkcji zdań <span class="inlinecode"><span class="id" type="var">P</
 
 <br/>
 <span class="id" type="keyword">End</span> <a class="idref" href="R2.html#MyConnectives"><span class="id" type="module">MyConnectives</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab107"></a><h2 class="section">Równość</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="MyEq"><span class="id" type="module">MyEq</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Czym jest równość? To pytanie stawiało sobie wielu filozofów,
+    szczególnie politycznych, a także ekonomistów. Odpowiedź na
+    nie jest jednym z największych osiągnięć matematyki w dziejach:
+    równość to jeden z typów induktywnych, które możemy zdefiniować
+    w Coqu. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="MyEq.eq"><span class="id" type="inductive">eq</span></a> {<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">x</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>) : <span class="id" type="var">A</span> → <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MyEq.eq_refl"><span class="id" type="constructor">eq_refl</span></a> : <a class="idref" href="R2.html#eq"><span class="id" type="inductive">eq</span></a> <span class="id" type="var">x</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Spróbujmy przeczytać tę definicję: dla danego typu <span class="inlinecode"><span class="id" type="var">A</span></span> oraz termu
+    <span class="inlinecode"><span class="id" type="var">x</span></span> tego typu, <span class="inlinecode"><span class="id" type="var">eq</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> jest predykatem, który ma jeden konstruktor
+    głoszący, że <span class="inlinecode"><span class="id" type="var">eq</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> zachodzi. Choć definicja taka brzmi obco i
+    dziwacznie, ma ona swoje uzasadnienie (które niestety poznamy
+    dopiero w przyszłości). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyEq.eq_refl_trivial"><span class="id" type="lemma">eq_refl_trivial</span></a> : <a class="idref" href="R2.html#MyEq.eq"><span class="id" type="inductive">eq</span></a> 42 42.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="R2.html#MyEq.eq_refl"><span class="id" type="constructor">eq_refl</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Poznane przez nas dotychczas taktyki potrafiące udowadniać proste
+    równości, jak <span class="inlinecode"><span class="id" type="tactic">trivial</span></span> czy <span class="inlinecode"><span class="id" type="tactic">reflexivity</span></span> działają w ten sposób,
+    że po prostu aplikują na celu <span class="inlinecode"><span class="id" type="var">eq_refl</span></span>. Nazwa <span class="inlinecode"><span class="id" type="var">eq_refl</span></span> to skrót
+    od ang. "reflexivity of equality", czyli "zwrotność równości" —
+    jest to najważniejsza cecha równości, która oznacza, że każdy term
+    jest równy samemu sobie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyEq.eq_refl_nontrivial"><span class="id" type="lemma">eq_refl_nontrivial</span></a> : <a class="idref" href="R2.html#MyEq.eq"><span class="id" type="inductive">eq</span></a> (1 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> 41<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a> 42.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Mogłoby wydawać się, że zwrotność nie wystarcza do udowadniania
+    "nietrywialnych" równości pokroju <span class="inlinecode">1</span> <span class="inlinecode">+</span> <span class="inlinecode">41</span> <span class="inlinecode">=</span> <span class="inlinecode">42</span>, jednak tak nie jest.
+    Dlaczego <span class="inlinecode"><span class="id" type="var">eq_refl</span></span> odnosi na tym celu sukces skoro <span class="inlinecode">1</span> <span class="inlinecode">+</span> <span class="inlinecode">41</span> oraz <span class="inlinecode">42</span>
+    zdecydowanie różnią się postacią? Odpowiedź jest prosta: typ <span class="inlinecode"><span class="id" type="var">eq</span></span> w
+    rzeczywistości owija jedynie równość pierwotną, wbudowaną w samo jądro
+    Coqa, którą jest konwertowalność. 
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyEq.eq_refl_alpha"><span class="id" type="lemma">eq_refl_alpha</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#MyEq.eq"><span class="id" type="inductive">eq</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> ⇒ <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">y</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> ⇒ <a class="idref" href="R2.html#y"><span class="id" type="variable">y</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">change</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <span class="id" type="var">A</span> ⇒ <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a>) <span class="id" type="keyword">with</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">y</span> : <span class="id" type="var">A</span> ⇒ <a class="idref" href="R2.html#y"><span class="id" type="variable">y</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="R2.html#MyEq.eq_refl"><span class="id" type="constructor">eq_refl</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyEq.eq_refl_beta"><span class="id" type="lemma">eq_refl_beta</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#MyEq.eq"><span class="id" type="inductive">eq</span></a> ((<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> ⇒ <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a>) (<a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">apply</span> <a class="idref" href="R2.html#MyEq.eq_refl"><span class="id" type="constructor">eq_refl</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="MyEq.ultimate_answer"><span class="id" type="definition">ultimate_answer</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> := 42.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyEq.eq_refl_delta"><span class="id" type="lemma">eq_refl_delta</span></a> : <a class="idref" href="R2.html#MyEq.eq"><span class="id" type="inductive">eq</span></a> <a class="idref" href="R2.html#MyEq.ultimate_answer"><span class="id" type="definition">ultimate_answer</span></a> 42.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="R2.html#MyEq.ultimate_answer"><span class="id" type="definition">ultimate_answer</span></a>. <span class="id" type="tactic">apply</span> <a class="idref" href="R2.html#MyEq.eq_refl"><span class="id" type="constructor">eq_refl</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyEq.eq_refl_iota"><span class="id" type="lemma">eq_refl_iota</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#MyEq.eq"><span class="id" type="inductive">eq</span></a> 42 (<span class="id" type="keyword">match</span> 0 <span class="id" type="keyword">with</span> | 0 ⇒ 42 | <span class="id" type="var">_</span> ⇒ 13 <span class="id" type="keyword">end</span>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">apply</span> <a class="idref" href="R2.html#MyEq.eq_refl"><span class="id" type="constructor">eq_refl</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Przypomnijmy, co już wiemy o redukcjach:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> konwersja alfa pozwala nam zmienić nazwę zmiennej związanej w
+      funkcji anonimowej nową, jeżeli ta nie jest jeszcze używana.
+      W naszym przykładzie zamieniamy <span class="inlinecode"><span class="id" type="var">x</span></span> w <span class="inlinecode"><span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" type="var">x</span></span> na <span class="inlinecode"><span class="id" type="var">y</span></span>,
+      otrzymując <span class="inlinecode"><span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">y</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" type="var">y</span></span> — konwersja jest legalna. Jednak
+      w funkcji <span class="inlinecode"><span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode"><span class="id" type="var">y</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">x</span></span> nie możemy użyć konwersji
+      alfa, żeby zmienić nazwę <span class="inlinecode"><span class="id" type="var">x</span></span> na <span class="inlinecode"><span class="id" type="var">y</span></span>, bo <span class="inlinecode"><span class="id" type="var">y</span></span> jest już używana
+      (tak nazywa się drugi argument).
+
+</li>
+<li> Redukcja beta zastępuje argumentem każde wystąpienie zmiennej
+      związanej w funkcji anonimowej. W naszym przypadku redukcja
+      ta zamienia <span class="inlinecode">(<span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">n</span>)</span> <span class="inlinecode"><span class="id" type="var">m</span></span> na <span class="inlinecode"><span class="id" type="var">m</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">m</span></span> — w miejsce
+      <span class="inlinecode"><span class="id" type="var">n</span></span> wstawiamy <span class="inlinecode"><span class="id" type="var">m</span></span>.
+
+</li>
+<li> Redukcja delta odwija definicje. W naszym przypadku zdefiniowaliśmy,
+      że <span class="inlinecode"><span class="id" type="var">ultimate_answer</span></span> oznacza <span class="inlinecode">42</span>, więc redukcja delta w miejsce
+      <span class="inlinecode"><span class="id" type="var">ultimate_answer</span></span> wstawia <span class="inlinecode">42</span>.
+
+</li>
+<li> Redukcja jota wykonuje pattern matching. W naszym przypadku <span class="inlinecode">0</span>
+      jest termem, który postać jest znana (został on skonstruowany
+      konstruktorem <span class="inlinecode">0</span>) i który pasuje do wzorca <span class="inlinecode">|</span> <span class="inlinecode">0</span> <span class="inlinecode">⇒</span> <span class="inlinecode">42</span>, a zatem
+      redukcja jota zamienia całe wyrażenie od <span class="inlinecode"><span class="id" type="keyword">match</span></span> aż do <span class="inlinecode"><span class="id" type="keyword">end</span></span>
+      na <span class="inlinecode">42</span>. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Termy <span class="inlinecode"><span class="id" type="var">x</span></span> i <span class="inlinecode"><span class="id" type="var">y</span></span> są konwertowalne, gdy za pomocą konwersji alfa oraz
+    redukcji beta, delta i jota można zredukować <span class="inlinecode"><span class="id" type="var">x</span></span> do <span class="inlinecode"><span class="id" type="var">y</span></span> lub <span class="inlinecode"><span class="id" type="var">y</span></span> do <span class="inlinecode"><span class="id" type="var">x</span></span>.
+
+<div class="paragraph"> </div>
+
+    Uważny czytelnik zada sobie w tym momencie pytanie: skoro równość to
+    konwertowalność, to jakim cudem równe są termy <span class="inlinecode">0</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">n</span></span> oraz <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">0</span>,
+    które przecież nie są konwertowalne? 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R2.html#MyEq"><span class="id" type="module">MyEq</span></a>.<br/>
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
