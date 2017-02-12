@@ -2225,7 +2225,175 @@ Suma <span class="inlinecode"><span class="id" type="var">A</span></span> i <spa
 </div>
 
 <div class="doc">
-<a name="lab95"></a><h1 class="section">Induktywne zdania i predykaty</h1>
+<a name="lab95"></a><h2 class="section">Typy puste</h2>
+
+<div class="paragraph"> </div>
+
+ Typy puste to typy, które nie mają żadnych elementów. Z jednym z nich
+    już się spotkaliśmy — był to <span class="inlinecode"><span class="id" type="var">Empty_set</span></span>, który jest pusty, gdyż nie
+    ma żadnych konstruktorów. Czy wszystkie typy puste to typy, które
+    nie mają konstruktorów? 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="Empty"><span class="id" type="inductive">Empty</span></a> : <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="c"><span class="id" type="constructor">c</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Empty_set"><span class="id" type="inductive">Empty_set</span></a> → <a class="idref" href="R2.html#Empty"><span class="id" type="inductive">Empty</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="Empty_is_empty"><span class="id" type="lemma">Empty_is_empty</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">empty</span> : <a class="idref" href="R2.html#Empty"><span class="id" type="inductive">Empty</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">empty</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">e</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Okazuje się, że nie. Pustość i niepustość jest kwestią czegoś więcej,
+    niż tylko ilości konstruktorów. Powyższy przykład pokazuje dobitnie,
+    że ważne są też typy argumentów konstruktorów. Jeżeli typ któregoś z
+    argumentów konstruktora jest pusty, to nie można użyć go do zrobienia
+    żadnego termu. Jeżeli każdy konstruktor typu <span class="inlinecode"><span class="id" type="var">T</span></span> ma argument, którego
+    typ jest pusty, to sam typ <span class="inlinecode"><span class="id" type="var">T</span></span> również jest pusty.
+
+<div class="paragraph"> </div>
+
+    Wobec powyższych rozważań możemy sformułować następujące kryterium:
+    typ <span class="inlinecode"><span class="id" type="var">T</span></span> jest niepusty, jeżeli ma co najmniej jeden konstruktor, który
+    nie bierze argumentów, których typy są puste. Jakkolwiek jest to bardzo
+    dobre kryterium, to jednak nie rozwiewa ono niestety wszystkich możliwych
+    wątpliwości. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="InfiniteList"><span class="id" type="inductive">InfiniteList</span></a> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) : <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="InfiniteCons"><span class="id" type="constructor">InfiniteCons</span></a> : <span class="id" type="var">A</span> → <a class="idref" href="R2.html#InfiniteList"><span class="id" type="inductive">InfiniteList</span></a> <span class="id" type="var">A</span> → <a class="idref" href="R2.html#InfiniteList"><span class="id" type="inductive">InfiniteList</span></a> <span class="id" type="var">A</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Czy typ <span class="inlinecode"><span class="id" type="var">InfiniteList</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> jest niepusty? Skorzystajmy z naszego kryterium:
+    ma on jeden konstruktor biorący dwa argumenty, jeden typu <span class="inlinecode"><span class="id" type="var">A</span></span> oraz drugi
+    typu <span class="inlinecode"><span class="id" type="var">InfiniteList</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>. W zależności od tego, czym jest <span class="inlinecode"><span class="id" type="var">A</span></span>, może on być
+    pusty lub nie — przyjmijmy, że <span class="inlinecode"><span class="id" type="var">A</span></span> jest niepusty. W przypadku drugiego
+    argumentu napotykamy jednak na problem: to, czy <span class="inlinecode"><span class="id" type="var">InfiniteList</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> jest
+    niepusty zależy od tego, czy typ argumentu jego konstruktora, również
+    <span class="inlinecode"><span class="id" type="var">InfiniteList</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>, jest niepusty. Sytuacja jest więc beznadziejna — mamy
+    błędne koło.
+
+<div class="paragraph"> </div>
+
+    Powyższy przykład pokazuje, że nasze kryterium może nie poradzić sobie
+    z rekurencją. Jak zatem rozstrzygnąć, czy typ ten jest niepusty? Musimy
+    odwołać się bezpośrednio do definicji i zastanowić się, czy możliwe jest
+    skonstruowanie jakichś jego termów. W tym celu przypomnijmy, czym są typy
+    induktywne:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Typ induktywny to rodzaj planu, który pokazuje, w jaki sposób można
+      konstruować jego termy, które są drzewami.
+
+</li>
+<li> Konstruktory to węzły drzewa. Ich nazwy oraz ilość i typy argumentów
+      nadają drzewu kształt i znaczenie.
+
+</li>
+<li> Konstruktory nierekurencyjne to liście drzewa.
+
+</li>
+<li> Konstruktory rekurencyjne to węzły wewnętrzne drzewa. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Kluczowym faktem jest rozmiar termów: o ile rozgałęzienia mogą być
+    potencjalnie nieskończone, o tyle wszystkie gałęzie muszą mieć
+    skończoną długość. Pociąga to za sobą bardzo istotny fakt: typy
+    mające jedynie konstruktory rekurencyjne są puste, gdyż bez użycia
+    konstruktorów nierekurencyjnych możemy konstruować jedynie drzewa
+    nieskończone (i to tylko przy nierealnym założeniu, że możliwe jest
+    zakończenie konstrukcji liczącej sobie nieskończoność kroków). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="InfiniteList_is_empty"><span class="id" type="lemma">InfiniteList_is_empty</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="R2.html#InfiniteList"><span class="id" type="inductive">InfiniteList</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">A</span> <span class="id" type="var">l</span>. <span class="id" type="tactic">induction</span> <span class="id" type="var">l</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">h</span> <span class="id" type="var">t</span>]. <span class="id" type="tactic">exact</span> <span class="id" type="var">IHt</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Pokazanie, że <span class="inlinecode"><span class="id" type="var">InfiniteList</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> jest pusty, jest bardzo proste —
+    wystarczy posłużyć się indukcją. Indukcja po <span class="inlinecode"><span class="id" type="var">l</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">InfiniteList</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>
+    daje nam hipotezę indukcyjną <span class="inlinecode"><span class="id" type="var">IHt</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">False</span></span>, której możemy użyć,
+    aby natychmiast zakończyć dowód.
+
+<div class="paragraph"> </div>
+
+    Zaraz, co właściwie się stało? Dlaczego dostaliśmy zupełnie za darmo
+    hipotezę <span class="inlinecode"><span class="id" type="var">IHt</span></span>, która jest szukanym przez nas dowodem? W ten właśnie
+    sposób przeprowadza się dowody indukcyjne: zakładamy, że hipoteza <span class="inlinecode"><span class="id" type="var">P</span></span>
+    zachodzi dla termu <span class="inlinecode"><span class="id" type="var">t</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">InfiniteList</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>, a następnie musimy pokazać,
+    że <span class="inlinecode"><span class="id" type="var">P</span></span> zachodzi także dla termu <span class="inlinecode"><span class="id" type="var">InfiniteCons</span></span> <span class="inlinecode"><span class="id" type="var">h</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span>. Zazwyczaj <span class="inlinecode"><span class="id" type="var">P</span></span> jest
+    predykatem i wykonanie kroku indukcyjnego jest nietrywialne, w naszym
+    przypadku jest jednak inaczej — postać <span class="inlinecode"><span class="id" type="var">P</span></span> jest taka sama dla <span class="inlinecode"><span class="id" type="var">t</span></span> oraz
+    dla <span class="inlinecode"><span class="id" type="var">InfiniteCons</span></span> <span class="inlinecode"><span class="id" type="var">h</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span> i jest nią <span class="inlinecode"><span class="id" type="var">False</span></span>.
+
+<div class="paragraph"> </div>
+
+    Czy ten konfundujący fakt nie oznacza jednak, że <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>, czyli typ
+    zwykłych list, również jest pusty? Spróbujmy pokazać, że tak jest. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="list_empty"><span class="id" type="lemma">list_empty</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">A</span> <span class="id" type="var">l</span>. <span class="id" type="tactic">induction</span> <span class="id" type="var">l</span> <span class="id" type="keyword">as</span> [| <span class="id" type="var">h</span> <span class="id" type="var">t</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Focus</span> 2. <span class="id" type="tactic">exact</span> <span class="id" type="var">IHt</span>.<br/>
+<span class="id" type="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Pokazanie, że typ <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> jest pusty, jest rzecz jasna niemożliwe,
+    gdyż typ ten zdecydowanie pusty nie jest — w jego definicji stoi
+    jak byk napisane, że dla dowolnego typu <span class="inlinecode"><span class="id" type="var">A</span></span> istnieje lista termów
+    typu <span class="inlinecode"><span class="id" type="var">A</span></span>. Jest nią oczywiście <span class="inlinecode">@<span class="id" type="var">nil</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>.
+
+<div class="paragraph"> </div>
+
+    Przyjrzyjmy się naszej próbie dowodu. Próbujemy posłużyć się indukcją
+    w ten sam sposób co poprzednio. Taktyka <span class="inlinecode"><span class="id" type="tactic">induction</span></span> generuje nam dwa
+    podcele, gdyż <span class="inlinecode"><span class="id" type="var">list</span></span> ma dwa konstruktory — pierwszy podcel dla <span class="inlinecode"><span class="id" type="var">nil</span></span>,
+    a drugi dla <span class="inlinecode"><span class="id" type="var">cons</span></span>. Komenda <span class="inlinecode"><span class="id" type="var">Focus</span></span> pozwala nam przełączyć się do
+    wybranego celu, w tym przypadku celu nr 2, czyli gdy <span class="inlinecode"><span class="id" type="var">l</span></span> jest postaci
+    <span class="inlinecode"><span class="id" type="var">cons</span></span> <span class="inlinecode"><span class="id" type="var">h</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span>.
+
+<div class="paragraph"> </div>
+
+    Sprawa wygląda identycznie jak poprzednio — za darmo dostajemy hipotezę
+    <span class="inlinecode"><span class="id" type="var">IHt</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">False</span></span>, której używamy do natychmiastowego rozwiązania naszego
+    celu. Tym, co stanowi przeszkodę nie do pokonania, jest cel nr 1, czyli
+    gdy <span class="inlinecode"><span class="id" type="var">l</span></span> zrobiono za pomocą konstruktora <span class="inlinecode"><span class="id" type="var">nil</span></span>. Ten konstruktor nie jest
+    rekurencyjny, więc nie dostajemy żadnej hipotezy indukcyjnej. Lista <span class="inlinecode"><span class="id" type="var">l</span></span>
+    zostaje w każdym miejscu, w którym występuje, zastąpiona przez <span class="inlinecode">[]</span>, a
+    ponieważ nie występuje nigdzie — znika. Musimy teraz udowodnić fałsz
+    wiedząc jedynie, że <span class="inlinecode"><span class="id" type="var">A</span></span> jest typem, co jest niemożliwe. 
+<div class="paragraph"> </div>
+
+<a name="lab96"></a><h1 class="section">Induktywne zdania i predykaty</h1>
 
 <div class="paragraph"> </div>
 
@@ -2235,7 +2403,7 @@ Suma <span class="inlinecode"><span class="id" type="var">A</span></span> i <spa
     definiować także zdania, spójniki logiczne, predykaty oraz relacje. 
 <div class="paragraph"> </div>
 
-<a name="lab96"></a><h2 class="section">Induktywne zdania</h2>
+<a name="lab97"></a><h2 class="section">Induktywne zdania</h2>
 
 </div>
 <div class="code">
@@ -2261,7 +2429,7 @@ Induktywne definicje zdań nie są zbyt ciekawe, gdyż pozwalają definiować
     i to na cztery sposoby! 
 <div class="paragraph"> </div>
 
-<a name="lab97"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab98"></a><h4 class="section">Ćwiczenie</h4>
 
 </div>
 <div class="code">
@@ -2274,7 +2442,7 @@ Induktywne definicje zdań nie są zbyt ciekawe, gdyż pozwalają definiować
 </div>
 
 <div class="doc">
-<a name="lab98"></a><h2 class="section">Induktywne predykaty</h2>
+<a name="lab99"></a><h2 class="section">Induktywne predykaty</h2>
 
 <div class="paragraph"> </div>
 
@@ -2477,7 +2645,7 @@ Jak pokazać, że <span class="inlinecode">3</span> nie jest parzyste? Pomoże n
     jest parzyste, już wiemy. 
 <div class="paragraph"> </div>
 
-<a name="lab99"></a><h4 class="section">Ćwiczenie.</h4>
+<a name="lab100"></a><h4 class="section">Ćwiczenie.</h4>
  Zdefiniuj induktywny predykat <span class="inlinecode"><span class="id" type="var">odd</span></span>, który ma oznaczać "bycie liczbą
     nieparzystą" i udowodnij, że zachowuje się on jak należy. 
 </div>
@@ -2501,7 +2669,7 @@ Jak pokazać, że <span class="inlinecode">3</span> nie jest parzyste? Pomoże n
 </div>
 
 <div class="doc">
-<a name="lab100"></a><h4 class="section">Ćwiczenie (chyba trudne).</h4>
+<a name="lab101"></a><h4 class="section">Ćwiczenie (chyba trudne).</h4>
  To ćwiczenie dotyczy bardziej kombinatorów taktyk i automatyzacji,
     niż definicji induktywnych. Przydać mogą ci się następujące taktyki,
     których dotąd nie omawialiśmy:
@@ -2530,7 +2698,7 @@ Jak pokazać, że <span class="inlinecode">3</span> nie jest parzyste? Pomoże n
 </div>
 
 <div class="doc">
-<a name="lab101"></a><h2 class="section">Indukcja po dowodzie</h2>
+<a name="lab102"></a><h2 class="section">Indukcja po dowodzie</h2>
 
 </div>
 <div class="code">
@@ -2641,7 +2809,7 @@ Indukcja po dowodzie działa dokładnie tak samo, jak indukcja, z którą
 
 <div class="paragraph"> </div>
 
-<a name="lab102"></a><h3 class="section">Taktyki <span class="inlinecode"><span class="id" type="tactic">replace</span></span> i <span class="inlinecode"><span class="id" type="tactic">assert</span></span>.</h3>
+<a name="lab103"></a><h3 class="section">Taktyki <span class="inlinecode"><span class="id" type="tactic">replace</span></span> i <span class="inlinecode"><span class="id" type="tactic">assert</span></span>.</h3>
  Przy następnych ćwiczeniach mogą przydać ci się taktyki <span class="inlinecode"><span class="id" type="tactic">replace</span></span>
     oraz <span class="inlinecode"><span class="id" type="tactic">assert</span></span>. 
 </div>
@@ -2686,7 +2854,7 @@ Taktyka <span class="inlinecode"><span class="id" type="tactic">assert</span></s
     Zawodzi ona, jeżeli nazwa <span class="inlinecode"><span class="id" type="var">x</span></span> jest już zajęta. 
 <div class="paragraph"> </div>
 
-<a name="lab103"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab104"></a><h4 class="section">Ćwiczenie</h4>
  Udowodnij poniższe twierdzenia. Zanim zaczniesz, zastanów się, po czym
     należy przeprowadzić indukcję: po wartości, czy po dowodzie? 
 </div>
@@ -2703,7 +2871,7 @@ Taktyka <span class="inlinecode"><span class="id" type="tactic">assert</span></s
 </div>
 
 <div class="doc">
-<a name="lab104"></a><h2 class="section">Definicje stałych i spójników logicznych</h2>
+<a name="lab105"></a><h2 class="section">Definicje stałych i spójników logicznych</h2>
 
 <div class="paragraph"> </div>
 
@@ -2723,7 +2891,7 @@ Taktyka <span class="inlinecode"><span class="id" type="tactic">assert</span></s
 </div>
 
 <div class="doc">
-<a name="lab105"></a><h3 class="section">Prawda i fałsz</h3>
+<a name="lab106"></a><h3 class="section">Prawda i fałsz</h3>
 
 </div>
 <div class="code">
@@ -2779,7 +2947,7 @@ Fałsz nie ma żadnych konstruktorów, a zatem nie może zostać w żaden
     nazwano, z zupełnie nieznanych powodów (zapewne dla hecy), <span class="inlinecode"><span class="id" type="var">I</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab106"></a><h3 class="section">Koniunkcja i dysjunkcja</h3>
+<a name="lab107"></a><h3 class="section">Koniunkcja i dysjunkcja</h3>
 
 </div>
 <div class="code">
@@ -2821,7 +2989,7 @@ Dowód dysjunkcji zdań <span class="inlinecode"><span class="id" type="var">P</
 </div>
 
 <div class="doc">
-<a name="lab107"></a><h2 class="section">Równość</h2>
+<a name="lab108"></a><h2 class="section">Równość</h2>
 
 </div>
 <div class="code">
