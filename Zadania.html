@@ -221,8 +221,8 @@ Udowodnij następujące twierdzenia.
 </div>
 
 <div class="doc">
-<a name="lab111"></a><h1 class="section">Póki co bezimienny rozdział</h1>
-<a name="lab112"></a><h2 class="section">Injekcje, surjekcje, bijekcje</h2>
+<a name="lab111"></a><h1 class="section">Póki co bezimienny rozdział (alfa)</h1>
+<a name="lab112"></a><h2 class="section">Injekcje, surjekcje, bijekcje (alfa)</h2>
 
 </div>
 <div class="code">
@@ -306,6 +306,190 @@ TODO: trzeba tu coś napisać, ale na razie nie mam czasu.
 
 <br/>
 <span class="id" type="keyword">Theorem</span> <a name="unary_bij"><span class="id" type="lemma">unary_bij</span></a> : <a class="idref" href="Zadania.html#bijective"><span class="id" type="definition">bijective</span></a> <a class="idref" href="Zadania.html#unary"><span class="id" type="definition">unary</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab113"></a><h2 class="section">Wreszcie zadania z arytmetyki (alfa)</h2>
+
+<div class="paragraph"> </div>
+
+ Poniższe zadania mają służyć utrwaleniu zdobytej dotychczas wiedzy na
+    temat prostej rekursji i indukcji. Większość powinna być robialna po
+    przeczytaniu rozdziału o konstruktorach rekurencyjnych, ale niczego nie
+    gwarantuję.
+
+<div class="paragraph"> </div>
+
+    Celem zadań jest rozwinięcie arytmetyki do takiego poziomu, żeby można
+    było tego używać gdzie indziej w jakotakim stopniu, Niektóre zadania
+    mogą pokrywać się z zadaniami obecnymi w tekście, a niektóre być może
+    nawet z przykładami. Staraj się nie podglądać. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="MyNat"><span class="id" type="module">MyNat</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zdefiniuj liczby naturalne. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="MyNat.::'0'"><span class="id" type="notation">"</span></a>0" := <a class="idref" href="Zadania.html#MyNat.O"><span class="id" type="constructor">O</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zdefiniuj dodawanie (rekurencyjnie po pierwszym argumencie) i
+    udowodnij jego właściwości. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="MyNat.::x_'+'_x"><span class="id" type="notation">"</span></a>a + b" := (<a class="idref" href="Zadania.html#MyNat.plus"><span class="id" type="definition">plus</span></a> <span class="id" type="var">a</span> <span class="id" type="var">b</span>) (<span class="id" type="tactic">at</span> <span class="id" type="keyword">level</span> 50, <span class="id" type="tactic">left</span> <span class="id" type="keyword">associativity</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus_0_l"><span class="id" type="lemma">plus_0_l</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, 0 <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus_0_r"><span class="id" type="lemma">plus_0_r</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> 0 <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus_assoc"><span class="id" type="lemma">plus_assoc</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#a"><span class="id" type="variable">a</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Zadania.html#b"><span class="id" type="variable">b</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#c"><span class="id" type="variable">c</span></a><a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Zadania.html#a"><span class="id" type="variable">a</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#b"><span class="id" type="variable">b</span></a><a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#c"><span class="id" type="variable">c</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus_comm"><span class="id" type="lemma">plus_comm</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.no_annihilation_l"><span class="id" type="lemma">no_annihilation_l</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">a</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#a"><span class="id" type="variable">a</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Zadania.html#a"><span class="id" type="variable">a</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.no_annihilation_r"><span class="id" type="lemma">no_annihilation_r</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">a</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#a"><span class="id" type="variable">a</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Zadania.html#a"><span class="id" type="variable">a</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.no_inverse_l"><span class="id" type="lemma">no_inverse_l</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">i</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="Zadania.html#i"><span class="id" type="variable">i</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">=</span></a> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.no_inverse_r"><span class="id" type="lemma">no_inverse_r</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">i</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#i"><span class="id" type="variable">i</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">=</span></a> 0.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Pokaż, że plus' n m = n + m 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="MyNat.plus'"><span class="id" type="definition">plus'</span></a> (<span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>) : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 ⇒ <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="Zadania.html#MyNat.S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">m'</span> ⇒ <a class="idref" href="Zadania.html#plus'"><span class="id" type="definition">plus'</span></a> (<a class="idref" href="Zadania.html#MyNat.S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a>) <span class="id" type="var">m'</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus'_0_r"><span class="id" type="lemma">plus'_0_r</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#MyNat.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> 0 = <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus'_S"><span class="id" type="lemma">plus'_S</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#MyNat.plus'"><span class="id" type="definition">plus'</span></a> (<a class="idref" href="Zadania.html#MyNat.S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a>) <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="Zadania.html#MyNat.S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="Zadania.html#MyNat.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus'_0_l"><span class="id" type="lemma">plus'_0_l</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#MyNat.plus'"><span class="id" type="definition">plus'</span></a> 0 <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> = <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus'_comm"><span class="id" type="lemma">plus'_comm</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#MyNat.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="Zadania.html#MyNat.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus'_is_plus"><span class="id" type="lemma">plus'_is_plus</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#MyNat.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Udowodnij powyższe twierdzenie bez używania lematów pomocniczych. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus'_is_plus_no_lemmas"><span class="id" type="lemma">plus'_is_plus_no_lemmas</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#MyNat.plus'"><span class="id" type="definition">plus'</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Udowodnij analogiczne twierdzenia dla plus'' i plus''' 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="MyNat.plus''"><span class="id" type="definition">plus''</span></a> (<span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>) : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 ⇒ <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="Zadania.html#MyNat.S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">n'</span> ⇒ <a class="idref" href="Zadania.html#plus''"><span class="id" type="definition">plus''</span></a> <span class="id" type="var">n'</span> (<a class="idref" href="Zadania.html#MyNat.S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus''_is_plus"><span class="id" type="lemma">plus''_is_plus</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#MyNat.plus''"><span class="id" type="definition">plus''</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="MyNat.plus'''"><span class="id" type="definition">plus'''</span></a> (<span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>) : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 ⇒ <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="Zadania.html#MyNat.S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">m'</span> ⇒ <a class="idref" href="Zadania.html#MyNat.S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="Zadania.html#plus'''"><span class="id" type="definition">plus'''</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <span class="id" type="var">m'</span>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.plus'''_is_plus"><span class="id" type="lemma">plus'''_is_plus</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#MyNat.plus'''"><span class="id" type="definition">plus'''</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zdefiniuj mnożenie i udowodnij jego właściwości. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="MyNat.::x_'*'_x"><span class="id" type="notation">"</span></a>a * b" := (<a class="idref" href="Zadania.html#MyNat.mult"><span class="id" type="definition">mult</span></a> <span class="id" type="var">a</span> <span class="id" type="var">b</span>) (<span class="id" type="tactic">at</span> <span class="id" type="keyword">level</span> 40, <span class="id" type="tactic">left</span> <span class="id" type="keyword">associativity</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.mult_0_l"><span class="id" type="lemma">mult_0_l</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, 0 <a class="idref" href="Zadania.html#MyNat.::x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'*'_x"><span class="id" type="notation">=</span></a> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.mult_0_r"><span class="id" type="lemma">mult_0_r</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'*'_x"><span class="id" type="notation">×</span></a> 0 <a class="idref" href="Zadania.html#MyNat.::x_'*'_x"><span class="id" type="notation">=</span></a> 0.<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zależności między dodawaniem i odejmowaniem 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Zadania.html#MyNat"><span class="id" type="module">MyNat</span></a>.<br/>
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
