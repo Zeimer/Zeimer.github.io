@@ -835,6 +835,36 @@ Zdefiniuj funkcję <span class="inlinecode"><span class="id" type="var">leb</spa
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'<='_x"><span class="id" type="notation">&lt;=</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="Zadania.html#MyNat.::x_'<='_x"><span class="id" type="notation">&lt;-&gt;</span></a> <a class="idref" href="Zadania.html#MyNat.leb"><span class="id" type="definition">leb</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a>.<br/>
 
 <br/>
+</div>
+
+<div class="doc">
+Zdefiniuj funkcję <span class="inlinecode"><span class="id" type="var">eqb</span></span>, która sprawdza, czy <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" type="var">m</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MyNat.eqb_spec"><span class="id" type="lemma">eqb_spec</span></a> : <span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">&lt;-&gt;</span></a> <a class="idref" href="Zadania.html#MyNat.eqb"><span class="id" type="definition">eqb</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#m"><span class="id" type="variable">m</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Pokaż, że indukcję na liczbach naturalnych można robić "co 2".
+    Wskazówka: taktyk można używać nie tylko do dowodzenia. Przypomnij
+    sobie, że taktyki, to programy, które generują dowody, zaś dowody
+    są programami. Dzięki temu nic nie stoi na przeszkodzie, aby
+    taktyki interpretować jako programy, które piszą inne programy.
+    I rzeczywiście — w Coqu możemy używać taktyk do definiowania
+    dowolnych termów. Czasem bywa to nawet częsta praktyka... 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="MyNat.ind_by_2"><span class="id" type="definition">ind_by_2</span></a> (<span class="id" type="var">P</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a> -&gt; <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">H0</span> : <a class="idref" href="Zadania.html#P"><span class="id" type="variable">P</span></a> 0) (<span class="id" type="var">H1</span> : <a class="idref" href="Zadania.html#P"><span class="id" type="variable">P</span></a> 1)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">HSS</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Zadania.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="Zadania.html#P"><span class="id" type="variable">P</span></a> (<a class="idref" href="Zadania.html#MyNat.S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="Zadania.html#MyNat.S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a>))) (<span class="id" type="var">n</span> : <a class="idref" href="Zadania.html#MyNat.nat"><span class="id" type="inductive">nat</span></a>) : <a class="idref" href="Zadania.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a>.<br/>
 
 <br/>
 <span class="id" type="keyword">End</span> <a class="idref" href="Zadania.html#MyNat"><span class="id" type="module">MyNat</span></a>.<br/>
