@@ -3307,6 +3307,117 @@ Powyższe dywagacje nie przeszkadzają nam jednak w udowadnianiu,
 <div class="code">
 
 <br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab112"></a><h1 class="section">Różne (alfa)</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab113"></a><h2 class="section">Parametryczność</h2>
+
+<div class="paragraph"> </div>
+
+ Niech <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span></span>. Zadajmy sobie następujące pytanie: ile jest funkcji
+    typu <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span>? Żeby ułatwić sobie zadanie, ograniczmy się jedynie do
+    typów, które mają skończoną ilość elementów.
+
+<div class="paragraph"> </div>
+
+    Nietrudno przekonać się, że ich ilość to |B|^|A|, gdzie ^ oznacza
+    potęgowanie, zaś |T| to ilość elementów typu <span class="inlinecode"><span class="id" type="var">T</span></span> (ta notacja nie ma
+    nic wspólnego z Coqiem — zaadaptowałem ją z teorii zbiorów jedynie
+    na potrzeby tego podrozdziału).
+
+<div class="paragraph"> </div>
+
+    Udowodnić ten fakt możesz (choć póki co nie w Coqu) posługując się
+    indukcją po ilości elementów typu <span class="inlinecode"><span class="id" type="var">A</span></span>. Jeżeli <span class="inlinecode"><span class="id" type="var">A</span></span> jest pusty, to
+    jest tylko jedna taka funkcja, o czym przekonałeś się już podczas
+    ćwiczeń w podrozdziale o typie <span class="inlinecode"><span class="id" type="var">Empty_set</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab114"></a><h4 class="section">Ćwiczenie</h4>
+ Udowodnij (nieformalnie, na papierze), że w powyższym akapicie nie
+    okłamałem cię. 
+<div class="paragraph"> </div>
+
+<a name="lab115"></a><h4 class="section">Ćwiczenie</h4>
+ Zdefiniuj wszystkie możliwe funkcje typu <span class="inlinecode"><span class="id" type="var">unit</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">unit</span></span>, <span class="inlinecode"><span class="id" type="var">unit</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">bool</span></span>
+    i <span class="inlinecode"><span class="id" type="var">bool</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">bool</span></span>. 
+<div class="paragraph"> </div>
+
+ Postawmy sobie teraz trudniejsze pytanie: ile jest funkcji typu
+    <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span>? W udzieleniu odpowiedzi pomoże nam
+    parametryczność — jedna z właściwości Coqowego polimorfizmu.
+
+<div class="paragraph"> </div>
+
+    Stwierdzenie, że polimorfizm w Coqu jest parametryczny, oznacza, że
+    funkcja biorąca typ jako jeden z argumentów działa w taki sam sposób
+    niezależnie od tego, jaki typ przekażemy jej jako argument.
+
+<div class="paragraph"> </div>
+
+    Konsekwencją tego jest, że funkcje polimorficzne nie wiedzą (i nie
+    mogą wiedzieć), na wartościach jakiego typu operują. Wobec tego
+    elementem typu <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span> nie może być funkcja, która
+    np. dla typu <span class="inlinecode"><span class="id" type="var">nat</span></span> stale zwraca <span class="inlinecode">42</span>, a dla innych typów po prostu
+    zwraca przekazany jej argument.
+
+<div class="paragraph"> </div>
+
+    Stąd konkludujemy, że typ <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span> ma tylko jeden
+    element, a mianowicie polimorficzną funkcję identycznościową. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="id'"><span class="id" type="definition">id'</span></a> : <span class="id" type="keyword">forall</span> <span class="id" type="var">A</span> : <span class="id" type="keyword">Set</span>, <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">fun</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Set</span>) (<span class="id" type="var">x</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>) =&gt; <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab116"></a><h4 class="section">Ćwiczenie</h4>
+ Zdefiniuj wszystkie elementy następujących typów lub udowodnij, że
+    istnienie choć jednego elementu prowadzi do sprzeczności:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">*</span> <span class="inlinecode"><span class="id" type="var">B</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">sum</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode"><span class="id" type="var">C</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">C</span></span> 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
