@@ -1074,7 +1074,8 @@ Możemy użyć tej pomocniczej funkcji, aby udowodnić, że konstruktory
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Theorem</span> <a name="some_not_none'"><span class="id" type="lemma">some_not_none'</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">a</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>), <a class="idref" href="R2.html#Some"><span class="id" type="constructor">Some</span></a> <a class="idref" href="R2.html#a"><span class="id" type="variable">a</span></a> &lt;&gt; <a class="idref" href="R2.html#None"><span class="id" type="constructor">None</span></a>.<br/>
+<span class="id" type="keyword">Theorem</span> <a name="some_not_none'"><span class="id" type="lemma">some_not_none'</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">a</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>), <a class="idref" href="R2.html#Some"><span class="id" type="constructor">Some</span></a> <a class="idref" href="R2.html#a"><span class="id" type="variable">a</span></a> &lt;&gt; <a class="idref" href="R2.html#None"><span class="id" type="constructor">None</span></a>.<br/>
 <span class="id" type="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" type="tactic">inversion</span> 1.<br/>
 <span class="id" type="keyword">Qed</span>.<br/>
@@ -3410,7 +3411,196 @@ Powyższe dywagacje nie przeszkadzają nam jednak w udowadnianiu,
 <li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">sum</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span>
 
 </li>
-<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode"><span class="id" type="var">C</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">C</span></span> 
+<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode"><span class="id" type="var">C</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">C</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">option</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span>,</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span> 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab117"></a><h2 class="section">Ścisła pozytywność</h2>
+
+<div class="paragraph"> </div>
+
+ Poznana przez nas dotychczas definicja typów induktywnych jest niepełna,
+    gdyż pominęliśmy kryterium ścisłej pozytywności. Rozważmy następujący
+    typ: 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*&nbsp;Inductive&nbsp;wut&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;:&nbsp;Type&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;C&nbsp;:&nbsp;(wut&nbsp;A&nbsp;-&gt;&nbsp;A)&nbsp;-&gt;&nbsp;wut&nbsp;A.&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Kod musi być zakomentowany, gdyż Coq nie akceptuje takiej definicji, jako
+    powód podając: 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*&nbsp;Error:&nbsp;Non&nbsp;strictly&nbsp;positive&nbsp;occurrence&nbsp;of&nbsp;"wut"<br/>
+&nbsp;&nbsp;&nbsp;in&nbsp;"(wut&nbsp;A&nbsp;-&gt;&nbsp;A)&nbsp;-&gt;&nbsp;wut&nbsp;A".&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Żeby zrozumieć ten komunikat o błędzie, musimy najpierw przypomnieć sobie
+    składnię konstruktorów. Konstruktory typu induktywnego <span class="inlinecode"><span class="id" type="var">T</span></span> będą mieć (w
+    dość sporym uproszczeniu) postać <span class="inlinecode"><span class="id" type="var">arg1</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode">...</span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">argN</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span> — są to funkcje
+    biorące pewną (być może zerową) ilość argumentów, a ich przeciwdziedziną
+    jest definiowany typ <span class="inlinecode"><span class="id" type="var">T</span></span>.
+
+<div class="paragraph"> </div>
+
+    Jeżeli definiowany typ <span class="inlinecode"><span class="id" type="var">T</span></span> nie występuje nigdzie w typach argumentów
+    <span class="inlinecode"><span class="id" type="var">arg1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" type="var">argN</span></span>, sytuacja jest klarowna i wszystko jest w porządku.
+    W przeciwnym wypadku, w zależności od postaci typów argumentów, mogą
+    pojawić się problemy.
+
+<div class="paragraph"> </div>
+
+    Jeżeli typ któregoś z argumentów jest równy <span class="inlinecode"><span class="id" type="var">T</span></span>, nie ma problemu — jest
+    to po prostu argument rekurencyjny. Jeżeli jest on postaci <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span> dla
+    dowolnego typu <span class="inlinecode"><span class="id" type="var">A</span></span>, również nie ma problemu — dzięki argumentom o takich
+    typach możemy reprezentować np. drzewa o nieskończonym współczynniku
+    rozgałęzienia. Mówimy, że w <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span> typ <span class="inlinecode"><span class="id" type="var">T</span></span> występuje w pozycji (ściśle)
+    pozytywnej.
+
+<div class="paragraph"> </div>
+
+    Problem pojawia się dopiero, gdy typ argumentu jest postaci <span class="inlinecode"><span class="id" type="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span>
+    lub podobnej (np. <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span>, <span class="inlinecode"><span class="id" type="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> etc.). W takich
+    przypadkach mówimy, że typ <span class="inlinecode"><span class="id" type="var">T</span></span> występuje na pozycji negatywnej (albo
+    "nie-ściśle-pozytywnej").
+
+<div class="paragraph"> </div>
+
+    Pierwszym, stosunkowo błahym problemem jest fakt, że typy łamiące
+    kryterium ścisłej pozytywności nie mają modeli teoriozbiorowych —
+    znaczy to po prostu, że nie można reprezentować ich w teorii zbiorów
+    za pomocą żadnych zbiorów. Dla wielu matematyków stanowi to problem
+    natury praktycznej (są przyzwyczajeni do teorii zbiorów) lub
+    filozoficznej.
+
+<div class="paragraph"> </div>
+
+    Problem ten wynika z faktu, że konstruktory typów induktywnych są
+    injekcjami, zaś typy argumentów, w których definiowany typ występuje
+    na pozycji negatywnej, są "za duże". Np. w przypadku typu <span class="inlinecode"><span class="id" type="var">wut</span></span> <span class="inlinecode"><span class="id" type="var">bool</span></span>
+    konstruktor <span class="inlinecode"><span class="id" type="var">C</span></span> jest injekcją z <span class="inlinecode"><span class="id" type="var">wut</span></span> <span class="inlinecode"><span class="id" type="var">bool</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">bool</span></span> w <span class="inlinecode"><span class="id" type="var">wut</span></span> <span class="inlinecode"><span class="id" type="var">bool</span></span>.
+    Gdybyśmy chcieli interpretować typy jako zbiory, to zbiór
+    <span class="inlinecode"><span class="id" type="var">wut</span></span> <span class="inlinecode"><span class="id" type="var">bool</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">bool</span></span> jest "za duży", by można było go wstrzyknąć do
+    <span class="inlinecode"><span class="id" type="var">wut</span></span> <span class="inlinecode"><span class="id" type="var">bool</span></span>, gdyż jest w bijekcji ze zbiorem potęgowym <span class="inlinecode"><span class="id" type="var">wut</span></span> <span class="inlinecode"><span class="id" type="var">bool</span></span>, a
+    w teorii zbiorów powszechnie wiadomo, że nie ma injekcji ze zbioru
+    potęgowego jakiegoś zbioru do niego samego.
+
+<div class="paragraph"> </div>
+
+    Nie przejmuj się, jeżeli nie rozumiesz powyższego paragrafu — nie
+    jest to główny powód obowiązywania kryterium ścisłej pozytywności,
+    wszak jako buntownicy zajmujący się teorią typów nie powinniśmy
+    zbytnio przejmować się teorią zbiorów.
+
+<div class="paragraph"> </div>
+
+    Prawdziwy powód jest inny: dopuszczenie typów łamiących kryterium
+    ścisłej pozytywności prowadzi do sprzeczności. Gdyby były one
+    legalne, legalna byłaby również poniższa definicja: 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*&nbsp;Definition&nbsp;y&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;:&nbsp;A&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;f&nbsp;:=&nbsp;(fun&nbsp;x&nbsp;:&nbsp;wut&nbsp;A&nbsp;=&gt;&nbsp;match&nbsp;x&nbsp;with&nbsp;|&nbsp;C&nbsp;f'&nbsp;=&gt;&nbsp;f'&nbsp;x&nbsp;end)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;f&nbsp;(C&nbsp;f)&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jak widać, gdyby definicja typu <span class="inlinecode"><span class="id" type="var">wut</span></span> została dopuszczona,
+    moglibyśmy uzyskać zapętlający się program umożliwiający nam
+    stworzenie elementu dowolnego typu i to bez użycia słowa
+    kluczowego <span class="inlinecode"><span class="id" type="keyword">Fixpoint</span></span> (program ten jest nazywany zazwyczaj
+    kombinatorem Y, ang. Y combinator). Stąd już niedaleko do
+    popadnięcia w zupełną sprzeczność: 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*&nbsp;Definition&nbsp;santa_is_a_pedophile&nbsp;:&nbsp;False&nbsp;:=&nbsp;y&nbsp;False.&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab118"></a><h4 class="section">Ćwiczenie</h4>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*&nbsp;Inductive&nbsp;T&nbsp;:&nbsp;Type&nbsp;:=&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Rozstrzygnij, czy typ posiadający jeden z następujących konstruktorów
+    spełnia kryterium ścisłej pozytywności. Następnie sprawdź w Coqu, czy
+    udzieliłeś poprawnej odpowiedzi.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">C1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">T</span></span>
+
+</li>
+<li> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">C2</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">bool</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span>
+
+</li>
+<li> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">C3</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span>
+
+</li>
+<li> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">C4</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span>
+
+</li>
+<li> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">C5</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span>,</span> <span class="inlinecode"><span class="id" type="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span>
+
+</li>
+<li> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">C6</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span>
+
+</li>
+<li> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">C7</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span>,</span> <span class="inlinecode">(<span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span>)</span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span>
+
+</li>
+<li> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">C8</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span>,</span> <span class="inlinecode">(<span class="id" type="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">A</span>)</span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span>
+
+</li>
+<li> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">C9</span></span> <span class="inlinecode">:</span> <span class="inlinecode">(<span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">T</span>,</span> <span class="inlinecode"><span class="id" type="var">T</span>)</span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span>
+
+</li>
+<li> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">C10</span></span> <span class="inlinecode">:</span> <span class="inlinecode">(<span class="id" type="keyword">forall</span></span> <span class="inlinecode">(<span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span>)</span> <span class="inlinecode">(<span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">T</span>),</span> <span class="inlinecode"><span class="id" type="var">A</span>)</span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span>
+
+</li>
+<li> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" type="var">C11</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode"><span class="id" type="var">C</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span>,</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode">(<span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">T</span>,</span> <span class="inlinecode"><span class="id" type="var">B</span>)</span> <span class="inlinecode">-&gt;</span> <span class="inlinecode">(<span class="id" type="var">C</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span>)</span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">T</span></span> 
 </li>
 </ul>
 
