@@ -3849,6 +3849,183 @@ Konstruktor <span class="inlinecode"><span class="id" type="var">vnil</span></sp
 
 <br/>
 </div>
+
+<div class="doc">
+<a name="lab121"></a><h2 class="section">Sumy zależne, podtypy i silne specyfikacje</h2>
+
+<div class="paragraph"> </div>
+
+ W Coqu, w przeciwieństwie do wielu języków imperatywnych, nie ma
+    mechanizmu subtypowania, a każde dwa typy są ze sobą rozłączne.
+    Nie jest to problemem, gdyż subtypowanie możemy zasymulować za
+    pomocą sum zależnych, a te zdefiniować możemy induktywnie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="sigT"><span class="id" type="inductive">sigT</span></a> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> -&gt; <span class="id" type="keyword">Type</span>) : <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="existT"><span class="id" type="constructor">existT</span></a> : <span class="id" type="keyword">forall</span> <span class="id" type="var">x</span> : <span class="id" type="var">A</span>, <span class="id" type="var">P</span> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a> -&gt; <a class="idref" href="R2.html#sigT"><span class="id" type="inductive">sigT</span></a> <span class="id" type="var">A</span> <span class="id" type="var">P</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Typ <span class="inlinecode"><span class="id" type="var">sigT</span></span> reprezentuje sumę zależną, której elementami są pary zależne.
+    Pierwszym elementem pary jest <span class="inlinecode"><span class="id" type="var">x</span></span>, który jest typu <span class="inlinecode"><span class="id" type="var">A</span></span>, zaś drugim
+    elementem pary jest term typu <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span>. Suma zależna jest wobec tego pewnym
+    uogólnieniem produktu.
+
+<div class="paragraph"> </div>
+
+    Niech cię nie zmyli nazewnictwo:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Suma jest reprezentowana przez typ <span class="inlinecode"><span class="id" type="var">sum</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span>. Jej elementami są
+      elementy <span class="inlinecode"><span class="id" type="var">A</span></span> zawinięte w konstruktor <span class="inlinecode"><span class="id" type="var">inl</span></span> oraz elementy <span class="inlinecode"><span class="id" type="var">B</span></span>
+      zawinięte w konstruktor <span class="inlinecode"><span class="id" type="var">inr</span></span>. Reprezentuje ideę "lub/albo".
+      Typ <span class="inlinecode"><span class="id" type="var">B</span></span> nie może zależeć od typu <span class="inlinecode"><span class="id" type="var">A</span></span>.
+
+</li>
+<li> Produkt jest reprezentowany przez typ <span class="inlinecode"><span class="id" type="var">prod</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span>. Jego elementami
+      są pary elementów <span class="inlinecode"><span class="id" type="var">A</span></span> i <span class="inlinecode"><span class="id" type="var">B</span></span>. Reprezentuje on ideę "i/oraz". Typ
+      <span class="inlinecode"><span class="id" type="var">B</span></span> nie może zależeć od typu <span class="inlinecode"><span class="id" type="var">A</span></span>.
+
+</li>
+<li> Uogólnieniem produktu jest suma zależna. Jest ona reprezentowana
+      przez typ <span class="inlinecode"><span class="id" type="var">sigT</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">P</span></span>. Jej elementami są pary zależne elementów
+      <span class="inlinecode"><span class="id" type="var">A</span></span> i <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span>, gdzie <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span></span> jest pierwszym elementem pary.
+      Reprezentuje ona ideę "i/oraz", gdzie typ <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> może zależeć od
+      elementu <span class="inlinecode"><span class="id" type="var">x</span></span> typu <span class="inlinecode"><span class="id" type="var">A</span></span>.
+
+</li>
+<li> Typ funkcji jest reprezentowany przez <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span>. Jego elementami
+      są termy postaci <span class="inlinecode"><span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode">...</span>. Reprezentują ideę "daj mi
+      coś typu <span class="inlinecode"><span class="id" type="var">A</span></span>, a ja oddam ci coś typu <span class="inlinecode"><span class="id" type="var">B</span></span>". Typ <span class="inlinecode"><span class="id" type="var">B</span></span> nie może
+      zależeć od typu <span class="inlinecode"><span class="id" type="var">A</span></span>.
+
+</li>
+<li> Uogólnieniem typu funkcji jest produkt zależny <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span>,</span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span>.
+      Jego elementami są termu postaci <span class="inlinecode"><span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode">...</span>. Reprezentuje
+      on ideę "daj mi <span class="inlinecode"><span class="id" type="var">x</span></span> typu <span class="inlinecode"><span class="id" type="var">A</span></span>, a ja oddam ci coś typu <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span>". Typ
+      <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> może zależeć od typu elementu <span class="inlinecode"><span class="id" type="var">x</span></span> typu <span class="inlinecode"><span class="id" type="var">A</span></span>. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ <span class="inlinecode"><span class="id" type="var">sigT</span></span> jest najogólniejszą postacią pary zależnej — <span class="inlinecode"><span class="id" type="var">A</span></span> jest typem,
+    a <span class="inlinecode"><span class="id" type="var">P</span></span> rodziną typów. Mimo swej ogólności jest używany dość rzadko,
+    gdyż najbardziej przydatną postacią sumy zależnej jest typ <span class="inlinecode"><span class="id" type="var">sig</span></span>: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="sig"><span class="id" type="inductive">sig</span></a> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> -&gt; <span class="id" type="keyword">Prop</span>) : <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="exist"><span class="id" type="constructor">exist</span></a> : <span class="id" type="keyword">forall</span> <span class="id" type="var">x</span> : <span class="id" type="var">A</span>, <span class="id" type="var">P</span> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a> -&gt; <a class="idref" href="R2.html#sig"><span class="id" type="inductive">sig</span></a> <span class="id" type="var">A</span> <span class="id" type="var">P</span>.<br/>
+
+<br/>
+<span class="id" type="var">Arguments</span> <a class="idref" href="R2.html#exist"><span class="id" type="constructor">exist</span></a> [<span class="id" type="var">A</span>] [<span class="id" type="var">P</span>] <span class="id" type="var">_</span> <span class="id" type="var">_</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Typ <span class="inlinecode"><span class="id" type="var">sig</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">P</span></span> można interpretować jako typ składający się z tych
+    elementów <span class="inlinecode"><span class="id" type="var">A</span></span>, które spełniają predykat <span class="inlinecode"><span class="id" type="var">P</span></span>. Formalnie jest to
+    para zależna, której pierwszym elementem jest term typu <span class="inlinecode"><span class="id" type="var">A</span></span>, zaś
+    drugim dowód na to, że spełnia on predykat <span class="inlinecode"><span class="id" type="var">P</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="even_nat"><span class="id" type="definition">even_nat</span></a> : <span class="id" type="keyword">Type</span> := <a class="idref" href="R2.html#sig"><span class="id" type="inductive">sig</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="even_four"><span class="id" type="definition">even_four</span></a> : <a class="idref" href="R2.html#even_nat"><span class="id" type="definition">even_nat</span></a> := <a class="idref" href="R2.html#exist"><span class="id" type="constructor">exist</span></a> 4 <a class="idref" href="R2.html#four_is_even"><span class="id" type="lemma">four_is_even</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Typ <span class="inlinecode"><span class="id" type="var">even_nat</span></span> reprezentuje parzyste liczby naturalne, zaś term
+    <span class="inlinecode"><span class="id" type="var">even_four</span></span> to liczba <span class="inlinecode">4</span> wraz z załączonym dowodem faktu, że <span class="inlinecode">4</span>
+    jest parzyste.
+
+<div class="paragraph"> </div>
+
+    Interpretacja typu <span class="inlinecode"><span class="id" type="var">sig</span></span> sprawia, że jest on wykorzystywany bardzo
+    często do podawania specyfikacji programów — pozwala on dodać do
+    wyniku zwracanego przez funkcję informację o jego właściwościach.
+    W przypadku argumentów raczej nie jest używany, gdyż prościej jest
+    po prostu wymagać dowodów żądanych właściwości w osobnych argumentach
+    niż pakować je w <span class="inlinecode"><span class="id" type="var">sig</span></span> po to, żeby i tak zostały później odpakowane. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="even_42"><span class="id" type="definition">even_42</span></a> : <a class="idref" href="R2.html#sig"><span class="id" type="inductive">sig</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> (<a class="idref" href="R2.html#exist"><span class="id" type="constructor">exist</span></a> 42). <span class="id" type="tactic">repeat</span> <span class="id" type="tactic">constructor</span>.<br/>
+<span class="id" type="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Definiowanie wartości typu <span class="inlinecode"><span class="id" type="var">sig</span></span> jest problematyczne, gdyż zawierają
+    one dowody. Napisanie definicji "ręcznie", explicité podając proofterm,
+    nie wchodzi w grę. Innym potencjalnym rozwiązaniem jest napisanie dowodu
+    na boku, a następnie użycie go we właściwej definicji, ale jest ono
+    dłuższe niż to konieczne.
+
+<div class="paragraph"> </div>
+
+    Przypomnijmy sobie, czym są taktyki. Dowody to termy, których typy są
+    sortu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>, a taktyki służą do konstruowania tych dowodów. Ponieważ
+    dowody nie różnią się (prawie) niczym od programów, taktyk można użyć
+    także do pisania programów. Taktyki to metaprogramy (napisane w jęzku
+    Ltac), które piszą programy (w jęzku termów Coqa, zwanym Gallina).
+
+<div class="paragraph"> </div>
+
+    Wobec tego trybu dowodzenia oraz taktyk możemy używać nie tylko do
+    dowodzenia, ale także do definiowania i to właśnie uczyniliśmy w
+    powyższym przykładzie. Skonstruowanie termu typu <span class="inlinecode"><span class="id" type="var">sig</span></span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode"><span class="id" type="var">even</span></span>,
+    czyli parzystej liczby naturalnej, odbyło się w następujący sposób.
+
+<div class="paragraph"> </div>
+
+    Naszym celem jest początkowo <span class="inlinecode"><span class="id" type="var">sig</span></span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode"><span class="id" type="var">even</span></span>, czyli typ, którego
+    element chcemy skonstrować. Używamy konstruktora <span class="inlinecode"><span class="id" type="var">exist</span></span>, który
+    w naszym przypadku jest typu <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span>,</span> <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">sig</span></span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode"><span class="id" type="var">even</span></span>.
+    Wobec tego <span class="inlinecode"><span class="id" type="var">exist</span></span> <span class="inlinecode">42</span> jest typu <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">42</span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">sig</span></span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode"><span class="id" type="var">even</span></span>, a jego
+    zaaplikowanie skutkować będzie zamianą naszego celu na <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">42</span>.
+    Następnie dowodzimy tego faktu, co kończy proces definiowania. 
+<div class="paragraph"> </div>
+
+<a name="lab122"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Zdefiniuj predykat <span class="inlinecode"><span class="id" type="var">sorted</span></span>, który jest spełniony, gdy jego argument
+    jest listą posortowaną. Następnie zdefiniuj typ list liczb naturalnych
+    posortowanych według relacji <span class="inlinecode">&lt;=</span> i skonstruuj term tego typu
+    odpowiadający liście <span class="inlinecode">[42;</span> <span class="inlinecode">666;</span> <span class="inlinecode">1337]</span>. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Print</span> <span class="id" type="var">sumbool</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Print</span> <span class="id" type="var">sumor</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;end&nbsp;hide&nbsp;*)</span></div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
 
