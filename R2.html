@@ -4064,7 +4064,7 @@ Coq nie akceptuje powyższego kodu, racząc nas informacją o błędzie:
 
 <div class="doc">
 Nasza porażka wynika z faktu, że do zdefiniowania funkcji, która
-    jest programem (jest dziedzina i przeciwdziedzina są sortu <span class="inlinecode"><span class="id" type="keyword">Set</span></span>)
+    jest programem (jej dziedzina i przeciwdziedzina są sortu <span class="inlinecode"><span class="id" type="keyword">Set</span></span>)
     próbowaliśmy użyć termu <span class="inlinecode"><span class="id" type="var">eq_nat_dec</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode"><span class="id" type="var">h</span></span>, który jest dowodem
     (konkluzją <span class="inlinecode"><span class="id" type="var">eq_nat_dec</span></span> jest równość, która jest sortu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>).
 
@@ -4114,10 +4114,105 @@ Typ <span class="inlinecode"><span class="id" type="var">sumbool</span></span> j
     liczbach naturalnych. Użyj typu <span class="inlinecode"><span class="id" type="var">sumbool</span></span>. Następnie napisz
     funkcję <span class="inlinecode"><span class="id" type="var">inb_nat</span></span>, która sprawdza, czy liczba naturalna <span class="inlinecode"><span class="id" type="var">n</span></span>
     jest obecna na liście <span class="inlinecode"><span class="id" type="var">l</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab125"></a><h2 class="section">Kwantyfikacja egzystencjalna (alfa)</h2>
+
+<div class="paragraph"> </div>
+
+ Znamy już pary zależne i wiemy, że mogą służyć do reprezentowania
+    podtypów, których w Coqu brak. Czas zatem uświadomić sobie kolejny
+    fragment korespondencji Curry'ego-Howarda, a mianowicie definicję
+    kwantyfikacji egzystencjalnej: 
 </div>
 <div class="code">
 
 <br/>
+<span class="id" type="keyword">Module</span> <a name="ex"><span class="id" type="module">ex</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="ex.ex"><span class="id" type="inductive">ex</span></a> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> -&gt; <span class="id" type="keyword">Prop</span>) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="ex.ex_intro"><span class="id" type="constructor">ex_intro</span></a> : <span class="id" type="keyword">forall</span> <span class="id" type="var">x</span> : <span class="id" type="var">A</span>, <span class="id" type="var">P</span> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a> -&gt; <a class="idref" href="R2.html#ex"><span class="id" type="inductive">ex</span></a> <span class="id" type="var">A</span> <span class="id" type="var">P</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" type="var">ex</span></span> to kolejne wcielenia sumy zależnej. Porównaj dokładnie tę
+    definicję z definicją <span class="inlinecode"><span class="id" type="var">sigT</span></span> oraz <span class="inlinecode"><span class="id" type="var">sig</span></span>. <span class="inlinecode"><span class="id" type="var">ex</span></span> jest niemal identyczne
+    jak <span class="inlinecode"><span class="id" type="var">sig</span></span>: jest to para zależna, której pierwszym elementem jest
+    term <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">A</span></span>, a drugim dowód na to, że <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> zachodzi. <span class="inlinecode"><span class="id" type="var">ex</span></span> jednak,
+    w przeciwieństwie do <span class="inlinecode"><span class="id" type="var">sig</span></span>, żyje w <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>, czyli jest zdaniem — nie
+    liczą się konkretne postaci jego termów ani ich ilość, a jedynie
+    fakt ich istnienia. To sprawia, że <span class="inlinecode"><span class="id" type="var">ex</span></span> jest doskonałym kandydatem
+    do reprezentowania kwantyfikacji egzystencjalnej. 
+<div class="paragraph"> </div>
+
+<a name="lab126"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Udowodnij, że dla każdej liczby naturalnej n istnieje liczba od niej
+    większa. Następnie zastanów się, jak działa taktyka <span class="inlinecode"><span class="id" type="tactic">exists</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="ex.exists_greater"><span class="id" type="lemma">exists_greater</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#ex.ex"><span class="id" type="inductive">ex</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> =&gt; <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="R2.html#k"><span class="id" type="variable">k</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R2.html#ex"><span class="id" type="module">ex</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab127"></a><h2 class="section">Typy hybrydowe (alfa)</h2>
+
+<div class="paragraph"> </div>
+
+ Ostatnim z typów istotnych z punktu widzenia silnych specyfikacji
+    jest typ o wdzięcznej nazwie <span class="inlinecode"><span class="id" type="var">sumor</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="sumor"><span class="id" type="module">sumor</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="sumor.sumor"><span class="id" type="inductive">sumor</span></a> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">B</span> : <span class="id" type="keyword">Prop</span>) : <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="sumor.inleft"><span class="id" type="constructor">inleft</span></a> : <span class="id" type="var">A</span> -&gt; <a class="idref" href="R2.html#sumor"><span class="id" type="inductive">sumor</span></a> <span class="id" type="var">A</span> <span class="id" type="var">B</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="sumor.inright"><span class="id" type="constructor">inright</span></a> : <span class="id" type="var">B</span> -&gt; <a class="idref" href="R2.html#sumor"><span class="id" type="inductive">sumor</span></a> <span class="id" type="var">A</span> <span class="id" type="var">B</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">sumor</span></span> jest hybrydą sumy rozłącznej <span class="inlinecode"><span class="id" type="var">sum</span></span>
+    oraz dysjunkcji <span class="inlinecode"><span class="id" type="var">or</span></span>. Możemy go interpretować jako typ, którego
+    elementami są elementy <span class="inlinecode"><span class="id" type="var">A</span></span> albo wymówki w stylu "nie mam elementu <span class="inlinecode"><span class="id" type="var">A</span></span>,
+    ponieważ zachodzi zdanie <span class="inlinecode"><span class="id" type="var">B</span></span>". <span class="inlinecode"><span class="id" type="var">B</span></span> nie zależy od <span class="inlinecode"><span class="id" type="var">A</span></span>, a więc jest to
+    zwykła suma (a nie suma zależna, czyli uogólnienie produktu). <span class="inlinecode"><span class="id" type="var">sumor</span></span>
+    żyje w <span class="inlinecode"><span class="id" type="keyword">Type</span></span>, a więc jest to specyfikacja i liczby się konkretna
+    postać jego termów, a nie jedynie fakt ich istnienia. 
+<div class="paragraph"> </div>
+
+<a name="lab128"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Zdefiniuj funkcję <span class="inlinecode"><span class="id" type="var">pred'</span></span>, która przypisuje liczbie naturalnej jej
+    poprzednik. Poprzednikiem <span class="inlinecode">0</span> nie powinno być <span class="inlinecode">0</span>. Mogą przydać ci
+    się typ <span class="inlinecode"><span class="id" type="var">sumor</span></span> oraz sposób definiowania za pomocą taktyk, omówiony
+    w podrozdziale dotyczącym sum zależnych. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R2.html#sumor"><span class="id" type="module">sumor</span></a>.<br/>
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
