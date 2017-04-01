@@ -4250,6 +4250,63 @@ Aby chronić nas przed tą katastrofą, Coq nakłada na rekurencję
 
 <a name="lab130"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
 
+<div class="paragraph"> </div>
+
+ Przyjrzyjmy się ponownie definicji dodawania: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Print</span> <span class="id" type="var">plus</span>.<br/>
+<span class="comment">(*&nbsp;plus&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;fix&nbsp;plus&nbsp;(n&nbsp;m&nbsp;:&nbsp;nat)&nbsp;{struct&nbsp;n}&nbsp;:&nbsp;nat&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;n&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;0&nbsp;=&gt;&nbsp;m<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;S&nbsp;p&nbsp;=&gt;&nbsp;S&nbsp;(plus&nbsp;p&nbsp;m)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;nat&nbsp;-&gt;&nbsp;nat&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Możemy zaobserwować parę rzeczy. Pierwsza, techniczna sprawa: po
+    <span class="inlinecode">=</span> widzimy nieznany nam konstrukt <span class="inlinecode"><span class="id" type="keyword">fix</span></span>. Pozwala on tworzyć
+    anonimowe funkcje rekruencyjne, tak jak <span class="inlinecode"><span class="id" type="keyword">fun</span></span> pozwala tworzyć
+    anonimowe funkcje nierekurencyjne. Funkcje zdefiniowane komendami 
+    <span class="inlinecode"><span class="id" type="keyword">Fixpoint</span></span> i <span class="inlinecode"><span class="id" type="keyword">Definition</span></span> są w jęzku termów Coqa reprezentowane
+    odpowiednio za pomocą <span class="inlinecode"><span class="id" type="keyword">fix</span></span> i <span class="inlinecode"><span class="id" type="keyword">fun</span></span>.
+
+<div class="paragraph"> </div>
+
+    Po drugie: za listą argumentów, a przed zwracanym typem, występuje
+    adnotacja <span class="inlinecode">{<span class="id" type="keyword">struct</span></span> <span class="inlinecode"><span class="id" type="var">n</span>}</span>. Wskazuje ona, który z argumentów funkcji
+    jest argumentem głównym. Definiując funkcje rekurencyjne zazwyczaj
+    nie musimy go pisać, gdyż Coq jest w stanie sam wywnioskować, który
+    argument jest główny.
+
+<div class="paragraph"> </div>
+
+    Czym jest argument główny? Aby to zrozumieć, zbadajmy najpierw
+    relację bycia podtermem (dla uproszczenia, skupimy się na termach
+    typów induktywnych). Relację tę opisują dwie proste zasady:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> po pierwsze, jeżeli dany term został skonstruowany pewnym konstruktorem,
+      to jego podtermami są rekurencyjne argumenty konstruktora. Przykład:
+      <span class="inlinecode">0</span> jest podtermem <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">0</span>, zaś <span class="inlinecode"><span class="id" type="var">nil</span></span> podtermem <span class="inlinecode"><span class="id" type="var">cons</span></span> <span class="inlinecode">42</span> <span class="inlinecode"><span class="id" type="var">nil</span></span>.
+
+</li>
+<li> po trzecie, jeżeli <span class="inlinecode"><span class="id" type="var">t1</span></span> jest podtermem <span class="inlinecode"><span class="id" type="var">t2</span></span>, a <span class="inlinecode"><span class="id" type="var">t2</span></span> podtermem <span class="inlinecode"><span class="id" type="var">t3</span></span>,
+      to <span class="inlinecode"><span class="id" type="var">t1</span></span> jest podtermem <span class="inlinecode"><span class="id" type="var">t3</span></span> — własność ta nazywa się tranzytywnością.
+      Przykład: <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">0</span> jest podtermem <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">0)</span>, a zatem <span class="inlinecode">0</span> jest podtermem
+      <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">0)</span>. Podobnie <span class="inlinecode"><span class="id" type="var">nil</span></span> jest podtermem <span class="inlinecode"><span class="id" type="var">cons</span></span> <span class="inlinecode">666</span> <span class="inlinecode">(<span class="id" type="var">cons</span></span> <span class="inlinecode">42</span> <span class="inlinecode"><span class="id" type="var">nil</span>)</span>. 
+
+</li>
+</ul>
+    
 </div>
 <div class="code">
 
