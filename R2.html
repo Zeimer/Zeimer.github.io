@@ -4299,16 +4299,44 @@ Możemy zaobserwować parę rzeczy. Pierwsza, techniczna sprawa: po
       <span class="inlinecode">0</span> jest podtermem <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">0</span>, zaś <span class="inlinecode"><span class="id" type="var">nil</span></span> podtermem <span class="inlinecode"><span class="id" type="var">cons</span></span> <span class="inlinecode">42</span> <span class="inlinecode"><span class="id" type="var">nil</span></span>.
 
 </li>
-<li> po trzecie, jeżeli <span class="inlinecode"><span class="id" type="var">t1</span></span> jest podtermem <span class="inlinecode"><span class="id" type="var">t2</span></span>, a <span class="inlinecode"><span class="id" type="var">t2</span></span> podtermem <span class="inlinecode"><span class="id" type="var">t3</span></span>,
+<li> po drugie, jeżeli <span class="inlinecode"><span class="id" type="var">t1</span></span> jest podtermem <span class="inlinecode"><span class="id" type="var">t2</span></span>, a <span class="inlinecode"><span class="id" type="var">t2</span></span> podtermem <span class="inlinecode"><span class="id" type="var">t3</span></span>,
       to <span class="inlinecode"><span class="id" type="var">t1</span></span> jest podtermem <span class="inlinecode"><span class="id" type="var">t3</span></span> — własność ta nazywa się tranzytywnością.
       Przykład: <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">0</span> jest podtermem <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">0)</span>, a zatem <span class="inlinecode">0</span> jest podtermem
-      <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">0)</span>. Podobnie <span class="inlinecode"><span class="id" type="var">nil</span></span> jest podtermem <span class="inlinecode"><span class="id" type="var">cons</span></span> <span class="inlinecode">666</span> <span class="inlinecode">(<span class="id" type="var">cons</span></span> <span class="inlinecode">42</span> <span class="inlinecode"><span class="id" type="var">nil</span>)</span>. 
-
+      <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode">0)</span>. Podobnie <span class="inlinecode"><span class="id" type="var">nil</span></span> jest podtermem <span class="inlinecode"><span class="id" type="var">cons</span></span> <span class="inlinecode">666</span> <span class="inlinecode">(<span class="id" type="var">cons</span></span> <span class="inlinecode">42</span> <span class="inlinecode"><span class="id" type="var">nil</span>)</span> 
 </li>
 </ul>
-    
+
+<div class="paragraph"> </div>
+
+<a name="lab131"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Zdefiniuj relacje bycia podtermem dla liczb naturalnych i list. 
 </div>
 <div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Udowodnij, że przytoczone wyżej przykłady nie są oszustwem.
+    Komenda <span class="inlinecode"><span class="id" type="keyword">Goal</span></span> jest wygodna, gdyż używając jej nie musimy
+    nadawać twierdzeniu nazwy. Użycie <span class="inlinecode"><span class="id" type="keyword">Qed</span></span> zapisze twierdzenie
+    jako <span class="inlinecode"><span class="id" type="var">Unnamed_thm</span></span>, <span class="inlinecode"><span class="id" type="var">Unnamed_thm0</span></span>, <span class="inlinecode"><span class="id" type="var">Unnamed_thm1</span></span> etc.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Goal</span> <a class="idref" href="R2.html#subterm_list"><span class="id" type="inductive">subterm_list</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nil"><span class="id" type="constructor">nil</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#cons"><span class="id" type="constructor">cons</span></a> 42 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nil"><span class="id" type="constructor">nil</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Goal</span> <a class="idref" href="R2.html#subterm_nat"><span class="id" type="inductive">subterm_nat</span></a> 0 (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> 0).<br/>
+
+<br/>
 
 <br/>
 </div>
