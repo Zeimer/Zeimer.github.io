@@ -1177,15 +1177,24 @@ Zdefiniuj funkcję <span class="inlinecode"><span class="id" type="var">nth</spa
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#nth"><span class="id" type="definition">nth</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> <a class="idref" href="Zadania.html#x"><span class="id" type="variable">x</span></a> -&gt; <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Zadania.html#length"><span class="id" type="definition">length</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>.<br/>
 
 <br/>
+<span class="id" type="keyword">Theorem</span> <a name="map_nth"><span class="id" type="lemma">map_nth</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="Zadania.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#nth"><span class="id" type="definition">nth</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> <a class="idref" href="Zadania.html#x"><span class="id" type="variable">x</span></a> -&gt; <a class="idref" href="Zadania.html#nth"><span class="id" type="definition">nth</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> (<a class="idref" href="Zadania.html#map"><span class="id" type="definition">map</span></a> <a class="idref" href="Zadania.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>) = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> (<a class="idref" href="Zadania.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Zadania.html#x"><span class="id" type="variable">x</span></a>).<br/>
+
+<br/>
 </div>
 
 <div class="doc">
-Zdefiniuj funkcję <span class="inlinecode"><span class="id" type="var">last</span></span>, która zwraca ostatni element listy lub
-    <span class="inlinecode"><span class="id" type="var">None</span></span>, jeżeli lista jest pusta. 
+Zdefiniuj funkcje <span class="inlinecode"><span class="id" type="var">head</span></span> i <span class="inlinecode"><span class="id" type="var">last</span></span>, które zwracają odpowiednio pierwszy
+    i ostatni element listy (lub <span class="inlinecode"><span class="id" type="var">None</span></span>, jeżeli jest pusta). 
 </div>
 <div class="code">
 
 <br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="head_nil"><span class="id" type="lemma">head_nil</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#head"><span class="id" type="definition">head</span></a> <a class="idref" href="Zadania.html#::'[]'"><span class="id" type="notation">[]</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">(</span></a>@<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#None"><span class="id" type="constructor">None</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>).<br/>
 
 <br/>
 <span class="id" type="keyword">Theorem</span> <a name="last_nil"><span class="id" type="lemma">last_nil</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>), <a class="idref" href="Zadania.html#last"><span class="id" type="definition">last</span></a> <a class="idref" href="Zadania.html#::'[]'"><span class="id" type="notation">[]</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">(</span></a>@<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#None"><span class="id" type="constructor">None</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>).<br/>
@@ -1193,8 +1202,69 @@ Zdefiniuj funkcję <span class="inlinecode"><span class="id" type="var">last</sp
 <br/>
 
 <br/>
+<span class="id" type="keyword">Theorem</span> <a name="head_nth"><span class="id" type="lemma">head_nth</span></a>: <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#head"><span class="id" type="definition">head</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="Zadania.html#nth"><span class="id" type="definition">nth</span></a> 0 <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>.<br/>
+
+<br/>
 <span class="id" type="keyword">Theorem</span> <a name="last_nth"><span class="id" type="lemma">last_nth</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#last"><span class="id" type="definition">last</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="Zadania.html#nth"><span class="id" type="definition">nth</span></a> (<a class="idref" href="Zadania.html#length"><span class="id" type="definition">length</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a> - 1<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'-'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zdefiniuj funkcje <span class="inlinecode"><span class="id" type="var">tail</span></span> i <span class="inlinecode"><span class="id" type="var">init</span></span>, które zwracają odpowiednio ogon
+    listy oraz wszystko poza jej ostatnim elementem (lub <span class="inlinecode"><span class="id" type="var">None</span></span>, gdy
+    lista jest pusta). 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zdefiniuj funkcje <span class="inlinecode"><span class="id" type="var">take</span></span> i <span class="inlinecode"><span class="id" type="var">drop</span></span>, które odpowiednio biorą lub
+    odrzucają n pierwszych elementów listy. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="take_nil"><span class="id" type="lemma">take_nil</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#take"><span class="id" type="definition">take</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#::'[]'"><span class="id" type="notation">[]</span></a> = @<a class="idref" href="Zadania.html#nil"><span class="id" type="constructor">nil</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="drop_nil"><span class="id" type="lemma">drop_nil</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#drop"><span class="id" type="definition">drop</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#::'[]'"><span class="id" type="notation">[]</span></a> = @<a class="idref" href="Zadania.html#nil"><span class="id" type="constructor">nil</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="take_0"><span class="id" type="lemma">take_0</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#take"><span class="id" type="definition">take</span></a> 0 <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="Zadania.html#::'[]'"><span class="id" type="notation">[]</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="drop_0"><span class="id" type="lemma">drop_0</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#drop"><span class="id" type="definition">drop</span></a> 0 <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="take_map"><span class="id" type="lemma">take_map</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="Zadania.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#map"><span class="id" type="definition">map</span></a> <a class="idref" href="Zadania.html#f"><span class="id" type="variable">f</span></a> (<a class="idref" href="Zadania.html#take"><span class="id" type="definition">take</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>) = <a class="idref" href="Zadania.html#take"><span class="id" type="definition">take</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> (<a class="idref" href="Zadania.html#map"><span class="id" type="definition">map</span></a> <a class="idref" href="Zadania.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="drop_map"><span class="id" type="lemma">drop_map</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="Zadania.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#map"><span class="id" type="definition">map</span></a> <a class="idref" href="Zadania.html#f"><span class="id" type="variable">f</span></a> (<a class="idref" href="Zadania.html#drop"><span class="id" type="definition">drop</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>) = <a class="idref" href="Zadania.html#drop"><span class="id" type="definition">drop</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> (<a class="idref" href="Zadania.html#map"><span class="id" type="definition">map</span></a> <a class="idref" href="Zadania.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="take_elem"><span class="id" type="lemma">take_elem</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#elem"><span class="id" type="inductive">elem</span></a> <a class="idref" href="Zadania.html#x"><span class="id" type="variable">x</span></a> (<a class="idref" href="Zadania.html#take"><span class="id" type="definition">take</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>) -&gt; <a class="idref" href="Zadania.html#elem"><span class="id" type="inductive">elem</span></a> <a class="idref" href="Zadania.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="drop_elem"><span class="id" type="lemma">drop_elem</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#elem"><span class="id" type="inductive">elem</span></a> <a class="idref" href="Zadania.html#x"><span class="id" type="variable">x</span></a> (<a class="idref" href="Zadania.html#drop"><span class="id" type="definition">drop</span></a> <a class="idref" href="Zadania.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>) -&gt; <a class="idref" href="Zadania.html#elem"><span class="id" type="inductive">elem</span></a> <a class="idref" href="Zadania.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>.<br/>
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
