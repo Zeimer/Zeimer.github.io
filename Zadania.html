@@ -35,8 +35,8 @@
     przeszłości przerzucić tutaj. 
 <div class="paragraph"> </div>
 
-<a name="lab132"></a><h1 class="section">R2</h1>
-<a name="lab133"></a><h2 class="section">Enumeracje</h2>
+<a name="lab133"></a><h1 class="section">R2</h1>
+<a name="lab134"></a><h2 class="section">Enumeracje</h2>
  Zadania z funkcji boolowskich, sprawdzające radzenie sobie w pracy
     z enumeracjami, definiowaniem funkcji przez pattern matching i dowodzeniem
     przez rozbicie na przypadki.
@@ -221,8 +221,8 @@ Udowodnij następujące twierdzenia.
 </div>
 
 <div class="doc">
-<a name="lab134"></a><h1 class="section">Póki co bezimienny rozdział (alfa)</h1>
-<a name="lab135"></a><h2 class="section">Injekcje, surjekcje, bijekcje (alfa)</h2>
+<a name="lab135"></a><h1 class="section">Póki co bezimienny rozdział (alfa)</h1>
+<a name="lab136"></a><h2 class="section">Injekcje, surjekcje, bijekcje (alfa)</h2>
 
 </div>
 <div class="code">
@@ -311,7 +311,7 @@ TODO: trzeba tu coś napisać, ale na razie nie mam czasu.
 </div>
 
 <div class="doc">
-<a name="lab136"></a><h1 class="section">Wreszcie zadania z arytmetyki (alfa)</h1>
+<a name="lab137"></a><h1 class="section">Wreszcie zadania z arytmetyki (alfa)</h1>
 
 <div class="paragraph"> </div>
 
@@ -874,7 +874,7 @@ Pokaż, że indukcję na liczbach naturalnych można robić "co 2".
 </div>
 
 <div class="doc">
-<a name="lab137"></a><h1 class="section">Listy</h1>
+<a name="lab138"></a><h1 class="section">Listy</h1>
 
 <div class="paragraph"> </div>
 
@@ -1433,7 +1433,7 @@ Zdefiniuj funkcje <span class="inlinecode"><span class="id" type="var">takeWhile
 </div>
 
 <div class="doc">
-<a name="lab138"></a><h2 class="section">Zwijanie</h2>
+<a name="lab139"></a><h2 class="section">Zwijanie</h2>
 
 </div>
 <div class="code">
@@ -1522,6 +1522,24 @@ Napisz funkcję <span class="inlinecode"><span class="id" type="var">partition</
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#partition"><span class="id" type="definition">partition</span></a> <a class="idref" href="Zadania.html#p"><span class="id" type="variable">p</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:core_scope:'('_x_','_x_','_'..'_','_x_')'"><span class="id" type="notation">(</span></a><a class="idref" href="Zadania.html#filter"><span class="id" type="definition">filter</span></a> <a class="idref" href="Zadania.html#p"><span class="id" type="variable">p</span></a> <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>, <a class="idref" href="Zadania.html#filter"><span class="id" type="definition">filter</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> =&gt; <a class="idref" href="Zadania.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="Zadania.html#p"><span class="id" type="variable">p</span></a> <a class="idref" href="Zadania.html#x"><span class="id" type="variable">x</span></a>)) <a class="idref" href="Zadania.html#l"><span class="id" type="variable">l</span></a>).<br/>
 
 <br/>
+</div>
+
+<div class="doc">
+Napisz funkcję <span class="inlinecode"><span class="id" type="var">zip</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span>,</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode">(<span class="id" type="var">A</span></span> <span class="inlinecode">*</span> <span class="inlinecode"><span class="id" type="var">B</span>)</span>,
+    która spełnia poniższą specyfikację. Co robi ta funkcja? 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="zip_length"><span class="id" type="lemma">zip_length</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">la</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">lb</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#B"><span class="id" type="variable">B</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#length"><span class="id" type="definition">length</span></a> (<a class="idref" href="Zadania.html#zip"><span class="id" type="definition">zip</span></a> <a class="idref" href="Zadania.html#la"><span class="id" type="variable">la</span></a> <a class="idref" href="Zadania.html#lb"><span class="id" type="variable">lb</span></a>) = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#min"><span class="id" type="definition">min</span></a> (<a class="idref" href="Zadania.html#length"><span class="id" type="definition">length</span></a> <a class="idref" href="Zadania.html#la"><span class="id" type="variable">la</span></a>) (<a class="idref" href="Zadania.html#length"><span class="id" type="definition">length</span></a> <a class="idref" href="Zadania.html#lb"><span class="id" type="variable">lb</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="zip_head"><span class="id" type="lemma">zip_head</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">la</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">lb</span> : <a class="idref" href="Zadania.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="Zadania.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">a</span> : <a class="idref" href="Zadania.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">b</span> : <a class="idref" href="Zadania.html#B"><span class="id" type="variable">B</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Zadania.html#head"><span class="id" type="definition">head</span></a> <a class="idref" href="Zadania.html#la"><span class="id" type="variable">la</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> <a class="idref" href="Zadania.html#a"><span class="id" type="variable">a</span></a> -&gt; <a class="idref" href="Zadania.html#head"><span class="id" type="definition">head</span></a> <a class="idref" href="Zadania.html#lb"><span class="id" type="variable">lb</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> <a class="idref" href="Zadania.html#b"><span class="id" type="variable">b</span></a> -&gt; <a class="idref" href="Zadania.html#head"><span class="id" type="definition">head</span></a> (<a class="idref" href="Zadania.html#zip"><span class="id" type="definition">zip</span></a> <a class="idref" href="Zadania.html#la"><span class="id" type="variable">la</span></a> <a class="idref" href="Zadania.html#lb"><span class="id" type="variable">lb</span></a>) = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:core_scope:'('_x_','_x_','_'..'_','_x_')'"><span class="id" type="notation">(</span></a><a class="idref" href="Zadania.html#a"><span class="id" type="variable">a</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:core_scope:'('_x_','_x_','_'..'_','_x_')'"><span class="id" type="notation">,</span></a> <a class="idref" href="Zadania.html#b"><span class="id" type="variable">b</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:core_scope:'('_x_','_x_','_'..'_','_x_')'"><span class="id" type="notation">)</span></a>.<br/>
 
 <br/>
 </div>

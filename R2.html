@@ -4167,7 +4167,70 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
 </div>
 
 <div class="doc">
-<a name="lab128"></a><h1 class="section">Rekursja</h1>
+<a name="lab128"></a><h2 class="section">Cztery rodzaje reguł (todo)</h2>
+
+<div class="paragraph"> </div>
+
+ Być może jeszcze tego nie zauważyłeś, ale większość logiki konstruktywnej
+    oraz programowania funkcyjnego kręci się wokół czterech rodzajów reguł.
+    Są to reguły:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> formacji (ang. formation rules)
+
+</li>
+<li> wprowadzania (ang. introduction rules)
+
+</li>
+<li> eliminacji (ang. elimination rules)
+
+</li>
+<li> obliczanie (ang. computation rules) 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Reguły formacji mówią nam, jak tworzyć typy (termy sortów <span class="inlinecode"><span class="id" type="keyword">Set</span></span> i <span class="inlinecode"><span class="id" type="keyword">Type</span></span>)
+    oraz zdania (termy sortu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>). Większość z nich pochodzi z nagłówków
+    definicji induktywnych: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Print</span> <span class="id" type="var">bool</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;Inductive&nbsp;bool&nbsp;:&nbsp;Set&nbsp;:=&nbsp;&nbsp;true&nbsp;:&nbsp;bool&nbsp;|&nbsp;false&nbsp;:&nbsp;bool&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Na mocy powyższego reguła formacji dla <span class="inlinecode"><span class="id" type="var">bool</span></span> brzmi po prostu:
+    <span class="inlinecode"><span class="id" type="var">bool</span></span> jest typem sortu <span class="inlinecode"><span class="id" type="keyword">Set</span></span>. Nie zawsze jednak reguły formacji
+    są aż tak proste. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Print</span> <span class="id" type="var">prod</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;Inductive&nbsp;prod&nbsp;(A&nbsp;B&nbsp;:&nbsp;Type)&nbsp;:&nbsp;Type&nbsp;:=&nbsp;&nbsp;pair&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;B&nbsp;-&gt;&nbsp;A&nbsp;*&nbsp;B&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Reguła formacji dla <span class="inlinecode"><span class="id" type="var">prod</span></span> głosi: jeżeli <span class="inlinecode"><span class="id" type="var">A</span></span> jest typem sortu <span class="inlinecode"><span class="id" type="keyword">Type</span></span>
+    oraz <span class="inlinecode"><span class="id" type="var">B</span></span> jest typem sortu <span class="inlinecode"><span class="id" type="keyword">Type</span></span>, to <span class="inlinecode"><span class="id" type="var">prod</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> jest typem sortu
+    <span class="inlinecode"><span class="id" type="keyword">Type</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab129"></a><h1 class="section">Rekursja</h1>
 
 <div class="paragraph"> </div>
 
@@ -4184,7 +4247,7 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
 
 <ul class="doclist">
 <li> Rekursja strukturalna to taka, w której funkcja wywołuje siebie
-      na argumentach o coraz mniejszym rozmiarze.
+      na argumentach o coraz mniejszym "rozmiarze".
 
 </li>
 <li> Rekursja dobrze ufundowana to taka, w której funkcja wywołuje siebie
@@ -4208,7 +4271,7 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
 
 <div class="paragraph"> </div>
 
-<a name="lab129"></a><h2 class="section">Rekursja ogólna</h2>
+<a name="lab130"></a><h2 class="section">Rekursja ogólna</h2>
 
 <div class="paragraph"> </div>
 
@@ -4248,7 +4311,7 @@ Aby chronić nas przed tą katastrofą, Coq nakłada na rekurencję
     Innymi słowy, dozwolona jest jedynie rekursja strukturalna. 
 <div class="paragraph"> </div>
 
-<a name="lab130"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
+<a name="lab131"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
 
 <div class="paragraph"> </div>
 
@@ -4308,7 +4371,7 @@ Możemy zaobserwować parę rzeczy. Pierwsza, techniczna sprawa: po
 
 <div class="paragraph"> </div>
 
-<a name="lab131"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab132"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4325,8 +4388,7 @@ Możemy zaobserwować parę rzeczy. Pierwsza, techniczna sprawa: po
 Udowodnij, że przytoczone wyżej przykłady nie są oszustwem.
     Komenda <span class="inlinecode"><span class="id" type="keyword">Goal</span></span> jest wygodna, gdyż używając jej nie musimy
     nadawać twierdzeniu nazwy. Użycie <span class="inlinecode"><span class="id" type="keyword">Qed</span></span> zapisze twierdzenie
-    jako <span class="inlinecode"><span class="id" type="var">Unnamed_thm</span></span>, <span class="inlinecode"><span class="id" type="var">Unnamed_thm0</span></span>, <span class="inlinecode"><span class="id" type="var">Unnamed_thm1</span></span> etc.
-
+    jako <span class="inlinecode"><span class="id" type="var">Unnamed_thm</span></span>, <span class="inlinecode"><span class="id" type="var">Unnamed_thm0</span></span>, <span class="inlinecode"><span class="id" type="var">Unnamed_thm1</span></span> etc. 
 </div>
 <div class="code">
 
@@ -4339,7 +4401,27 @@ Udowodnij, że przytoczone wyżej przykłady nie są oszustwem.
 <br/>
 
 <br/>
+
+<br/>
 </div>
+
+<div class="doc">
+Argument główny to ten, który jest dopasowywany jako pierwszy. Argumentami
+    głównymi w wywołaniach rekurencyjnych mogą być jedynie podtermy argumentu
+    głównego z obecnego wywołania.
+
+<div class="paragraph"> </div>
+
+    Argumentem głównym funkcji <span class="inlinecode"><span class="id" type="var">plus</span></span> jest jej pierwszy argument (o czym
+    informuje nas adnotacja <span class="inlinecode">{<span class="id" type="keyword">struct</span></span> <span class="inlinecode"><span class="id" type="var">n</span>}</span>), gdyż to on jest dopasowywany
+    jako pierwszy (i jedyny). W przypadku gdy <span class="inlinecode"><span class="id" type="var">n</span></span> jest równe <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode"><span class="id" type="var">p</span></span>, <span class="inlinecode"><span class="id" type="var">plus</span></span>
+    jest wywoływany rekurencyjnie z argumentami <span class="inlinecode"><span class="id" type="var">p</span></span> i <span class="inlinecode"><span class="id" type="var">m</span></span>, co jest dozwolone,
+    gdyż jego argument główny, <span class="inlinecode"><span class="id" type="var">p</span></span>, jest podtermem <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode"><span class="id" type="var">p</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;</div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
 
