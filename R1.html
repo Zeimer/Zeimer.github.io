@@ -106,7 +106,7 @@ Zapis <span class="inlinecode"><span class="id" type="var">x</span></span> <span
 <li> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> — aplikacje funkcji do argumentu są termami
 
 </li>
-<li> <span class="inlinecode"><span class="id" type="keyword">if</span></span> <span class="inlinecode"><span class="id" type="var">true</span></span> <span class="inlinecode"><span class="id" type="keyword">then</span></span> <span class="inlinecode">5</span> <span class="inlinecode"><span class="id" type="keyword">else</span></span> <span class="inlinecode">2</span> — konstrukcja if-else jest termem 
+<li> <span class="inlinecode"><span class="id" type="keyword">if</span></span> <span class="inlinecode"><span class="id" type="var">true</span></span> <span class="inlinecode"><span class="id" type="keyword">then</span></span> <span class="inlinecode">5</span> <span class="inlinecode"><span class="id" type="keyword">else</span></span> <span class="inlinecode">2</span> — konstrukcja if-then-else jest termem 
 </li>
 </ul>
 
@@ -2105,7 +2105,7 @@ W praktyce komenda <span class="inlinecode"><span class="id" type="keyword">Hypo
 </div>
 
 <div class="doc">
-<a name="lab57"></a><h2 class="section">"Paradoks" golibrody</h2>
+<a name="lab57"></a><h2 class="section">Paradoks golibrody</h2>
 
 </div>
 <div class="code">
@@ -2241,6 +2241,9 @@ Komenda <span class="inlinecode"><span class="id" type="keyword">Require</span><
 <span class="id" type="keyword">Theorem</span> <a name="imp_not_or"><span class="id" type="lemma">imp_not_or</span></a> : (<a class="idref" href="R1.html#exercises_classical.P"><span class="id" type="variable">P</span></a> -&gt; <a class="idref" href="R1.html#exercises_classical.Q"><span class="id" type="variable">Q</span></a>) -&gt; (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~</span></a><a class="idref" href="R1.html#exercises_classical.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">\/</span></a> <a class="idref" href="R1.html#exercises_classical.Q"><span class="id" type="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">)</span></a>.<br/>
 
 <br/>
+<span class="id" type="keyword">Theorem</span> <a name="material_implication"><span class="id" type="lemma">material_implication</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">(</span></a><a class="idref" href="R1.html#exercises_classical.P"><span class="id" type="variable">P</span></a> -&gt; <a class="idref" href="R1.html#exercises_classical.Q"><span class="id" type="variable">Q</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">&lt;-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~</span></a><a class="idref" href="R1.html#exercises_classical.P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">\/</span></a> <a class="idref" href="R1.html#exercises_classical.Q"><span class="id" type="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
 <span class="id" type="keyword">Theorem</span> <a name="contraposition_conv"><span class="id" type="lemma">contraposition_conv</span></a> : (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~</span></a><a class="idref" href="R1.html#exercises_classical.Q"><span class="id" type="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~</span></a><a class="idref" href="R1.html#exercises_classical.P"><span class="id" type="variable">P</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">)</span></a> -&gt; (<a class="idref" href="R1.html#exercises_classical.P"><span class="id" type="variable">P</span></a> -&gt; <a class="idref" href="R1.html#exercises_classical.Q"><span class="id" type="variable">Q</span></a>).<br/>
 
 <br/>
@@ -2342,28 +2345,57 @@ Na zakończenie zwróćmy swą uwagę ku kolejnemu paradoksowi, tym razem
 
 <div class="paragraph"> </div>
 
-    Gdzież więc jest paradoksalność całego paradoksu? Wynika on w znacznej
+    Gdzież więc leży paradoksalność całego paradoksu? Wynika ona w znacznej
     mierze ze znaczenia słowa "jeżeli". W mowie potocznej różni się ono
     znacznie od tzw. implikacji materialnej, w Coqu reprezentowanej (ale
     tylko przy założeniu reguły wyłączonego środka) przez implikację (<span class="inlinecode">-&gt;</span>).
 
 <div class="paragraph"> </div>
 
+    Określenie "taka osoba, że jeżeli ona pije, to wszyscy piją" przeciętny
+    człowiek interpretuje w kategoriach przyczyny i skutku, a więc przypisuje
+    rzeczonej osobie magiczną zdolność zmuszania wszystkich do picia, tak
+    jakby posiadała zdolność wznoszenia toastów za pomocą telepatii.
 
 <div class="paragraph"> </div>
 
-    
+    Jest to błąd, gdyż zamierzonym znaczeniem słowa jeżeli jest tutaj (ze
+    względu na kontekst matematyczny) implikacja materialna. W jednym z
+    powyższych ćwiczeń udowodniłeś, że w logice klasycznej mamy tautologię
+    <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">Q</span></span> <span class="inlinecode">&lt;-&gt;</span> <span class="inlinecode">~<span class="id" type="var">P</span></span> <span class="inlinecode">\/</span> <span class="inlinecode"><span class="id" type="var">Q</span></span>, a więc że implikacja jest prawdziwa gdy jej
+    przesłanka jest fałszywa lub gdy jej konkluzja jest prawdziwa.
+
+<div class="paragraph"> </div>
+
+    Do paradoksalności paradoksu swoje cegiełki dokładają też reguły logiki
+    klasycznej (wyłączony środek) oraz logiki konstruktywnej (<i>ex falso
+    quodlibet</i>), których w użyliśmy w dowodzie, a które dla zwykłego człowieka
+    nie muszą być takie oczywiste. 
+<div class="paragraph"> </div>
+
+<a name="lab60"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ W powyższym dowodzie logiki klasycznej użyłem conajmniej dwukrotnie.
+    Zacytuj wszystkie fragmenty dowodu wykorzystujące logikę klasyczną. 
+<div class="paragraph"> </div>
+
+<a name="lab61"></a><h4 class="section">Ćwiczenie</h4>
+ Pokaż, że założenie o tym, że w barze jest conajmniej jeden klient,
+    jest konieczne. Co więcej, pokaż że stwierdzenie "w barze jest taki
+    klient, że jeżeli on pije, to wszyscy piją" jest równoważne stwierdzeniu
+    "w barze jest jakiś klient". 
 </div>
 <div class="code">
 
 <br/>
-
-<br/>
-
-<br/>
-
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<span class="id" type="keyword">Theorem</span> <a name="dp_nonempty"><span class="id" type="lemma">dp_nonempty</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">man</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">drinks</span> : <a class="idref" href="R1.html#man"><span class="id" type="variable">man</span></a> -&gt; <span class="id" type="keyword">Prop</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">exists</span></a> <span class="id" type="var">drinker</span> : <a class="idref" href="R1.html#man"><span class="id" type="variable">man</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="R1.html#drinks"><span class="id" type="variable">drinks</span></a> <a class="idref" href="R1.html#drinker"><span class="id" type="variable">drinker</span></a> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">x</span> : <a class="idref" href="R1.html#man"><span class="id" type="variable">man</span></a>, <a class="idref" href="R1.html#drinks"><span class="id" type="variable">drinks</span></a> <a class="idref" href="R1.html#x"><span class="id" type="variable">x</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">&lt;-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">exists</span></a> <span class="id" type="var">x</span> : <a class="idref" href="R1.html#man"><span class="id" type="variable">man</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">)</span></a>.<br/>
+</div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
 

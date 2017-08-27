@@ -180,7 +180,7 @@
     typowany, polimorficzny rachunek λ, który umożliwia reprezentację
     funkcji generycznych, działających na argumentach dowolnego typu
     w ten sam sposób (przykładem niech będzie funkcja identycznościowa).
-    System ten został również odkryty niezależnie przez Johna Reynoldsa,
+    System ten został również odkryty niezależnie przez Johna Reynoldsa.
 
 <div class="paragraph"> </div>
 
@@ -243,14 +243,57 @@
 <li> Certified Programming with Dependent Types Adama Chlipali —
       książka dla zaawansowanych, traktująca o praktycznym użyciu
       typów zależnych oraz kładąca bardzo mocny nacisk na
-      automatyzację, dostępna za darmo tu: adam.chlipala.net/cpdt 
+      automatyzację, dostępna za darmo tu: adam.chlipala.net/cpdt
+
+</li>
+<li> Verified Functional Algorithms, której autorem jest Andrew
+      Appel, to trzecia część cyklu Software Foundations. Jak sama
+      nazwa wskazuje skupia się ona na algorytmach, adaptowaniu ich
+      do realiów języków funkcyjnych oraz weryfikacją poprawności
+      ich działania. Analiza algorytmów jest odsunięta na dalszy
+      plan, gdyż jest niemożliwe, aby w Coqu formalnie udowodnić
+      złożoność jakiegoś algorytmu. Dostępna jest za darmo tutaj:
+      https://www.cs.princeton.edu/~appel/vfa/
+
+</li>
+<li> Mathematical Components Book, dostępna za darmo tutaj:
+      https://math-comp.github.io/mcb/book.pdf, to książka dotycząca
+      biblioteki o nazwie Mathematical Components. Zawiera ona
+      wprowadzenia do Coqa, ale poza tym opisuje też dwie inne rzeczy:
+<ul class="doclist">
+<li> Metodologię dowodzenie zwaną <i>small scale reflection</i>
+        (ang. reflekcja na małą skalę), która pozwala wykorzystać
+        w dowodach maksimum możliwości obliczeniowych Coqa, a dzięki
+        temu uprościć dowody i zorganizować twierdzenia w logiczny
+        sposób
+
+</li>
+<li> Język taktyk Ssreflect, którego bazą jest <span class="inlinecode"><span class="id" type="keyword">Ltac</span></span>, a który
+        wprowadza w stosunku do niego wiele ulepszeń i udogodnień,
+        umożliwiając między innymi sprawne zastosowanie metodologii
+        <i>small scale reflection</i> w praktyce
+
+</li>
+</ul>
+
+</li>
+<li> Manual, dostępny pod adresem https://coq.inria.fr/refman/,
+      nie jest wprawdzie zbyt przyjazny do czytania ciurkiem, ale
+      można tu znaleźć wiele wartościowych informacji. Gdyby ktoś
+      jednak pokusił się o przeczytanie go od deski do deski,
+      polecam następującą kolejności rozdziałów: 4 -&gt; (5) -&gt; 1 -&gt; 2 -&gt;
+      17 -&gt; 29 -&gt; 13 -&gt; 12 -&gt; (3) -&gt; (6) -&gt; 7 -&gt; 8 -&gt; 9 -&gt; 10 -&gt; 21 -&gt;
+      22 -&gt; 25 -&gt; 26 -&gt; 27 -&gt; 18 -&gt; 19 -&gt; 20 -&gt; 24 -&gt; 23 -&gt; (11) -&gt;
+      (14) -&gt; (15) -&gt; (16) -&gt; (28) -&gt; (30), gdzie nawiasy okrągłe
+      oznaczają rozdziały opcjonalne (niezbyt ciekawe lub nieprzydatne) 
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
  Zalecana kolejność czytania:
-    SF, część 1 -&gt; (Coq'Art) -&gt; SF, część 2 -&gt; CPDT 
+    SF, część 1 -&gt; (Coq'Art) -&gt; (MCB) -&gt; SF, część 2 i 3 -&gt; CPDT -&gt;
+    Manual 
 <div class="paragraph"> </div>
 
 <a name="lab8"></a><h1 class="section">Sprawy techniczne</h1>
