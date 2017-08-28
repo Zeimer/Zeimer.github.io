@@ -579,8 +579,8 @@ Nasze twierdzenie głosi, że funkcja <span class="inlinecode"><span class="id" 
 <div class="doc">
 Zauważmy, że nie musimy używać taktyki <span class="inlinecode"><span class="id" type="tactic">intro</span></span>, żeby wprowadzić
     <span class="inlinecode"><span class="id" type="var">b</span></span> do kontekstu: taktyka <span class="inlinecode"><span class="id" type="tactic">destruct</span></span> sama jest w stanie wykryć,
-    że nie ma jej w kontekście i wprowadzić ją tam przed rozbiciem
-    jej na konstruktory. Zauważmy też, że oba podcele rozwiązaliśmy
+    że nie ma go w kontekście i wprowadzić je tam przed rozbiciem
+    go na konstruktory. Zauważmy też, że oba podcele rozwiązaliśmy
     w ten sam sposób, więc możemy użyć kombinatora <span class="inlinecode">;</span> (średnika),
     żeby rozwiązać je oba za jednym zamachem. 
 <div class="paragraph"> </div>
@@ -3278,15 +3278,22 @@ Przypomnijmy, co już wiemy o redukcjach:
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;Inductive&nbsp;wut&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;:&nbsp;Type&nbsp;:=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;C&nbsp;:&nbsp;(wut&nbsp;A&nbsp;-&gt;&nbsp;A)&nbsp;-&gt;&nbsp;wut&nbsp;A.&nbsp;*)</span><br/>
+<span class="id" type="var">Fail</span> <span class="id" type="keyword">Inductive</span> <a name="wut"><span class="id" type="inductive">wut</span></a> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) : <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="C"><span class="id" type="constructor">C</span></a> : (<a class="idref" href="R2.html#wut"><span class="id" type="inductive">wut</span></a> <span class="id" type="var">A</span> -&gt; <span class="id" type="var">A</span>) -&gt; <a class="idref" href="R2.html#wut"><span class="id" type="inductive">wut</span></a> <span class="id" type="var">A</span>.<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-Kod musi być zakomentowany, gdyż Coq nie akceptuje takiej definicji, jako
-    powód podając: 
+Uwaga: poprzedzenie komendą <span class="inlinecode"><span class="id" type="var">Fail</span></span> innej komendy oznajmia Coqowi, że
+    spodziewamy się, iż komenda zawiedzie. Coq akceptuje komendę <span class="inlinecode"><span class="id" type="var">Fail</span></span> <span class="inlinecode"><span class="id" type="var">c</span></span>,
+    jeżeli komenda <span class="inlinecode"><span class="id" type="var">c</span></span> zawodzi, i wypisuje komunikat o błędzie. Jeżeli
+    komenda <span class="inlinecode"><span class="id" type="var">c</span></span> zakończy się sukcesem, komenda <span class="inlinecode"><span class="id" type="var">Fail</span></span> <span class="inlinecode"><span class="id" type="var">c</span></span> zwróci błąd.
+
+<div class="paragraph"> </div>
+
+    Komenda <span class="inlinecode"><span class="id" type="var">Fail</span></span> jest przydatna w sytuacjach takich jak obecna, gdy
+    chcemy zilustrować fakt, że jakaś komenda zawodzi. 
 </div>
 <div class="code">
 
@@ -3364,9 +3371,9 @@ Kod musi być zakomentowany, gdyż Coq nie akceptuje takiej definicji, jako
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;y&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;:&nbsp;A&nbsp;:=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;f&nbsp;:=&nbsp;(fun&nbsp;x&nbsp;:&nbsp;wut&nbsp;A&nbsp;=&gt;&nbsp;match&nbsp;x&nbsp;with&nbsp;|&nbsp;C&nbsp;f'&nbsp;=&gt;&nbsp;f'&nbsp;x&nbsp;end)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;f&nbsp;(C&nbsp;f)&nbsp;*)</span><br/>
+<span class="id" type="var">Fail</span> <span class="id" type="keyword">Definition</span> <a name="y"><span class="id" type="definition">y</span></a> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">f</span> := (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <span class="id" type="var">wut</span> <span class="id" type="var">A</span> =&gt; <span class="id" type="keyword">match</span> <span class="id" type="var">x</span> <span class="id" type="keyword">with</span> | <span class="id" type="var">C</span> <span class="id" type="var">f'</span> =&gt; <span class="id" type="var">f'</span> <span class="id" type="var">x</span> <span class="id" type="keyword">end</span>)<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">in</span> <span class="id" type="var">f</span> (<span class="id" type="var">C</span> <span class="id" type="var">f</span>).<br/>
 
 <br/>
 </div>
@@ -3382,7 +3389,7 @@ Jak widać, gdyby definicja typu <span class="inlinecode"><span class="id" type=
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;santa_is_a_pedophile&nbsp;:&nbsp;False&nbsp;:=&nbsp;y&nbsp;False.&nbsp;*)</span><br/>
+<span class="id" type="var">Fail</span> <span class="id" type="keyword">Definition</span> <a name="santa_is_a_pedophile"><span class="id" type="definition">santa_is_a_pedophile</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False"><span class="id" type="inductive">False</span></a> := <span class="id" type="var">y</span> <span class="id" type="var">False</span>.<br/>
 
 <br/>
 </div>
@@ -3514,9 +3521,9 @@ Definiując rodzinę typów <span class="inlinecode"><span class="id" type="var"
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;Inductive&nbsp;option'&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;:&nbsp;Type&nbsp;:=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Some'&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;option'&nbsp;A<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;None'&nbsp;:&nbsp;forall&nbsp;B&nbsp;:&nbsp;Type,&nbsp;option'&nbsp;B.&nbsp;*)</span><br/>
+<span class="id" type="var">Fail</span> <span class="id" type="keyword">Inductive</span> <a name="option'"><span class="id" type="inductive">option'</span></a> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) : <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="Some'"><span class="id" type="constructor">Some'</span></a> : <span class="id" type="var">A</span> -&gt; <a class="idref" href="R2.html#option'"><span class="id" type="inductive">option'</span></a> <span class="id" type="var">A</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="None'"><span class="id" type="constructor">None'</span></a> : <span class="id" type="keyword">forall</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>, <a class="idref" href="R2.html#option'"><span class="id" type="inductive">option'</span></a> <a class="idref" href="R2.html#B"><span class="id" type="variable">B</span></a>.<br/>
 
 <br/>
 </div>
@@ -3981,16 +3988,15 @@ Powyższe dywagacje nie przeszkadzają nam jednak w udowadnianiu,
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;Fixpoint&nbsp;inb_nat&nbsp;(n&nbsp;:&nbsp;nat)&nbsp;(l&nbsp;:&nbsp;list&nbsp;nat)&nbsp;:&nbsp;bool&nbsp;:=<br/>
-&nbsp;&nbsp;&nbsp;match&nbsp;l&nbsp;with<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;nil&nbsp;=&gt;&nbsp;false<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;cons&nbsp;h&nbsp;t&nbsp;=&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;eq_nat_dec&nbsp;n&nbsp;h&nbsp;with<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;or_introl&nbsp;_&nbsp;=&gt;&nbsp;true<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;_&nbsp;=&gt;&nbsp;inb_nat&nbsp;n&nbsp;t<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end<br/>
-&nbsp;&nbsp;&nbsp;end.<br/>
-*)</span><br/>
+<span class="id" type="var">Fail</span> <span class="id" type="keyword">Fixpoint</span> <a name="inb_nat"><span class="id" type="definition">inb_nat</span></a> (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) : <a class="idref" href="R2.html#bool"><span class="id" type="inductive">bool</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#l"><span class="id" type="variable">l</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nil"><span class="id" type="constructor">nil</span></a> =&gt; <a class="idref" href="R2.html#false"><span class="id" type="constructor">false</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#cons"><span class="id" type="constructor">cons</span></a> <span class="id" type="var">h</span> <span class="id" type="var">t</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <a class="idref" href="R2.html#eq_nat_dec"><span class="id" type="lemma">eq_nat_dec</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <span class="id" type="var">h</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#or_introl"><span class="id" type="constructor">or_introl</span></a> <span class="id" type="var">_</span> =&gt; <a class="idref" href="R2.html#true"><span class="id" type="constructor">true</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span> =&gt; <a class="idref" href="R2.html#inb_nat"><span class="id" type="definition">inb_nat</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <span class="id" type="var">t</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
 
 <br/>
 </div>
@@ -4167,7 +4173,7 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
 </div>
 
 <div class="doc">
-<a name="lab132"></a><h2 class="section">Cztery rodzaje reguł (todo)</h2>
+<a name="lab132"></a><h2 class="section">Cztery rodzaje reguł</h2>
 
 <div class="paragraph"> </div>
 
@@ -4187,15 +4193,40 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
 <li> eliminacji (ang. elimination rules)
 
 </li>
-<li> obliczanie (ang. computation rules) 
+<li> obliczania (ang. computation rules) 
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
+<a name="lab133"></a><h3 class="section">Reguły formacji</h3>
+
+<div class="paragraph"> </div>
+
  Reguły formacji mówią nam, jak tworzyć typy (termy sortów <span class="inlinecode"><span class="id" type="keyword">Set</span></span> i <span class="inlinecode"><span class="id" type="keyword">Type</span></span>)
     oraz zdania (termy sortu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>). Większość z nich pochodzi z nagłówków
-    definicji induktywnych: 
+    definicji induktywnych. Reguła dla typu <span class="inlinecode"><span class="id" type="var">bool</span></span> wygląda tak: 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;----------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;bool&nbsp;:&nbsp;Set&nbsp;<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Ten mistyczny zapis pochodzi z publikacji dotyczących teorii typów.
+    Nad kreską znajdują się przesłanki reguły, a pod kreską znajduje się
+    konkluzja reguły.
+
+<div class="paragraph"> </div>
+
+    Regułę tę możemy odczytać: <span class="inlinecode"><span class="id" type="var">bool</span></span> jest typem sortu <span class="inlinecode"><span class="id" type="keyword">Set</span></span>. Postać tej
+    reguły wynika wprost z definicji typu <span class="inlinecode"><span class="id" type="var">bool</span></span>. 
 </div>
 <div class="code">
 
@@ -4209,17 +4240,22 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
 </div>
 
 <div class="doc">
-Na mocy powyższego reguła formacji dla <span class="inlinecode"><span class="id" type="var">bool</span></span> brzmi po prostu:
-    <span class="inlinecode"><span class="id" type="var">bool</span></span> jest typem sortu <span class="inlinecode"><span class="id" type="keyword">Set</span></span>. Nie zawsze jednak reguły formacji
-    są aż tak proste. 
+Powyższej regule formacji odpowiada tutaj fragment <span class="inlinecode"><span class="id" type="keyword">Inductive</span></span> <span class="inlinecode"><span class="id" type="var">bool</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Set</span></span>,
+    który stwierdza po prostu, że <span class="inlinecode"><span class="id" type="var">bool</span></span> jest typem sortu <span class="inlinecode"><span class="id" type="keyword">Set</span></span>.
+
+<div class="paragraph"> </div>
+
+    Nie zawsze jednak reguły formacji są aż tak proste. Reguła dla produktu
+    wygląda tak: 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" type="keyword">Print</span> <span class="id" type="var">prod</span>.<br/>
-
-<br/>
-<span class="comment">(*&nbsp;===&gt;&nbsp;Inductive&nbsp;prod&nbsp;(A&nbsp;B&nbsp;:&nbsp;Type)&nbsp;:&nbsp;Type&nbsp;:=&nbsp;&nbsp;pair&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;B&nbsp;-&gt;&nbsp;A&nbsp;*&nbsp;B&nbsp;*)</span><br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;Type,&nbsp;B&nbsp;:&nbsp;Type<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;------------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;prod&nbsp;A&nbsp;B&nbsp;:&nbsp;Type<br/>
+*)</span><br/>
 
 <br/>
 </div>
@@ -4227,10 +4263,238 @@ Na mocy powyższego reguła formacji dla <span class="inlinecode"><span class="i
 <div class="doc">
 Reguła formacji dla <span class="inlinecode"><span class="id" type="var">prod</span></span> głosi: jeżeli <span class="inlinecode"><span class="id" type="var">A</span></span> jest typem sortu <span class="inlinecode"><span class="id" type="keyword">Type</span></span>
     oraz <span class="inlinecode"><span class="id" type="var">B</span></span> jest typem sortu <span class="inlinecode"><span class="id" type="keyword">Type</span></span>, to <span class="inlinecode"><span class="id" type="var">prod</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> jest typem sortu
-    <span class="inlinecode"><span class="id" type="keyword">Type</span></span>. 
+    <span class="inlinecode"><span class="id" type="keyword">Type</span></span>. Jest ona rzecz jasna konsekwencją definicji produktu. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Print</span> <span class="id" type="var">prod</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;Inductive&nbsp;prod&nbsp;(A&nbsp;B&nbsp;:&nbsp;Type)&nbsp;:&nbsp;Type&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pair&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;B&nbsp;-&gt;&nbsp;A&nbsp;*&nbsp;B&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Regule odpowiada fragment <span class="inlinecode"><span class="id" type="keyword">Inductive</span></span> <span class="inlinecode"><span class="id" type="var">prod</span></span> <span class="inlinecode">(<span class="id" type="var">A</span></span> <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span>)</span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span></span>. To,
+    co w regule jest nad kreską (<span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span></span> i <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span></span>), tutaj występuje
+    przed dwukropkiem, po prostu jako argumentu typu <span class="inlinecode"><span class="id" type="var">prod</span></span>. Jak widać,
+    nagłówek typu induktywnego jest po prostu skompresowaną formą reguły
+    formacji.
+
 <div class="paragraph"> </div>
 
-<a name="lab133"></a><h1 class="section">Rekursja</h1>
+    Należy zauważyć, że nie wszystkie reguły formacji pochodzą z definicji
+    induktywnych. Tak wygląda reguła formacji dla funkcji (między typami
+    sortu <span class="inlinecode"><span class="id" type="keyword">Type</span></span>): 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;Type,&nbsp;B&nbsp;:&nbsp;Type<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;------------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;-&gt;&nbsp;B&nbsp;:&nbsp;Type<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Reguła nie pochodzi z definicji induktywnej, gdyż typ funkcji <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span>
+    jest typem wbudowanym i nie jest zdefiniowany indukcyjnie. 
+<div class="paragraph"> </div>
+
+<a name="lab134"></a><h3 class="section">Reguły wprowadzania</h3>
+
+<div class="paragraph"> </div>
+
+ Reguły wprowadzania mówią nam, w jaki sposób formować termy danego
+    typu. Większość z nich pochodzi od konstruktorów typów induktywnych.
+    Dla typu bool reguły wprowadzania wyglądają tak: 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-----------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;true&nbsp;:&nbsp;bool<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;false&nbsp;:&nbsp;bool<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Reguły te stwierdzają po prostu, że <span class="inlinecode"><span class="id" type="var">true</span></span> jest termem typu <span class="inlinecode"><span class="id" type="var">bool</span></span>
+    oraz że <span class="inlinecode"><span class="id" type="var">false</span></span> jest termem typu <span class="inlinecode"><span class="id" type="var">bool</span></span>. Wynikają one wprost z
+    definicji typu <span class="inlinecode"><span class="id" type="var">bool</span></span> — każda z nich odpowiada jednemu konstruktorowi.
+
+<div class="paragraph"> </div>
+
+    Wobec powyższego nie powinna zaskoczyć cię reguła wprowadzania dla
+    produktu: 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;Type,&nbsp;B&nbsp;:&nbsp;Type,&nbsp;a&nbsp;:&nbsp;A,&nbsp;b&nbsp;:&nbsp;B<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;--------------------------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;pair&nbsp;A&nbsp;B&nbsp;a&nbsp;b&nbsp;:&nbsp;prod&nbsp;A&nbsp;B<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jeżeli jednak zaskoczyła cię obecność w regule <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span></span> i <span class="inlinecode"><span class="id" type="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span></span>,
+    przyjrzyj się dokładnie typowi konstruktora <span class="inlinecode"><span class="id" type="var">pair</span></span>: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Check</span> @<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#pair"><span class="id" type="constructor">pair</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;pair&nbsp;:&nbsp;forall&nbsp;A&nbsp;B&nbsp;:&nbsp;Type,&nbsp;A&nbsp;-&gt;&nbsp;B&nbsp;-&gt;&nbsp;A&nbsp;*&nbsp;B&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Widać tutaj jak na dłoni, że <span class="inlinecode"><span class="id" type="var">pair</span></span> jest funkcją zależną biorącą
+    cztery argumenty i zwracają wynik, którego typ jest produktem jej
+    dwóch pierwszych argumentów.
+
+<div class="paragraph"> </div>
+
+    Podobnie jak w przypadku reguł formacji, nie wszystkie reguły
+    wprowadzania pochodzą od konstruktorów typów induktywnych. W
+    przypadku funkcji reguła wygląda mniej więcej tak: 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Γ&nbsp;|-&nbsp;A&nbsp;-&gt;&nbsp;B&nbsp;:&nbsp;Type,&nbsp;Γ;&nbsp;x&nbsp;:&nbsp;T&nbsp;|-&nbsp;y&nbsp;:&nbsp;B<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-------------------------------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Γ&nbsp;|-&nbsp;fun&nbsp;x&nbsp;=&gt;&nbsp;y&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;B<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Pojawiło się tu kilka nowych rzeczy: litera Γ oznacza kontekst,
+    zaś zapis Γ |- j, że osąd j zachodzi w kontekście Γ. Zapis Γ; j
+    oznacza rozszerzenie kontekstu Γ poprzez dodanie do niego osądu j.
+
+<div class="paragraph"> </div>
+
+    Regułę możemy odczytać tak: jeżeli <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> jest typem sortu <span class="inlinecode"><span class="id" type="keyword">Type</span></span>
+    w kontekście Γ i <span class="inlinecode"><span class="id" type="var">y</span></span> jest termem typu <span class="inlinecode"><span class="id" type="var">B</span></span> w kontekście Γ rozszerzonym
+    o osąd <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">T</span></span>, to <span class="inlinecode"><span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" type="var">y</span></span> jest termem typu <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> w kontekście
+    Γ.
+
+<div class="paragraph"> </div>
+
+    Nie przejmuj się, jeżeli nie rozumiesz powyższej reguły. Znajomość
+    reguł wprowadzania nie jest nam potrzebna, by skutecznie posługiwać
+    się Coqiem.
+
+<div class="paragraph"> </div>
+
+    Należy też dodać, że reguła ta jest nieco uproszczona. Pełniejszy
+    opis teoretyczny induktywnego rachunku konstrukcji można znaleźć
+    w rozdziałach 4 i 5 manuala: https://coq.inria.fr/refman/toc.html 
+<div class="paragraph"> </div>
+
+<a name="lab135"></a><h3 class="section">Reguły eliminacji</h3>
+
+<div class="paragraph"> </div>
+
+ Reguły eliminacji są w pewien sposób dualne do reguł wprowadzania.
+    Tak jak reguły wprowadzania dla typu <span class="inlinecode"><span class="id" type="var">T</span></span> służą do konstruowania
+    termów typu <span class="inlinecode"><span class="id" type="var">T</span></span> z innych termów, tak reguły eliminacji dla typu <span class="inlinecode"><span class="id" type="var">T</span></span>
+    mówią nam, jak z termów typu <span class="inlinecode"><span class="id" type="var">T</span></span> skonstruować termy innych typów.
+
+<div class="paragraph"> </div>
+
+    Zobaczmy, jak wygląda jedna z reguł eliminacji dla typu <span class="inlinecode"><span class="id" type="var">bool</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;:&nbsp;bool&nbsp;-&gt;&nbsp;Type,&nbsp;x&nbsp;:&nbsp;P&nbsp;true,&nbsp;y&nbsp;:&nbsp;P&nbsp;false,&nbsp;b&nbsp;:&nbsp;bool<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;bool_rect&nbsp;P&nbsp;x&nbsp;y&nbsp;b&nbsp;:&nbsp;P&nbsp;b<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Reguła ta mówi nam, że jeżeli mamy rodzinę typów <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">bool</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="keyword">Type</span></span>
+    oraz termy <span class="inlinecode"><span class="id" type="var">x</span></span> typu <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">true</span></span> i <span class="inlinecode"><span class="id" type="var">y</span></span> typu <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">false</span></span>, a także term <span class="inlinecode"><span class="id" type="var">b</span></span>
+    typu <span class="inlinecode"><span class="id" type="var">bool</span></span>, to możemy skonstruować term <span class="inlinecode"><span class="id" type="var">bool_rect</span></span> <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span> <span class="inlinecode"><span class="id" type="var">y</span></span> <span class="inlinecode"><span class="id" type="var">b</span></span> typu
+    <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">b</span></span>.
+
+<div class="paragraph"> </div>
+
+    Spójrzmy na tę regułę z nieco innej strony: 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;:&nbsp;bool&nbsp;-&gt;&nbsp;Type,&nbsp;x&nbsp;:&nbsp;P&nbsp;true,&nbsp;y&nbsp;:&nbsp;P&nbsp;false<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;bool_rect&nbsp;P&nbsp;x&nbsp;y&nbsp;:&nbsp;forall&nbsp;b&nbsp;:&nbsp;bool,&nbsp;P&nbsp;b<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Widzimy, że reguły eliminacji dla typu <span class="inlinecode"><span class="id" type="var">T</span></span> służą do konstruowania funkcji,
+    których dziedziną jest <span class="inlinecode"><span class="id" type="var">T</span></span>, a więc mówi nam, jak "wyeliminować" term typu
+    <span class="inlinecode"><span class="id" type="var">T</span></span>, aby uzyskać term innego typu.
+
+<div class="paragraph"> </div>
+
+    Reguły eliminacji występują w wielu wariantach:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> zależnym i niezależnym (w zależności od tego, czy służą do definiowania
+      funkcji zależnych, czy nie)
+
+</li>
+<li> rekurencyjnym i nierekurencyjnym (służącym jedynie jedynie do
+      przeprowadzania rozumowań przez przypadki oraz definiowania funkcji
+      przez pattern matching, bez rekurencji)
+
+</li>
+<li> reguły indukcyjne to rekurencyjne reguły eliminacji, które służą do
+      definiowania funkcji, których przeciwdziedzina jest sortu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>, a
+      więc do dowodzenia zdań
+
+</li>
+<li> rekursory to rekurencyjne reguły eliminacji, które służą do definiowania
+      funkcji, których przeciwdziedzina jest sortu <span class="inlinecode"><span class="id" type="keyword">Set</span></span> lub <span class="inlinecode"><span class="id" type="keyword">Type</span></span>, a więc
+      do definiowania funkcji przez rekursję
+
+</li>
+</ul>
+    
+<div class="paragraph"> </div>
+
+<a name="lab136"></a><h1 class="section">Rekursja</h1>
 
 <div class="paragraph"> </div>
 
@@ -4271,7 +4535,7 @@ Reguła formacji dla <span class="inlinecode"><span class="id" type="var">prod</
 
 <div class="paragraph"> </div>
 
-<a name="lab134"></a><h2 class="section">Rekursja ogólna</h2>
+<a name="lab137"></a><h2 class="section">Rekursja ogólna</h2>
 
 <div class="paragraph"> </div>
 
@@ -4311,7 +4575,7 @@ Aby chronić nas przed tą katastrofą, Coq nakłada na rekurencję
     Innymi słowy, dozwolona jest jedynie rekursja strukturalna. 
 <div class="paragraph"> </div>
 
-<a name="lab135"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
+<a name="lab138"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
 
 <div class="paragraph"> </div>
 
@@ -4371,7 +4635,7 @@ Możemy zaobserwować parę rzeczy. Pierwsza, techniczna sprawa: po
 
 <div class="paragraph"> </div>
 
-<a name="lab136"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab139"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4419,9 +4683,7 @@ Argument główny to ten, który jest dopasowywany jako pierwszy. Argumentami
     gdyż jego argument główny, <span class="inlinecode"><span class="id" type="var">p</span></span>, jest podtermem <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode"><span class="id" type="var">p</span></span>. 
 </div>
 <div class="code">
-
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;</div>
+</div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
 
