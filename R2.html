@@ -4307,7 +4307,23 @@ Reguła nie pochodzi z definicji induktywnej, gdyż typ funkcji <span class="inl
     jest typem wbudowanym i nie jest zdefiniowany indukcyjnie. 
 <div class="paragraph"> </div>
 
-<a name="lab134"></a><h3 class="section">Reguły wprowadzania</h3>
+<a name="lab134"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Napisz, bez podglądania, jak wyglądają reguły formacji dla <span class="inlinecode"><span class="id" type="var">option</span></span>,
+    <span class="inlinecode"><span class="id" type="var">nat</span></span> oraz <span class="inlinecode"><span class="id" type="var">list</span></span>. Następnie zweryfikuj swoje odpowiedzi za pomocą
+    komendy <span class="inlinecode"><span class="id" type="keyword">Print</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab135"></a><h3 class="section">Reguły wprowadzania</h3>
 
 <div class="paragraph"> </div>
 
@@ -4412,7 +4428,23 @@ Pojawiło się tu kilka nowych rzeczy: litera Γ oznacza kontekst,
     w rozdziałach 4 i 5 manuala: https://coq.inria.fr/refman/toc.html 
 <div class="paragraph"> </div>
 
-<a name="lab135"></a><h3 class="section">Reguły eliminacji</h3>
+<a name="lab136"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Napisz, bez podglądania, jak wyglądają reguły wprowadzania dla
+    <span class="inlinecode"><span class="id" type="var">option</span></span>, <span class="inlinecode"><span class="id" type="var">nat</span></span> oraz <span class="inlinecode"><span class="id" type="var">list</span></span>. Następnie zweryfikuj swoje odpowiedzi
+    za pomocą komendy <span class="inlinecode"><span class="id" type="keyword">Print</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab137"></a><h3 class="section">Reguły eliminacji</h3>
 
 <div class="paragraph"> </div>
 
@@ -4424,6 +4456,30 @@ Pojawiło się tu kilka nowych rzeczy: litera Γ oznacza kontekst,
 <div class="paragraph"> </div>
 
     Zobaczmy, jak wygląda jedna z reguł eliminacji dla typu <span class="inlinecode"><span class="id" type="var">bool</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;Type,&nbsp;x&nbsp;:&nbsp;A,&nbsp;y&nbsp;:&nbsp;A,&nbsp;b&nbsp;:&nbsp;bool<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;--------------------------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;b&nbsp;then&nbsp;x&nbsp;else&nbsp;y&nbsp;:&nbsp;A<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Reguła ta mówi nam, że jeżeli mamy typ <span class="inlinecode"><span class="id" type="var">A</span></span> oraz dwie wartości
+    <span class="inlinecode"><span class="id" type="var">x</span></span> i <span class="inlinecode"><span class="id" type="var">y</span></span> typu <span class="inlinecode"><span class="id" type="var">A</span></span>, a także term <span class="inlinecode"><span class="id" type="var">b</span></span> typu <span class="inlinecode"><span class="id" type="var">bool</span></span>, to możemy
+    skonstruować inną wartość typu <span class="inlinecode"><span class="id" type="var">A</span></span>, mianowicie <span class="inlinecode"><span class="id" type="keyword">if</span></span> <span class="inlinecode"><span class="id" type="var">b</span></span> <span class="inlinecode"><span class="id" type="keyword">then</span></span> <span class="inlinecode"><span class="id" type="var">x</span></span>
+    <span class="inlinecode"><span class="id" type="keyword">else</span></span> <span class="inlinecode"><span class="id" type="var">y</span></span>.
+
+<div class="paragraph"> </div>
+
+    Reguła ta jest dość prosta. W szczególności nie jest ona zależna,
+    tzn. obie gałęzie <span class="inlinecode"><span class="id" type="keyword">if</span></span>a muszą być tego samego typu. Przyjrzyjmy
+    się nieco bardziej ogólnej regule. 
 </div>
 <div class="code">
 
@@ -4460,9 +4516,9 @@ Reguła ta mówi nam, że jeżeli mamy rodzinę typów <span class="inlinecode">
 </div>
 
 <div class="doc">
-Widzimy, że reguły eliminacji dla typu <span class="inlinecode"><span class="id" type="var">T</span></span> służą do konstruowania funkcji,
-    których dziedziną jest <span class="inlinecode"><span class="id" type="var">T</span></span>, a więc mówi nam, jak "wyeliminować" term typu
-    <span class="inlinecode"><span class="id" type="var">T</span></span>, aby uzyskać term innego typu.
+Widzimy, że reguły eliminacji dla typu induktywnego <span class="inlinecode"><span class="id" type="var">T</span></span> służą do
+    konstruowania funkcji, których dziedziną jest <span class="inlinecode"><span class="id" type="var">T</span></span>, a więc mówią
+    nam, jak "wyeliminować" term typu <span class="inlinecode"><span class="id" type="var">T</span></span>, aby uzyskać term innego typu. 
 
 <div class="paragraph"> </div>
 
@@ -4471,30 +4527,243 @@ Widzimy, że reguły eliminacji dla typu <span class="inlinecode"><span class="i
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> zależnym i niezależnym (w zależności od tego, czy służą do definiowania
-      funkcji zależnych, czy nie)
+<li> zależnym i niezależnym — w zależności od tego, czy służą do definiowania
+      funkcji zależnych, czy nie.
 
 </li>
-<li> rekurencyjnym i nierekurencyjnym (służącym jedynie jedynie do
+<li> rekurencyjnym i nierekurencyjnym — te druge służą jedynie do
       przeprowadzania rozumowań przez przypadki oraz definiowania funkcji
-      przez pattern matching, bez rekurencji)
+      przez pattern matching, ale bez rekurencji. Niektóre typy nie mają
+      rekurencyjnych reguł eliminacji.
 
 </li>
-<li> reguły indukcyjne to rekurencyjne reguły eliminacji, które służą do
-      definiowania funkcji, których przeciwdziedzina jest sortu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>, a
-      więc do dowodzenia zdań
-
-</li>
-<li> rekursory to rekurencyjne reguły eliminacji, które służą do definiowania
-      funkcji, których przeciwdziedzina jest sortu <span class="inlinecode"><span class="id" type="keyword">Set</span></span> lub <span class="inlinecode"><span class="id" type="keyword">Type</span></span>, a więc
-      do definiowania funkcji przez rekursję
+<li> pierwotne i wtórne — dla typu induktywnego <span class="inlinecode"><span class="id" type="var">T</span></span> Coq generuje regułę
+      <span class="inlinecode"><span class="id" type="var">T_rect</span></span>, którą będziemy zwać regułą pierwotną. Jej postać wynika
+      wprost z definicji typu <span class="inlinecode"><span class="id" type="var">T</span></span>. Reguły dla typów nieinduktywnych (np.
+      funkcji) również będziemy uważać za pierwotne. Jednak nie wszystkie
+      reguły są pierwotne — przekonamy się o tym w przyszłości, tworząc
+      własne reguły indukcyjne.
 
 </li>
 </ul>
-    
+
 <div class="paragraph"> </div>
 
-<a name="lab136"></a><h1 class="section">Rekursja</h1>
+ Zgodnie z zaprezentowaną klasyfikacją, pierwsza z naszych reguł jest:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> niezależna, gdyż obie gałęzie <span class="inlinecode"><span class="id" type="keyword">if</span></span>a są tego samego typu. Innymi słowy,
+      definiujemy term typu <span class="inlinecode"><span class="id" type="var">A</span></span>, który nie jest zależny
+
+</li>
+<li> nierekurencyjna, gdyż typ <span class="inlinecode"><span class="id" type="var">bool</span></span> nie jest rekurencyjny i wobec tego
+      może posiadać jedynie reguły nierekurencyjne
+
+</li>
+<li> wtórna — regułą pierwotną dla <span class="inlinecode"><span class="id" type="var">bool</span></span> jest <span class="inlinecode"><span class="id" type="var">bool_rect</span></span> 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Druga z naszych reguł jest:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> zależna, gdyż definiujemy term typu zależnego <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">b</span></span>
+
+</li>
+<li> nierekurencyjna z tych samych powodów, co reguła pierwsza
+
+</li>
+<li> pierwotna — Coq wygenerował ją dla nas automatycznie 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ W zależności od kombinacji powyższych cech reguły eliminacji mogą
+    występować pod różnymi nazwami:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> reguły indukcyjne są zależne i rekurencyjne. Służą do definiowania
+      funkcji, których przeciwdziedzina jest sortu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>, a więc do
+      dowodzenia zdań przez indukcję
+
+</li>
+<li> rekursory to rekurencyjne reguły eliminacji, które służą do definiowania
+      funkcji, których przeciwdziedzina jest sortu <span class="inlinecode"><span class="id" type="keyword">Set</span></span> lub <span class="inlinecode"><span class="id" type="keyword">Type</span></span> 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Nie przejmuj się natłokiem nazw ani rozróżnień. Powyższą klasyfikację
+    wymyśliłem na poczekaniu i nie ma ona w praktyce żadnego znaczenia.
+
+<div class="paragraph"> </div>
+
+    Zauważmy, że podobnie jak nie wszystkie reguły formacji i wprowadzania
+    pochodzą od typów induktywnych, tak i nie wszystkie reguły eliminacji
+    od nich pochodzą. Kontrprzykładem niech będzie reguła eliminacji dla
+    funkcji (niezależnych): 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;Type,&nbsp;B&nbsp;:&nbsp;Type,&nbsp;f&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;B,&nbsp;x&nbsp;:&nbsp;A<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-------------------------------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;f&nbsp;x&nbsp;:&nbsp;B<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Reguła ta mówi nam, że jeżeli mamy funkcję <span class="inlinecode"><span class="id" type="var">f</span></span> typu <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">B</span></span> oraz
+    argument <span class="inlinecode"><span class="id" type="var">x</span></span> typu <span class="inlinecode"><span class="id" type="var">A</span></span>, to aplikacja funkcji <span class="inlinecode"><span class="id" type="var">f</span></span> do argumentu <span class="inlinecode"><span class="id" type="var">x</span></span>
+    jest typu <span class="inlinecode"><span class="id" type="var">B</span></span>.
+
+<div class="paragraph"> </div>
+
+    Zauważmy też, że mimo iż reguły wprowadzania i eliminacji są w pewien
+    sposób dualne, to istnieją między nimi różnice.
+
+<div class="paragraph"> </div>
+
+    Przede wszystkim, poza regułami wbudowanymi, obowiązuje prosta zasada:
+    jeden konstruktor typu induktywnego — jedna reguła wprowadzania. Innymi
+    słowy, reguły wprowadzania dla typów induktywnych pochodzą bezpośrednio
+    od konstruktorów i nie możemy w żaden sposób dodać nowych. Są one w
+    pewien sposób pierwotne i nie mamy nad nimi (bezpośredniej) kontroli.
+
+<div class="paragraph"> </div>
+
+    Jeżeli chodzi o reguły eliminacji, to są one, poza niewielką ilością
+    reguł pierwotnych, w pewnym sensie wtórne —
+    możemy budować je z pattern matchingu i rekursji strukturalnej i to
+    właśnie te dwie ostatnie idee są w Coqu ideami pierwotnymi. Jeżeli
+    chodzi o kontrolę, to możemy swobodnie dodawać nowe reguły eliminacji
+    za pomocą twierdzeń lub definiując je bezpośrednio.
+
+<div class="paragraph"> </div>
+
+    Działanie takie jest, w przypadku nieco bardziej zaawansowanych
+    twierdzeń niż dotychczas widzieliśmy, bardzo częste. Ba! Częste
+    jest także tworzenie reguł eliminacji dla każdej funkcji z osobna,
+    perfekcyjnie dopasowanych do kształtu jej rekursji. Jest to nawet
+    bardzo wygodne, gdyż Coq potrafi automatycznie wygenerować dla nas
+    takie reguły.
+
+<div class="paragraph"> </div>
+
+    Przykładem niestandardowej reguły może być reguła eliminacji dla
+    list działająca "od tyłu": 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;Type,&nbsp;P&nbsp;:&nbsp;list&nbsp;A&nbsp;-&gt;&nbsp;Prop,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;H&nbsp;:&nbsp;P&nbsp;<span class="inlinecode">[]</span>,&nbsp;H'&nbsp;:&nbsp;forall&nbsp;(h&nbsp;:&nbsp;A)&nbsp;(t&nbsp;:&nbsp;list&nbsp;A),&nbsp;P&nbsp;t&nbsp;-&gt;&nbsp;P&nbsp;(t&nbsp;++&nbsp;<span class="inlinecode"><span class="id" type="var">h</span></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-------------------------------------------------------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;l&nbsp;:&nbsp;list&nbsp;A,&nbsp;P&nbsp;l<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Póki co wydaje mi się, że udowodnienie słuszności tej reguły będzie dla
+    nas za trudne. W przyszłości na pewno napiszę coś więcej na temat reguł
+    eliminacji, gdyż ze względu na swój "otwarty" charakter są one z punktu
+    widzenia praktyki najważniejsze.
+
+<div class="paragraph"> </div>
+
+    Tymczasem na otarcie łez zajmijmy się inną, niestandardową regułą dla
+    list. 
+<div class="paragraph"> </div>
+
+<a name="lab138"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Udowodnij, że reguła dla list "co dwa" jest słuszna. Zauważ, że komenda
+    <span class="inlinecode"><span class="id" type="keyword">Fixpoint</span></span> może służyć do podawania definicji rekurencyjnych nie tylko
+    "ręcznie", ale także za pomocą taktyk.
+
+<div class="paragraph"> </div>
+
+    Wskazówka: użycie hipotezy indukcyjnej <span class="inlinecode"><span class="id" type="var">list_ind_2</span></span> zbyt wcześnie
+    ma podobne skutki co wywołanie rekurencyjne na argumencie, który
+    nie jest strukturalnie mniejszy. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="EliminationRules"><span class="id" type="module">EliminationRules</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Lists.List.html#"><span class="id" type="library">List</span></a>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">ListNotations</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="EliminationRules.list_ind_2"><span class="id" type="definition">list_ind_2</span></a><br/>
+&nbsp;&nbsp;(<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> -&gt; <span class="id" type="keyword">Prop</span>)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">H0</span> : <a class="idref" href="R2.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Lists.List.html#ListNotations.:list_scope:'['_']'"><span class="id" type="notation">[]</span></a>) (<span class="id" type="var">H1</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">x</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>, <a class="idref" href="R2.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Lists.List.html#ListNotations.:list_scope:'['_x_';'_'..'_';'_x_']'"><span class="id" type="notation">[</span></a><a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Lists.List.html#ListNotations.:list_scope:'['_x_';'_'..'_';'_x_']'"><span class="id" type="notation">]</span></a>)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">H2</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">x</span> <span class="id" type="var">y</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>), <a class="idref" href="R2.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="R2.html#l"><span class="id" type="variable">l</span></a> -&gt; <a class="idref" href="R2.html#P"><span class="id" type="variable">P</span></a> (<a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:list_scope:x_'::'_x"><span class="id" type="notation">::</span></a> <a class="idref" href="R2.html#y"><span class="id" type="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:list_scope:x_'::'_x"><span class="id" type="notation">::</span></a> <a class="idref" href="R2.html#l"><span class="id" type="variable">l</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:list_scope:x_'::'_x"><span class="id" type="notation">)</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">l</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>) : <a class="idref" href="R2.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="R2.html#l"><span class="id" type="variable">l</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab139"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Napisz funkcję <span class="inlinecode"><span class="id" type="tactic">apply</span></span>, odpowiadającą regule eliminacji dla funkcji
+    (niezależnych). Udowodnij jej specyfikację.
+
+<div class="paragraph"> </div>
+
+    Uwaga: notacja "$" na oznaczenie aplikacji funkcji pochodzi z języka
+    Haskell i jest tam bardzo często stosowana, gdyż pozwala zaoszczędzić
+    stawiania zbędnych nawiasów. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="EliminationRules.::x_'$'_x"><span class="id" type="notation">"</span></a>f $ x" := (<a class="idref" href="R2.html#EliminationRules.apply"><span class="id" type="definition">apply</span></a> <span class="id" type="var">f</span> <span class="id" type="var">x</span>) (<span class="id" type="tactic">at</span> <span class="id" type="keyword">level</span> 5).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="EliminationRules.apply_spec"><span class="id" type="lemma">apply_spec</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="R2.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="R2.html#A"><span class="id" type="variable">A</span></a>), <a class="idref" href="R2.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="R2.html#EliminationRules.::x_'$'_x"><span class="id" type="notation">$</span></a> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="R2.html#EliminationRules.::x_'$'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="R2.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="R2.html#x"><span class="id" type="variable">x</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R2.html#EliminationRules"><span class="id" type="module">EliminationRules</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab140"></a><h3 class="section">Reguły obliczania</h3>
+
+<div class="paragraph"> </div>
+
+ TODO 
+<div class="paragraph"> </div>
+
+<a name="lab141"></a><h1 class="section">Rekursja</h1>
 
 <div class="paragraph"> </div>
 
@@ -4535,7 +4804,7 @@ Widzimy, że reguły eliminacji dla typu <span class="inlinecode"><span class="i
 
 <div class="paragraph"> </div>
 
-<a name="lab137"></a><h2 class="section">Rekursja ogólna</h2>
+<a name="lab142"></a><h2 class="section">Rekursja ogólna</h2>
 
 <div class="paragraph"> </div>
 
@@ -4575,7 +4844,7 @@ Aby chronić nas przed tą katastrofą, Coq nakłada na rekurencję
     Innymi słowy, dozwolona jest jedynie rekursja strukturalna. 
 <div class="paragraph"> </div>
 
-<a name="lab138"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
+<a name="lab143"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
 
 <div class="paragraph"> </div>
 
@@ -4635,7 +4904,7 @@ Możemy zaobserwować parę rzeczy. Pierwsza, techniczna sprawa: po
 
 <div class="paragraph"> </div>
 
-<a name="lab139"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab144"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
