@@ -3139,7 +3139,11 @@ Przypomnijmy, co już wiemy o redukcjach:
 
     Uważny czytelnik zada sobie w tym momencie pytanie: skoro równość to
     konwertowalność, to jakim cudem równe są termy <span class="inlinecode">0</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">n</span></span> oraz <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">0</span>,
-    które przecież nie są konwertowalne? 
+    które przecież nie są konwertowalne?
+
+<div class="paragraph"> </div>
+
+    TODO: udzielić odpowiedzi na to pytanie. 
 </div>
 <div class="code">
 
@@ -3150,11 +3154,144 @@ Przypomnijmy, co już wiemy o redukcjach:
 </div>
 
 <div class="doc">
-<a name="lab113"></a><h1 class="section">Różne</h1>
+<a name="lab113"></a><h2 class="section">Indukcja wzajemna</h2>
 
 <div class="paragraph"> </div>
 
-<a name="lab114"></a><h2 class="section">Parametryczność</h2>
+ Jest jeszcze jeden rodzaj indukcji, o którym dotychczas nie mówiliśmy:
+    indukcja wzajemna. Bez uprzedniego teoretyzowania zbadajmy sprawę na
+    przykładzie klasyków polskiej literatury: 
+<div class="paragraph"> </div>
+
+ <i>Smok to wysuszony zmok</i> 
+<div class="paragraph"> </div>
+
+ <i>Zmok to zmoczony smok</i> 
+<div class="paragraph"> </div>
+
+ Stanisław Lem 
+<div class="paragraph"> </div>
+
+ Idea stojąca za indukcją wzajemną jest prosta: chcemy przez indukcję
+    zdefiniować jednocześnie dwa obiekty, które mogą się nawzajem do siebie
+    odwoływać.
+
+<div class="paragraph"> </div>
+
+    W owym definiowaniu nie mamy rzecz jasna pełnej swobody — obowiązują te
+    same kryteria co w przypadku zwykłych, "pojedynczych" definicji typów
+    induktywnych. Wobec tego zauważyć należy, że definicja słowa "smok"
+    podana przez Lema jest według Coqowych standardów nieakceptowalna, gdyż
+    jeżeli w definicji <i>smoka</i> rozwiniemy definicję <i>zmoka</i>, to otrzymamy
+
+<div class="paragraph"> </div>
+
+    <i>Smok ty wysuszony zmoczony smok</i> 
+<div class="paragraph"> </div>
+
+ Widać gołym okiem, iż próba zredukowania (czyli obliczenia) obieku
+    <i>smok</i> nigdy się nie skończy. Jak już wiemy, niekończące się obliczenia
+    w logice odpowiadają sprzeczności, a zatem ani <i>smoki</i>, ani <i>zmoki</i> w
+    Coqowym świecie nie istnieją.
+
+<div class="paragraph"> </div>
+
+    Nie znaczy to bynajmniej, że wszystkie definicje przez indukcję
+    wzajemną są w Coqu niepoprawne, choć należy przyznać, że są dość
+    rzadko używane. Czas jednak abyśmy ujrzeli pierwszy prawdziwy przkład
+    indukcji wzajemnej. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="MutInd"><span class="id" type="module">MutInd</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="MutInd.even"><span class="id" type="inductive">even</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> -&gt; <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MutInd.even0"><span class="id" type="constructor">even0</span></a> : <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MutInd.evenS"><span class="id" type="constructor">evenS</span></a> : <span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#odd"><span class="id" type="inductive">odd</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>)<br/>
+<br/>
+<span class="id" type="keyword">with</span> <a name="MutInd.odd"><span class="id" type="inductive">odd</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> -&gt; <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MutInd.oddS"><span class="id" type="constructor">oddS</span></a> : <span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#odd"><span class="id" type="inductive">odd</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Aby zrozumieć tę definicję, zestawmy ją z naszą definicją parzystości
+    z sekcji <i>Induktywne predykaty</i>.
+
+<div class="paragraph"> </div>
+
+    Zdefiniowaliśmy tam predykat bycia liczbą parzystą tak:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode">0</span> jest parzyste
+
+</li>
+<li> jeżeli <span class="inlinecode"><span class="id" type="var">n</span></span> jest parzyste, to <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> też jest parzyste 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Tym razem jednak nie definiujemy jedynie predykatu "jest liczbą parzystą".
+    Definiujemy jednocześnie dwa predykaty: "jest liczbą parzystą" oraz
+    "jest liczbą nieparzystą". Definicja brzmi tak:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode">0</span> jest parzyste
+
+</li>
+<li> jeżeli <span class="inlinecode"><span class="id" type="var">n</span></span> jest nieparzyste, to <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> jest parzyste
+
+</li>
+<li> jeżeli <span class="inlinecode"><span class="id" type="var">n</span></span> jest parzyste, to <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> jest nieparzyste 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Czy definicja taka rzeczywiście ma sens? Sprawdźmy to:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode">0</span> jest parzyste na mocy definicji
+
+</li>
+<li> jeżeli <span class="inlinecode">0</span> jest parzyste (a jest), to <span class="inlinecode">1</span> jest nieparzyste
+
+</li>
+<li> jeżeli <span class="inlinecode">1</span> jest nieparzyste (a jest), to <span class="inlinecode">2</span> jest parzyste
+
+</li>
+<li> ο αδελφός μου είναι τακ ψηθξοςυ, ͽε ο κθρςα 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Jak widać, nasza definicja rzeczywiście ma sens. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="R2.html#MutInd"><span class="id" type="module">MutInd</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab114"></a><h1 class="section">Różne</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab115"></a><h2 class="section">Parametryczność</h2>
 
 <div class="paragraph"> </div>
 
@@ -3177,12 +3314,12 @@ Przypomnijmy, co już wiemy o redukcjach:
     ćwiczeń w podrozdziale o typie <span class="inlinecode"><span class="id" type="var">Empty_set</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab115"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab116"></a><h4 class="section">Ćwiczenie</h4>
  Udowodnij (nieformalnie, na papierze), że w powyższym akapicie nie
     okłamałem cię. 
 <div class="paragraph"> </div>
 
-<a name="lab116"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab117"></a><h4 class="section">Ćwiczenie</h4>
  Zdefiniuj wszystkie możliwe funkcje typu <span class="inlinecode"><span class="id" type="var">unit</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">unit</span></span>, <span class="inlinecode"><span class="id" type="var">unit</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">bool</span></span>
     i <span class="inlinecode"><span class="id" type="var">bool</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">bool</span></span>. 
 <div class="paragraph"> </div>
@@ -3220,7 +3357,7 @@ Przypomnijmy, co już wiemy o redukcjach:
 </div>
 
 <div class="doc">
-<a name="lab117"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab118"></a><h4 class="section">Ćwiczenie</h4>
  Zdefiniuj wszystkie elementy następujących typów lub udowodnij, że
     istnienie choć jednego elementu prowadzi do sprzeczności:
 
@@ -3267,7 +3404,7 @@ Przypomnijmy, co już wiemy o redukcjach:
 </div>
 
 <div class="doc">
-<a name="lab118"></a><h2 class="section">Ścisła pozytywność</h2>
+<a name="lab119"></a><h2 class="section">Ścisła pozytywność</h2>
 
 <div class="paragraph"> </div>
 
@@ -3395,7 +3532,7 @@ Jak widać, gdyby definicja typu <span class="inlinecode"><span class="id" type=
 </div>
 
 <div class="doc">
-<a name="lab119"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab120"></a><h4 class="section">Ćwiczenie</h4>
 
 </div>
 <div class="code">
@@ -3457,7 +3594,7 @@ Rozstrzygnij, czy typ posiadający jeden z następujących konstruktorów
 </div>
 
 <div class="doc">
-<a name="lab120"></a><h2 class="section">Rodziny typów induktywnych</h2>
+<a name="lab121"></a><h2 class="section">Rodziny typów induktywnych</h2>
 
 <div class="paragraph"> </div>
 
@@ -3660,7 +3797,7 @@ Konstruktor <span class="inlinecode"><span class="id" type="var">vnil</span></sp
     w zależności od konstruktora, a zatem umieszczamy go po ostatnim <span class="inlinecode">:</span>. 
 <div class="paragraph"> </div>
 
-<a name="lab121"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab122"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -3695,7 +3832,7 @@ Konstruktor <span class="inlinecode"><span class="id" type="var">vnil</span></sp
 </div>
 
 <div class="doc">
-<a name="lab122"></a><h2 class="section">Sumy zależne i podtypy</h2>
+<a name="lab123"></a><h2 class="section">Sumy zależne i podtypy</h2>
 
 <div class="paragraph"> </div>
 
@@ -3849,7 +3986,7 @@ Definiowanie wartości typu <span class="inlinecode"><span class="id" type="var"
     Następnie dowodzimy tego faktu, co kończy proces definiowania. 
 <div class="paragraph"> </div>
 
-<a name="lab123"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab124"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -3859,7 +3996,7 @@ Definiowanie wartości typu <span class="inlinecode"><span class="id" type="var"
     odpowiadający liście <span class="inlinecode">[42;</span> <span class="inlinecode">666;</span> <span class="inlinecode">1337]</span>. 
 <div class="paragraph"> </div>
 
-<a name="lab124"></a><h2 class="section">Rozstrzygalność</h2>
+<a name="lab125"></a><h2 class="section">Rozstrzygalność</h2>
 
 </div>
 <div class="code">
@@ -3959,7 +4096,7 @@ Powyższe dywagacje nie przeszkadzają nam jednak w udowadnianiu,
 
 <div class="paragraph"> </div>
 
-<a name="lab125"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab126"></a><h4 class="section">Ćwiczenie</h4>
 
 </div>
 <div class="code">
@@ -3971,7 +4108,7 @@ Powyższe dywagacje nie przeszkadzają nam jednak w udowadnianiu,
 </div>
 
 <div class="doc">
-<a name="lab126"></a><h3 class="section">Techniczne apekty rozstrzygalności</h3>
+<a name="lab127"></a><h3 class="section">Techniczne apekty rozstrzygalności</h3>
 
 <div class="paragraph"> </div>
 
@@ -4061,7 +4198,7 @@ Typ <span class="inlinecode"><span class="id" type="var">sumbool</span></span> j
     dysjunkcji. 
 <div class="paragraph"> </div>
 
-<a name="lab127"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab128"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4071,7 +4208,7 @@ Typ <span class="inlinecode"><span class="id" type="var">sumbool</span></span> j
     jest obecna na liście <span class="inlinecode"><span class="id" type="var">l</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab128"></a><h2 class="section">Kwantyfikacja egzystencjalna (alfa)</h2>
+<a name="lab129"></a><h2 class="section">Kwantyfikacja egzystencjalna (alfa)</h2>
 
 <div class="paragraph"> </div>
 
@@ -4103,7 +4240,7 @@ Typ <span class="inlinecode"><span class="id" type="var">sumbool</span></span> j
     do reprezentowania kwantyfikacji egzystencjalnej. 
 <div class="paragraph"> </div>
 
-<a name="lab129"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab130"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4123,7 +4260,7 @@ Typ <span class="inlinecode"><span class="id" type="var">sumbool</span></span> j
 </div>
 
 <div class="doc">
-<a name="lab130"></a><h2 class="section">Typy hybrydowe (alfa)</h2>
+<a name="lab131"></a><h2 class="section">Typy hybrydowe (alfa)</h2>
 
 <div class="paragraph"> </div>
 
@@ -4153,7 +4290,7 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
     postać jego termów, a nie jedynie fakt ich istnienia. 
 <div class="paragraph"> </div>
 
-<a name="lab131"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab132"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4173,7 +4310,7 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
 </div>
 
 <div class="doc">
-<a name="lab132"></a><h2 class="section">Cztery rodzaje reguł</h2>
+<a name="lab133"></a><h2 class="section">Cztery rodzaje reguł</h2>
 
 <div class="paragraph"> </div>
 
@@ -4199,7 +4336,7 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
 
 <div class="paragraph"> </div>
 
-<a name="lab133"></a><h3 class="section">Reguły formacji</h3>
+<a name="lab134"></a><h3 class="section">Reguły formacji</h3>
 
 <div class="paragraph"> </div>
 
@@ -4307,7 +4444,7 @@ Reguła nie pochodzi z definicji induktywnej, gdyż typ funkcji <span class="inl
     jest typem wbudowanym i nie jest zdefiniowany indukcyjnie. 
 <div class="paragraph"> </div>
 
-<a name="lab134"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab135"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4323,7 +4460,7 @@ Reguła nie pochodzi z definicji induktywnej, gdyż typ funkcji <span class="inl
 </div>
 
 <div class="doc">
-<a name="lab135"></a><h3 class="section">Reguły wprowadzania</h3>
+<a name="lab136"></a><h3 class="section">Reguły wprowadzania</h3>
 
 <div class="paragraph"> </div>
 
@@ -4428,7 +4565,7 @@ Pojawiło się tu kilka nowych rzeczy: litera Γ oznacza kontekst,
     w rozdziałach 4 i 5 manuala: https://coq.inria.fr/refman/toc.html 
 <div class="paragraph"> </div>
 
-<a name="lab136"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab137"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4444,7 +4581,7 @@ Pojawiło się tu kilka nowych rzeczy: litera Γ oznacza kontekst,
 </div>
 
 <div class="doc">
-<a name="lab137"></a><h3 class="section">Reguły eliminacji</h3>
+<a name="lab138"></a><h3 class="section">Reguły eliminacji</h3>
 
 <div class="paragraph"> </div>
 
@@ -4691,7 +4828,7 @@ Póki co wydaje mi się, że udowodnienie słuszności tej reguły będzie dla
     list. 
 <div class="paragraph"> </div>
 
-<a name="lab138"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab139"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4725,7 +4862,7 @@ Póki co wydaje mi się, że udowodnienie słuszności tej reguły będzie dla
 </div>
 
 <div class="doc">
-<a name="lab139"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab140"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4756,14 +4893,14 @@ Póki co wydaje mi się, że udowodnienie słuszności tej reguły będzie dla
 </div>
 
 <div class="doc">
-<a name="lab140"></a><h3 class="section">Reguły obliczania</h3>
+<a name="lab141"></a><h3 class="section">Reguły obliczania</h3>
 
 <div class="paragraph"> </div>
 
  TODO 
 <div class="paragraph"> </div>
 
-<a name="lab141"></a><h1 class="section">Rekursja</h1>
+<a name="lab142"></a><h1 class="section">Rekursja</h1>
 
 <div class="paragraph"> </div>
 
@@ -4804,7 +4941,7 @@ Póki co wydaje mi się, że udowodnienie słuszności tej reguły będzie dla
 
 <div class="paragraph"> </div>
 
-<a name="lab142"></a><h2 class="section">Rekursja ogólna</h2>
+<a name="lab143"></a><h2 class="section">Rekursja ogólna</h2>
 
 <div class="paragraph"> </div>
 
@@ -4844,7 +4981,7 @@ Aby chronić nas przed tą katastrofą, Coq nakłada na rekurencję
     Innymi słowy, dozwolona jest jedynie rekursja strukturalna. 
 <div class="paragraph"> </div>
 
-<a name="lab143"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
+<a name="lab144"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
 
 <div class="paragraph"> </div>
 
@@ -4904,7 +5041,7 @@ Możemy zaobserwować parę rzeczy. Pierwsza, techniczna sprawa: po
 
 <div class="paragraph"> </div>
 
-<a name="lab144"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab145"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
