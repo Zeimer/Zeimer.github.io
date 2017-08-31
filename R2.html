@@ -3159,8 +3159,8 @@ Przypomnijmy, co już wiemy o redukcjach:
 <div class="paragraph"> </div>
 
  Jest jeszcze jeden rodzaj indukcji, o którym dotychczas nie mówiliśmy:
-    indukcja wzajemna. Bez uprzedniego teoretyzowania zbadajmy sprawę na
-    przykładzie klasyków polskiej literatury: 
+    indukcja wzajemna (ang. mutual induction). Bez zbędnego teoretyzowania
+    zbadajmy sprawę na przykładzie klasyków polskiej literatury: 
 <div class="paragraph"> </div>
 
  <i>Smok to wysuszony zmok</i> 
@@ -3239,7 +3239,8 @@ Aby zrozumieć tę definicję, zestawmy ją z naszą definicją parzystości
 
  Tym razem jednak nie definiujemy jedynie predykatu "jest liczbą parzystą".
     Definiujemy jednocześnie dwa predykaty: "jest liczbą parzystą" oraz
-    "jest liczbą nieparzystą". Definicja brzmi tak:
+    "jest liczbą nieparzystą", które odwołują się do siebi nawzajm. Definicja
+    brzmi tak:
 
 <div class="paragraph"> </div>
 
@@ -3270,15 +3271,482 @@ Aby zrozumieć tę definicję, zestawmy ją z naszą definicją parzystości
 <li> jeżeli <span class="inlinecode">1</span> jest nieparzyste (a jest), to <span class="inlinecode">2</span> jest parzyste
 
 </li>
-<li> ο αδελφός μου είναι τακ ψηθξοςυ, ͽε ο κθρςα 
+<li> i tak dalej, ad infiitum
+
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
- Jak widać, nasza definicja rzeczywiście ma sens. 
+ Jak widać, za pomocą naszej wzajemnie induktywnej definicji <span class="inlinecode"><span class="id" type="var">even</span></span> można
+    wygenerować wszystkie liczby parzyste (i tylko je), tak więc nowe <span class="inlinecode"><span class="id" type="var">even</span></span>
+    jest równoważne staremu <span class="inlinecode"><span class="id" type="var">even</span></span> z sekcji <i>Induktywne predykaty</i>. Podobnie
+    <span class="inlinecode"><span class="id" type="var">odd</span></span> może wygenerować wszystkie liczby nieparzyste i tylko je. 
+<div class="paragraph"> </div>
+
+<a name="lab114"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Upewnij się, że powyższy akapit nie kłamie. 
 </div>
 <div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.even_0"><span class="id" type="lemma">even_0</span></a> : <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.odd_1"><span class="id" type="lemma">odd_1</span></a> : <a class="idref" href="R2.html#MutInd.odd"><span class="id" type="inductive">odd</span></a> 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.even_2"><span class="id" type="lemma">even_2</span></a> : <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> 2.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.even_42"><span class="id" type="lemma">even_42</span></a> : <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> 42.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.not_odd_0"><span class="id" type="lemma">not_odd_0</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~</span></a> <a class="idref" href="R2.html#MutInd.odd"><span class="id" type="inductive">odd</span></a> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.not_even_1"><span class="id" type="lemma">not_even_1</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~</span></a> <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> 1.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab115"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Udowodnij podstawowe właściwości <span class="inlinecode"><span class="id" type="var">even</span></span> i <span class="inlinecode"><span class="id" type="var">odd</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.even_SS"><span class="id" type="lemma">even_SS</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.odd_SS"><span class="id" type="lemma">odd_SS</span></a> : <br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.odd"><span class="id" type="inductive">odd</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#MutInd.odd"><span class="id" type="inductive">odd</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.even_plus"><span class="id" type="lemma">even_plus</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> (<a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jeśli poległeś przy ostatnim zadaniu — nie przejmuj się. Specjalnie
+    dobrałem złośliwy przykład.
+
+<div class="paragraph"> </div>
+
+    W tym momencie należy sobie zadać pytanie: jak dowodzić właściwości
+    typów wzajemnie induktywnych? Aby udzielić odpowiedzi, spróbujmy
+    udowodnić <span class="inlinecode"><span class="id" type="var">even_plus</span></span> za pomocą indukcji po <span class="inlinecode"><span class="id" type="var">n</span></span>, a potem prześledźmy,
+    co poszło nie tak. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.even_plus_failed_1"><span class="id" type="lemma">even_plus_failed_1</span></a> : <br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> (<a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">n</span>; <span class="id" type="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">constructor</span>. <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>; <span class="id" type="tactic">clear</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Nasza indukcja po <span class="inlinecode"><span class="id" type="var">n</span></span> zawiodła, gdyż nasza hipoteza indukcyjna ma w
+    konkluzji <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">(<span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">m</span>)</span>, podczas gdy nasz cel jest postaci
+    <span class="inlinecode"><span class="id" type="var">odd</span></span> <span class="inlinecode">(<span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">m</span>)</span>. Zauważmy, że teoretycznie cel powinno dać się udowodnić,
+    jako że mamy hipotezy <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span> oraz <span class="inlinecode"><span class="id" type="var">odd</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span>, a suma liczby parzystej i
+    nieparzystej jest nieparzysta.
+
+<div class="paragraph"> </div>
+
+    Nie zrażajmy się jednak i spróbujmy indukcji po dowodzie <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.even_plus_failed_2"><span class="id" type="lemma">even_plus_failed_2</span></a> : <br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> (<a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">induction</span> 1; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>.<br/>
+<span class="id" type="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Nasza indukcja po dowodzie hipotezy <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> zawiodła, i to z kretesem,
+    gdyż w kontekście nie mamy nawet żadnej hipotezy indukcyjnej! Co właściwie
+    się stało? 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#MutInd.even_ind"><span class="id" type="definition">even_ind</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;even_ind&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;P&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;Prop,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;0&nbsp;-&gt;&nbsp;(forall&nbsp;n&nbsp;:&nbsp;nat,&nbsp;odd&nbsp;n&nbsp;-&gt;&nbsp;P&nbsp;(S&nbsp;n))&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;n&nbsp;:&nbsp;nat,&nbsp;even&nbsp;n&nbsp;-&gt;&nbsp;P&nbsp;n&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jak widać, w naszej hipotezie "indukcyjnej" wygenerowanej przez Coqa w
+    ogóle nie ma żadnej indukcji. Jest tam jedynie odwołanie do predykatu
+    <span class="inlinecode"><span class="id" type="var">odd</span></span>...
+
+<div class="paragraph"> </div>
+
+    Zauważmy jednak, że naszym celem znów było <span class="inlinecode"><span class="id" type="var">odd</span></span> <span class="inlinecode">(<span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">m</span>)</span>, a hipotezy
+    <span class="inlinecode"><span class="id" type="var">odd</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> oraz <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span> sprawiają, że w teorii powinno dać się ten cel
+    udowodnić, gdyż suma liczby parzystej i nieparzystej jest nieparzysta.
+
+<div class="paragraph"> </div>
+
+    Mogłoby się zdawać, że cierpimy na niedopasowanie (próba 1) lub brak
+    (próba 2) hipotez indukcyjnych. Wydaje się też, że skoro w obydwu
+    próbach zatrzymaliśmy się na celu <span class="inlinecode"><span class="id" type="var">odd</span></span> <span class="inlinecode">(<span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">m</span>)</span>, to pomocne mogłoby
+    okazać się poniższe twierdzenie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="MutInd.odd_even_plus_failed"><span class="id" type="lemma">odd_even_plus_failed</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.odd"><span class="id" type="inductive">odd</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> -&gt; <a class="idref" href="R2.html#MutInd.odd"><span class="id" type="inductive">odd</span></a> (<a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">n</span>; <span class="id" type="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">constructor</span>. <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>; <span class="id" type="tactic">clear</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Niestety — nie dla psa kiełbasa, gdyż natykamy się na problemy bliźniaczo
+    podobne do tych, które napotkaliśmy w poprzednim twierdzeniu: nasza
+    hipoteza indukcyjna ma w konkluzji <span class="inlinecode"><span class="id" type="var">odd</span></span> <span class="inlinecode">(<span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">m</span>)</span>, podczas gdy nasz cel
+    jest postaci <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">(<span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">m</span>)</span>.
+
+<div class="paragraph"> </div>
+
+    Próba przepchnięcia lematu za pomocą indukcji po dowodzie hipotezy
+    <span class="inlinecode"><span class="id" type="var">odd</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> także nie zadziała, z tych samych powodów dla których indukcja
+    po <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> nie pozwoliła nam udowodnić <span class="inlinecode"><span class="id" type="var">even_plus</span></span>. Zauważmy jednak, że
+    cel jest udowadnialny, gdyż jako hipotezy mamy <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> oraz <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span>,
+    a suma dwóch liczb parzystych jest parzysta.
+
+<div class="paragraph"> </div>
+
+    Wydaje się, że wpadliśmy w błędne koło i jesteśmy w matni, bez wyjścia,
+    bez nadziei, bez krzty szans na powodzenie: w dowodzie <span class="inlinecode"><span class="id" type="var">even_plus</span></span>
+    potrzebujemy lematu <span class="inlinecode"><span class="id" type="var">odd_even_plus</span></span>, ale nie możemy go udowodnić, gdyż
+    w dowodzie <span class="inlinecode"><span class="id" type="var">odd_even_plus</span></span> wymagane jest użycie lematu <span class="inlinecode"><span class="id" type="var">even_plus</span></span>.
+    Ehhh, gdybyśmy tak mogli udowodnić oba te twierdzenia na raz...
+
+<div class="paragraph"> </div>
+
+    Eureka!
+
+<div class="paragraph"> </div>
+
+    Zauważ, że w naszych dotychczasowych dowodach przez indukcję posługiwaliśmy
+    się zwykłą, "pojedynczą" indukcją. Była ona wystarczająca, gdyż mieliśmy do
+    czynienia jedynie ze zwykłymi typami induktywnymi. Tym razem jednak jest
+    inaczej: w ostatnich trzech dowodach chcieliśmy użyć "pojedynczej" indukcji
+    do udowodnienia czegoś na temat predykatów wzajemnie induktywnych.
+
+<div class="paragraph"> </div>
+
+    Jest to ogromny zgrzyt. Do dowodzenia właściwości typów wzajemnie
+    induktywnych powinniśmy użyć... o zgrozo, jak mogliśmy to przeoczyć,
+    przecież to takie oczywiste... indukcji wzajemnej!
+
+<div class="paragraph"> </div>
+
+    Sedno naszego bólu wynika z postaci reguł indukcyjnych dla <span class="inlinecode"><span class="id" type="var">even</span></span> oraz
+    <span class="inlinecode"><span class="id" type="var">odd</span></span>: mimo, że są to predykaty wzajemnie induktywne, Coq wygenerował
+    dla nas reguły <span class="inlinecode"><span class="id" type="var">even_ind</span></span> oraz <span class="inlinecode"><span class="id" type="var">odd_ind</span></span>, które nie tylko nie odwołują
+    się do siebie nawzajem, ale w ogóle nie ma w nich żadnej indukcji.
+
+<div class="paragraph"> </div>
+
+    Na tym etapie naszej drogi do oświecenia remedium powinno być oczywiste:
+    potrzebujemy dwóch wzajemnych reguł indukcyjnych. Na szczęście ich
+    zdobycie nie będzie trudne: Coq potrafi je dla nas wygenerować. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Scheme</span> <a name="MutInd.even_mut_ind"><span class="id" type="definition">even_mut_ind</span></a> := <span class="id" type="var">Minimality</span> <span class="id" type="keyword">for</span> <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <span class="id" type="keyword">Sort</span> <span class="id" type="keyword">Prop</span><br/>
+<span class="id" type="keyword">with</span> <a name="MutInd.odd_mut_ind"><span class="id" type="definition">odd_mut_ind</span></a> := <span class="id" type="var">Minimality</span> <span class="id" type="keyword">for</span> <a class="idref" href="R2.html#MutInd.odd"><span class="id" type="inductive">odd</span></a> <span class="id" type="keyword">Sort</span> <span class="id" type="keyword">Prop</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Powyższa komenda mówi Coqowi mniej więcej tyle: wygeneruj dwie wzajemnie
+    induktywne (minimalne) reguły eliminacji o nazwach <span class="inlinecode"><span class="id" type="var">even_mut_ind</span></span> oraz
+    <span class="inlinecode"><span class="id" type="var">odd_mut_ind</span></span>.
+
+<div class="paragraph"> </div>
+
+    Nie będziemy na razie rozwodzić się znaczeniem w tym kontekście słowa
+    "minimalny". Przyjmij póki co na wiarę, że w przypadku induktywnych
+    predykatów i relacji reguły minimalne są lepsze od innych.
+
+<div class="paragraph"> </div>
+
+    (Pewnie zastanawiasz się, dlaczego Coq domyślnie nie wygenerował reguł
+    <span class="inlinecode"><span class="id" type="var">even_mut_ind</span></span> oraz <span class="inlinecode"><span class="id" type="var">odd_mut_ind</span></span>, skoro to potrafi. Cóż, ja też się
+    nad tym zastanawiam...)
+
+<div class="paragraph"> </div>
+
+    (W tym miejscu nasuwa mi się pewien żart programistyczny: Scheme to nie
+    język programowania, <span class="inlinecode"><span class="id" type="keyword">Scheme</span></span> to komenda Coqa służąca do generowania
+    reguł indukcyjnych.)
+
+<div class="paragraph"> </div>
+
+    Aby lepiej zrozumieć wygenerowane reguły, przyjrzyjmy się im. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Check</span> <a class="idref" href="R2.html#MutInd.even_mut_ind"><span class="id" type="definition">even_mut_ind</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;<br/>
+even_mut_ind<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;P&nbsp;P0&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;Prop,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;0&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(forall&nbsp;n&nbsp;:&nbsp;nat,&nbsp;odd&nbsp;n&nbsp;-&gt;&nbsp;P0&nbsp;n&nbsp;-&gt;&nbsp;P&nbsp;(S&nbsp;n))&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(forall&nbsp;n&nbsp;:&nbsp;nat,&nbsp;even&nbsp;n&nbsp;-&gt;&nbsp;P&nbsp;n&nbsp;-&gt;&nbsp;P0&nbsp;(S&nbsp;n))&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;n&nbsp;:&nbsp;nat,&nbsp;even&nbsp;n&nbsp;-&gt;&nbsp;P&nbsp;n&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Mamy tutaj dwa predykaty <span class="inlinecode"><span class="id" type="var">P</span>,</span> <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>. Nie powinno nas to dziwić
+    — przecież będziemy dowodzić dwóch twierdzeń na raz. Reszta reguły mówi,
+    że aby udowodnić <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span>,</span> <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span>, wystarczy, że pokażemy,
+    że spełnione są następujące warunki:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> po pierwsze musimy pokazać, że zachodzi <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">0</span>
+
+</li>
+<li> po drugie musimy pokazać, że dla wszystkich nieparzystych <span class="inlinecode"><span class="id" type="var">n</span></span>, jeżeli
+      zachodzi <span class="inlinecode"><span class="id" type="var">P0</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span>, to <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode"><span class="id" type="var">n</span>)</span>. Zauważ, że w tym stwierdzeniu występuje
+      zarówno <span class="inlinecode"><span class="id" type="var">P</span></span>, jak i <span class="inlinecode"><span class="id" type="var">P0</span></span>
+
+</li>
+<li> po trzecie musimy pokazać, że dla wszystkich parzystych <span class="inlinecode"><span class="id" type="var">n</span></span>, jeżeli
+      zachodzi <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span>, to zachodzi także <span class="inlinecode"><span class="id" type="var">P0</span></span> <span class="inlinecode">(<span class="id" type="var">S</span></span> <span class="inlinecode"><span class="id" type="var">n</span>)</span> 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Reguła ta jest wybitnie podobna do zwykłek indukcji dla typu <span class="inlinecode"><span class="id" type="var">nat</span></span>. Tam
+    wyglądała ona mniej więcej tak: 
+<div class="paragraph"> </div>
+
+ <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">0</span> ~&gt; <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">1</span> ~&gt; <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">2</span> ~&gt; ..., 
+<div class="paragraph"> </div>
+
+ gdzie symbol "~&gt;" ma jedynie wizualnie przypominać strzałkę i nie ma nic
+    wspólnego z implikacją czy funkcjami.
+
+<div class="paragraph"> </div>
+
+    Tym razem jest podobnie, ale mamy dwa różne predykaty <span class="inlinecode"><span class="id" type="var">P</span></span> i <span class="inlinecode"><span class="id" type="var">P0</span></span>. Wobec
+    tego <span class="inlinecode"><span class="id" type="var">even_mut_ind</span></span> można zwizualizować tak (dla większej jasności przez
+    chwilę będziemy pisać <span class="inlinecode"><span class="id" type="var">Q</span></span> zamiast <span class="inlinecode"><span class="id" type="var">P0</span></span>): 
+<div class="paragraph"> </div>
+
+ <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">0</span> ~&gt; <span class="inlinecode"><span class="id" type="var">Q</span></span> <span class="inlinecode">1</span> ~&gt; <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">2</span> ~&gt; <span class="inlinecode"><span class="id" type="var">Q</span></span> <span class="inlinecode">3</span> ~&gt; <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode">4</span> ~&gt; ... 
+<div class="paragraph"> </div>
+
+ Reguła <span class="inlinecode"><span class="id" type="var">odd_mut_ind</span></span> jest analogiczna. Ba! Właściwie jedyną rzeczą, jaką
+    różni się od <span class="inlinecode"><span class="id" type="var">even_mut_ind</span></span>, jest to, że w konkluzji ma <span class="inlinecode"><span class="id" type="var">P0</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span>, podczas
+    gdy <span class="inlinecode"><span class="id" type="var">even_mut_ind</span></span> ma tam <span class="inlinecode"><span class="id" type="var">P</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span>.
+
+<div class="paragraph"> </div>
+
+    Skoro mamy już odpowiednią regułę indukcyjną, czas użyć jej do opuszczenia
+    naszej matni. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MutInd.even_plus"><span class="id" type="lemma">even_plus</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> (<a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">generalize</span> <span class="id" type="tactic">dependent</span> <span class="id" type="var">m</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">H</span> <span class="id" type="keyword">using</span> <a class="idref" href="R2.html#MutInd.even_mut_ind"><span class="id" type="definition">even_mut_ind</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">P0</span> := <span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> =&gt; <span class="id" type="keyword">forall</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> -&gt; <a class="idref" href="R2.html#MutInd.odd"><span class="id" type="inductive">odd</span></a> (<a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a>); <span class="id" type="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">constructor</span>. <span class="id" type="tactic">apply</span> <span class="id" type="var">IHeven</span>. <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">constructor</span>. <span class="id" type="tactic">apply</span> <span class="id" type="var">IHeven</span>. <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+W powyższym dowodzie najpierw wprowadzamy do kontekstu <span class="inlinecode"><span class="id" type="var">n</span></span>, <span class="inlinecode"><span class="id" type="var">m</span></span> i <span class="inlinecode"><span class="id" type="var">H</span></span>.
+    Następnie używamy taktyki <span class="inlinecode"><span class="id" type="tactic">generalize</span></span> <span class="inlinecode"><span class="id" type="tactic">dependent</span></span>, która jest odwrotnością
+    <span class="inlinecode"><span class="id" type="tactic">intro</span></span> — służy ona do przerzucania rzeczy z kontekstu do celu. Jeżeli
+    <span class="inlinecode"><span class="id" type="tactic">intro</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span> odczytamy jako "weźmy dowolne <span class="inlinecode"><span class="id" type="var">m</span></span>", to <span class="inlinecode"><span class="id" type="tactic">generalize</span></span> <span class="inlinecode"><span class="id" type="tactic">dependent</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span>
+    możemy odczytać: "zamiast naszego celu <span class="inlinecode"><span class="id" type="var">G</span></span> dla tego konkretnego <span class="inlinecode"><span class="id" type="var">m</span></span>,
+    udowodnijmy cel <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">m</span>,</span> <span class="inlinecode"><span class="id" type="var">G</span></span>".
+
+<div class="paragraph"> </div>
+
+    Cała operacja służy temu, abyśmy uzyskali jak najogólniejszą hipotezę
+    indukcyjną — w szczególności chcemy, aby nasza hiptoeza indukcyjna
+    była kwantyfikowana po <span class="inlinecode"><span class="id" type="var">m</span></span> (więcej o generalizowaniu hipotezy indukcyjnej
+    napiszę w przyszłości). Po tej operacji nasz cel zyskuje postać
+    <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span>,</span> <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">(<span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">m</span>)</span>.
+
+<div class="paragraph"> </div>
+
+    Następnie musimy wykonać najtrudniejszy krok dowodu, czyli rozpocząć
+    indukcję. Dotychczas było to proste — np. dla <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> pisaliśmy po
+    prostu <span class="inlinecode"><span class="id" type="tactic">induction</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> i wszystko się udawało. Nie zawsze jednak jest
+    tak kolorowo.
+
+<div class="paragraph"> </div>
+
+    Przede wszystkim musimy wskazać regułe indukcyjną, której chcemy użyć
+    do przeprowadzenia naszej indukcji — jeżeli tego nie zrobimy, użyta
+    zostanie reguła domyślna, o której już wiemy, że nie zadziała. Po to
+    właśnie jest klauzula <span class="inlinecode"><span class="id" type="keyword">using</span></span> <span class="inlinecode"><span class="id" type="var">even_mut_ind</span></span>.
+
+<div class="paragraph"> </div>
+
+    Druga sprawa to wskazanie, czego tak właściwie będziemy przez indukcję
+    dowodzić. Dotychczas było to banalne — nic nie pisaliśmy, a Coq sam
+    potrafił wywnioskować postać tego zdania z celu. Tym razem jest jednak
+    inaczej: chcemy dowodzić dwóch zdań na raz, ale z celu można wywnioskować
+    tylko jedno.
+
+<div class="paragraph"> </div>
+
+    Zanim przejdziesz dalej — przyjrzyj się jeszcze raz postaci reguły
+    <span class="inlinecode"><span class="id" type="var">even_mut_ind</span></span>.
+
+<div class="paragraph"> </div>
+
+    Użyta przez nas postać taktyki <span class="inlinecode"><span class="id" type="tactic">induction</span></span> jest równoważna następującej
+    (TODO: przepraszam za formatowanie, chwilowo nie umiem tego ładniej
+    napisać): 
+<div class="paragraph"> </div>
+
+ <span class="inlinecode"><span class="id" type="tactic">induction</span></span> <span class="inlinecode"><span class="id" type="var">H</span></span> <span class="inlinecode"><span class="id" type="keyword">using</span></span> <span class="inlinecode"><span class="id" type="var">even_mut_ind</span></span> <span class="inlinecode"><span class="id" type="keyword">with</span></span> 
+<div class="paragraph"> </div>
+
+ <span class="inlinecode">(<span class="id" type="var">P</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span>,</span> <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode">(<span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">m</span>))</span> <span class="inlinecode"></span>
+<div class="paragraph"> </div>
+
+ <span class="inlinecode">(<span class="id" type="var">P0</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" type="keyword">forall</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span>,</span> <span class="inlinecode"><span class="id" type="var">even</span></span> <span class="inlinecode"><span class="id" type="var">m</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">odd</span></span> <span class="inlinecode">(<span class="id" type="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" type="var">m</span>))</span> 
+<div class="paragraph"> </div>
+
+ Argumenty <span class="inlinecode"><span class="id" type="var">P</span></span> i <span class="inlinecode"><span class="id" type="var">P0</span></span> to zdania, których będziemy jednocześnie dowodzić.
+    Argumentu <span class="inlinecode"><span class="id" type="var">P</span></span> nie musieliśmy pisać, gdyż wynika on wprost z celu, który
+    mamy udowodnić w chwili użycia taktyki <span class="inlinecode"><span class="id" type="tactic">induction</span></span>. Jednak argumentu <span class="inlinecode"><span class="id" type="var">P0</span></span>
+    Coq nie jest w stanie sam wywnioskować. To, jaki ma on być, jest sprawą
+    nietrywialną i zależy w pełni od nas — od naszego doświadczenia i wprawy
+    w stosowaniu indukcji wzajemnej.
+
+<div class="paragraph"> </div>
+
+    Indukcja generuje nam 3 podcele: 2 odpowiadają konstruktorom <span class="inlinecode"><span class="id" type="var">even</span></span>,
+    a jeden konstruktorowi <span class="inlinecode"><span class="id" type="var">odd</span></span>. Reszta dowodu przebiega w taki sposób,
+    w jaki próbowaliśmy dowodzić wcześniej. Tym razem jedna skutkuje, gdyż
+    dzięki nowej wzajemnej regule indukcyjnej dysponujemy wszystkimi
+    potrzebnymi hipotezami indukcyjnymi. 
+<div class="paragraph"> </div>
+
+<a name="lab116"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Udowodnij twierdzenia. Zanim to zrobisz, zastanów się: w których
+    przypadkach potrzebna będzie indukcja wzajemna? 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MutInd.even_or_odd"><span class="id" type="lemma">even_or_odd</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> \/ <a class="idref" href="R2.html#MutInd.odd"><span class="id" type="inductive">odd</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MutInd.even_mult"><span class="id" type="lemma">even_mult</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> (<a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">*</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MutInd.even_double"><span class="id" type="lemma">even_double</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> (2 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">*</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Ufff... Dowodzenie za pomocą indukcji wzajemnej wydaje się skomplikowane.
+    Musimy wygenerować odpowiednie reguły dziwną komendą (jeżeli nie zostały
+    wygenerowane wcześniej), zgeneralizować hipotezę indukcyjną, zgadnąć
+    twierdzenie pomocnicze i zainstancjować argumenty taktyki <span class="inlinecode"><span class="id" type="tactic">induction</span></span>.
+    Strasznie dużo roboty.
+
+<div class="paragraph"> </div>
+
+    Jeżeli przyjrzałeś się dokładnie wiadomości wypisanej przez Coqa po <span class="inlinecode"><span class="id" type="keyword">Qed</span></span>
+    w lemacie <span class="inlinecode"><span class="id" type="var">even_plus</span></span>, dostrzegłeś zapewne zanjomy napis: <span class="inlinecode"><span class="id" type="var">even_plus</span></span> is
+    defined. Niby wszystko gra, ale zaraz! Czy przypadkiem nie zapewniałem
+    cię, że będziemy dowodzić dwóch twierdzeń na raz?
+
+<div class="paragraph"> </div>
+
+    Istotnie tak było. Co więc stało się z drugim twierdzeniem? Czy dowodziliśmy
+    tylko jednego? 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="MutInd.even_plus'"><span class="id" type="lemma">even_plus'</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> (<a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a><br/>
+<span class="id" type="keyword">with</span> <a name="MutInd.odd_even_plus"><span class="id" type="lemma">odd_even_plus</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="R2.html#MutInd.odd"><span class="id" type="inductive">odd</span></a> <a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> -&gt; <a class="idref" href="R2.html#MutInd.even"><span class="id" type="inductive">even</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a> -&gt; <a class="idref" href="R2.html#MutInd.odd"><span class="id" type="inductive">odd</span></a> (<a class="idref" href="R2.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="R2.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>. <span class="id" type="tactic">apply</span> <span class="id" type="var">odd_even_plus</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>. <span class="id" type="tactic">apply</span> <a class="idref" href="R2.html#MutInd.even_plus"><span class="id" type="lemma">even_plus</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" type="keyword">End</span> <a class="idref" href="R2.html#MutInd"><span class="id" type="module">MutInd</span></a>.<br/>
@@ -3287,11 +3755,11 @@ Aby zrozumieć tę definicję, zestawmy ją z naszą definicją parzystości
 </div>
 
 <div class="doc">
-<a name="lab114"></a><h1 class="section">Różne</h1>
+<a name="lab117"></a><h1 class="section">Różne</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab115"></a><h2 class="section">Parametryczność</h2>
+<a name="lab118"></a><h2 class="section">Parametryczność</h2>
 
 <div class="paragraph"> </div>
 
@@ -3314,12 +3782,12 @@ Aby zrozumieć tę definicję, zestawmy ją z naszą definicją parzystości
     ćwiczeń w podrozdziale o typie <span class="inlinecode"><span class="id" type="var">Empty_set</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab116"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab119"></a><h4 class="section">Ćwiczenie</h4>
  Udowodnij (nieformalnie, na papierze), że w powyższym akapicie nie
     okłamałem cię. 
 <div class="paragraph"> </div>
 
-<a name="lab117"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab120"></a><h4 class="section">Ćwiczenie</h4>
  Zdefiniuj wszystkie możliwe funkcje typu <span class="inlinecode"><span class="id" type="var">unit</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">unit</span></span>, <span class="inlinecode"><span class="id" type="var">unit</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">bool</span></span>
     i <span class="inlinecode"><span class="id" type="var">bool</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" type="var">bool</span></span>. 
 <div class="paragraph"> </div>
@@ -3357,7 +3825,7 @@ Aby zrozumieć tę definicję, zestawmy ją z naszą definicją parzystości
 </div>
 
 <div class="doc">
-<a name="lab118"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab121"></a><h4 class="section">Ćwiczenie</h4>
  Zdefiniuj wszystkie elementy następujących typów lub udowodnij, że
     istnienie choć jednego elementu prowadzi do sprzeczności:
 
@@ -3404,7 +3872,7 @@ Aby zrozumieć tę definicję, zestawmy ją z naszą definicją parzystości
 </div>
 
 <div class="doc">
-<a name="lab119"></a><h2 class="section">Ścisła pozytywność</h2>
+<a name="lab122"></a><h2 class="section">Ścisła pozytywność</h2>
 
 <div class="paragraph"> </div>
 
@@ -3532,7 +4000,7 @@ Jak widać, gdyby definicja typu <span class="inlinecode"><span class="id" type=
 </div>
 
 <div class="doc">
-<a name="lab120"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab123"></a><h4 class="section">Ćwiczenie</h4>
 
 </div>
 <div class="code">
@@ -3594,7 +4062,7 @@ Rozstrzygnij, czy typ posiadający jeden z następujących konstruktorów
 </div>
 
 <div class="doc">
-<a name="lab121"></a><h2 class="section">Rodziny typów induktywnych</h2>
+<a name="lab124"></a><h2 class="section">Rodziny typów induktywnych</h2>
 
 <div class="paragraph"> </div>
 
@@ -3797,7 +4265,7 @@ Konstruktor <span class="inlinecode"><span class="id" type="var">vnil</span></sp
     w zależności od konstruktora, a zatem umieszczamy go po ostatnim <span class="inlinecode">:</span>. 
 <div class="paragraph"> </div>
 
-<a name="lab122"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab125"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -3832,7 +4300,7 @@ Konstruktor <span class="inlinecode"><span class="id" type="var">vnil</span></sp
 </div>
 
 <div class="doc">
-<a name="lab123"></a><h2 class="section">Sumy zależne i podtypy</h2>
+<a name="lab126"></a><h2 class="section">Sumy zależne i podtypy</h2>
 
 <div class="paragraph"> </div>
 
@@ -3986,7 +4454,7 @@ Definiowanie wartości typu <span class="inlinecode"><span class="id" type="var"
     Następnie dowodzimy tego faktu, co kończy proces definiowania. 
 <div class="paragraph"> </div>
 
-<a name="lab124"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab127"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -3996,7 +4464,7 @@ Definiowanie wartości typu <span class="inlinecode"><span class="id" type="var"
     odpowiadający liście <span class="inlinecode">[42;</span> <span class="inlinecode">666;</span> <span class="inlinecode">1337]</span>. 
 <div class="paragraph"> </div>
 
-<a name="lab125"></a><h2 class="section">Rozstrzygalność</h2>
+<a name="lab128"></a><h2 class="section">Rozstrzygalność</h2>
 
 </div>
 <div class="code">
@@ -4096,7 +4564,7 @@ Powyższe dywagacje nie przeszkadzają nam jednak w udowadnianiu,
 
 <div class="paragraph"> </div>
 
-<a name="lab126"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab129"></a><h4 class="section">Ćwiczenie</h4>
 
 </div>
 <div class="code">
@@ -4108,7 +4576,7 @@ Powyższe dywagacje nie przeszkadzają nam jednak w udowadnianiu,
 </div>
 
 <div class="doc">
-<a name="lab127"></a><h3 class="section">Techniczne apekty rozstrzygalności</h3>
+<a name="lab130"></a><h3 class="section">Techniczne apekty rozstrzygalności</h3>
 
 <div class="paragraph"> </div>
 
@@ -4198,7 +4666,7 @@ Typ <span class="inlinecode"><span class="id" type="var">sumbool</span></span> j
     dysjunkcji. 
 <div class="paragraph"> </div>
 
-<a name="lab128"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab131"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4208,7 +4676,7 @@ Typ <span class="inlinecode"><span class="id" type="var">sumbool</span></span> j
     jest obecna na liście <span class="inlinecode"><span class="id" type="var">l</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab129"></a><h2 class="section">Kwantyfikacja egzystencjalna (alfa)</h2>
+<a name="lab132"></a><h2 class="section">Kwantyfikacja egzystencjalna (alfa)</h2>
 
 <div class="paragraph"> </div>
 
@@ -4240,7 +4708,7 @@ Typ <span class="inlinecode"><span class="id" type="var">sumbool</span></span> j
     do reprezentowania kwantyfikacji egzystencjalnej. 
 <div class="paragraph"> </div>
 
-<a name="lab130"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab133"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4260,7 +4728,7 @@ Typ <span class="inlinecode"><span class="id" type="var">sumbool</span></span> j
 </div>
 
 <div class="doc">
-<a name="lab131"></a><h2 class="section">Typy hybrydowe (alfa)</h2>
+<a name="lab134"></a><h2 class="section">Typy hybrydowe (alfa)</h2>
 
 <div class="paragraph"> </div>
 
@@ -4290,7 +4758,7 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
     postać jego termów, a nie jedynie fakt ich istnienia. 
 <div class="paragraph"> </div>
 
-<a name="lab132"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab135"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4310,7 +4778,7 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
 </div>
 
 <div class="doc">
-<a name="lab133"></a><h2 class="section">Cztery rodzaje reguł</h2>
+<a name="lab136"></a><h2 class="section">Cztery rodzaje reguł</h2>
 
 <div class="paragraph"> </div>
 
@@ -4336,7 +4804,7 @@ Jak sama nazwa wskazuje, <span class="inlinecode"><span class="id" type="var">su
 
 <div class="paragraph"> </div>
 
-<a name="lab134"></a><h3 class="section">Reguły formacji</h3>
+<a name="lab137"></a><h3 class="section">Reguły formacji</h3>
 
 <div class="paragraph"> </div>
 
@@ -4444,7 +4912,7 @@ Reguła nie pochodzi z definicji induktywnej, gdyż typ funkcji <span class="inl
     jest typem wbudowanym i nie jest zdefiniowany indukcyjnie. 
 <div class="paragraph"> </div>
 
-<a name="lab135"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab138"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4460,7 +4928,7 @@ Reguła nie pochodzi z definicji induktywnej, gdyż typ funkcji <span class="inl
 </div>
 
 <div class="doc">
-<a name="lab136"></a><h3 class="section">Reguły wprowadzania</h3>
+<a name="lab139"></a><h3 class="section">Reguły wprowadzania</h3>
 
 <div class="paragraph"> </div>
 
@@ -4565,7 +5033,7 @@ Pojawiło się tu kilka nowych rzeczy: litera Γ oznacza kontekst,
     w rozdziałach 4 i 5 manuala: https://coq.inria.fr/refman/toc.html 
 <div class="paragraph"> </div>
 
-<a name="lab137"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab140"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4581,7 +5049,7 @@ Pojawiło się tu kilka nowych rzeczy: litera Γ oznacza kontekst,
 </div>
 
 <div class="doc">
-<a name="lab138"></a><h3 class="section">Reguły eliminacji</h3>
+<a name="lab141"></a><h3 class="section">Reguły eliminacji</h3>
 
 <div class="paragraph"> </div>
 
@@ -4828,7 +5296,7 @@ Póki co wydaje mi się, że udowodnienie słuszności tej reguły będzie dla
     list. 
 <div class="paragraph"> </div>
 
-<a name="lab139"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab142"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4862,7 +5330,7 @@ Póki co wydaje mi się, że udowodnienie słuszności tej reguły będzie dla
 </div>
 
 <div class="doc">
-<a name="lab140"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab143"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -4893,14 +5361,14 @@ Póki co wydaje mi się, że udowodnienie słuszności tej reguły będzie dla
 </div>
 
 <div class="doc">
-<a name="lab141"></a><h3 class="section">Reguły obliczania</h3>
+<a name="lab144"></a><h3 class="section">Reguły obliczania</h3>
 
 <div class="paragraph"> </div>
 
  TODO 
 <div class="paragraph"> </div>
 
-<a name="lab142"></a><h1 class="section">Rekursja</h1>
+<a name="lab145"></a><h1 class="section">Rekursja</h1>
 
 <div class="paragraph"> </div>
 
@@ -4941,7 +5409,7 @@ Póki co wydaje mi się, że udowodnienie słuszności tej reguły będzie dla
 
 <div class="paragraph"> </div>
 
-<a name="lab143"></a><h2 class="section">Rekursja ogólna</h2>
+<a name="lab146"></a><h2 class="section">Rekursja ogólna</h2>
 
 <div class="paragraph"> </div>
 
@@ -4981,7 +5449,7 @@ Aby chronić nas przed tą katastrofą, Coq nakłada na rekurencję
     Innymi słowy, dozwolona jest jedynie rekursja strukturalna. 
 <div class="paragraph"> </div>
 
-<a name="lab144"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
+<a name="lab147"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
 
 <div class="paragraph"> </div>
 
@@ -5041,7 +5509,7 @@ Możemy zaobserwować parę rzeczy. Pierwsza, techniczna sprawa: po
 
 <div class="paragraph"> </div>
 
-<a name="lab145"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab148"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
