@@ -1,0 +1,213 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="coqdoc.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="jquery-1.8.3.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="MyStyles.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-88023543-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+<h1 class="libtitle">X1: Logika boolowska</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+ Zadania z funkcji boolowskich, sprawdzające radzenie sobie w pracy
+    z enumeracjami, definiowaniem funkcji przez pattern matching i dowodzeniem
+    przez rozbicie na przypadki.
+
+<div class="paragraph"> </div>
+
+    Chciałem, żeby nazwy twierdzeń odpowiadały tym z biblioteki standardowej,
+    ale na razie nie mam siły tego ujednolicić. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <a name="boolean_functions"><span class="id" type="section">boolean_functions</span></a>.<br/>
+<span class="id" type="keyword">Variables</span> <a name="boolean_functions.b"><span class="id" type="variable">b</span></a> <a name="boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a name="boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a name="boolean_functions.b3"><span class="id" type="variable">b3</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" type="inductive">bool</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zdefiniuj następujące funkcje boolowskie:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" type="var">negb</span></span> (negacja)
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">andb</span></span> (koniunkcja)
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">orb</span></span> (alternatywa)
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">implb</span></span> (implikacja)
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">eqb</span></span> (równoważność)
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">xorb</span></span> (alternatywa wykluczająca)
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">nor</span></span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">nand</span></span> 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="boolean_functions.::x_'&&'_x"><span class="id" type="notation">"</span></a>b1 &amp;&amp; b2" := (<a class="idref" href="X1.html#andb"><span class="id" type="definition">andb</span></a> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span>).<br/>
+<span class="id" type="keyword">Notation</span> <a name="boolean_functions.::x_'||'_x"><span class="id" type="notation">"</span></a>b1 || b2" := (<a class="idref" href="X1.html#orb"><span class="id" type="definition">orb</span></a> <span class="id" type="var">b1</span> <span class="id" type="var">b2</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Udowodnij następujące twierdzenia. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Właściwości&nbsp;negacji&nbsp;*)</span><br/>
+<span class="id" type="keyword">Theorem</span> <a name="negb_inv"><span class="id" type="lemma">negb_inv</span></a> : <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a>) = <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="negb_ineq"><span class="id" type="lemma">negb_ineq</span></a> : <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> &lt;&gt; <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Eliminacja&nbsp;*)</span><br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_elim_l"><span class="id" type="lemma">andb_elim_l</span></a> : <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">-&gt;</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_elim_r"><span class="id" type="lemma">andb_elim_r</span></a> : <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">-&gt;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_elim"><span class="id" type="lemma">andb_elim</span></a> : <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">-&gt;</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">/\</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_elim"><span class="id" type="lemma">orb_elim</span></a> : <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">-&gt;</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">\/</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Elementy&nbsp;neutralne&nbsp;i&nbsp;anihilujące&nbsp;*)</span><br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_false_annihilation_l"><span class="id" type="lemma">andb_false_annihilation_l</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#false"><span class="id" type="constructor">false</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#false"><span class="id" type="constructor">false</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_false_annihilation_r"><span class="id" type="lemma">andb_false_annihilation_r</span></a> : <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#false"><span class="id" type="constructor">false</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#false"><span class="id" type="constructor">false</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_true_neutral_l"><span class="id" type="lemma">andb_true_neutral_l</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_true_neutral_r"><span class="id" type="lemma">andb_true_neutral_r</span></a> : <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_true_annihilation_l"><span class="id" type="lemma">orb_true_annihilation_l</span></a> :  <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_true_annihilation_r"><span class="id" type="lemma">orb_true_annihilation_r</span></a> :  <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_false_neutral_l"><span class="id" type="lemma">orb_false_neutral_l</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#false"><span class="id" type="constructor">false</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_false_neutral_r"><span class="id" type="lemma">orb_false_neutral_r</span></a> : <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#false"><span class="id" type="constructor">false</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Przemienność&nbsp;*)</span><br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_comm"><span class="id" type="lemma">andb_comm</span></a> : <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_comm"><span class="id" type="lemma">orb_comm</span></a> : <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Łączność&nbsp;*)</span><br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_assoc"><span class="id" type="lemma">andb_assoc</span></a> : <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b3"><span class="id" type="variable">b3</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b3"><span class="id" type="variable">b3</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_assoc"><span class="id" type="lemma">orb_assoc</span></a> : <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b3"><span class="id" type="variable">b3</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b3"><span class="id" type="variable">b3</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Rozdzielność&nbsp;*)</span><br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_dist_orb"><span class="id" type="lemma">andb_dist_orb</span></a> : <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b3"><span class="id" type="variable">b3</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b3"><span class="id" type="variable">b3</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_dist_andb"><span class="id" type="lemma">orb_dist_andb</span></a> : <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b3"><span class="id" type="variable">b3</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b3"><span class="id" type="variable">b3</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Negacja&nbsp;*)</span><br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_negb"><span class="id" type="lemma">andb_negb</span></a> : <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#false"><span class="id" type="constructor">false</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="orb_negb"><span class="id" type="lemma">orb_negb</span></a> : <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;de&nbsp;Morgan&nbsp;*)</span><br/>
+<span class="id" type="keyword">Theorem</span> <a name="negb_andb"><span class="id" type="lemma">negb_andb</span></a> : <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">)</span></a> = <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> || <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="negb_orb"><span class="id" type="lemma">negb_orb</span></a> : <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">)</span></a> = <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> &amp;&amp; <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;eqb,&nbsp;xorb,&nbsp;norb,&nbsp;nandb&nbsp;*)</span><br/>
+<span class="id" type="keyword">Theorem</span> <a name="eqb_spec"><span class="id" type="lemma">eqb_spec</span></a> : <a class="idref" href="X1.html#eqb"><span class="id" type="definition">eqb</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">-&gt;</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="eqb_spec'"><span class="id" type="lemma">eqb_spec'</span></a> : <a class="idref" href="X1.html#eqb"><span class="id" type="definition">eqb</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#false"><span class="id" type="constructor">false</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">-&gt;</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">&lt;&gt;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="xorb_spec"><span class="id" type="lemma">xorb_spec</span></a> : <a class="idref" href="X1.html#xorb"><span class="id" type="definition">xorb</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> = <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="X1.html#eqb"><span class="id" type="definition">eqb</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="xorb_spec'"><span class="id" type="lemma">xorb_spec'</span></a> : <a class="idref" href="X1.html#xorb"><span class="id" type="definition">xorb</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">-&gt;</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">&lt;&gt;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="norb_spec"><span class="id" type="lemma">norb_spec</span></a> : <a class="idref" href="X1.html#norb"><span class="id" type="definition">norb</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> = <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'||'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="nandb_spec"><span class="id" type="lemma">nandb_spec</span></a> : <a class="idref" href="X1.html#nandb"><span class="id" type="definition">nandb</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> = <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Różne&nbsp;*)</span><br/>
+<span class="id" type="keyword">Theorem</span> <a name="andb_eq_orb"><span class="id" type="lemma">andb_eq_orb</span></a> : <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'&&'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">-&gt;</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="all3_spec"><span class="id" type="lemma">all3_spec</span></a> :  <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">&amp;&amp;</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:bool_scope:x_'&&'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">||</span></a> <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">(</span></a><a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="X1.html#boolean_functions.b1"><span class="id" type="variable">b1</span></a> || <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="X1.html#boolean_functions.b2"><span class="id" type="variable">b2</span></a>) <a class="idref" href="X1.html#boolean_functions.::x_'||'_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="noncontradiction_bool"><span class="id" type="lemma">noncontradiction_bool</span></a> : <a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> (<a class="idref" href="X1.html#eqb"><span class="id" type="definition">eqb</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a> (<a class="idref" href="X1.html#negb"><span class="id" type="definition">negb</span></a> <a class="idref" href="X1.html#boolean_functions.b"><span class="id" type="variable">b</span></a>)) = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#true"><span class="id" type="constructor">true</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="X1.html#boolean_functions"><span class="id" type="section">boolean_functions</span></a>.<br/>
+</div>
+<hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
