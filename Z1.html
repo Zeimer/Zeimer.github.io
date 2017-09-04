@@ -1,0 +1,116 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="coqdoc.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="jquery-1.8.3.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="MyStyles.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-88023543-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+<h1 class="libtitle">Z1: Teoria funkcji (alfa, TODO</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Arith.html#"><span class="id" type="library">Arith</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="injective"><span class="id" type="definition">injective</span></a> {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">f</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="Z1.html#B"><span class="id" type="variable">B</span></a>) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">x</span> <span class="id" type="var">x'</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a>, <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Z1.html#x"><span class="id" type="variable">x</span></a> = <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Z1.html#x'"><span class="id" type="variable">x'</span></a> -&gt; <a class="idref" href="Z1.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Z1.html#x'"><span class="id" type="variable">x'</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+TODO: trzeba tu coś napisać, ale na razie nie mam czasu. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="injective'"><span class="id" type="definition">injective'</span></a> {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">f</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="Z1.html#B"><span class="id" type="variable">B</span></a>) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">x</span> <span class="id" type="var">x'</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a>, <a class="idref" href="Z1.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">&lt;&gt;</span></a> <a class="idref" href="Z1.html#x'"><span class="id" type="variable">x'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">-&gt;</span></a> <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Z1.html#x"><span class="id" type="variable">x</span></a> &lt;&gt; <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Z1.html#x'"><span class="id" type="variable">x'</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="injective_is_injective'"><span class="id" type="lemma">injective_is_injective'</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="Z1.html#B"><span class="id" type="variable">B</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Z1.html#injective"><span class="id" type="definition">injective</span></a> <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a> -&gt; <a class="idref" href="Z1.html#injective'"><span class="id" type="definition">injective'</span></a> <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="injective'_is_injective_classic"><span class="id" type="lemma">injective'_is_injective_classic</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="Z1.html#B"><span class="id" type="variable">B</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">EM</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">P</span> : <span class="id" type="keyword">Prop</span>, <a class="idref" href="Z1.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~</span></a> <a class="idref" href="Z1.html#P"><span class="id" type="variable">P</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">)</span></a>, <a class="idref" href="Z1.html#injective'"><span class="id" type="definition">injective'</span></a> <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a> -&gt; <a class="idref" href="Z1.html#injective"><span class="id" type="definition">injective</span></a> <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="id_injective"><span class="id" type="lemma">id_injective</span></a> : <span class="id" type="keyword">forall</span> <span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Z1.html#injective"><span class="id" type="definition">injective</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a> =&gt; <a class="idref" href="Z1.html#x"><span class="id" type="variable">x</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="S_injective"><span class="id" type="lemma">S_injective</span></a> : <a class="idref" href="Z1.html#injective"><span class="id" type="definition">injective</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Z1.html#n"><span class="id" type="variable">n</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="add_k_left_inj"><span class="id" type="lemma">add_k_left_inj</span></a> : <span class="id" type="keyword">forall</span> <span class="id" type="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Z1.html#injective"><span class="id" type="definition">injective</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> =&gt; <a class="idref" href="Z1.html#k"><span class="id" type="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Z1.html#n"><span class="id" type="variable">n</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="mul_k_inj"><span class="id" type="lemma">mul_k_inj</span></a> : <span class="id" type="keyword">forall</span> <span class="id" type="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <a class="idref" href="Z1.html#k"><span class="id" type="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">&lt;&gt;</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Z1.html#injective"><span class="id" type="definition">injective</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> =&gt; <a class="idref" href="Z1.html#k"><span class="id" type="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">*</span></a> <a class="idref" href="Z1.html#n"><span class="id" type="variable">n</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="pred_not_injective"><span class="id" type="lemma">pred_not_injective</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~</span></a> <a class="idref" href="Z1.html#injective"><span class="id" type="definition">injective</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#pred"><span class="id" type="definition">pred</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="surjective"><span class="id" type="definition">surjective</span></a> {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">f</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="Z1.html#B"><span class="id" type="variable">B</span></a>) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">b</span> : <a class="idref" href="Z1.html#B"><span class="id" type="variable">B</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">exists</span></a> <span class="id" type="var">a</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Z1.html#a"><span class="id" type="variable">a</span></a> = <a class="idref" href="Z1.html#b"><span class="id" type="variable">b</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="S_not_surjective"><span class="id" type="lemma">S_not_surjective</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">~</span></a> <a class="idref" href="Z1.html#surjective"><span class="id" type="definition">surjective</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="bijective"><span class="id" type="definition">bijective</span></a> {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">f</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="Z1.html#B"><span class="id" type="variable">B</span></a>) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Z1.html#injective"><span class="id" type="definition">injective</span></a> <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a> /\ <a class="idref" href="Z1.html#surjective"><span class="id" type="definition">surjective</span></a> <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="bijective'"><span class="id" type="definition">bijective'</span></a> {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">f</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="Z1.html#B"><span class="id" type="variable">B</span></a>) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">b</span> : <a class="idref" href="Z1.html#B"><span class="id" type="variable">B</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_'!'_x_'..'_x_','_x"><span class="id" type="notation">exists</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_'!'_x_'..'_x_','_x"><span class="id" type="notation">!</span></a> <span class="id" type="var">a</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_'!'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Z1.html#a"><span class="id" type="variable">a</span></a> = <a class="idref" href="Z1.html#b"><span class="id" type="variable">b</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="bijectives_equiv"><span class="id" type="lemma">bijectives_equiv</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Z1.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="Z1.html#B"><span class="id" type="variable">B</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Z1.html#bijective"><span class="id" type="definition">bijective</span></a> <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a> &lt;-&gt; <a class="idref" href="Z1.html#bijective'"><span class="id" type="definition">bijective'</span></a> <a class="idref" href="Z1.html#f"><span class="id" type="variable">f</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Lists.List.html#"><span class="id" type="library">List</span></a>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">ListNotations</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="unary"><span class="id" type="definition">unary</span></a> (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#unit"><span class="id" type="inductive">unit</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="Z1.html#n"><span class="id" type="variable">n</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 =&gt; <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Lists.List.html#ListNotations.:list_scope:'['_']'"><span class="id" type="notation">[]</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">n'</span> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#tt"><span class="id" type="constructor">tt</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:list_scope:x_'::'_x"><span class="id" type="notation">::</span></a> <a class="idref" href="Z1.html#unary"><span class="id" type="definition">unary</span></a> <span class="id" type="var">n'</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="unary_bij"><span class="id" type="lemma">unary_bij</span></a> : <a class="idref" href="Z1.html#bijective"><span class="id" type="definition">bijective</span></a> <a class="idref" href="Z1.html#unary"><span class="id" type="definition">unary</span></a>.<br/>
+
+<br/>
+</div>
+<hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
