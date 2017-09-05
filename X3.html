@@ -376,8 +376,6 @@ Napisz funkcję <span class="inlinecode"><span class="id" type="var">join</span>
 <span class="id" type="keyword">Theorem</span> <a name="last_nil"><span class="id" type="lemma">last_nil</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>), <a class="idref" href="X3.html#last"><span class="id" type="definition">last</span></a> <a class="idref" href="X3.html#::'[]'"><span class="id" type="notation">[]</span></a> = <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">(</span></a>@<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#None"><span class="id" type="constructor">None</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>).<br/>
 
 <br/>
-
-<br/>
 <span class="id" type="keyword">Theorem</span> <a name="head_nth"><span class="id" type="lemma">head_nth</span></a>: <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#head"><span class="id" type="definition">head</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="X3.html#nth"><span class="id" type="definition">nth</span></a> 0 <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a>.<br/>
 
@@ -624,84 +622,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" type="var">join</span>
 </div>
 
 <div class="doc">
-<a name="lab156"></a><h3 class="section">Zwijanie</h3>
-
-</div>
-<div class="code">
-
-<br/>
-<span class="id" type="keyword">Fixpoint</span> <a name="foldr"><span class="id" type="definition">foldr</span></a> {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">f</span> : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a> -&gt; <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">b</span> : <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>) : <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a> :=<br/>
-<span class="id" type="keyword">match</span> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a> <span class="id" type="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="X3.html#::'[]'"><span class="id" type="notation">[]</span></a> =&gt; <a class="idref" href="X3.html#b"><span class="id" type="variable">b</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">h</span> <a class="idref" href="X3.html#::x_'::'_x"><span class="id" type="notation">::</span></a> <span class="id" type="var">t</span> <a class="idref" href="X3.html#::x_'::'_x"><span class="id" type="notation">=&gt;</span></a> <a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> <span class="id" type="var">h</span> (<a class="idref" href="X3.html#foldr"><span class="id" type="definition">foldr</span></a> <a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="X3.html#b"><span class="id" type="variable">b</span></a> <span class="id" type="var">t</span>)<br/>
-<span class="id" type="keyword">end</span>.<br/>
-
-<br/>
-<span class="id" type="keyword">Fixpoint</span> <a name="foldl"><span class="id" type="definition">foldl</span></a> {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">f</span> : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a> -&gt; <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">a</span> : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a>) : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a> :=<br/>
-<span class="id" type="keyword">match</span> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a> <span class="id" type="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="X3.html#::'[]'"><span class="id" type="notation">[]</span></a> =&gt; <a class="idref" href="X3.html#a"><span class="id" type="variable">a</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">h</span> <a class="idref" href="X3.html#::x_'::'_x"><span class="id" type="notation">::</span></a> <span class="id" type="var">t</span> <a class="idref" href="X3.html#::x_'::'_x"><span class="id" type="notation">=&gt;</span></a> <a class="idref" href="X3.html#foldl"><span class="id" type="definition">foldl</span></a> <a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> (<a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="X3.html#a"><span class="id" type="variable">a</span></a> <span class="id" type="var">h</span>) <span class="id" type="var">t</span><br/>
-<span class="id" type="keyword">end</span>.<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"><span class="id" type="var">foldr</span></span> i <span class="inlinecode"><span class="id" type="var">foldl</span></span>.
-    Napiszę o tym później, a na razie porcja zadań.
-
-<div class="paragraph"> </div>
-
-    Zaimplementuj za pomocą <span class="inlinecode"><span class="id" type="var">foldr</span></span> lub <span class="inlinecode"><span class="id" type="var">foldl</span></span> następujące funkcje:
-    <span class="inlinecode"><span class="id" type="var">length</span></span>, <span class="inlinecode"><span class="id" type="var">app</span></span>, <span class="inlinecode"><span class="id" type="var">rev</span></span>, <span class="inlinecode"><span class="id" type="var">map</span></span>, <span class="inlinecode"><span class="id" type="var">join</span></span>, <span class="inlinecode"><span class="id" type="var">filter</span></span>, <span class="inlinecode"><span class="id" type="var">takeWhile</span></span>,
-    <span class="inlinecode"><span class="id" type="var">dropWhile</span></span>.
-
-<div class="paragraph"> </div>
-
-    Udowodnij, że zdefiniowane przez ciebie funkcje pokrywają się ze
-    swoimi klasycznymi odpowiednikami. 
-</div>
-<div class="code">
-
-<br/>
-
-<br/>
-<span class="id" type="keyword">Theorem</span> <a name="lengthF_spec"><span class="id" type="lemma">lengthF_spec</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#lengthF"><span class="id" type="definition">lengthF</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="X3.html#length"><span class="id" type="definition">length</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a>.<br/>
-
-<br/>
-<span class="id" type="keyword">Theorem</span> <a name="appF_spec"><span class="id" type="lemma">appF_spec</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l1</span> <span class="id" type="var">l2</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#appF"><span class="id" type="definition">appF</span></a> <a class="idref" href="X3.html#l1"><span class="id" type="variable">l1</span></a> <a class="idref" href="X3.html#l2"><span class="id" type="variable">l2</span></a> = <a class="idref" href="X3.html#l1"><span class="id" type="variable">l1</span></a> <a class="idref" href="X3.html#::x_'++'_x"><span class="id" type="notation">++</span></a> <a class="idref" href="X3.html#l2"><span class="id" type="variable">l2</span></a>.<br/>
-
-<br/>
-<span class="id" type="keyword">Theorem</span> <a name="revF_spec"><span class="id" type="lemma">revF_spec</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#revF"><span class="id" type="definition">revF</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="X3.html#rev"><span class="id" type="definition">rev</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a>.<br/>
-
-<br/>
-
-<br/>
-<span class="id" type="keyword">Theorem</span> <a name="mapF_spec"><span class="id" type="lemma">mapF_spec</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#mapF"><span class="id" type="definition">mapF</span></a> <a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="X3.html#map"><span class="id" type="definition">map</span></a> <a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a>.<br/>
-
-<br/>
-<span class="id" type="keyword">Theorem</span> <a name="joinF_spec"><span class="id" type="lemma">joinF_spec</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> (<a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>)),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#joinF"><span class="id" type="definition">joinF</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="X3.html#join"><span class="id" type="definition">join</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a>.<br/>
-
-<br/>
-<span class="id" type="keyword">Theorem</span> <a name="filterF_spec"><span class="id" type="lemma">filterF_spec</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">p</span> : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" type="inductive">bool</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#filterF"><span class="id" type="definition">filterF</span></a> <a class="idref" href="X3.html#p"><span class="id" type="variable">p</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="X3.html#filter"><span class="id" type="definition">filter</span></a> <a class="idref" href="X3.html#p"><span class="id" type="variable">p</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a>.<br/>
-
-<br/>
-<span class="id" type="keyword">Theorem</span> <a name="takeWhileF_spec"><span class="id" type="lemma">takeWhileF_spec</span></a> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">p</span> : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" type="inductive">bool</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#takeWhileF"><span class="id" type="definition">takeWhileF</span></a> <a class="idref" href="X3.html#p"><span class="id" type="variable">p</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a> = <a class="idref" href="X3.html#takeWhile"><span class="id" type="definition">takeWhile</span></a> <a class="idref" href="X3.html#p"><span class="id" type="variable">p</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a>.<br/>
-
-<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-<a name="lab157"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">partition</span></span></h3>
+<a name="lab156"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">partition</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -720,7 +641,7 @@ Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"
 </div>
 
 <div class="doc">
-<a name="lab158"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">zip</span></span></h3>
+<a name="lab157"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">zip</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -803,7 +724,7 @@ Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"
 </div>
 
 <div class="doc">
-<a name="lab159"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">intersperse</span></span></h3>
+<a name="lab158"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">intersperse</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -843,22 +764,12 @@ Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="X3.html#a"><span class="id" type="variable">a</span></a> = <a class="idref" href="X3.html#b"><span class="id" type="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">-&gt;</span></a> <a class="idref" href="X3.html#intersperse"><span class="id" type="definition">intersperse</span></a> <a class="idref" href="X3.html#b"><span class="id" type="variable">b</span></a> (<a class="idref" href="X3.html#map"><span class="id" type="definition">map</span></a> <a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a>) = <a class="idref" href="X3.html#map"><span class="id" type="definition">map</span></a> <a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> (<a class="idref" href="X3.html#intersperse"><span class="id" type="definition">intersperse</span></a> <a class="idref" href="X3.html#a"><span class="id" type="variable">a</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a>).<br/>
 
 <br/>
-<span class="comment">(*&nbsp;TODO&nbsp;:&nbsp;begin&nbsp;hide&nbsp;*)</span><br/>
-<span class="id" type="keyword">Theorem</span> <a name="intersperse_join"><span class="id" type="lemma">intersperse_join</span></a> :<br/>
-&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">x</span> : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> (<a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>)),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#intersperse"><span class="id" type="definition">intersperse</span></a> <a class="idref" href="X3.html#x"><span class="id" type="variable">x</span></a> (<a class="idref" href="X3.html#join"><span class="id" type="definition">join</span></a> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a>) = <a class="idref" href="X3.html#join"><span class="id" type="definition">join</span></a> (<a class="idref" href="X3.html#intersperse"><span class="id" type="definition">intersperse</span></a> <a class="idref" href="X3.html#::'['_x_';'_'..'_';'_x_']'"><span class="id" type="notation">[</span></a><a class="idref" href="X3.html#x"><span class="id" type="variable">x</span></a><a class="idref" href="X3.html#::'['_x_';'_'..'_';'_x_']'"><span class="id" type="notation">]</span></a> (<a class="idref" href="X3.html#map"><span class="id" type="definition">map</span></a> (<a class="idref" href="X3.html#intersperse"><span class="id" type="definition">intersperse</span></a> <a class="idref" href="X3.html#x"><span class="id" type="variable">x</span></a>) <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a>)).<br/>
-<span class="id" type="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">l</span> <span class="id" type="keyword">as</span> [| <span class="id" type="var">h</span> [| <span class="id" type="var">h'</span> <span class="id" type="var">t</span>]]; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">trivial</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> !<a class="idref" href="X3.html#app_nil_r"><span class="id" type="lemma">app_nil_r</span></a>. <span class="id" type="tactic">trivial</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span> <span class="id" type="keyword">in</span> *. <span class="id" type="tactic">rewrite</span> &lt;- <span class="id" type="var">IHl</span>.<br/>
-<span class="id" type="keyword">Abort</span>.<br/>
-<span class="comment">(*&nbsp;end&nbsp;hide&nbsp;*)</span><br/>
 
 <br/>
 </div>
 
 <div class="doc">
-<a name="lab160"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">replicate</span></span></h3>
+<a name="lab159"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">replicate</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -958,7 +869,7 @@ Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"
 </div>
 
 <div class="doc">
-<a name="lab161"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">zipWith</span></span></h3>
+<a name="lab160"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">zipWith</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -977,7 +888,7 @@ Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"
 </div>
 
 <div class="doc">
-<a name="lab162"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">unzip</span></span> (odtąd TODO!)</h3>
+<a name="lab161"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">unzip</span></span> (odtąd TODO!)</h3>
 
 <div class="paragraph"> </div>
 
@@ -1002,7 +913,7 @@ Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"
 </div>
 
 <div class="doc">
-<a name="lab163"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">find</span></span></h3>
+<a name="lab162"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">find</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -1024,7 +935,7 @@ Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"
 </div>
 
 <div class="doc">
-<a name="lab164"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">findIndex</span></span></h3>
+<a name="lab163"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">findIndex</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -1044,7 +955,7 @@ Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"
 </div>
 
 <div class="doc">
-<a name="lab165"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">findIndices</span></span></h3>
+<a name="lab164"></a><h3 class="section"><span class="inlinecode"><span class="id" type="var">findIndices</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -1054,6 +965,152 @@ Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"
 <div class="code">
 
 <br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab165"></a><h3 class="section">Zwijanie</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="foldr"><span class="id" type="definition">foldr</span></a> {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">f</span> : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a> -&gt; <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">b</span> : <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>) : <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="X3.html#::'[]'"><span class="id" type="notation">[]</span></a> =&gt; <a class="idref" href="X3.html#b"><span class="id" type="variable">b</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">h</span> <a class="idref" href="X3.html#::x_'::'_x"><span class="id" type="notation">::</span></a> <span class="id" type="var">t</span> <a class="idref" href="X3.html#::x_'::'_x"><span class="id" type="notation">=&gt;</span></a> <a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> <span class="id" type="var">h</span> (<a class="idref" href="X3.html#foldr"><span class="id" type="definition">foldr</span></a> <a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="X3.html#b"><span class="id" type="variable">b</span></a> <span class="id" type="var">t</span>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="foldl"><span class="id" type="definition">foldl</span></a> {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">f</span> : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a> -&gt; <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a> -&gt; <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">a</span> : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="X3.html#list"><span class="id" type="inductive">list</span></a> <a class="idref" href="X3.html#B"><span class="id" type="variable">B</span></a>) : <a class="idref" href="X3.html#A"><span class="id" type="variable">A</span></a> :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="X3.html#l"><span class="id" type="variable">l</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="X3.html#::'[]'"><span class="id" type="notation">[]</span></a> =&gt; <a class="idref" href="X3.html#a"><span class="id" type="variable">a</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">h</span> <a class="idref" href="X3.html#::x_'::'_x"><span class="id" type="notation">::</span></a> <span class="id" type="var">t</span> <a class="idref" href="X3.html#::x_'::'_x"><span class="id" type="notation">=&gt;</span></a> <a class="idref" href="X3.html#foldl"><span class="id" type="definition">foldl</span></a> <a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> (<a class="idref" href="X3.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="X3.html#a"><span class="id" type="variable">a</span></a> <span class="id" type="var">h</span>) <span class="id" type="var">t</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"><span class="id" type="var">foldr</span></span> i <span class="inlinecode"><span class="id" type="var">foldl</span></span>.
+    Napiszę o tym później, a na razie porcja zadań.
+
+<div class="paragraph"> </div>
+
+    Zaimplementuj za pomocą <span class="inlinecode"><span class="id" type="var">foldr</span></span> lub <span class="inlinecode"><span class="id" type="var">foldl</span></span> następujące funkcje:
+    <span class="inlinecode"><span class="id" type="var">length</span></span>, <span class="inlinecode"><span class="id" type="var">app</span></span>, <span class="inlinecode"><span class="id" type="var">rev</span></span>, <span class="inlinecode"><span class="id" type="var">map</span></span>, <span class="inlinecode"><span class="id" type="var">join</span></span>, <span class="inlinecode"><span class="id" type="var">filter</span></span>, <span class="inlinecode"><span class="id" type="var">takeWhile</span></span>,
+    <span class="inlinecode"><span class="id" type="var">dropWhile</span></span>.
+
+<div class="paragraph"> </div>
+
+    Udowodnij, że zdefiniowane przez ciebie funkcje pokrywają się ze
+    swoimi klasycznymi odpowiednikami. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">lengthF_spec</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lengthF</span> <span class="id" type="var">l</span> = <span class="id" type="var">length</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">appF_spec</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l1</span> <span class="id" type="var">l2</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">appF</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> = <span class="id" type="var">l1</span> ++ <span class="id" type="var">l2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">revF_spec</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">revF</span> <span class="id" type="var">l</span> = <span class="id" type="var">rev</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">mapF_spec</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <span class="id" type="var">A</span> -&gt; <span class="id" type="var">B</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mapF</span> <span class="id" type="var">f</span> <span class="id" type="var">l</span> = <span class="id" type="var">map</span> <span class="id" type="var">f</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">joinF_spec</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> (<span class="id" type="var">list</span> <span class="id" type="var">A</span>)),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">joinF</span> <span class="id" type="var">l</span> = <span class="id" type="var">join</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">filterF_spec</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">p</span> : <span class="id" type="var">A</span> -&gt; <span class="id" type="var">bool</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">filterF</span> <span class="id" type="var">p</span> <span class="id" type="var">l</span> = <span class="id" type="var">filter</span> <span class="id" type="var">p</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">takeWhileF_spec</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">p</span> : <span class="id" type="var">A</span> -&gt; <span class="id" type="var">bool</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">takeWhileF</span> <span class="id" type="var">p</span> <span class="id" type="var">l</span> = <span class="id" type="var">takeWhile</span> <span class="id" type="var">p</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab166"></a><h3 class="section">Niestandardowe reguły indukcyjne</h3>
+
+<div class="paragraph"> </div>
+
+ Wyjaśnienia nadejdą już wkrótce. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">list_ind_2</span><br/>
+&nbsp;&nbsp;(<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span> -&gt; <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">H0</span> : <span class="id" type="var">P</span> []) (<span class="id" type="var">H1</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">x</span> : <span class="id" type="var">A</span>, <span class="id" type="var">P</span> [<span class="id" type="var">x</span>])<br/>
+&nbsp;&nbsp;(<span class="id" type="var">H2</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">x</span> <span class="id" type="var">y</span> : <span class="id" type="var">A</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>), <span class="id" type="var">P</span> <span class="id" type="var">l</span> -&gt; <span class="id" type="var">P</span> (<span class="id" type="var">x</span> :: <span class="id" type="var">y</span> :: <span class="id" type="var">l</span>))<br/>
+&nbsp;&nbsp;(<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>) : <span class="id" type="var">P</span> <span class="id" type="var">l</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">l</span> <span class="id" type="keyword">as</span> [| <span class="id" type="var">x</span> [| <span class="id" type="var">y</span> <span class="id" type="var">l</span>]]; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">H2</span>. <span class="id" type="tactic">apply</span> <span class="id" type="var">list_ind_2</span>; <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">list_ind_rev</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span> -&gt; <span class="id" type="keyword">Prop</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">Hnil</span> : <span class="id" type="var">P</span> []) (<span class="id" type="var">Hsnoc</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">h</span> : <span class="id" type="var">A</span>) (<span class="id" type="var">t</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>), <span class="id" type="var">P</span> <span class="id" type="var">t</span> -&gt; <span class="id" type="var">P</span> (<span class="id" type="var">t</span> ++ [<span class="id" type="var">h</span>]))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>), <span class="id" type="var">P</span> <span class="id" type="var">l</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">cut</span> (<span class="id" type="keyword">forall</span> <span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>, <span class="id" type="var">P</span> (<span class="id" type="var">rev</span> <span class="id" type="var">l</span>)); <span class="id" type="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">specialize</span> (<span class="id" type="var">H</span> (<span class="id" type="var">rev</span> <span class="id" type="var">l</span>)). <span class="id" type="tactic">rewrite</span> &lt;- <span class="id" type="var">rev_inv</span>. <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">l0</span> <span class="id" type="keyword">as</span> [| <span class="id" type="var">h</span> <span class="id" type="var">t</span>]; <span class="id" type="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Hsnoc</span>. <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">list_ind_app_l</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span> -&gt; <span class="id" type="keyword">Prop</span>)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">Hnil</span> : <span class="id" type="var">P</span> []) (<span class="id" type="var">IH</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">l</span> <span class="id" type="var">l'</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>, <span class="id" type="var">P</span> <span class="id" type="var">l</span> -&gt; <span class="id" type="var">P</span> (<span class="id" type="var">l'</span> ++ <span class="id" type="var">l</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>), <span class="id" type="var">P</span> <span class="id" type="var">l</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">l</span> <span class="id" type="keyword">as</span> [| <span class="id" type="var">h</span> <span class="id" type="var">t</span>]; <span class="id" type="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> (<span class="id" type="var">IH</span> <span class="id" type="var">_</span> [<span class="id" type="var">h</span>]). <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">list_ind_app_r</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span> -&gt; <span class="id" type="keyword">Prop</span>)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">Hnil</span> : <span class="id" type="var">P</span> []) (<span class="id" type="var">IH</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">l</span> <span class="id" type="var">l'</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>, <span class="id" type="var">P</span> <span class="id" type="var">l</span> -&gt; <span class="id" type="var">P</span> (<span class="id" type="var">l</span> ++ <span class="id" type="var">l'</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>), <span class="id" type="var">P</span> <span class="id" type="var">l</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">l</span> <span class="id" type="keyword">as</span> [| <span class="id" type="var">h</span> <span class="id" type="var">t</span>] <span class="id" type="keyword">using</span> <span class="id" type="var">list_ind_rev</span>; <span class="id" type="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> (<span class="id" type="var">IH</span> <span class="id" type="var">t</span> [<span class="id" type="var">h</span>]). <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">list_ind_app</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">P</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span> -&gt; <span class="id" type="keyword">Prop</span>)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">Hnil</span> : <span class="id" type="var">P</span> []) (<span class="id" type="var">Hsingl</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">x</span> : <span class="id" type="var">A</span>, <span class="id" type="var">P</span> [<span class="id" type="var">x</span>])<br/>
+&nbsp;&nbsp;(<span class="id" type="var">IH</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">l</span> <span class="id" type="var">l'</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>, <span class="id" type="var">P</span> <span class="id" type="var">l</span> -&gt; <span class="id" type="var">P</span> <span class="id" type="var">l'</span> -&gt; <span class="id" type="var">P</span> (<span class="id" type="var">l</span> ++ <span class="id" type="var">l'</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>), <span class="id" type="var">P</span> <span class="id" type="var">l</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">l</span> <span class="id" type="keyword">as</span> [| <span class="id" type="var">h</span> <span class="id" type="var">t</span>]; <span class="id" type="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> (<span class="id" type="var">IH</span> [<span class="id" type="var">h</span>] <span class="id" type="var">t</span>); <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
 </div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
