@@ -1,0 +1,295 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="coqdoc.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="jquery-1.8.3.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="MyStyles.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-88023543-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+<h1 class="libtitle">X31: Złożoność obliczeniowa i rekursja ogonowa</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+ (Uwaga: numeracja jest chwilowa, bo nie wiem jak zrobić kolejność. To jest
+    tylko draft. Chyba będę pisał rozdziały chaotycznie.) 
+<div class="paragraph"> </div>
+
+ Prerekwizyty:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> rekursja strukturalna
+
+</li>
+<li> dowodzenie przez indukcję
+
+</li>
+<li> listy 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">X3</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zapoznaliśmy się już z rekursją strukturalną, dzięki której możemy definiować
+    proste funkcje, oraz z techniką dowodzenia przez indukcję, dzięki której
+    możemy stwierdzić ponad wszelką wątpliwość, że nasze funkcje robią to, czego
+    od nich wymagamy. Skoro tak, to czas zapoznać się z kolejnym istotnym
+    elementem układanki, jakim jest złożoność obliczeniowa.
+
+<div class="paragraph"> </div>
+
+    W tym rozdziale nauczysz się analizować proste algorytmy pod względem czasu
+    ich działania. Poznasz też technikę, która pozwala napisać niektóre funkcje
+    rekurencyjne w dużo wydajniejszy sposób. 
+<div class="paragraph"> </div>
+
+<a name="lab148"></a><h1 class="section">Złożoność obliczeniowa</h1>
+
+<div class="paragraph"> </div>
+
+ Zaczniemy od zdefiniowania złożoności obliczeniowej (nieco upraszczając).
+    Nasz cel jest prosty: chcemy zbadać, jak długo będą wykonywać się nasze
+    programy.
+
+<div class="paragraph"> </div>
+
+    Jest to z pozoru proste zadanie: wystarczy włączyć zegar, odpalić program
+    i wyłączyć zegar, gdy program się wykona. Takie podejście ma jednak spore
+    wady, gdyż zmierzony w ten sposób czas:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Zależy od sprzętu. Im lepszy sprzęt, tym krótszy czas.
+
+</li>
+<li> Jest w pewnym sensie losowy. Za każdym wykonaniem programu czas jego
+      działania będzie nieco inny. Wobec tego musielibyśmy puszczać nasz
+      program wielokrotnie, co spowolniłoby mierzenie czasu jego wykonania.
+      Musielibyśmy też, zamiast "zwykłego" czasu działania, posługiwać się
+      średnim czasem działania, co rodzi obawy natury statystycznej.
+
+</li>
+<li> Jest trudny do zmierzenia. Co, jeżeli wykonanie programu jest dłuższe,
+      niż przewidywany czas istnienia wszechświata? 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Wobec powyższego mierzenie czasu za pomocą zegarka należy odrzucić. Innym
+    z pozoru dobrym pomysłem jest zastępienie pojęcia "czasu" pojęciem "ilości
+    taktów procesora". Jednak i ono ma swoje wady:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Zależy od sprzętu. Niektóre procesory mogą np. wykonywać wiele operacji
+      na raz (wektoryzacja), inne zaś mają po kilka rdzeni i być może zechcą
+      wykonać nasz kod współbieżnie na kilku z nich.
+
+</li>
+<li> Zależy od implementacji języka, którym się posługujemy. W Coqu jest
+      możliwość ekstrakcji kodu do kilku innych języków (Haskell, Ocaml,
+      Scheme), a kod wyekstraktowany do Haskella najpewniej miałby inny
+      czas działania, niż kod wyekstraktowany do Ocamla.
+
+</li>
+<li> Również jest trudny do zmierzenia. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Jak widać, mierzenie czasu za pomocą taktów procesora też nie jest zbyt
+    dobrym pomysłem. Prawdę mówiąc, wszelkie podejścia oparte na mierzeniu
+    czegokolwiek będą się wiązały z takimi nieprzyjemnościami, jak błędy
+    pomiaru, problemy z mierzeniem, czy potencjalna konieczność posługiwania
+    się uśrednieniami.
+
+<div class="paragraph"> </div>
+
+    Zdecydujemy się zatem na podejście bardziej abstrakcyjne: będziemy
+    liczyć, ile operacji wykonuje nasz program w zależności od rozmiaru
+    danych wejściowych. Niech cię nie zmyli słowo "rozmiar": nie ma ono
+    nic wspólnego z mierzeniem.
+
+<div class="paragraph"> </div>
+
+    Żeby za dużo nie gdakać, rzućmy okiem na przykład. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Print</span> <span class="id" type="var">head</span>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;head&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fix&nbsp;head&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(l&nbsp;:&nbsp;list&nbsp;A)&nbsp;{struct&nbsp;l}&nbsp;:&nbsp;option&nbsp;A&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;l&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<span class="inlinecode">[]</span>&nbsp;=&gt;&nbsp;None<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;h&nbsp;::&nbsp;_&nbsp;=&gt;&nbsp;Some&nbsp;h<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;A&nbsp;:&nbsp;Type,&nbsp;list&nbsp;A&nbsp;-&gt;&nbsp;option&nbsp;A&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Tak powinna wyglądać definicja funkcji <span class="inlinecode"><span class="id" type="var">head</span></span>, której napisanie było w
+    poprzednim rozdziale jednym z twoich zadań.
+
+<div class="paragraph"> </div>
+
+    Pierwszym krokiem naszej analizy jest ustalenie, czym są dane wejściowe.
+    Dane wejściowe to po prostu argumenty funkcji <span class="inlinecode"><span class="id" type="var">head</span></span>, czyli <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span></span>
+    oraz <span class="inlinecode"><span class="id" type="var">l</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>.
+
+<div class="paragraph"> </div>
+
+    Drugim krokiem jest ustalanie, które argumenty mają wpływ na czas działania
+    funkcji i jaki jest ich rozmiar. Z pewnością wpływu na wynik nie może mieć
+    typ <span class="inlinecode"><span class="id" type="var">A</span></span>, gdyż dla każdego typu robi ona to samo — zmienia się tylko typ
+    danych, na których operuje. Wobec tego jedynym argumentem, którego rozmiar
+    może mieć znaczenie, jest <span class="inlinecode"><span class="id" type="var">l</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>.
+
+<div class="paragraph"> </div>
+
+    Kolejnym krokiem jest ustalenie, jaki jest rozmiar listy <span class="inlinecode"><span class="id" type="var">l</span></span>, ale zanim
+    będzie to w ogóle możliwe, musimy zadać sobie bardziej fundamentalne
+    pytanie: czym właściwie jest rozmiar? Przez rozmiar rozumieć będziemy
+    zawsze pewną liczbę naturalną, która intuicyjnie mówi nam, jak duży i
+    skomplikowany jest dany obiekt.
+
+<div class="paragraph"> </div>
+
+    W przypadku typów induktywnych powinno to być dość jasne. Jako że funkcje
+    na obiektach takich typów definiujemy przez rekursję, która stopniowo
+    "pożera" swój argument, spodziewamy się, że obliczenie funkcji na "większym"
+    obiekcie będzie wymagało wykonania większej ilości wywołań rekurencyjnych,
+    co oznacza dłuższy "czas" wykonania ("czas" jest w cudzysłowie, gdyż tak
+    naprawdę nie badamy już dosłownie czasu działania programu, a jedynie ilość
+    wykonywanych przez niego operacji).
+
+<div class="paragraph"> </div>
+
+    Czymże może być rozmiar listy? Cóż, potencjalnych miar rozmiaru list jest
+    zapewne nieskończenie wiele, ale najsensowniejszym pomysłem, który powinien
+    od razu przyjść ci na myśl, jest jej długość (ta sama, którą obliczamy
+    za pomocą funkcji <span class="inlinecode"><span class="id" type="var">length</span></span>).
+
+<div class="paragraph"> </div>
+
+    W ostatnim kroku pozostaje nam policzyć na palcach, ile operacji wykonuje
+    nasza funkcja. Pierwszą operacją jest pattern matching. Druga to zwrócenie
+    wyniku. Hmmm, czyżby nasza funkcja wykonywała tylko dwie operacje?
+
+<div class="paragraph"> </div>
+
+    Przypomnij sobie, że wzorce są dopasowywane w kolejności od góry do dołu.
+    Wobec tego jeżeli lista nie jest pusta, to wykonujemy dwa dopasowania, a
+    nie jedno. Wobec dla pustej listy wykonujemy dwie operacje, a dla niepustej
+    trzy.
+
+<div class="paragraph"> </div>
+
+    Ale czy aby na pewno? A może zwrócenie wyniku nie jest operacją? A może
+    jego koszt jest inny niż koszt wykonania dopasowania? Być może nie podoba
+    ci się forma naszego wyniku: "jeżeli pusta to 2, jeżeli nie to 3".
+
+<div class="paragraph"> </div>
+
+    Powyższe wątpliwości wynikają w znacznej mierze z tego, że nasza analiza
+    była zbyt szczegółowa. Nasze podejście wymaga jeszcze jednego, ostatniego
+    już ulepszenia: zamiast analizy dokładnej posłużymy się analizą
+    asymptotyczną.
+
+<div class="paragraph"> </div>
+
+    Za określeniem "złożoność asymptotyczna" kryje się prosta idea: nie
+    interesuje nas dokładna ilość operacji, jakie program wykonuje, a tylko
+    w jaki sposób zwiększa się ona w zależności od rozmiaru danych. Jeżeli
+    przełożymy naszą odpowiedź na język złożoności asymptotycznej, zabrzmi
+    ona: funkcja <span class="inlinecode"><span class="id" type="var">head</span></span> działa w czasie stałym, co nieformalnie będziemy
+    oznaczać przez O(1).
+
+<div class="paragraph"> </div>
+
+    Co znaczy określenie "czas stały"? Przede wszystkim nie odnosi się ono
+    do czasu, lecz do ilości operacji. Przywyknij do tej konwencji — gdy
+    chodzi o złożoność, "czas" znaczy "ilość operacji". Odpowiadając na
+    pytanie: jeżeli funkcja "działa w czasie stałym" to znaczy, że wykonuje
+    ona taką samą ilość operacji niezależnie od rozmiaru danych.
+
+<div class="paragraph"> </div>
+
+    Uzyskana odpowiedź nie powinna nas to dziwić — ustaliliśmy wszakże, że
+    funkcja <span class="inlinecode"><span class="id" type="var">head</span></span> oblicza wynik za pomocą góra dwóch dopasowań do wzorca.
+    Nawet jeżeli przekażemy do niej listę o długości milion, to nie dotyka
+    ona jej ogona o długości 999999.
+
+<div class="paragraph"> </div>
+
+    Co dokładnie oznacza stwierdzenie "taką samą ilość operacji"? Mówiąc
+    wprost: ile konkretnie? O tym informuje nas nasze nieformalne oznaczenie
+    O(1), które zaraz stanie się dla nas jasne. Zanim jednak to się stani,
+    zauważmy, że istnieją trzy podstawowe sposoby analizowania złożoności
+    asymptotycznej:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> optymistyczny. Polega na obliczeniu najkrótszego możliwego czasu działania
+      programu. Nie będziemy go stosować, gdyż świat rzeczywisty jest na to zbyt
+      brutalny.
+
+</li>
+<li> średni. Polega na oszacowaniu przeciętnego oczekiwanego czasu działania
+      algorytmu. Ma on dwie wady: po pierwsze, wymaga on znajomości rachunku
+      prawdopodobieństwa i analizy matematycznej i jest ogólnie trudniejszy od
+      wariantu pesymistycznego (o którym za chwilę). Po drugie: prawa Murphy'ego.
+      W uproszczeniu prawa Murphy'ego głoszą, że jeżeli coś może się nie udać,
+      to na pewno się nie uda. To skłania nas do odrzucenia tego wariantu
+      analizy i skierowania naszej uwagi ku sposobowi ostatniemu.
+
+</li>
+<li> pesymistyczny. Polega na obliczeniu najgorszego (czyli najwolniejszego)
+      możliwego czasu działania algorytmu. 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
