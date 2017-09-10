@@ -15,7 +15,7 @@
 
 </script>
 </head>
-<h1 class="libtitle">X31: Złożoność obliczeniowa i rekursja ogonowa</h1>
+<h1 class="libtitle">X31: Złożoność obliczeniowa</h1>
 
 <div class="code">
 </div>
@@ -39,7 +39,10 @@
 <li> dowodzenie przez indukcję
 
 </li>
-<li> listy 
+<li> listy
+
+</li>
+<li> teoria relacji 
 </li>
 </ul>
 
@@ -66,13 +69,12 @@ Zapoznaliśmy się już z rekursją strukturalną, dzięki której możemy defin
     rekurencyjne w dużo wydajniejszy sposób. 
 <div class="paragraph"> </div>
 
-<a name="lab148"></a><h1 class="section">Złożoność obliczeniowa</h1>
+<a name="lab148"></a><h1 class="section">Czas działania programu</h1>
 
 <div class="paragraph"> </div>
 
- Zaczniemy od zdefiniowania złożoności obliczeniowej (nieco upraszczając).
-    Nasz cel jest prosty: chcemy zbadać, jak długo będą wykonywać się nasze
-    programy.
+ Cel naszych rozważań w tym rozdziale jest prosty: chcemy zbadać, jak długo
+    będą wykonywać się nasze programy.
 
 <div class="paragraph"> </div>
 
@@ -128,11 +130,14 @@ Zapoznaliśmy się już z rekursją strukturalną, dzięki której możemy defin
     dobrym pomysłem. Prawdę mówiąc, wszelkie podejścia oparte na mierzeniu
     czegokolwiek będą się wiązały z takimi nieprzyjemnościami, jak błędy
     pomiaru, problemy z mierzeniem, czy potencjalna konieczność posługiwania
-    się uśrednieniami.
+    się uśrednieniami. 
+<div class="paragraph"> </div>
+
+<a name="lab149"></a><h1 class="section">Złożoność obliczeniowa</h1>
 
 <div class="paragraph"> </div>
 
-    Zdecydujemy się zatem na podejście bardziej abstrakcyjne: będziemy
+ Zdecydujemy się zatem na podejście bardziej abstrakcyjne: będziemy
     liczyć, ile operacji wykonuje nasz program w zależności od rozmiaru
     danych wejściowych. Niech cię nie zmyli słowo "rozmiar": nie ma ono
     nic wspólnego z mierzeniem.
@@ -220,19 +225,22 @@ Tak powinna wyglądać definicja funkcji <span class="inlinecode"><span class="i
 
 <div class="paragraph"> </div>
 
-    Powyższe wątpliwości wynikają w znacznej mierze z tego, że nasza analiza
-    była zbyt szczegółowa. Nasze podejście wymaga jeszcze jednego, ostatniego
-    już ulepszenia: zamiast analizy dokładnej posłużymy się analizą
-    asymptotyczną.
+    Powyższe wątpliwości wynikają w znacznej mierze z tego, że wynik naszej
+    analizy jest zbyt szczegółowy. Nasze podejście wymaga jeszcze jednego,
+    ostatniego już ulepszenia: zamiast analizy dokładnej posłużymy się analizą
+    asymptotyczną. 
+<div class="paragraph"> </div>
+
+<a name="lab150"></a><h1 class="section">Złożoność asymptotyczna</h1>
 
 <div class="paragraph"> </div>
 
-    Za określeniem "złożoność asymptotyczna" kryje się prosta idea: nie
+ Za określeniem "złożoność asymptotyczna" kryje się prosta idea: nie
     interesuje nas dokładna ilość operacji, jakie program wykonuje, a tylko
     w jaki sposób zwiększa się ona w zależności od rozmiaru danych. Jeżeli
     przełożymy naszą odpowiedź na język złożoności asymptotycznej, zabrzmi
-    ona: funkcja <span class="inlinecode"><span class="id" type="var">head</span></span> działa w czasie stałym, co nieformalnie będziemy
-    oznaczać przez O(1).
+    ona: funkcja <span class="inlinecode"><span class="id" type="var">head</span></span> działa w czasie stałym (co nieformalnie będziemy
+    oznaczać przez O(1)).
 
 <div class="paragraph"> </div>
 
@@ -244,7 +252,7 @@ Tak powinna wyglądać definicja funkcji <span class="inlinecode"><span class="i
 
 <div class="paragraph"> </div>
 
-    Uzyskana odpowiedź nie powinna nas to dziwić — ustaliliśmy wszakże, że
+    Uzyskana odpowiedź nie powinna nas dziwić — ustaliliśmy wszakże, że
     funkcja <span class="inlinecode"><span class="id" type="var">head</span></span> oblicza wynik za pomocą góra dwóch dopasowań do wzorca.
     Nawet jeżeli przekażemy do niej listę o długości milion, to nie dotyka
     ona jej ogona o długości 999999.
@@ -253,31 +261,261 @@ Tak powinna wyglądać definicja funkcji <span class="inlinecode"><span class="i
 
     Co dokładnie oznacza stwierdzenie "taką samą ilość operacji"? Mówiąc
     wprost: ile konkretnie? O tym informuje nas nasze nieformalne oznaczenie
-    O(1), które zaraz stanie się dla nas jasne. Zanim jednak to się stani,
-    zauważmy, że istnieją trzy podstawowe sposoby analizowania złożoności
+    O(1), które niedługo stanie się dla nas jasne. Przedtem jednak należy
+    zauważyć, że istnieją trzy podstawowe sposoby analizowania złożoności
     asymptotycznej:
 
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> optymistyczny. Polega na obliczeniu najkrótszego możliwego czasu działania
-      programu. Nie będziemy go stosować, gdyż świat rzeczywisty jest na to zbyt
-      brutalny.
+<li> optymistyczny, polegający na obliczeniu najkrótszego możliwego czasu
+      działania programu
 
 </li>
-<li> średni. Polega na oszacowaniu przeciętnego oczekiwanego czasu działania
-      algorytmu. Ma on dwie wady: po pierwsze, wymaga on znajomości rachunku
-      prawdopodobieństwa i analizy matematycznej i jest ogólnie trudniejszy od
-      wariantu pesymistycznego (o którym za chwilę). Po drugie: prawa Murphy'ego.
-      W uproszczeniu prawa Murphy'ego głoszą, że jeżeli coś może się nie udać,
-      to na pewno się nie uda. To skłania nas do odrzucenia tego wariantu
-      analizy i skierowania naszej uwagi ku sposobowi ostatniemu.
+<li> średni, który polega na oszacowaniu przeciętnego czasu działania
+      algorytmu, czyli czasu działania dla "typowych" danych wejściowych
 
 </li>
-<li> pesymistyczny. Polega na obliczeniu najgorszego (czyli najwolniejszego)
-      możliwego czasu działania algorytmu. 
+<li> pesymistyczny, polegający na obliczeniu najgorszego możliwego czasu
+      działania algorytmu. 
 </li>
 </ul>
+
+<div class="paragraph"> </div>
+
+ Analizy optymistyczna i pesymistyczna są w miarę łatwe, a średnia — dość
+    trudna. Jest tak dlatego, że przy dwóch pierwszych sposobach interesuje
+    nas dokładnie jeden przypadek (najbardziej lub najmniej korzystny), a przy
+    trzecim — przypdek "średni", a do uporania się z nim musimy przeanalizować
+    wszystkie przypadki.
+
+<div class="paragraph"> </div>
+
+    Analizy średnia i pesymistyczna są w miarę przydatne, a optymistyczna —
+    raczej nie. Optymizm należy odrzucić choćby ze względu na prawa Murphy'ego,
+    które głoszą, że "jeżeli coś może się nie udać, to na pewno się nie uda".
+
+<div class="paragraph"> </div>
+
+    Wobec powyższych rozważań skupimy się na analizie pesymistycznej, gdyż ona
+    jako jedyna z trzech możliwości jest zarówno użyteczna, jak i w miarę
+    łatwa. 
+<div class="paragraph"> </div>
+
+<a name="lab151"></a><h1 class="section">Duże O</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab152"></a><h2 class="section">Definicja i intuicja</h2>
+
+<div class="paragraph"> </div>
+
+ Nadszedł wreszcie czas, aby formalnie zdefiniować "notację" duże O.
+    Wziąłem słowo "notacja" w cudzysłów, gdyż w ten właśnie sposób byt
+    ten jest nazywany w literaturze; w Coqu jednak słowo "notacja" ma
+    zupełnie inne znaczenie, nijak niezwiązane z dużym O. Zauważmy też,
+    że zbieżność nazwy <span class="inlinecode"><span class="id" type="var">O</span></span> z identyczną nazwą konstruktora <span class="inlinecode"><span class="id" type="var">O</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span></span> jest
+    jedynie smutnym przypadkiem. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">O</span> (<span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">exists</span> <span class="id" type="var">c</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">n'</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">n</span> &lt;= <span class="id" type="var">n'</span> -&gt; <span class="id" type="var">f</span> <span class="id" type="var">n'</span> &lt;= <span class="id" type="var">c</span> * <span class="id" type="var">g</span> <span class="id" type="var">n'</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zdanie <span class="inlinecode"><span class="id" type="var">O</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">g</span></span> można odczytać jako "f rośnie nie szybciej niż g" lub
+    "f jest asymptotycznie mniejsze od g", gdyż <span class="inlinecode"><span class="id" type="var">O</span></span> jest pewną formą porządku.
+    Jest to jednak porządek specyficzny:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Po pierwsze, funkcje <span class="inlinecode"><span class="id" type="var">f</span></span> i <span class="inlinecode"><span class="id" type="var">g</span></span> porównujemy porównując wyniki zwracane
+      przez nie dla danego argumentu.
+
+</li>
+<li> Po drugie, nie porównujemy ich na wszystkich argumentach, lecz jedynie
+      na wszystkich argumentach większych od pewnego <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span></span>. Oznacza to,
+      że <span class="inlinecode"><span class="id" type="var">f</span></span> może być "większe" od <span class="inlinecode"><span class="id" type="var">g</span></span> na skończonej ilości argumentów od <span class="inlinecode">0</span>
+      do <span class="inlinecode"><span class="id" type="var">n</span></span>, a mimo tego i tak być od <span class="inlinecode"><span class="id" type="var">g</span></span> asymptotycznie mniejsze. 
+
+</li>
+<li> Po trzecie, nie porównujemy <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">n'</span></span> bezpośrednio do <span class="inlinecode"><span class="id" type="var">g</span></span> <span class="inlinecode"><span class="id" type="var">n'</span></span>, lecz do
+      <span class="inlinecode"><span class="id" type="var">c</span></span> <span class="inlinecode">*</span> <span class="inlinecode"><span class="id" type="var">g</span></span> <span class="inlinecode"><span class="id" type="var">n'</span></span>. Można to intuicyjnie rozumieć tak, że nie interesują nas
+      konkretne postaci funkcji <span class="inlinecode"><span class="id" type="var">f</span></span> i <span class="inlinecode"><span class="id" type="var">g</span></span> lecz jedynie ich komponenty 
+      najbardziej znaczące, czyli najbardziej wpływające na wynik. Przykład:
+      jeżeli f(n) = 4n^2, a g(n) = 42n^42, to nie interesują nas stałe 4 i 42.
+      Najbardziej znaczącym komponentem <span class="inlinecode"><span class="id" type="var">f</span></span> jest n^2, zaś g — n^42. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Poszukaj w Internecie wizualizacji tej idei — ja niestety mam bardzo
+    ograniczone możliwości osadzania multimediów w niniejszej książce
+    (TODO: postaram się coś na to poradzić). 
+<div class="paragraph"> </div>
+
+<a name="lab153"></a><h2 class="section">Złożoność formalna i nieformalna</h2>
+
+<div class="paragraph"> </div>
+
+ Ostatecznie nasze nieformalne stwierdzenie, że złożoność funkcji <span class="inlinecode"><span class="id" type="var">head</span></span>
+    to O(1) możemy rozumieć tak: "ilość operacji wykonywanych przez funkcję
+    <span class="inlinecode"><span class="id" type="var">head</span></span> jest stała i nie zależy w żaden sposób od długości listy, która
+    jest jej argumentem". Nie musimy przy tym zastanawiać się, ile dokładnie
+    operacji wykonuje <span class="inlinecode"><span class="id" type="var">head</span></span>: może 2, może 3, a może nawet 4, ale na pewno
+    mniej niż, powiedzmy, 1000, więc taką wartość możemy przyjąć za <span class="inlinecode"><span class="id" type="var">c</span></span>.
+
+<div class="paragraph"> </div>
+
+    To nieformalne stwierdzenie moglibyśmy przy użyciu naszej formalnej
+    definicji zapisać jako <span class="inlinecode"><span class="id" type="var">O</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode">(<span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">_</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode">1)</span>, gdzie <span class="inlinecode"><span class="id" type="var">f</span></span> oznaczałoby ilość
+    operacji wykonywanych przez funkcję <span class="inlinecode"><span class="id" type="var">head</span></span>.
+
+<div class="paragraph"> </div>
+
+    Moglibyśmy, ale nie możemy, gdyż zdania dotyczące złożoności obliczeniowej
+    funkcji <span class="inlinecode"><span class="id" type="var">head</span></span>, i ogólnie wszystkich funkcji możliwych do zaimplementowania
+    w Coqu, nie są zdaniami Coqa (czyli termami typu <span class="inlinecode"><span class="id" type="keyword">Prop</span></span>), lecz zdaniami o
+    Coqu, a więc zdaniami wyrażonymi w metajęzyku (którym jest tutaj język
+    polski).
+
+<div class="paragraph"> </div>
+
+    Jest to bardzo istotne spostrzeżenie, więc powtórzmy je, tym razem nieco
+    dobitniej: jest niemożliwe, aby w Coqu udowodnić, że jakaś funkcja napisana
+    w Coqu ma jakąś złożoność obliczeniową.
+
+<div class="paragraph"> </div>
+
+    Z tego względu nasza definicja <span class="inlinecode"><span class="id" type="var">O</span></span> oraz ćwiczenia jej dotyczące mają
+    jedynie charakter pomocniczy. Ich celem jest pomóc ci zrozumieć, czym
+    jest złożoność asymptotyczna. Wszelkie dowodzenie złożoności obliczeniowej
+    będziemy przeprowadzać w sposób tradycyjny, czyli "na kartce" (no, może
+    poza pewną sztuczką, ale o tym później). 
+<div class="paragraph"> </div>
+
+<a name="lab154"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Udowodnij, że <span class="inlinecode"><span class="id" type="var">O</span></span> jest relacją zwrotną i przechodnią. Pokaż też, że nie
+    jest ani symetryczna, ani słabo antysymetryczna. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">O_refl</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">f</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>, <span class="id" type="var">O</span> <span class="id" type="var">f</span> <span class="id" type="var">f</span>.<br/>
+<span class="comment">(*&nbsp;begin&nbsp;hid&nbsp;e*)</span><br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">red</span>. <span class="id" type="tactic">exists</span> 1, 0. <span class="id" type="tactic">intros</span>. <span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">rewrite</span> &lt;- <span class="id" type="var">plus_n_O</span>. <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+<span class="comment">(*&nbsp;end&nbsp;hide&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">O_trans</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">h</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">O</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> -&gt; <span class="id" type="var">O</span> <span class="id" type="var">g</span> <span class="id" type="var">h</span> -&gt; <span class="id" type="var">O</span> <span class="id" type="var">f</span> <span class="id" type="var">h</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">O_asym</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">exists</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>, <span class="id" type="var">O</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> /\ ~ <span class="id" type="var">O</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">O_not_weak_antisym</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">exists</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>, <span class="id" type="var">O</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> /\ <span class="id" type="var">O</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span> /\ <span class="id" type="var">f</span> &lt;&gt; <span class="id" type="var">g</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab155"></a><h2 class="section">Duże Omega</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Omega</span> (<span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>) : <span class="id" type="keyword">Prop</span> := <span class="id" type="var">O</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" type="var">Omega</span></span> to <span class="inlinecode"><span class="id" type="var">O</span></span> z odwróconymi argumentami. Skoro <span class="inlinecode"><span class="id" type="var">O</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">g</span></span> oznacza, że <span class="inlinecode"><span class="id" type="var">f</span></span>
+    rośnie nie szybciej niż <span class="inlinecode"><span class="id" type="var">g</span></span>, to <span class="inlinecode"><span class="id" type="var">Omega</span></span> <span class="inlinecode"><span class="id" type="var">g</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span> musi znaczyć, ż <span class="inlinecode"><span class="id" type="var">g</span></span> rośnie
+    nie wolniej niż <span class="inlinecode"><span class="id" type="var">f</span></span>. <span class="inlinecode"><span class="id" type="var">O</span></span> oznacza więc ograniczenie górne, a <span class="inlinecode"><span class="id" type="var">Omega</span></span>
+    ograniczenie dolne. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Omega_refl</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">f</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>, <span class="id" type="var">Omega</span> <span class="id" type="var">f</span> <span class="id" type="var">f</span>.<br/>
+<span class="comment">(*&nbsp;begin&nbsp;hid&nbsp;e*)</span><br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">red</span>. <span class="id" type="tactic">apply</span> <span class="id" type="var">O_refl</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+<span class="comment">(*&nbsp;end&nbsp;hide&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Omega_trans</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">h</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Omega</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> -&gt; <span class="id" type="var">Omega</span> <span class="id" type="var">g</span> <span class="id" type="var">h</span> -&gt; <span class="id" type="var">Omega</span> <span class="id" type="var">f</span> <span class="id" type="var">h</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Omega_not_weak_antisym</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">exists</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>, <span class="id" type="var">O</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> /\ <span class="id" type="var">O</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span> /\ <span class="id" type="var">f</span> &lt;&gt; <span class="id" type="var">g</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab156"></a><h1 class="section">Duże Theta</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Theta</span> (<span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>) : <span class="id" type="keyword">Prop</span> := <span class="id" type="var">O</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> /\ <span class="id" type="var">O</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Definicja <span class="inlinecode"><span class="id" type="var">Theta</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">g</span></span> głosi, że <span class="inlinecode"><span class="id" type="var">O</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">g</span></span> i <span class="inlinecode"><span class="id" type="var">O</span></span> <span class="inlinecode"><span class="id" type="var">g</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span>. Przypomnijmy, że
+    <span class="inlinecode"><span class="id" type="var">O</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">g</span></span> możemy rozumieć jako "<span class="inlinecode"><span class="id" type="var">f</span></span> rośnie asymptotycznie nie szybciej
+    niż <span class="inlinecode"><span class="id" type="var">g</span></span>", zaś <span class="inlinecode"><span class="id" type="var">O</span></span> <span class="inlinecode"><span class="id" type="var">g</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span> analogicznie jako "<span class="inlinecode"><span class="id" type="var">g</span></span> rośnie asymptotycznie
+    nie szybciej niż <span class="inlinecode"><span class="id" type="var">f</span></span>". Wobec tego interpretacja <span class="inlinecode"><span class="id" type="var">Theta</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">g</span></span> nasuwa się
+    sama: "<span class="inlinecode"><span class="id" type="var">f</span></span> i <span class="inlinecode"><span class="id" type="var">g</span></span> rosną asymptotycznie w tym samym tempie".
+
+<div class="paragraph"> </div>
+
+    <span class="inlinecode"><span class="id" type="var">Theta</span></span> jest relacją równoważności, która oddaje nieformalną ideę
+    najbardziej znaczącego komponentu funkcji, którą posłużyliśmy się
+    opisując intuicje dotyczące <span class="inlinecode"><span class="id" type="var">O</span></span>. Parafrazując:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" type="var">O</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">g</span></span> znaczy tyle, co "najbardziej znaczący komponent <span class="inlinecode"><span class="id" type="var">f</span></span> jest
+      mniejszy lub równy najbardziej znaczącemu komponentowi <span class="inlinecode"><span class="id" type="var">g</span></span>"
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">Theta</span></span> <span class="inlinecode"><span class="id" type="var">f</span></span> <span class="inlinecode"><span class="id" type="var">g</span></span> znaczy "najbardziej znaczące komponenty <span class="inlinecode"><span class="id" type="var">f</span></span> i <span class="inlinecode"><span class="id" type="var">g</span></span> są
+      sobie równe". 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a name="lab157"></a><h4 class="section">Ćwiczenie</h4>
 
 </div>
 <div class="code">
@@ -285,7 +523,462 @@ Tak powinna wyglądać definicja funkcji <span class="inlinecode"><span class="i
 <br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">Theta_refl</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">f</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>, <span class="id" type="var">Theta</span> <span class="id" type="var">f</span> <span class="id" type="var">f</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">Theta_trans</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">h</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Theta</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> -&gt; <span class="id" type="var">Theta</span> <span class="id" type="var">g</span> <span class="id" type="var">h</span> -&gt; <span class="id" type="var">Theta</span> <span class="id" type="var">f</span> <span class="id" type="var">h</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">Theta_sym</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">nat</span> -&gt; <span class="id" type="var">nat</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Theta</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> -&gt; <span class="id" type="var">Theta</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab158"></a><h1 class="section">Złożoność typowych funkcji na listach</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab159"></a><h2 class="section">Analiza nieformalna</h2>
+
+<div class="paragraph"> </div>
+
+ Skoro rozumiesz już, na czym polegają <span class="inlinecode"><span class="id" type="var">O</span></span> oraz <span class="inlinecode"><span class="id" type="var">Theta</span></span>, przeanalizujemy
+    złożoność typowej funkcji operującej na listach. Zapoznamy się też z
+    dwoma sposobami na sprawdzenie poprawności naszej analizy: mimo, że w
+    Coqu nie można udowodnić, że dana funkcja ma jakąś złożoność obliczeniową,
+    możemy użyć Coqa do upewnienia się, że nie popełniliśmy w naszej analizie
+    nieformalnej pewnych rodzajów błędów.
+
+<div class="paragraph"> </div>
+
+    Naszą ofiarą będzie funkcja <span class="inlinecode"><span class="id" type="var">length</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Print</span> <span class="id" type="var">length</span>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;length&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fix&nbsp;length&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(l&nbsp;:&nbsp;list&nbsp;A)&nbsp;{struct&nbsp;l}&nbsp;:&nbsp;nat&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;l&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<span class="inlinecode">[]</span>&nbsp;=&gt;&nbsp;0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;_&nbsp;::&nbsp;t&nbsp;=&gt;&nbsp;S&nbsp;(length&nbsp;A&nbsp;t)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;A&nbsp;:&nbsp;Type,&nbsp;list&nbsp;A&nbsp;-&gt;&nbsp;nat&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Oznaczmy złożoność tej funkcji w zależności o rozmiaru (długości) listy
+    <span class="inlinecode"><span class="id" type="var">l</span></span> przez T(n) (pamiętaj, że jest to oznaczenie nieformalne, które nie ma
+    nic wspólnego z Coqiem). Jako, że nasza funkcja wykonuje dopasowanie <span class="inlinecode"><span class="id" type="var">l</span></span>,
+    rozważmy dwa przypadki:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" type="var">l</span></span> ma postać <span class="inlinecode">[]</span>. Wtedy rozmiar <span class="inlinecode"><span class="id" type="var">l</span></span> jest równy 0, a jedyne co robi
+      nasza funkcja, to zwrócenie wyniku, które policzymy jako jedna operacja.
+      Wobec tego T(0) = 1.
+
+</li>
+<li> <span class="inlinecode"><span class="id" type="var">l</span></span> ma postać <span class="inlinecode"><span class="id" type="var">h</span></span> <span class="inlinecode">::</span> <span class="inlinecode"><span class="id" type="var">t</span></span>. Wtedy rozmiar <span class="inlinecode"><span class="id" type="var">l</span></span> jest równy n + 1, gdzie n
+      jest rozmiarem <span class="inlinecode"><span class="id" type="var">t</span></span>. Nasza funkcja robi dwie rzeczy: rekurencyjnie wywołuje
+      się z argumentem <span class="inlinecode"><span class="id" type="var">t</span></span>, co kosztuje nas T(n) operacji , oraz dostawia do
+      wyniku tego wywołania <span class="inlinecode"><span class="id" type="var">S</span></span>, co kosztuje nas 1 operację. Wobec tego
+      T(n + 1) = T(n) + 1. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Otrzymaliśmy więc odpowiedź w postaci równania rekurencyjnego T(0) = 1;
+    T(n + 1) = T(n) + 1. Widać na oko, że T(n) = n + 1, a zatem złożoność
+    funkcji <span class="inlinecode"><span class="id" type="var">length</span></span> to O(n). 
+<div class="paragraph"> </div>
+
+<a name="lab160"></a><h2 class="section">Formalne sprawdzenie</h2>
+
+<div class="paragraph"> </div>
+
+<a name="lab161"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Żeby przekonać się, że powyższy akapit nie kłamie, zaimplementuj <span class="inlinecode"><span class="id" type="var">T</span></span>
+    w Coqu i udowodnij, że rzeczywiście rośnie ono nie szybciej niż
+    <span class="inlinecode"><span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" type="var">n</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">T_spec_0</span> : <span class="id" type="var">T</span> 0 = 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">T_spec_S</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">T</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) = 1 + <span class="id" type="var">T</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">T_sum</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">T</span> <span class="id" type="var">n</span> = <span class="id" type="var">n</span> + 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">O_T_n</span> : <span class="id" type="var">O</span> <span class="id" type="var">T</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> =&gt; <span class="id" type="var">n</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Prześledźmy jeszcze raz całą analizę, krok po kroku:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> oznaczamy złożoność analizowanej funkcji przez T
+
+</li>
+<li> patrząc na definicję analizowanej funkcji definiujemy T za pomocą równań
+      T(0) = 1 i T(n + 1) = T(n) + 1
+
+</li>
+<li> rozwiązujemy równanie rekurencyjne i dostajemy T(n) = n + 1
+
+</li>
+<li> konkludujemy, że złożoność analizowanej funkcji to O(n) 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ W celu sprawdzenia analizy robimy następujące rzeczy:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> implementujemy T w Coqu
+
+</li>
+<li> dowodzimy, że rozwiązaliśmy równanie rekurencyjne poprawnie
+
+</li>
+<li> pokazujemy, że <span class="inlinecode"><span class="id" type="var">O</span></span> <span class="inlinecode"><span class="id" type="var">T</span></span> <span class="inlinecode">(<span class="id" type="keyword">fun</span></span> <span class="inlinecode"><span class="id" type="var">n</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" type="var">n</span>)</span> zachodzi 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Dzięki powyższej procedurze udało nam się wyeliminować podejrzenie co do
+    tego, że źle rozwiązaliśmy równanie rekurencyjne lub że źle podaliśmy
+    złożoność za pomocą dużego O. Należy jednak po raz kolejny zaznaczyć, że
+    nasza analiza nie jest formalnym dowodem tego, że funkcja <span class="inlinecode"><span class="id" type="var">length</span></span> ma
+    złożoność O(n). Jest tak dlatego, że pierwsza część naszej analizy jest
+    nieformalna i nie może zostać w Coqu sformalizowana. 
+<div class="paragraph"> </div>
+
+ Jest jeszcze jeden sposób, żeby sprawdzić naszą nieformalną analizę.
+    Mianowicie możemy sprawdzić nasze mniemanie, że T(n + 1) = T(n) + 1,
+    dowodząc formalnie w Coqu, że pewna wariacja funkcji <span class="inlinecode"><span class="id" type="var">length</span></span> wykonuje
+    co najwyżej <span class="inlinecode"><span class="id" type="var">n</span></span> wywołań rekurencyjnych, gdzie <span class="inlinecode"><span class="id" type="var">n</span></span> jest rozmiarem jej
+    argumentu. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">length'</span> {<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">fuel</span> : <span class="id" type="var">nat</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>) : <span class="id" type="var">option</span> <span class="id" type="var">nat</span> :=<br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">fuel</span>, <span class="id" type="var">l</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0, <span class="id" type="var">_</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span>, [] =&gt; <span class="id" type="var">Some</span> 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">S</span> <span class="id" type="var">fuel'</span>, <span class="id" type="var">_</span> :: <span class="id" type="var">t</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">length'</span> <span class="id" type="var">fuel'</span> <span class="id" type="var">t</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">n</span> =&gt; <span class="id" type="var">Some</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Pomysł jest prosty: zdefiniujemy wariację funkcji <span class="inlinecode"><span class="id" type="var">length</span></span> za pomocą
+    techniki, którą nazywam "rekursją po paliwie". W porównaniu do <span class="inlinecode"><span class="id" type="var">length</span></span>,
+    której argumentem głównym jest <span class="inlinecode"><span class="id" type="var">l</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>, <span class="inlinecode"><span class="id" type="var">length'</span></span> ma jeden dodatkowy
+    argument <span class="inlinecode"><span class="id" type="var">fuel</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">nat</span></span>, który będziemy zwać paliwem, a który jest jej
+    argumentem głównym
+
+<div class="paragraph"> </div>
+
+    Nasza rekursja wygląda tak, że każde wywołanie rekurencyjne zmniejsza
+    zapasy paliwa o <span class="inlinecode">1</span>, ale z pozostałymi argumentami możemy robić dowolne
+    cuda. Żeby uwzględnić możliwość wyczerpania się paliwa, nasza funkcja
+    zwraca wartość typu <span class="inlinecode"><span class="id" type="var">option</span></span> <span class="inlinecode"><span class="id" type="var">nat</span></span> zamiast samego <span class="inlinecode"><span class="id" type="var">nat</span></span>. Wyczerpaniu się
+    paliwa odpowiada wynik <span class="inlinecode"><span class="id" type="var">None</span></span>, zaś <span class="inlinecode"><span class="id" type="var">Some</span></span> oznacza, że funkcja zakończyła
+    się wykonywać przed wyczerpaniem się paliwa.
+
+<div class="paragraph"> </div>
+
+    Paliwo jest więc tak naprawdę maksymalną ilością wywołań rekurencyjnych,
+    które funkcja może wykonać. Jeżeli uda nam się udowodnić, że dla pewnej
+    ilości paliwa funkcja zawsze zwraca <span class="inlinecode"><span class="id" type="var">Some</span></span>, będzie to znaczyło, że
+    znaleźliśmy górne ograniczenie ilości wywołań rekurencyjnych niezbędnych
+    do poprawnego wykonania się funkcji. 
+<div class="paragraph"> </div>
+
+<a name="lab162"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Uwaga, trudne. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">length'_rec_depth</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">length'</span> (<span class="id" type="var">S</span> (<span class="id" type="var">length</span> <span class="id" type="var">l</span>)) <span class="id" type="var">l</span> = <span class="id" type="var">Some</span> (<span class="id" type="var">length</span> <span class="id" type="var">l</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Twierdzenie to wygląda dość kryptycznie głównie ze względu na fakt, że
+    <span class="inlinecode"><span class="id" type="var">length</span></span> <span class="inlinecode"><span class="id" type="var">l</span></span> jest zarówno analizowaną przez nas funkcją, jaki i funkcją
+    obliczającą rozmiar listy <span class="inlinecode"><span class="id" type="var">l</span></span>.
+
+<div class="paragraph"> </div>
+
+    Żeby lepiej zrozumieć, co się stało, spróbujmy zinterpretować powyższe
+    twierdzenie. Mówi ono, że dla dowolnego <span class="inlinecode"><span class="id" type="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="keyword">Type</span></span> i <span class="inlinecode"><span class="id" type="var">l</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>,
+    jeżeli wywołamy <span class="inlinecode"><span class="id" type="var">length'</span></span> na <span class="inlinecode"><span class="id" type="var">l</span></span> dając jej <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">length</span></span> <span class="inlinecode"><span class="id" type="var">l</span>)</span> paliwa, to
+    zwróci ona <span class="inlinecode"><span class="id" type="var">Some</span></span> <span class="inlinecode">(<span class="id" type="var">length</span></span> <span class="inlinecode"><span class="id" type="var">l</span>)</span>.
+
+<div class="paragraph"> </div>
+
+    Innymi słowy, <span class="inlinecode"><span class="id" type="var">S</span></span> <span class="inlinecode">(<span class="id" type="var">length</span></span> <span class="inlinecode"><span class="id" type="var">l</span>)</span> paliwa to dostatecznie dużo, aby funkcja
+    wykonała się poprawnie. Dodatkowo <span class="inlinecode"><span class="id" type="var">Some</span></span> <span class="inlinecode">(<span class="id" type="var">length</span></span> <span class="inlinecode"><span class="id" type="var">l</span>)</span> jest pewną formą
+    specyfikacji dla funkcji <span class="inlinecode"><span class="id" type="var">length'</span></span>, która mówi, że jeżeli <span class="inlinecode"><span class="id" type="var">length'</span></span>
+    ma dostatecznie dużo paliwa, to wywołanie jej na <span class="inlinecode"><span class="id" type="var">l</span></span> daje taki sam
+    wynik jak <span class="inlinecode"><span class="id" type="var">length</span></span> <span class="inlinecode"><span class="id" type="var">l</span></span>, czyli nie pomyliliśmy się przy jej definiowaniu
+    (chcieliśmy, żeby była to "wariacja" <span class="inlinecode"><span class="id" type="var">length</span></span>, która daje takie same
+    wyniki, ale jest zdefiniowana przez rekursję po paliwie).
+
+<div class="paragraph"> </div>
+
+    Na tym kończy się nasz worek sztuczek formalnych, które pomagają nam
+    upewnić się w poprawności naszej analizy nieformalnej. 
+<div class="paragraph"> </div>
+
+<a name="lab163"></a><h1 class="section">Złożoność problemu</h1>
+
+<div class="paragraph"> </div>
+
+ Dotychczas zajmowaliśmy się złożonością obliczeniową funkcji. Złożoność ta
+    oznacza faktycznie złożoność sposobu rozwiązania pewnego problemu — w naszym
+    przypadku były to problemy zwrócenia głowy listy (funkcja <span class="inlinecode"><span class="id" type="var">head</span></span>) oraz
+    obliczenia jej długości (funkcja <span class="inlinecode"><span class="id" type="var">length</span></span>).
+
+<div class="paragraph"> </div>
+
+    Złożoność ta nie mówi jednak nic o innych sposobach rozwiązania tego samego
+    problemu. Być może istnieje szybszy sposób obliczania długości listy?
+    Zajmijmy się więc przez krótką chwilę koncepcją pokrewną koncepcji złożoności
+    obliczeniowej programu — jest nią koncepcja złożoności obliczeniowej
+    problemu.
+
+<div class="paragraph"> </div>
+
+    Na początku rozdziału stwierdziliśmy, że naszym celem będzie badanie
+    "czasu działania programu". Taki cel może jednak budzić pewien niesmak:
+    dlaczego mielibyśmy robić coś takiego?
+
+<div class="paragraph"> </div>
+
+    Czas (także w swym informatycznym znaczeniu, jako ilość operacji) jest
+    cennym zasobem i nie chcielibyśmy używać go nadaremnie ani marnować.
+    Jeżeli poznamy złożoność obliczeniową zarówno problemu, jak i jego
+    rozwiązania, to będziemy mogli stwierdzić, czy nasze rozwiązanie jest
+    optymalne (w sensie asymptotycznym, czyli dla instancji problemu, w
+    której rozmiary argumentów są bardzo duże).
+
+<div class="paragraph"> </div>
+
+    Na nasze potrzeby zdefiniujmy złożoność problemu jako złożoność najszybszego
+    programu, który rozwiązuje ten problem. Podobnie jak pojęcie złożoności
+    obliczeniowej programu, jest niemożliwe, aby pojęcie to sformalizować w
+    Coqu, będziemy się więc musieli zadowolić dywagacjami nieformalnymi.
+
+<div class="paragraph"> </div>
+
+    Zacznijmy od <span class="inlinecode"><span class="id" type="var">head</span></span> i problemu zwrócenia głowy listy. Czy można to zrobić
+    szybciej, niż w czasie stałym? Oczywiście nie. Czas stały to najlepsze, co
+    możemy uzyskać (zastanów się przez chwilę nad tym, dlaczego tak jest).
+    Oczywiście należy to zdanie rozumieć w sensie asymptotycznym: jeżeli chodzi
+    o dokładną złożoność, to różne funkcje działające w czasie stałym mogą
+    wykonywać różną ilość operacji — zarówno "jeden" jak i "milion" oznaczają
+    czas stały. Wobec tego złożoność problemu zwrócenia głowy listy to O(1).
+
+<div class="paragraph"> </div>
+
+    A co z obliczaniem długości listy? Czy można to zrobić szybciej niż w czasie
+    O(n)? Tutaj również odpowiedź brzmi "nie". Jest dość oczywiste, że w celu
+    obliczenia długość całej listy musimy przejść ją całą. Jeżeli przejdziemy
+    tylko pół, to obliczymy długość jedynie połowy listy. 
+<div class="paragraph"> </div>
+
+<a name="lab164"></a><h1 class="section">Przyspieszanie funkcji rekurencyjnych</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab165"></a><h2 class="section">Złożoność <span class="inlinecode"><span class="id" type="var">rev</span></span></h2>
+
+<div class="paragraph"> </div>
+
+ Przyjrzyjmy się złożoności funkcji <span class="inlinecode"><span class="id" type="var">rev</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Print</span> <span class="id" type="var">rev</span>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;rev&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fix&nbsp;rev&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(l&nbsp;:&nbsp;list&nbsp;A)&nbsp;{struct&nbsp;l}&nbsp;:&nbsp;list&nbsp;A&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;l&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<span class="inlinecode"></span>&nbsp;=&gt;&nbsp;<span class="inlinecode"></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;h&nbsp;::&nbsp;t&nbsp;=&gt;&nbsp;rev&nbsp;A&nbsp;t&nbsp;++&nbsp;<span class="inlinecode"><span class="id" type="var">h</span></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;A&nbsp;:&nbsp;Type,&nbsp;list&nbsp;A&nbsp;-&gt;&nbsp;list&nbsp;A&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Oznaczmy szukaną złożoność przez T(n). Z przypadku gdy <span class="inlinecode"><span class="id" type="var">l</span></span> jest postaci
+    <span class="inlinecode">[]</span> uzyskujemy T(0) = 1. W przypadku gdy <span class="inlinecode"><span class="id" type="var">l</span></span> jest postaci <span class="inlinecode"><span class="id" type="var">h</span></span> <span class="inlinecode">::</span> <span class="inlinecode"><span class="id" type="var">t</span></span>
+    mamy wywołanie rekurencyjne o koszcie T(n); dostawiamy też <span class="inlinecode"><span class="id" type="var">h</span></span> na koniec
+    odwróconego ogona. Jaki jest koszt tej operacji? Aby to zrobić, musimy
+    przebyć <span class="inlinecode"><span class="id" type="var">rev</span></span> <span class="inlinecode"><span class="id" type="var">t</span></span> od początku do końca, a więc koszt ten jest równy długości
+    listy <span class="inlinecode"><span class="id" type="var">l</span></span>. Stąd T(n + 1) = T(n) + n.
+
+<div class="paragraph"> </div>
+
+    Pozostaje nam rozwiązać równanie. Jeżeli nie potrafisz tego zrobić,
+    dla prostych równań pomocna może być strona https://www.wolframalpha.com/.
+    Rozwijając to równanie mamy T(n) = n + (n - 1) + (n - 2) + ... + 1, więc
+    T jest rzędu O(n^2).
+
+<div class="paragraph"> </div>
+
+    A jaka jest złożoność problemu odwracania listy? Z pewnością nie można tego
+    zrobić, jeżeli nie dotkniemy każdego elementu listy. Wobec tego możemy ją
+    oszacować z dołu przez Omega(n).
+
+<div class="paragraph"> </div>
+
+    Z taką sytuacją jeszcze się nie spotkaliśmy: wiemy, że asymptotycznie
+    problem wymaga Omega(n) operacji, ale nasze rozwiązanie wykonuje O(n^2)
+    operacji. Być może zatem możliwe jest napisanie funkcji <span class="inlinecode"><span class="id" type="var">rev</span></span> wydajniej. 
+<div class="paragraph"> </div>
+
+<a name="lab166"></a><h2 class="section">Pamięć</h2>
+
+<div class="paragraph"> </div>
+
+ Przyjrzyj się jeszcze raz definicji funkcji <span class="inlinecode"><span class="id" type="var">rev</span></span>. Funkcja <span class="inlinecode"><span class="id" type="var">rev</span></span> nie ma
+    pamięci — nie pamięta ona, jaką część wyniku już obliczyła. Po prostu
+    wykonuje dopasowanie na swym argumencie i wywołuje się rekurencyjnie.
+
+<div class="paragraph"> </div>
+
+    Funkcję <span class="inlinecode"><span class="id" type="var">rev</span></span> będziemy mogli przyspieszyć, jeżeli dodamy jej pamięć. Na
+    potrzeby tego rozdziału nie będziemy traktować pamięci jak zasobu, lecz
+    jako pewną abstrakcyjną ideę. Przyjrzyjmy się poniższej, alternatywnej
+    implementacji funkcji odwracającej listę. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">rev_aux</span> {<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">l</span> <span class="id" type="var">acc</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>) : <span class="id" type="var">list</span> <span class="id" type="var">A</span> :=<br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">l</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| [] =&gt; <span class="id" type="var">acc</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">h</span> :: <span class="id" type="var">t</span> =&gt; <span class="id" type="var">rev_aux</span> <span class="id" type="var">t</span> (<span class="id" type="var">h</span> :: <span class="id" type="var">acc</span>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">rev'</span> {<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>) : <span class="id" type="var">list</span> <span class="id" type="var">A</span> := <span class="id" type="var">rev_aux</span> <span class="id" type="var">l</span> [].<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Funkcja <span class="inlinecode"><span class="id" type="var">rev_aux</span></span> to serce naszej nowej implementacji. Mimo, że odwraca
+    ona listę <span class="inlinecode"><span class="id" type="var">l</span></span>, ma aż dwa argumenty — poza <span class="inlinecode"><span class="id" type="var">l</span></span> ma też argument <span class="inlinecode"><span class="id" type="var">acc</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" type="var">list</span></span> <span class="inlinecode"><span class="id" type="var">A</span></span>,
+    który nazywać będziemy akumulatorem. To właśnie on jest pamięcią tej
+    funkcji. Jednak jego "bycie pamięcią" nie wynika z jego nazwy, a ze
+    sposobu, w jaki użyliśmy go w definicji <span class="inlinecode"><span class="id" type="var">rev_aux</span></span>.
+
+<div class="paragraph"> </div>
+
+    Gdy <span class="inlinecode"><span class="id" type="var">rev_aux</span></span> natrafi na pustą listę, zwraca wartość swego akumulatora.
+    Nie powinno nas to dziwić — wszakże ma w nim zapamiętany cały wynik (bo
+    zjadła już cały argument <span class="inlinecode"><span class="id" type="var">l</span></span>). Jeżeli napotyka listę postaci <span class="inlinecode"><span class="id" type="var">h</span></span> <span class="inlinecode">::</span> <span class="inlinecode"><span class="id" type="var">t</span></span>,
+    to wywołuje się rekurencyjnie na ogonie <span class="inlinecode"><span class="id" type="var">t</span></span>, ale z akumulatorem, do
+    którego dostawia na początek <span class="inlinecode"><span class="id" type="var">h</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Compute</span> <span class="id" type="var">rev_aux</span> [1; 2; 3; 4; 5] [].<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;=&nbsp;<span class="inlinecode">5;</span> <span class="inlinecode">4;</span> <span class="inlinecode">3;</span> <span class="inlinecode">2;</span> <span class="inlinecode">1</span>&nbsp;:&nbsp;list&nbsp;nat&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Widzimy więc na własne oczy, że <span class="inlinecode"><span class="id" type="var">rev_aux</span></span> rzeczywiście odwraca listę.
+    Robi to przerzucając swój argument główy kawałek po kawałku do swojego
+    akumulatora — głowa <span class="inlinecode"><span class="id" type="var">l</span></span> trafia do akumulatora na samym początku, a więc
+    znajdzie się na samym jego końcu, gdyż przykryją ją dalsze fragmenty
+    listy <span class="inlinecode"><span class="id" type="var">l</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Compute</span> <span class="id" type="var">rev_aux</span> [1; 2; 3; 4; 5] [6; 6; 6].<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Trochę cię okłamałem twierdząc, że <span class="inlinecode"><span class="id" type="var">rev_aux</span></span> odwraca <span class="inlinecode"><span class="id" type="var">l</span></span>. Tak naprawdę
+    oblicza ona odwrotność <span class="inlinecode"><span class="id" type="var">l</span></span> z doklejonym na końcu akumulatorem. Tak więc
+    wynik zwracany przez <span class="inlinecode"><span class="id" type="var">rev_aux</span></span> zależy nie tylko od <span class="inlinecode"><span class="id" type="var">l</span></span>, ale także od
+    akumulatora <span class="inlinecode"><span class="id" type="var">acc</span></span>. Właściwą funkcję <span class="inlinecode"><span class="id" type="var">rev'</span></span> uzyskujemy, inicjalizując
+    wartość akumulatora w <span class="inlinecode"><span class="id" type="var">rev_aux</span></span> na listę pustą. 
+<div class="paragraph"> </div>
+
+<a name="lab167"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Udowodnij poprawność funkcji <span class="inlinecode"><span class="id" type="var">rev'</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">rev_aux_spec</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> <span class="id" type="var">acc</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">rev_aux</span> <span class="id" type="var">l</span> <span class="id" type="var">acc</span> = <span class="id" type="var">rev</span> <span class="id" type="var">l</span> ++ <span class="id" type="var">acc</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">rev'_spec</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">A</span>), <span class="id" type="var">rev'</span> <span class="id" type="var">l</span> = <span class="id" type="var">rev</span> <span class="id" type="var">l</span>.<br/>
+</div>
 <hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
 </div>
 
