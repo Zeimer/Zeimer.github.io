@@ -756,6 +756,19 @@ Negacja relacji totalnej nie może być totalna. Nie ma się co dziwić —
 <br/>
 
 <br/>
+</div>
+
+<div class="doc">
+<a name="lab243"></a><h1 class="section">Rodzaje relacji heterogenicznych v2</h1>
+
+<div class="paragraph"> </div>
+
+ Poznawszy cztery właściwości, jakie relacje mogą posiadać, rozważymy
+    teraz relacje, które posiadają dwie lub więcej z tych właściwości. 
+</div>
+<div class="code">
+
+<br/>
 <span class="id" title="keyword">Class</span> <a name="Functional"><span class="id" title="record">Functional</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a name="F_LT"><span class="id" title="projection">F_LT</span></a> :&gt; <a class="idref" href="X5.html#LeftTotal"><span class="id" title="class">LeftTotal</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>;<br/>
@@ -792,14 +805,7 @@ Lewostronną totalność i prawostronną unikalność możemy połączyć, by
 Z każdej funkcji można w prosty sposób zrobić relację funkcyjną, ale
     bez dodatkowych aksjomatów nie jesteśmy w stanie z relacji funkcyjnej
     zrobić funkcji. Przemilczając kwestie aksjomatów możemy powiedzieć
-    więc, że relacje funkcyjne odpowiadają funkcjom.
-
-<div class="paragraph"> </div>
-
-    Co więcej, relacje funkcyjne, która są lewostronnie unikalne odpowiadają
-    funkcjom injektywnym, a te które są prawostronnie totalne — funkcjom
-    surjektywnym. Relacje spełniające wszystkie cztery warunki odpowiadają
-    bijekcjom. 
+    więc, że relacje funkcyjne odpowiadają funkcjom. 
 </div>
 <div class="code">
 
@@ -880,7 +886,7 @@ Ani koniunkcje, ani dysjunkcje, ani negacje relacji funkcyjnych nie
     pierwsze mają problem z <span class="inlinecode"><span class="id" title="var">Rand</span></span>, a drugie z <span class="inlinecode"><span class="id" title="var">Ror</span></span>, oba zaś z <span class="inlinecode"><span class="id" title="var">Rnot</span>.</span> <span class="inlinecode"></span>
 <div class="paragraph"> </div>
 
-<a name="lab243"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab244"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -912,10 +918,196 @@ Ani koniunkcje, ani dysjunkcje, ani negacje relacji funkcyjnych nie
 <br/>
 
 <br/>
+<span class="id" title="keyword">Class</span> <a name="Injective"><span class="id" title="record">Injective</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="I_Fun"><span class="id" title="projection">I_Fun</span></a> :&gt; <a class="idref" href="X5.html#Functional"><span class="id" title="class">Functional</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="I_LU"><span class="id" title="projection">I_LU</span></a> :&gt; <a class="idref" href="X5.html#LeftUnique"><span class="id" title="class">LeftUnique</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>;<br/>
+}.<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="inj_to_Injective"><span class="id" title="instance">inj_to_Injective</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X4.html#injective"><span class="id" title="definition">injective</span></a> <a class="idref" href="X5.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> (<span class="id" title="keyword">fun</span> (<span class="id" title="var">a</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) (<span class="id" title="var">b</span> : <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) =&gt; <a class="idref" href="X5.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="X5.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="X5.html#b"><span class="id" title="variable">b</span></a>).<br/>
+
+<br/>
 </div>
 
 <div class="doc">
-<a name="lab244"></a><h1 class="section">Rodzaje relacji homogenicznych</h1>
+Relacje funkcyjne, które są lewostronnie unikalne, odpowiadają funkcjom
+    injektywnym. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Injective_eq"><span class="id" title="instance">Injective_eq</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> (@<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Injective_Rcomp"><span class="id" title="instance">Injective_Rcomp</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) (<span class="id" title="var">S</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a> <a class="idref" href="X5.html#C"><span class="id" title="variable">C</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> (<a class="idref" href="X5.html#Rcomp"><span class="id" title="definition">Rcomp</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Rinv_not_Injective"><span class="id" title="lemma">Rinv_not_Injective</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Rand_not_Injective"><span class="id" title="lemma">Rand_not_Injective</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> (<a class="idref" href="X5.html#Rand"><span class="id" title="definition">Rand</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Ror_not_Injective"><span class="id" title="lemma">Ror_not_Injective</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> (<a class="idref" href="X5.html#Ror"><span class="id" title="definition">Ror</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Rnot_not_Injective"><span class="id" title="lemma">Rnot_not_Injective</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Injective"><span class="id" title="class">Injective</span></a> (<a class="idref" href="X5.html#Rnot"><span class="id" title="definition">Rnot</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Właściwości relacji injektywnych są podobne jak relacji funkcyjnych.
+    Uwaga: relacje injektywny odpowiadają funkcjom injektywnym, ale same
+    nie muszą być funkcjami injektywnymi. TODO: sprawdzć czy to rzeczywiście
+    jest prawda. 
+<div class="paragraph"> </div>
+
+<a name="lab245"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Znajdź relację, która jest injektywna w sensie <span class="inlinecode"><span class="id" title="var">Injective</span></span> (jako relacja),
+    ale nie jest injektywna w sensie <span class="inlinecode"><span class="id" title="var">injective</span></span> (jako funkcja). 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Class</span> <a name="Surjective"><span class="id" title="record">Surjective</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="S_Fun"><span class="id" title="projection">S_Fun</span></a> :&gt; <a class="idref" href="X5.html#Functional"><span class="id" title="class">Functional</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="S_RT"><span class="id" title="projection">S_RT</span></a> :&gt; <a class="idref" href="X5.html#RightTotal"><span class="id" title="class">RightTotal</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>;<br/>
+}.<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="sur_to_Surjective"><span class="id" title="instance">sur_to_Surjective</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X4.html#surjective"><span class="id" title="definition">surjective</span></a> <a class="idref" href="X5.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> (<span class="id" title="keyword">fun</span> (<span class="id" title="var">a</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) (<span class="id" title="var">b</span> : <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) =&gt; <a class="idref" href="X5.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="X5.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="X5.html#b"><span class="id" title="variable">b</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Relacje funkcyjne, które są prawostronnie totalne, odpowiadają funkcjom
+    surjektywnym. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Surjective_eq"><span class="id" title="instance">Surjective_eq</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> (@<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Surjective_Rcomp"><span class="id" title="instance">Surjective_Rcomp</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) (<span class="id" title="var">S</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a> <a class="idref" href="X5.html#C"><span class="id" title="variable">C</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> (<a class="idref" href="X5.html#Rcomp"><span class="id" title="definition">Rcomp</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Rinv_not_Surjective"><span class="id" title="lemma">Rinv_not_Surjective</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Rand_not_Surjective"><span class="id" title="lemma">Rand_not_Surjective</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> (<a class="idref" href="X5.html#Rand"><span class="id" title="definition">Rand</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Ror_not_Surjective"><span class="id" title="lemma">Ror_not_Surjective</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> (<a class="idref" href="X5.html#Ror"><span class="id" title="definition">Ror</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Rnot_not_Surjective"><span class="id" title="lemma">Rnot_not_Surjective</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Surjective"><span class="id" title="class">Surjective</span></a> (<a class="idref" href="X5.html#Rnot"><span class="id" title="definition">Rnot</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Właściwości relacji surjektywnych także są podobne do tych, jakie są
+    udziałem relacji funkcyjnych. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Class</span> <a name="Bijective"><span class="id" title="record">Bijective</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="B_Fun"><span class="id" title="projection">B_Fun</span></a> :&gt; <a class="idref" href="X5.html#Functional"><span class="id" title="class">Functional</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="B_LU"><span class="id" title="projection">B_LU</span></a> :&gt; <a class="idref" href="X5.html#LeftUnique"><span class="id" title="class">LeftUnique</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="B_RT"><span class="id" title="projection">B_RT</span></a> :&gt; <a class="idref" href="X5.html#RightTotal"><span class="id" title="class">RightTotal</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>;<br/>
+}.<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="bij_to_Bijective"><span class="id" title="instance">bij_to_Bijective</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X4.html#bijective"><span class="id" title="definition">bijective</span></a> <a class="idref" href="X5.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> (<span class="id" title="keyword">fun</span> (<span class="id" title="var">a</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) (<span class="id" title="var">b</span> : <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) =&gt; <a class="idref" href="X5.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="X5.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="X5.html#b"><span class="id" title="variable">b</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Relacje funkcyjne, które są lewostronnie totalne (czyli injektywne) oraz
+    prawostronnie totalne (czyli surjektywne), odpowiadają bijekcjom. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Bijective_eq"><span class="id" title="instance">Bijective_eq</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> (@<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Bijective_Rcomp"><span class="id" title="instance">Bijective_Rcomp</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) (<span class="id" title="var">S</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a> <a class="idref" href="X5.html#C"><span class="id" title="variable">C</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> (<a class="idref" href="X5.html#Rcomp"><span class="id" title="definition">Rcomp</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Bijective_Rinv"><span class="id" title="instance">Bijective_Rinv</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Rand_not_Bijective"><span class="id" title="lemma">Rand_not_Bijective</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> (<a class="idref" href="X5.html#Rand"><span class="id" title="definition">Rand</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Ror_not_Bijective"><span class="id" title="lemma">Ror_not_Bijective</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> (<a class="idref" href="X5.html#Ror"><span class="id" title="definition">Ror</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Rnot_not_Bijective"><span class="id" title="lemma">Rnot_not_Bijective</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Bijective"><span class="id" title="class">Bijective</span></a> (<a class="idref" href="X5.html#Rnot"><span class="id" title="definition">Rnot</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Właściwości relacji bijektywnych różnią się jednym szalenie istotnym
+    detalem od właściwości relacji funkcyjnych, injektywnych i surjektywnych:
+    odwrotność relacji bijektywnej jest relacją bijektywną. 
+<div class="paragraph"> </div>
+
+<a name="lab246"></a><h1 class="section">Rodzaje relacji homogenicznych</h1>
 
 </div>
 <div class="code">
