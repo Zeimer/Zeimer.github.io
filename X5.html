@@ -289,10 +289,6 @@ Złożenie dwóch relacji możemy odwrócić, składając ich odwrotności w
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<span class="id" title="var">a</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) (<span class="id" title="var">b</span> : <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) =&gt; <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="X5.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="X5.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="X5.html#b"><span class="id" title="variable">b</span></a>.<br/>
 
 <br/>
-<span class="id" title="keyword">Definition</span> <a name="Rdiff"><span class="id" title="definition">Rdiff</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) : <a class="idref" href="X5.html#hrel"><span class="id" title="definition">hrel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<span class="id" title="var">a</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) (<span class="id" title="var">b</span> : <a class="idref" href="X5.html#B"><span class="id" title="variable">B</span></a>) =&gt; <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="X5.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="X5.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="X5.html#b"><span class="id" title="variable">b</span></a>. <span class="comment">(*&nbsp;TODO&nbsp;*)</span><br/>
-
-<br/>
 </div>
 
 <div class="doc">
@@ -1141,6 +1137,10 @@ Relacje homogeniczne to takie, których wszystkie argumenty są tego
 </li>
 </ul>
 
+<div class="paragraph"> </div>
+
+<a name="lab247"></a><h2 class="section">Zwrotność</h2>
+
 </div>
 <div class="code">
 
@@ -1167,36 +1167,9 @@ Relacje homogeniczne to takie, których wszystkie argumenty są tego
 
 <div class="doc">
 Relacja <span class="inlinecode"><span class="id" title="var">R</span></span> jest zwrotna (ang. reflexive), jeżeli każdy <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> jest
-    w relacji sam ze sobą. 
-</div>
-<div class="code">
-
-<br/>
-<span class="id" title="keyword">Instance</span> <a name="Reflexive_eq"><span class="id" title="instance">Reflexive_eq</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} : <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> (@<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-Najważniejszym przykładem relacji zwrotnej jest równość. Przypomnij
-    sobie, że <span class="inlinecode"><span class="id" title="var">eq</span></span> ma tylko jeden konstruktor <span class="inlinecode"><span class="id" title="var">eq_refl</span></span>, który głosi,
-    że każdy obiekt jest równy samemu sobie. 
-</div>
-<div class="code">
-
-<br/>
-<span class="id" title="keyword">Theorem</span> <a name="eq_subrelation_Reflexive"><span class="id" title="lemma">eq_subrelation_Reflexive</span></a> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#subrelation"><span class="id" title="definition">subrelation</span></a> (@<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-Równość jest "najmniejszą" relacją zwrotną w tym sensie, że jest ona
-    subrelacją każdej relacji zwrotnej. Intuicyjnym uzasadnieniem jest
-    fakt, że w definicji <span class="inlinecode"><span class="id" title="var">eq</span></span> poza konstruktorem <span class="inlinecode"><span class="id" title="var">eq_refl</span></span>, który daje
-    zwrotność, nie ma niczego innego. 
+    w relacji sam ze sobą. Przykładem ze świata rzeczywistego może być
+    relacja "x jest blisko y". Jest oczywiste, że każdy jest blisko samego
+    siebie. 
 </div>
 <div class="code">
 
@@ -1217,18 +1190,55 @@ Okazuje się, że wszystkie relacje na <span class="inlinecode"><span class="id"
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Theorem</span> <a name="Reflexive_Rcomp"><span class="id" title="lemma">Reflexive_Rcomp</span></a> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> (<a class="idref" href="X5.html#Rcomp"><span class="id" title="definition">Rcomp</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+<span class="id" title="keyword">Instance</span> <a name="Reflexive_eq"><span class="id" title="instance">Reflexive_eq</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} : <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> (@<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Reflexive_RTrue"><span class="id" title="instance">Reflexive_RTrue</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> (@<a class="idref" href="X5.html#RTrue"><span class="id" title="definition">RTrue</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="RFalse_nonempty_not_Reflexive"><span class="id" title="lemma">RFalse_nonempty_not_Reflexive</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> (@<a class="idref" href="X5.html#RFalse"><span class="id" title="definition">RFalse</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-Złożenie relacji zwrotnych jest relacją zwrotną. Dowód jest tak prosty,
-    że nie ma sensu nawet próbować uzasdniać tego intuicyjnie. 
+Najważniejszym przykładem relacji zwrotnej jest równość. <span class="inlinecode"><span class="id" title="var">eq</span></span> jest
+    relacją zwrotną, gdyż ma konstruktor <span class="inlinecode"><span class="id" title="var">eq_refl</span></span>, który głosi, że
+    każdy obiekt jest równy samemu sobie. Zwrotna jest też relacja
+    <span class="inlinecode"><span class="id" title="var">RTrue</span></span>, gdyż każdy obiekt jest w jej przypadku w relacji z każdym,
+    a więc także z samym sobą. Zwrotna nie jest za to relacja <span class="inlinecode"><span class="id" title="var">RFalse</span></span>
+    na typie niepustym, gdyż tam żaden obiekt nie jest w relacji z
+    żadnym, a więc nie może także być w relacji z samym sobą. 
 </div>
 <div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="eq_subrelation_Reflexive"><span class="id" title="lemma">eq_subrelation_Reflexive</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#subrelation"><span class="id" title="definition">subrelation</span></a> (@<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Równość jest "najmniejszą" relacją zwrotną w tym sensie, że jest ona
+    subrelacją każdej relacji zwrotnej. Intuicyjnym uzasadnieniem jest
+    fakt, że w definicji <span class="inlinecode"><span class="id" title="var">eq</span></span> poza konstruktorem <span class="inlinecode"><span class="id" title="var">eq_refl</span></span>, który daje
+    zwrotność, nie ma niczego innego. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Reflexive_Rcomp"><span class="id" title="instance">Reflexive_Rcomp</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> (<a class="idref" href="X5.html#Rcomp"><span class="id" title="definition">Rcomp</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Reflexive_Rinv"><span class="id" title="instance">Reflexive_Rinv</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
 
 <br/>
 <span class="id" title="keyword">Instance</span> <a name="Reflexive_Rand"><span class="id" title="instance">Reflexive_Rand</span></a> :<br/>
@@ -1244,17 +1254,103 @@ Złożenie relacji zwrotnych jest relacją zwrotną. Dowód jest tak prosty,
 </div>
 
 <div class="doc">
-Jak widać, koniunkcja relacji zwrotnych także jest zwrotna. Dysjunkcja
-    posiada natomiast dużo mocniejszą właściwość: dysjunkcja dowolnej relacji
-    z relacją zwrotną daje relację zwrotną. Tak więc dysjunkcja <span class="inlinecode"><span class="id" title="var">R</span></span> z <span class="inlinecode"><span class="id" title="var">eq</span></span>
-    pozwala nam łatwo "dodać" zwrotność do <span class="inlinecode"><span class="id" title="var">R</span></span>. Słownie dysjunkcja z <span class="inlinecode"><span class="id" title="var">eq</span></span>
-    odpowiada zwrotowi "lub równy", który możemy spotkać np. w wyrażeniach
-    "mniejszy lub równy", "większy lub równy".
+Jak widać, złożenie, odwrotność i koniunkcja relacji zwrotnych są zwrotne.
+    Dysjunkcja posiada natomiast dużo mocniejszą właściwość: dysjunkcja
+    dowolnej relacji z relacją zwrotną daje relację zwrotną. Tak więc
+    dysjunkcja <span class="inlinecode"><span class="id" title="var">R</span></span> z <span class="inlinecode"><span class="id" title="var">eq</span></span> pozwala nam łatwo "dodać" zwrotność do <span class="inlinecode"><span class="id" title="var">R</span></span>. Słownie
+    dysjunkcja z <span class="inlinecode"><span class="id" title="var">eq</span></span> odpowiada zwrotowi "lub równy", który możemy spotkać np.
+    w wyrażeniach "mniejszy lub równy", "większy lub równy".
+
+<div class="paragraph"> </div>
+
+    Właściwością odwrotną do zwrotności jest antyzwrotność. Relacja
+    antyzwrotna to taka, że żaden <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> nie jest w relacji sam ze sobą. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Antireflexive_neq"><span class="id" title="instance">Antireflexive_neq</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>), <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> =&gt; <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#32263a1c8b01baecdff9deb038955bc9"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Antireflexive_lt"><span class="id" title="instance">Antireflexive_lt</span></a> : <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#lt"><span class="id" title="definition">lt</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Typowymi przykładami relacji antyzwrotnych są nierówność <span class="inlinecode">&lt;&gt;</span> oraz
+    porządek "mniejszy niż" (<span class="inlinecode">&lt;</span>) na liczbach naturalnych. Ze względu
+    na sposób działania ludzkiego mózgu antyzwrotna jest cała masa relacji
+    znanych nam z codziennego życia: "x jest matką y", "x jest ojcem y",
+    "x jest synem y", "x jest córką y", "x jest nad y", "x jest pod y",
+    "x jest za y", "x jest przed y", etc. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Antireflexive_empty"><span class="id" title="lemma">Antireflexive_empty</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a>, <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="eq_nonempty_not_Antireflexive"><span class="id" title="lemma">eq_nonempty_not_Antireflexive</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (@<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="RTrue_nonempty_not_Antireflexive"><span class="id" title="lemma">RTrue_nonempty_not_Antireflexive</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (@<a class="idref" href="X5.html#RTrue"><span class="id" title="definition">RTrue</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Antireflexive_RFalse"><span class="id" title="instance">Antireflexive_RFalse</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (@<a class="idref" href="X5.html#RFalse"><span class="id" title="definition">RFalse</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Równość na typie niepustym nie jest antyzwrotna, gdyż jest zwrotna
+    (wzajemne związki między tymi dwoma pojęciami zbadamy już niedługo).
+    Antyzwrotna nie jest także relacja <span class="inlinecode"><span class="id" title="var">RTrue</span></span> na typie niepustym, gdyż
+    co najmniej jeden element jest w relacji z samym sobą. Antyzwrotna
+    jest za to relacja pusta (<span class="inlinecode"><span class="id" title="var">RFalse</span></span>). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Rcomp_not_Antireflexive"><span class="id" title="lemma">Rcomp_not_Antireflexive</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (<a class="idref" href="X5.html#Rcomp"><span class="id" title="definition">Rcomp</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Antireflexive_Rinv"><span class="id" title="instance">Antireflexive_Rinv</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Antireflexive_Rand"><span class="id" title="instance">Antireflexive_Rand</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (<a class="idref" href="X5.html#Rand"><span class="id" title="definition">Rand</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Antireflexive_Ror"><span class="id" title="instance">Antireflexive_Ror</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (<a class="idref" href="X5.html#Ror"><span class="id" title="definition">Ror</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Złożenie relacji antyzwrotnych nie musi być antyzwrotne, ale odwrotność
+    i dysjunkcja już tak, zaś koniunkcja dowolnej relacji z relacją
+    antyzwrotną daje nam relację antyzwrotną. Dzięki temu możemy dowolnej
+    relacji <span class="inlinecode"><span class="id" title="var">R</span></span> "zabrać" zwrotność koniunkcjując ją z <span class="inlinecode">&lt;&gt;</span>.
 
 <div class="paragraph"> </div>
 
     Kolejną właściwością jest niezwrotność. Relacja niezwrotna to taka,
-    która nie jest zwrotna. 
+    która nie jest zwrotna. Zauważ, że pojęcie to zasadniczo różni się
+    od pojęcia relacji antyzwrotnej: tutaj mamy kwantyfikator <span class="inlinecode"><span class="id" title="tactic">exists</span></span>,
+    tam zaś <span class="inlinecode"><span class="id" title="keyword">forall</span></span>. 
 </div>
 <div class="code">
 
@@ -1263,7 +1359,7 @@ Jak widać, koniunkcja relacji zwrotnych także jest zwrotna. Dysjunkcja
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> (<a class="idref" href="X5.html#Rnot"><span class="id" title="definition">Rnot</span></a> (@<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>)).<br/>
 
 <br/>
-<span class="id" title="keyword">Instance</span> <a name="Irreflexive_lt"><span class="id" title="instance">Irreflexive_lt</span></a> : <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#lt"><span class="id" title="definition">lt</span></a>.<br/>
+<span class="id" title="keyword">Instance</span> <a name="Irreflexive_gt"><span class="id" title="instance">Irreflexive_gt</span></a> : <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#gt"><span class="id" title="definition">gt</span></a>.<br/>
 
 <br/>
 </div>
@@ -1277,10 +1373,14 @@ Typowym przykładem relacji niezwrotnej jest nierówność <span class="inlinec
 
 <div class="paragraph"> </div>
 
-    Innym przykładem relacji niezwrotnej jest porządek "mniejszy niż" na
-    liczbach naturalnych. Porządkami zajmiemy się już niedługo. 
+    Innym przykładem relacji niezwrotnej jest porządek "większy niż"
+    na liczbach naturalnych. Porządkami zajmiemy się już niedługo. 
 </div>
 <div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="empty_not_Irreflexive"><span class="id" title="lemma">empty_not_Irreflexive</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <a name="eq_empty_not_Irreflexive"><span class="id" title="lemma">eq_empty_not_Irreflexive</span></a> :<br/>
@@ -1303,6 +1403,33 @@ Równość jest zwrotna, a więc nie może być niezwrotna. Zauważ jednak,
 <div class="code">
 
 <br/>
+<span class="id" title="keyword">Theorem</span> <a name="RTrue_empty_not_Irreflexive"><span class="id" title="lemma">RTrue_empty_not_Irreflexive</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> (@<a class="idref" href="X5.html#RTrue"><span class="id" title="definition">RTrue</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="RTrue_nonempty_not_Irreflexive"><span class="id" title="lemma">RTrue_nonempty_not_Irreflexive</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> (@<a class="idref" href="X5.html#RTrue"><span class="id" title="definition">RTrue</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="RFalse_empty_not_Irreflexive"><span class="id" title="lemma">RFalse_empty_not_Irreflexive</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> (@<a class="idref" href="X5.html#RFalse"><span class="id" title="definition">RFalse</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Irreflexive_RFalse_nonempty"><span class="id" title="instance">Irreflexive_RFalse_nonempty</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> (@<a class="idref" href="X5.html#RFalse"><span class="id" title="definition">RFalse</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Podobnej techniki możemy użyć, aby pokazać, że relacja pełna (<span class="inlinecode"><span class="id" title="var">RTrue</span></span>)
+    nie jest niezwrotna. Inaczej jest jednak w przypadku <span class="inlinecode"><span class="id" title="var">RFalse</span></span> — na typie
+    pustym nie jest ona niezwrotna, ale na dowolnym typie niepustym już
+    owszem. 
+</div>
+<div class="code">
+
+<br/>
 <span class="id" title="keyword">Theorem</span> <a name="Rcomp_not_Irreflexive"><span class="id" title="lemma">Rcomp_not_Irreflexive</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> (<a class="idref" href="X5.html#Rcomp"><span class="id" title="definition">Rcomp</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
@@ -1318,6 +1445,11 @@ Złożenie relacji niezwrotnych nie musi być niezwrotne. Przyjrzyj się
 <div class="code">
 
 <br/>
+<span class="id" title="keyword">Instance</span> <a name="Irreflexive_Rinv"><span class="id" title="instance">Irreflexive_Rinv</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
 <span class="id" title="keyword">Instance</span> <a name="Irreflexive_Rand"><span class="id" title="instance">Irreflexive_Rand</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> (<a class="idref" href="X5.html#Rand"><span class="id" title="definition">Rand</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
@@ -1331,70 +1463,67 @@ Złożenie relacji niezwrotnych nie musi być niezwrotne. Przyjrzyj się
 </div>
 
 <div class="doc">
-Koniunkcja dowolnej relacji z relacją niezwrotną daje relację niezwrotną.
-    Tak więc za pomocą koniunkcji i dysjunkcji możemy łatwo "dodawać" i
-    "odbierać" zwrotność różnym relacjom. Okazuje się też, że dysjunkcja nie
+Odwrotność relacji niezwrotnej jest niezwrotna. Koniunkcja dowolnej
+    relacji z relacją niezwrotną daje relację niezwrotną. Tak więc za
+    pomocą koniunkcji i dysjunkcji możemy łatwo "dodawać" i "odbierać"
+    zwrotność różnym relacjom. Okazuje się też, że dysjunkcja nie
     zachowuje niezwrotności.
 
 <div class="paragraph"> </div>
 
-    Druga i ostatnią pochodną zwrotności jest antyzwrotność. Relacja
-    antyzwrotna to taka, że żaden <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> nie jest w relacji sam ze sobą.
-    Zauważ, że pojęcie to zasadniczo różni się od pojęcia relacji
-    niezwrotnej: tutaj mamy kwantyfikator <span class="inlinecode"><span class="id" title="keyword">forall</span></span>, tam zaś <span class="inlinecode"><span class="id" title="tactic">exists</span></span>. 
+    Na zakończenie zbadajmy jeszcze, jakie związki zachodzą pomiędzy
+    zwrotnością, antyzwrotnością i niezwrotnością. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Theorem</span> <a name="Antireflexive_empty"><span class="id" title="lemma">Antireflexive_empty</span></a> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a>, <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+<span class="id" title="keyword">Instance</span> <a name="Reflexive_Rnot"><span class="id" title="instance">Reflexive_Rnot</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> (<a class="idref" href="X5.html#Rnot"><span class="id" title="definition">Rnot</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
 
 <br/>
-<span class="id" title="keyword">Theorem</span> <a name="eq_nonempty_not_Antireflexive"><span class="id" title="lemma">eq_nonempty_not_Antireflexive</span></a> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (@<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>).<br/>
-
-<br/>
-<span class="id" title="keyword">Theorem</span> <a name="Rcomp_not_Antireflexive"><span class="id" title="lemma">Rcomp_not_Antireflexive</span></a> :<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (<a class="idref" href="X5.html#Rcomp"><span class="id" title="definition">Rcomp</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
-
-<br/>
-<span class="id" title="keyword">Instance</span> <a name="Antireflexive_Rand"><span class="id" title="instance">Antireflexive_Rand</span></a> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (<a class="idref" href="X5.html#Rand"><span class="id" title="definition">Rand</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
-
-<br/>
-<span class="id" title="keyword">Instance</span> <a name="Antireflexive_Ror"><span class="id" title="instance">Antireflexive_Ror</span></a> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (<a class="idref" href="X5.html#Ror"><span class="id" title="definition">Ror</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
-
-<br/>
-<span class="id" title="keyword">Instance</span> <a name="Antireflexive_Rnot_nonempty"><span class="id" title="instance">Antireflexive_Rnot_nonempty</span></a> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">nonempty</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+<span class="id" title="keyword">Instance</span> <a name="Antireflexive_Rnot"><span class="id" title="instance">Antireflexive_Rnot</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (<a class="idref" href="X5.html#Rnot"><span class="id" title="definition">Rnot</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-Podobnie jak w przypadku relacji zwrotnych, każda relacja na typie
-    pustym jest antyzwrotna, sztampowym zaś przykładem relacji antyzwrotnej
-    jest nierówność <span class="inlinecode">&lt;&gt;</span>. Ze względu na sposób działania ludzkiego mózgu
-    antyzwrotna jest cała masa relacji znanych nam z codziennego życia:
-    "bycie matką", "bycie ojcem", "bycie synem", "bycie córką", "bycie nad",
-    "byciem pod", "bycie za", "bycie przed", etc.
+Podstawowa zależność między nimi jest taka, że negacja relacji zwrotnej
+    jest antyzwrotna, zaś negacja relacji antyzwrotnej jest zwrotna. 
+</div>
+<div class="code">
 
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Reflexive_Antireflexive_nonempty"><span class="id" title="lemma">Reflexive_Antireflexive_nonempty</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Każda relacja na typie pustym jest jednocześnie zwrotna i antyzwrotna,
+    ale nie może taka być żadna relacja na typie niepustym. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Irreflexive_nonempty_Antireflexive"><span class="id" title="instance">Irreflexive_nonempty_Antireflexive</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Irreflexive"><span class="id" title="class">Irreflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Związek między niezwrotnością i antyzwrotnością jest nadzwyczaj prosty:
+    każda relacja antyzwrotna na typie niepustym jest też niezwrotna. 
 <div class="paragraph"> </div>
 
-    Koniunkcja dowolnej relacji z relacją antyzwrotną daje nam relację
-    antyzwrotną, zaś dysjunkcja jedynie zachowuje właściwość bycia relacją
-    antyzwrotną.
+<a name="lab248"></a><h2 class="section">Symetria</h2>
 
-<div class="paragraph"> </div>
-
-    Dzięki ostatniemu twierdzeniu widać też, czym naprawdę są właściwości
-    poprzedzone przedrostkiem "anty-": negacja relacji zwrotnej jest
-    antyzwrotna. 
 </div>
 <div class="code">
 
@@ -1521,7 +1650,7 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Antisymmetric"><span class="id" title="class">Antisymmetric</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Antisymmetric"><span class="id" title="class">Antisymmetric</span></a> (<a class="idref" href="X5.html#Rnot"><span class="id" title="definition">Rnot</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">wut</span>. <span class="id" title="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">rel</span>. <span class="id" title="tactic">intro</span>.<br/>
 <span class="id" title="keyword">Abort</span>.<br/>
 
 <br/>
@@ -1568,6 +1697,15 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#WeakAntisymmetric"><span class="id" title="class">WeakAntisymmetric</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#WeakAntisymmetric"><span class="id" title="class">WeakAntisymmetric</span></a> (<a class="idref" href="X5.html#Rnot"><span class="id" title="definition">Rnot</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
 
 <br/>
+</div>
+
+<div class="doc">
+<a name="lab249"></a><h2 class="section">Przechodniość</h2>
+
+</div>
+<div class="code">
+
+<br/>
 <span class="id" title="keyword">Class</span> <a name="Transitive"><span class="id" title="record">Transitive</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a name="transitive"><span class="id" title="projection">transitive</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>, <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="X5.html#z"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#z"><span class="id" title="variable">z</span></a><br/>
@@ -1601,6 +1739,15 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 <span class="id" title="keyword">Theorem</span> <a name="Rnot_not_Transitive"><span class="id" title="lemma">Rnot_not_Transitive</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">),</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Transitive"><span class="id" title="class">Transitive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Transitive"><span class="id" title="class">Transitive</span></a> (<a class="idref" href="X5.html#Rnot"><span class="id" title="definition">Rnot</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab250"></a><h2 class="section">Inne</h2>
+
+</div>
+<div class="code">
 
 <br/>
 <span class="id" title="keyword">Class</span> <a name="Total"><span class="id" title="record">Total</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
@@ -1712,7 +1859,7 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 </div>
 
 <div class="doc">
-<a name="lab247"></a><h1 class="section">Relacje równoważności</h1>
+<a name="lab251"></a><h1 class="section">Relacje równoważności</h1>
 
 </div>
 <div class="code">
@@ -1735,6 +1882,11 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> (<a class="idref" href="X5.html#Rcomp"><span class="id" title="definition">Rcomp</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
 
 <br/>
+<span class="id" title="keyword">Instance</span> <a name="Equivalence_Rinv"><span class="id" title="instance">Equivalence_Rinv</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
 <span class="id" title="keyword">Instance</span> <a name="Equivalence_Rand"><span class="id" title="instance">Equivalence_Rand</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> (<a class="idref" href="X5.html#Rand"><span class="id" title="definition">Rand</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>).<br/>
@@ -1753,7 +1905,7 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 </div>
 
 <div class="doc">
-<a name="lab248"></a><h1 class="section">Słabe relacje homogeniczne</h1>
+<a name="lab252"></a><h1 class="section">Słabe relacje homogeniczne</h1>
 
 </div>
 <div class="code">
@@ -1804,7 +1956,7 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 </div>
 
 <div class="doc">
-<a name="lab249"></a><h1 class="section">Złożone relacje homogeniczne</h1>
+<a name="lab253"></a><h1 class="section">Złożone relacje homogeniczne</h1>
 
 </div>
 <div class="code">
@@ -1855,7 +2007,7 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 </div>
 
 <div class="doc">
-<a name="lab250"></a><h1 class="section">Domknięcia</h1>
+<a name="lab254"></a><h1 class="section">Domknięcia</h1>
 
 </div>
 <div class="code">
@@ -1866,7 +2018,6 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 &nbsp;&nbsp;&nbsp;&nbsp;| <a name="rc_refl"><span class="id" title="constructor">rc_refl</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a>.<br/>
 
 <br/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Instance</span> <a name="Reflexive_rc"><span class="id" title="instance">Reflexive_rc</span></a> :<br/>
@@ -1887,12 +2038,16 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a> (<a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Theorem</span> <a name="rc_Rinv"><span class="id" title="lemma">rc_Rinv</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> (<a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>)) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
 <span class="id" title="keyword">Inductive</span> <a name="symm_clos"><span class="id" title="inductive">symm_clos</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <span class="id" title="var">A</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a name="sc_step"><span class="id" title="constructor">sc_step</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a name="sc_symm"><span class="id" title="constructor">sc_symm</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a>.<br/>
 
 <br/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Instance</span> <a name="Symmetric_sc"><span class="id" title="instance">Symmetric_sc</span></a> :<br/>
@@ -1913,13 +2068,17 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> (<a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Theorem</span> <a name="sc_Rinv"><span class="id" title="lemma">sc_Rinv</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> (<a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>)) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
 <span class="id" title="keyword">Inductive</span> <a name="trans_clos"><span class="id" title="inductive">trans_clos</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <span class="id" title="var">A</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a name="tc_step"><span class="id" title="constructor">tc_step</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a name="tc_trans"><span class="id" title="constructor">tc_trans</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> : <span class="id" title="var">A</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="X5.html#z"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#z"><span class="id" title="variable">z</span></a>.<br/>
 
 <br/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Instance</span> <a name="Transitive_tc"><span class="id" title="instance">Transitive_tc</span></a> :<br/>
@@ -1940,6 +2099,11 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> (<a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Theorem</span> <a name="tc_Rinv"><span class="id" title="lemma">tc_Rinv</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> (<a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>)) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
 <span class="id" title="keyword">Inductive</span> <a name="equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <span class="id" title="var">A</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a name="ec_step"><span class="id" title="constructor">ec_step</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a name="ec_refl"><span class="id" title="constructor">ec_refl</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a><br/>
@@ -1948,12 +2112,10 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="X5.html#z"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> <span class="id" title="var">R</span> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#z"><span class="id" title="variable">z</span></a>.<br/>
 
 <br/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Instance</span> <a name="Equivalence_ec"><span class="id" title="instance">Equivalence_ec</span></a> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> (<a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> (<a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> (<a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>))).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> (<a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <a name="subrelation_ec"><span class="id" title="lemma">subrelation_ec</span></a> :<br/>
@@ -1968,4 +2130,111 @@ Symetria jest zachowywana zarówno przez koniunkcję i dysjunkcję, jak
 <span class="id" title="keyword">Theorem</span> <a name="ec_idempotent"><span class="id" title="lemma">ec_idempotent</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> (<a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="ec_Rinv"><span class="id" title="lemma">ec_Rinv</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> (<a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>)) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#equiv_clos"><span class="id" title="inductive">equiv_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab255"></a><h3 class="section">Domknięcie zwrotnosymetryczne</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="rsc"><span class="id" title="definition">rsc</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a> (<a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Reflexive_rsc"><span class="id" title="instance">Reflexive_rsc</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> (<a class="idref" href="X5.html#rsc"><span class="id" title="definition">rsc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Symmetric_rsc"><span class="id" title="instance">Symmetric_rsc</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="X5.html#Symmetric"><span class="id" title="class">Symmetric</span></a> (<a class="idref" href="X5.html#rsc"><span class="id" title="definition">rsc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="subrelation_rsc"><span class="id" title="lemma">subrelation_rsc</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="X5.html#subrelation"><span class="id" title="definition">subrelation</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> (<a class="idref" href="X5.html#rsc"><span class="id" title="definition">rsc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="rsc_smallest"><span class="id" title="lemma">rsc_smallest</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#subrelation"><span class="id" title="definition">subrelation</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Symmetric"><span class="id" title="class">Symmetric</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#subrelation"><span class="id" title="definition">subrelation</span></a> (<a class="idref" href="X5.html#rsc"><span class="id" title="definition">rsc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>) <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="rsc_idempotent"><span class="id" title="lemma">rsc_idempotent</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#rsc"><span class="id" title="definition">rsc</span></a> (<a class="idref" href="X5.html#rsc"><span class="id" title="definition">rsc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#rsc"><span class="id" title="definition">rsc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="rsc_Rinv"><span class="id" title="lemma">rsc_Rinv</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> (<a class="idref" href="X5.html#rsc"><span class="id" title="definition">rsc</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>)) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#rsc"><span class="id" title="definition">rsc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab256"></a><h3 class="section">Domknięcie równoważnościowe v2</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="rstc"><span class="id" title="definition">rstc</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> (<a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> (<a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Equivalence_rstc"><span class="id" title="instance">Equivalence_rstc</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> (<a class="idref" href="X5.html#trans_clos"><span class="id" title="inductive">trans_clos</span></a> (<a class="idref" href="X5.html#symm_clos"><span class="id" title="inductive">symm_clos</span></a> (<a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>))).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="subrelation_rstc"><span class="id" title="lemma">subrelation_rstc</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="X5.html#subrelation"><span class="id" title="definition">subrelation</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> (<a class="idref" href="X5.html#rstc"><span class="id" title="definition">rstc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="rstc_smallest"><span class="id" title="lemma">rstc_smallest</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#subrelation"><span class="id" title="definition">subrelation</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#Equivalence"><span class="id" title="class">Equivalence</span></a> <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#subrelation"><span class="id" title="definition">subrelation</span></a> (<a class="idref" href="X5.html#rstc"><span class="id" title="definition">rstc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>) <a class="idref" href="X5.html#S"><span class="id" title="variable">S</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="rstc_idempotent"><span class="id" title="lemma">rstc_idempotent</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#rstc"><span class="id" title="definition">rstc</span></a> (<a class="idref" href="X5.html#rstc"><span class="id" title="definition">rstc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#rstc"><span class="id" title="definition">rstc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="rstc_Rinv"><span class="id" title="lemma">rstc_Rinv</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> (<a class="idref" href="X5.html#rstc"><span class="id" title="definition">rstc</span></a> (<a class="idref" href="X5.html#Rinv"><span class="id" title="definition">Rinv</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>)) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#rstc"><span class="id" title="definition">rstc</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab257"></a><h1 class="section">Redukcje</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="rr"><span class="id" title="definition">rr</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a> =&gt; <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="X5.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#32263a1c8b01baecdff9deb038955bc9"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="X5.html#y"><span class="id" title="variable">y</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="Antireflexive_rr"><span class="id" title="instance">Antireflexive_rr</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="X5.html#Antireflexive"><span class="id" title="class">Antireflexive</span></a> (<a class="idref" href="X5.html#rr"><span class="id" title="definition">rr</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="rr_rc"><span class="id" title="lemma">rr_rc</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <a class="idref" href="X5.html#rel"><span class="id" title="definition">rel</span></a> <a class="idref" href="X5.html#A"><span class="id" title="variable">A</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X5.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X5.html#refl_clos"><span class="id" title="inductive">refl_clos</span></a> (<a class="idref" href="X5.html#rr"><span class="id" title="definition">rr</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>) <a class="idref" href="X5.html#963ce1287588e0f70015b5df590260f1"><span class="id" title="notation">&lt;--&gt;</span></a> <a class="idref" href="X5.html#R"><span class="id" title="variable">R</span></a>.<br/>
 </div>
