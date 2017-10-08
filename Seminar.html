@@ -1,0 +1,605 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="coqdoc.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="jquery-1.8.3.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="MyStyles.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-88023543-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+<h1 class="libtitle">Seminar: IndPred</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+ The topic of this talk is "Inductive Predicates", but we won't confine
+    ourselves to just them and will study all the different kinds of
+    inductive types out there. 
+<div class="paragraph"> </div>
+
+<a name="lab148"></a><h1 class="section">Inductive propositions and types with a grain of axioms</h1>
+
+<div class="paragraph"> </div>
+
+ Let's start with inductive propositions: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;Inductive&nbsp;False&nbsp;:&nbsp;Prop&nbsp;:=&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;Inductive&nbsp;True&nbsp;:&nbsp;Prop&nbsp;:=&nbsp;&nbsp;I&nbsp;:&nbsp;True&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="var">False</span></span> and <span class="inlinecode"><span class="id" title="var">True</span></span> have very simple definitions. <span class="inlinecode"><span class="id" title="var">False</span></span> doesn't have
+    any constructors and <span class="inlinecode"><span class="id" title="var">True</span></span> does have one, called <span class="inlinecode"><span class="id" title="var">I</span></span>. This name is
+    arbitrary — it has to be there, because constructors can't be nameless,
+    but doesn't really matter, because we're only interested in its existence,
+    not name.
+
+<div class="paragraph"> </div>
+
+    The definitions are not that interesting if you have seen them already,
+    so let's have a look at something weirder: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="VeryTrue"><span class="id" title="inductive">VeryTrue</span></a> : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="proof"><span class="id" title="constructor">proof</span></a> : <a class="idref" href="Seminar.html#VeryTrue"><span class="id" title="inductive">VeryTrue</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="other_proof"><span class="id" title="constructor">other_proof</span></a> : <a class="idref" href="Seminar.html#VeryTrue"><span class="id" title="inductive">VeryTrue</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+How is this one different from <span class="inlinecode"><span class="id" title="var">True</span></span>? Well, <span class="inlinecode"><span class="id" title="var">False</span></span>, <span class="inlinecode"><span class="id" title="var">True</span></span> and
+    <span class="inlinecode"><span class="id" title="var">VeryTrue</span></span> can be likened to <span class="inlinecode"><span class="id" title="var">Empty_set</span></span>, <span class="inlinecode"><span class="id" title="var">unit</span></span> and <span class="inlinecode"><span class="id" title="var">bool</span></span>: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;Inductive&nbsp;Empty_set&nbsp;:&nbsp;Set&nbsp;:=&nbsp;.*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;Inductive&nbsp;unit&nbsp;:&nbsp;Set&nbsp;:=&nbsp;&nbsp;tt&nbsp;:&nbsp;unit&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;Inductive&nbsp;bool&nbsp;:&nbsp;Set&nbsp;:=&nbsp;&nbsp;true&nbsp;:&nbsp;bool&nbsp;|&nbsp;false&nbsp;:&nbsp;bool&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The similarities are striking — these two series of types from a
+    high-level point of view look (nearly) the same. The dissimilarities
+    are more subtle.
+
+<div class="paragraph"> </div>
+
+    Besides names the only difference lies in the sorts — <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> and
+    <span class="inlinecode"><span class="id" title="keyword">Set</span></span> — but it's a colossal one.
+
+<div class="paragraph"> </div>
+
+    Note: if a proof isn't there, it's an exercise. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="bool_inhabited"><span class="id" title="lemma">bool_inhabited</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="VeryTrue_inhabited"><span class="id" title="lemma">VeryTrue_inhabited</span></a> : <a class="idref" href="Seminar.html#VeryTrue"><span class="id" title="inductive">VeryTrue</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+First off, both <span class="inlinecode"><span class="id" title="var">bool</span></span> and <span class="inlinecode"><span class="id" title="var">VeryTrue</span></span>, which correspond in the series,
+    are inhabited. This means that <span class="inlinecode"><span class="id" title="var">bool</span></span> has an element and <span class="inlinecode"><span class="id" title="var">VeryTrue</span></span> is
+    indeed true. No surprise here. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="unit_contractible"><span class="id" title="lemma">unit_contractible</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a>, <a class="idref" href="Seminar.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Seminar.html#y"><span class="id" title="variable">y</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="bool_not_contractible"><span class="id" title="lemma">bool_not_contractible</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="Seminar.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#32263a1c8b01baecdff9deb038955bc9"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="Seminar.html#y"><span class="id" title="variable">y</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Secondly, <span class="inlinecode"><span class="id" title="var">unit</span></span> is contractible and <span class="inlinecode"><span class="id" title="var">bool</span></span> is not. This means roughly
+    that <span class="inlinecode"><span class="id" title="var">unit</span></span> has one element and <span class="inlinecode"><span class="id" title="var">bool</span></span> has more than one (in fact it
+    has two). We could believe that this is also the case for <span class="inlinecode"><span class="id" title="var">True</span></span> and
+    <span class="inlinecode"><span class="id" title="var">VeryTrue</span></span>, but it's not that simple. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="True_contractible"><span class="id" title="lemma">True_contractible</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>, <a class="idref" href="Seminar.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Seminar.html#y"><span class="id" title="variable">y</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="VeryTrue_not_contractible"><span class="id" title="lemma">VeryTrue_not_contractible</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="Seminar.html#VeryTrue"><span class="id" title="inductive">VeryTrue</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="Seminar.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#32263a1c8b01baecdff9deb038955bc9"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="Seminar.html#y"><span class="id" title="variable">y</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exists</span> <a class="idref" href="Seminar.html#proof"><span class="id" title="constructor">proof</span></a>, <a class="idref" href="Seminar.html#other_proof"><span class="id" title="constructor">other_proof</span></a>. <span class="id" title="tactic">inversion</span> 1.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Even though <span class="inlinecode"><span class="id" title="var">True</span></span> has the same property that holds for <span class="inlinecode"><span class="id" title="var">unit</span></span>,
+    it looks like the trickery of <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> is not enough to prove
+    that <span class="inlinecode"><span class="id" title="var">VeryTrue</span></span> is contractible. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Logic.ProofIrrelevance.html#"><span class="id" title="library">ProofIrrelevance</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="VeryTrue_contractible"><span class="id" title="lemma">VeryTrue_contractible</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="Seminar.html#VeryTrue"><span class="id" title="inductive">VeryTrue</span></a>, <a class="idref" href="Seminar.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Seminar.html#y"><span class="id" title="variable">y</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+No, it's not about lack of trickery — it may simply be not true. In
+    fact, it's axiom-dependent. In vanilla Coq we can't do much, but if
+    we assume the Axiom of Proof Irrelevance, we can prove that both
+    constructors of <span class="inlinecode"><span class="id" title="var">VeryTrue</span></span> construct the very same proof. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Logic.ProofIrrelevance.html#proof_irrelevance"><span class="id" title="axiom">proof_irrelevance</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;proof_irrelevance&nbsp;:&nbsp;forall&nbsp;(P&nbsp;:&nbsp;Prop)&nbsp;(p1&nbsp;p2&nbsp;:&nbsp;P),&nbsp;p1&nbsp;=&nbsp;p2&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The Axiom of Proof Irrelevance states that all proofs of any proposition
+    are equal. This is exactly the statement we wanted to prove. You may
+    wonder if we're allowed to assume such an axiom, but it was proved
+    that this axiom is consistent with the Calculus of Inductive Constructions
+    (so, it won't introduce any contradictions to Coq).
+
+<div class="paragraph"> </div>
+
+    But before we go on we have to clarify what was meant by "proof" in the
+    above statement in order to avoid falling into an equivocation lurking
+    in the darkness out there.
+
+<div class="paragraph"> </div>
+
+    In the context of Coq the word "proof" can mean two things:
+<ul class="doclist">
+<li> "proofterm". Proofterm is just a term. To prove <span class="inlinecode"><span class="id" title="var">P</span></span> we have to
+      construct <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span> and this <span class="inlinecode"><span class="id" title="var">p</span></span> is the proofterm that proves <span class="inlinecode"><span class="id" title="var">P</span></span>.
+
+</li>
+<li> "proofscript". A proofscript is the text that appears between the
+      theorem statement and the keyword <span class="inlinecode"><span class="id" title="keyword">Qed</span></span>. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ What I meant by "all proofs of any proposition are equal" could be
+    better rephrased as "all proofterms of any proposition are equal". 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Logic.FinFun.html#"><span class="id" title="library">Logic.FinFun</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Note: module FinFun contains definitions of injections, surjections and
+    bijections.
+
+<div class="paragraph"> </div>
+
+    These are not the only differences. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="no_bij_unit_bool"><span class="id" title="lemma">no_bij_unit_bool</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">f</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Logic.FinFun.html#Bijective"><span class="id" title="definition">Bijective</span></a> <a class="idref" href="Seminar.html#f"><span class="id" title="variable">f</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Even though there are functions going from <span class="inlinecode"><span class="id" title="var">unit</span></span> to <span class="inlinecode"><span class="id" title="var">bool</span></span> and the
+    other way around too, they are in no sense equivalences. Particularly,
+    <span class="inlinecode"><span class="id" title="var">unit</span></span> is not in bijction with <span class="inlinecode"><span class="id" title="var">bool</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="unit_not_bool"><span class="id" title="lemma">unit_not_bool</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#32263a1c8b01baecdff9deb038955bc9"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Since Leibniz it is known that two equal things must also have the
+    same properties. Using this fact we can prove that <span class="inlinecode"><span class="id" title="var">unit</span></span> is not
+    equal to <span class="inlinecode"><span class="id" title="var">bool</span></span> (since they differ in the property of being in
+    bijction with <span class="inlinecode"><span class="id" title="var">uni</span></span>). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="VeryTrue_True"><span class="id" title="lemma">VeryTrue_True</span></a> : <a class="idref" href="Seminar.html#VeryTrue"><span class="id" title="inductive">VeryTrue</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">&lt;-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="var">VeryTrue</span></span> and <span class="inlinecode"><span class="id" title="var">True</span></span> are, however, logically equivalent. This really
+    shouldn't surprise us, because both can be proved without any assumptions.
+    But this is not all that's true about their relationship. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="bij_VeryTrue_True"><span class="id" title="lemma">bij_VeryTrue_True</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">f</span> : <a class="idref" href="Seminar.html#VeryTrue"><span class="id" title="inductive">VeryTrue</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Logic.FinFun.html#Bijective"><span class="id" title="definition">Bijective</span></a> <a class="idref" href="Seminar.html#f"><span class="id" title="variable">f</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+From the Axiom of Proof Irrelevance it follows that <span class="inlinecode"><span class="id" title="var">VeryTrue</span></span> and
+    <span class="inlinecode"><span class="id" title="var">True</span></span> are in bijection with each other. This too isn't that much
+    of a surprise because we have shown before that they both are
+    contractible, i.e. both have only a single element. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Module</span> <a name="Classical"><span class="id" title="module">Classical</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Logic.ClassicalFacts.html#"><span class="id" title="library">ClassicalFacts</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+There's another axiom we can assume: the Axiom of Propositional
+    Extensionality, which lives in the module <span class="inlinecode"><span class="id" title="var">ClassicalFacts</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Logic.ClassicalFacts.html#prop_extensionality"><span class="id" title="definition">prop_extensionality</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;prop_extensionality&nbsp;=&nbsp;forall&nbsp;A&nbsp;B&nbsp;:&nbsp;Prop,&nbsp;A&nbsp;&lt;-&gt;&nbsp;B&nbsp;-&gt;&nbsp;A&nbsp;=&nbsp;B<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Prop&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This axiom states that if two propositions are logically equivalent,
+    then they are equal. It also has been proved that adding it to Coq
+    is consistent (even if we already have proof irrelevance). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Axiom</span> <a name="Classical.prop_ext"><span class="id" title="axiom">prop_ext</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Logic.ClassicalFacts.html#prop_extensionality"><span class="id" title="definition">prop_extensionality</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Note: assuming this axiom is technically realized differently than
+    assuming <span class="inlinecode"><span class="id" title="var">proof_irrelevance</span></span>. To assume <span class="inlinecode"><span class="id" title="var">proof_irrelevance</span></span>, we only
+    had to import the relevant module and the axiom was sitting there
+    waiting for us. However, to assume <span class="inlinecode"><span class="id" title="var">prop_extensionality</span></span> we have to
+    write it out explicitly after importing the module. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="Classical.VeryTrue_is_True"><span class="id" title="lemma">VeryTrue_is_True</span></a> : <a class="idref" href="Seminar.html#VeryTrue"><span class="id" title="inductive">VeryTrue</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Using this axiom, we can prove that <span class="inlinecode"><span class="id" title="var">VeryTrue</span></span> and <span class="inlinecode"><span class="id" title="var">True</span></span> are not only
+    logically equivalent and in bijection with each other, but actually
+    equal. Propositions are very different from ordinary types. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Seminar.html#Classical"><span class="id" title="module">Classical</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Let's try to sum up the above lesson using slogans and metaphors.
+    An often repeated phrase is "propositions as types". By this it is
+    most often meant that proposition can be represented by types and
+    logic can be reduced to operations on types.
+
+<div class="paragraph"> </div>
+
+    This is mostly accurate, but as we have seen, proposition and types
+    are not exactly the same thing in Coq. We can imagine that a type is
+    just a bag of dots. The bag is the type proper and the dots are just
+    repeated applications of the type's constructors.
+
+<div class="paragraph"> </div>
+
+    We can then in search of dots put our hand into the bag and if there
+    are some, we can pull them out. If there are many of them, we can
+    distinguish them by looking at them or doing more complicated operations.
+
+<div class="paragraph"> </div>
+
+    Propositions can be thought of as bags of dots in the same way, but if
+    we put our hand into the bag, only two things can possibly happen:
+<ul class="doclist">
+<li> We pull out a big blob of glue with some dots glued to it. We can't
+      unglue them, but we know there are some dots
+
+</li>
+<li> There's nothing 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ The moral of this story is as follows: in case of types (those terms
+    whose type is <span class="inlinecode"><span class="id" title="keyword">Set</span></span> or <span class="inlinecode"><span class="id" title="keyword">Type</span></span>, to be more precise) we are interested
+    in what the terms look like, how many are there and so on. In the
+    case of propositions (terms whose type is <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>) we can possibly
+    only be interested in whether there are any terms (proofs) or not. 
+<div class="paragraph"> </div>
+
+<a name="lab149"></a><h1 class="section">On number of constructors</h1>
+
+<div class="paragraph"> </div>
+
+ Let's consider how the truth of a proposition depends on the number
+    of its constructors. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="TheTruest"><span class="id" title="inductive">TheTruest</span></a> : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="ShortProof"><span class="id" title="constructor">ShortProof</span></a> : <a class="idref" href="Seminar.html#TheTruest"><span class="id" title="inductive">TheTruest</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="LongProof"><span class="id" title="constructor">LongProof</span></a> : <a class="idref" href="Seminar.html#TheTruest"><span class="id" title="inductive">TheTruest</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#TheTruest"><span class="id" title="inductive">TheTruest</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This proposition dangerously resembles the type <span class="inlinecode"><span class="id" title="var">nat</span></span>. It appears to
+    have an infinite amount of proofs constructred by two constructors,
+    one of which corresponds to <span class="inlinecode">0</span> and the other to <span class="inlinecode"><span class="id" title="var">S</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="TheTruest_True"><span class="id" title="lemma">TheTruest_True</span></a> : <a class="idref" href="Seminar.html#TheTruest"><span class="id" title="inductive">TheTruest</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">&lt;-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="TheTruest_contractible"><span class="id" title="lemma">TheTruest_contractible</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="Seminar.html#TheTruest"><span class="id" title="inductive">TheTruest</span></a>, <a class="idref" href="Seminar.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Seminar.html#y"><span class="id" title="variable">y</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This is not really the case. Since all the proofs are equal to each
+    other, there in fact is only a single proof. So even though this
+    proposition has two constructors one of which is recursive, it
+    resembles <span class="inlinecode"><span class="id" title="var">unit</span></span> more than <span class="inlinecode"><span class="id" title="var">nat</span></span>, to which it would be equivalent
+    if it lived in <span class="inlinecode"><span class="id" title="keyword">Set</span></span> or <span class="inlinecode"><span class="id" title="keyword">Type</span></span>.
+
+<div class="paragraph"> </div>
+
+    This leads us to ask a somewhat contrived question: for propositions,
+    are all constructors besides one useless? Or rather, does a single one
+    suffice to make a proposition true? 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="BePatient"><span class="id" title="inductive">BePatient</span></a> : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="the_longest_proof"><span class="id" title="constructor">the_longest_proof</span></a> : <a class="idref" href="Seminar.html#BePatient"><span class="id" title="inductive">BePatient</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#BePatient"><span class="id" title="inductive">BePatient</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The above proposition has a single constructor, so we could be led
+    to believe it's true. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="BePatient_false"><span class="id" title="lemma">BePatient_false</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="Seminar.html#BePatient"><span class="id" title="inductive">BePatient</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="BePatient_False"><span class="id" title="lemma">BePatient_False</span></a> : <a class="idref" href="Seminar.html#BePatient"><span class="id" title="inductive">BePatient</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">&lt;-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+However it happens that this proposition is not at all true. How is
+    this possible? It has a constructor, so it must be true... not quite.
+    Recall that we can build terms of inductive types by applying their
+    constructors only a <i>finite</i> number of times.
+
+<div class="paragraph"> </div>
+
+    The "word" finite is crucial here. If we try to apply the constructor
+    <span class="inlinecode"><span class="id" title="var">the_longest_proof</span></span> repeatedly, our only hope at finishing is if we
+    do it <i>ad infinitum</i>. This is exactly the thing that is forbidden by
+    the definition of inductive types.
+
+<div class="paragraph"> </div>
+
+    So, a proposition with one constructor can be false. We could add
+    more constructors like <span class="inlinecode"><span class="id" title="var">the_longest_proof</span></span> and they wouldn't help
+    if all of them were recursive. Thus we have proven (but only at the
+    metatheoretical level) that a false proposition can have any number
+    of constructors: 0 (<span class="inlinecode"><span class="id" title="var">False</span></span>), 1 (<span class="inlinecode"><span class="id" title="var">BePatient</span></span>), 2 or more (<span class="inlinecode"><span class="id" title="var">BePatient</span></span>
+    on steroids with more constructors).
+
+<div class="paragraph"> </div>
+
+    But what about nonrecursive constructors? Can a propositiona with a
+    nonrecursive constructor be false? 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="LatentFalsity"><span class="id" title="inductive">LatentFalsity</span></a> : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="I_am_true"><span class="id" title="constructor">I_am_true</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#LatentFalsity"><span class="id" title="inductive">LatentFalsity</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Well, this one has one nonrecursive constructor, so again we could be
+    led to believe it's true... but beware. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="LatentFalsity_false"><span class="id" title="lemma">LatentFalsity_false</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a> <a class="idref" href="Seminar.html#LatentFalsity"><span class="id" title="inductive">LatentFalsity</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="LatentFalsity_False"><span class="id" title="lemma">LatentFalsity_False</span></a> : <a class="idref" href="Seminar.html#LatentFalsity"><span class="id" title="inductive">LatentFalsity</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">&lt;-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This proposition is false because its only constructor takes a proof
+    of <span class="inlinecode"><span class="id" title="var">False</span></span> as an argument. Since there isn't one, this constructor can
+    never be used to build a proof of <span class="inlinecode"><span class="id" title="var">LatentFalsity</span></span>.
+
+<div class="paragraph"> </div>
+
+    Our voyage into the land of constructors looks rather grimm. We have
+    met false propositions with any number of constructors, recursive or
+    not. We have also seen that true propositions can have one or more
+    constructors.
+
+<div class="paragraph"> </div>
+
+    The only certainty we discovered is that a proposition without any
+    constructors must necessarily be false. As soon as it has at least
+    one, it can be provable or not depending on how they look like. 
+<div class="paragraph"> </div>
+
+<a name="lab150"></a><h4 class="section">Exercise</h4>
+
+<div class="paragraph"> </div>
+
+ Find a simple heuristic for deciding (at the metatheoretical level)
+    whether an inductive proposition can be proven or not. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab151"></a><h4 class="section">Exercise</h4>
+
+<div class="paragraph"> </div>
+
+ Prove that <span class="inlinecode"><span class="id" title="var">bool</span></span> <span class="inlinecode">&lt;&gt;</span> <span class="inlinecode"><span class="id" title="var">nat</span></span>. Does <span class="inlinecode"><span class="id" title="var">TheTruest</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">VeryTrue</span></span> hold? If yes,
+    under what assumptions? 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab152"></a><h1 class="section">Induction principles</h1>
+
+<div class="paragraph"> </div>
+
+ We're not done yet — the differences that were described above have
+    some more consequences. In this subchapter we will be interested in
+    induction principles, which correspond to natural deduction's
+    elimination rules. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Empty_set_ind"><span class="id" title="definition">Empty_set_ind</span></a>.<br/>
+<span class="comment">(*&nbsp;==&gt;&nbsp;Empty_set_ind<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;(P&nbsp;:&nbsp;Empty_set&nbsp;-&gt;&nbsp;Prop)&nbsp;(e&nbsp;:&nbsp;Empty_set),&nbsp;P&nbsp;e&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#unit_ind"><span class="id" title="definition">unit_ind</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;unit_ind<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;P&nbsp;:&nbsp;unit&nbsp;-&gt;&nbsp;Prop,&nbsp;P&nbsp;tt&nbsp;-&gt;&nbsp;forall&nbsp;u&nbsp;:&nbsp;unit,&nbsp;P&nbsp;u&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool_ind"><span class="id" title="definition">bool_ind</span></a>.<br/>
+</div>
