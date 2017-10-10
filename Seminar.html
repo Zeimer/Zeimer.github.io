@@ -816,10 +816,70 @@ It's basically the same story as before, but it has recursion. First
     The second argument is of particular interest to us: if it were
     <span class="inlinecode"><span class="id" title="keyword">forall</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span>, we would only have a case-analysis
     principle. However, it also has the premise <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>, which makes it
-    recursive. 
+    recursive.
+
 <div class="paragraph"> </div>
 
-<a name="lab153"></a><h4 class="section">Exercise</h4>
+    We can sum up this subchapter with the following intuition about
+    induction. Inductive types are collections of trees made by
+    applying their constructors a finite number of times. In order for
+    such constructions to be finite there must be some base cases,
+    like <span class="inlinecode">0</span> for <span class="inlinecode"><span class="id" title="var">nat</span></span> and <span class="inlinecode"><span class="id" title="var">nil</span></span> for <span class="inlinecode"><span class="id" title="var">list</span></span>.
+
+<div class="paragraph"> </div>
+
+    We are interested in proving that all terms of a type <span class="inlinecode"><span class="id" title="var">T</span></span> have some
+    property <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. In the standard case we can do this by
+    proving that the bases cases have the property and that this type's
+    constructors preserve this property.
+
+<div class="paragraph"> </div>
+
+    In the less standard case, we can find other ways of generating all
+    terms of <span class="inlinecode"><span class="id" title="var">T</span></span>, like <span class="inlinecode">0</span>, <span class="inlinecode">1</span> and <span class="inlinecode">+</span> <span class="inlinecode">2</span> for <span class="inlinecode"><span class="id" title="var">nat</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab153"></a><h1 class="section">On induction principles v2 (TODO)</h1>
+
+<div class="paragraph"> </div>
+
+ Let's for a moment put aside the differences between propositions and
+    types and have some philosophical thinking about induction. Let's say
+    we have a collection of things <span class="inlinecode"><span class="id" title="var">T</span></span> and we want to prove that all
+    elements of <span class="inlinecode"><span class="id" title="var">T</span></span> have some property <span class="inlinecode"><span class="id" title="var">P</span></span>. How could we accomplish this
+    task? It's a general, philosophical question, not one specific to
+    Coq.
+
+<div class="paragraph"> </div>
+
+    Say we have a collection which consists of an old dishwasher, the
+    number π, some weird symbols written on a clay tablet and your
+    granny's graduation hat. How could we prove that each of these has
+    some property <span class="inlinecode"><span class="id" title="var">P</span></span>, like "x was created by aliens"?
+
+<div class="paragraph"> </div>
+
+    Well, you probably thought about checking each case separately. This
+    is a perfectly sane idea, but it's based on an implicit assumption
+    which we have to uncover. This assumption says that our collection is
+    finite. But what if the collection is infinite?
+
+<div class="paragraph"> </div>
+
+    This is really a question concerning the "inner nature" of the objects
+    we consider. If we have an infinite amount of objects whose inner
+    natures are different from each other and we want to be done with our
+    proving in finite time and using finite resources, then we're doomed.
+
+<div class="paragraph"> </div>
+
+    Having said this, what if the collections of interest are Coq types?
+    Is the situation here hopeless too? It turns out that the answer is
+    no. Coq types can be described as collection of objects that share an
+    inner nature. 
+<div class="paragraph"> </div>
+
+<a name="lab154"></a><h4 class="section">Exercise</h4>
 
 <div class="paragraph"> </div>
 
@@ -835,4 +895,8 @@ It's basically the same story as before, but it has recursion. First
 &nbsp;&nbsp;(<span class="id" title="var">P</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span>) (<span class="id" title="var">H0</span> : <a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> 0) (<span class="id" title="var">H1</span> : <a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> 1)<br/>
 &nbsp;&nbsp;(<span class="id" title="var">HSS</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a>)))<br/>
 &nbsp;&nbsp;(<span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a>.<br/>
+
+<br/>
+
+<br/>
 </div>
