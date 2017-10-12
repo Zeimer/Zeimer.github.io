@@ -790,61 +790,70 @@ It's basically the same story as before, but it has recursion. First
     The second argument is of particular interest to us: if it were
     <span class="inlinecode"><span class="id" title="keyword">forall</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span>, we would only have a case-analysis
     principle. However, it also has the premise <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>, which makes it
-    recursive.
+    recursive. 
+<div class="paragraph"> </div>
+
+<a name="lab153"></a><h1 class="section">On induction v2 (TODO)</h1>
 
 <div class="paragraph"> </div>
 
-<span class="comment">(**&nbsp;*&nbsp;On&nbsp;induction&nbsp;v2&nbsp;(TODO)&nbsp;*)</span><br/>
+ Let's for a moment put aside the differences between propositions and
+    types and have some philosophical thinking about induction. Let's say
+    we have a collection of things <span class="inlinecode"><span class="id" title="var">T</span></span> and we want to prove that all
+    elements of <span class="inlinecode"><span class="id" title="var">T</span></span> have some property <span class="inlinecode"><span class="id" title="var">P</span></span>. How could we accomplish this
+    task? It's a general, philosophical question, not one specific to
+    Coq.
 
 <div class="paragraph"> </div>
 
-<span class="comment">(**&nbsp;Let's&nbsp;for&nbsp;a&nbsp;moment&nbsp;put&nbsp;aside&nbsp;the&nbsp;differences&nbsp;between&nbsp;propositions&nbsp;and<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;types&nbsp;and&nbsp;have&nbsp;some&nbsp;philosophical&nbsp;thinking&nbsp;about&nbsp;induction.&nbsp;Let's&nbsp;say<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;have&nbsp;a&nbsp;collection&nbsp;of&nbsp;things&nbsp;<span class="inlinecode"><span class="id" title="var">T</span></span>&nbsp;and&nbsp;we&nbsp;want&nbsp;to&nbsp;prove&nbsp;that&nbsp;all<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;elements&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">T</span></span>&nbsp;have&nbsp;some&nbsp;property&nbsp;<span class="inlinecode"><span class="id" title="var">P</span></span>.&nbsp;How&nbsp;could&nbsp;we&nbsp;accomplish&nbsp;this<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;task?&nbsp;It's&nbsp;a&nbsp;general,&nbsp;philosophical&nbsp;question,&nbsp;not&nbsp;one&nbsp;specific&nbsp;to<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Coq.<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Say&nbsp;we&nbsp;have&nbsp;a&nbsp;collection&nbsp;which&nbsp;consists&nbsp;of&nbsp;an&nbsp;old&nbsp;dishwasher,&nbsp;the<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;π,&nbsp;some&nbsp;weird&nbsp;symbols&nbsp;written&nbsp;on&nbsp;a&nbsp;clay&nbsp;tablet&nbsp;and&nbsp;your<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;granny's&nbsp;graduation&nbsp;hat.&nbsp;How&nbsp;could&nbsp;we&nbsp;prove&nbsp;that&nbsp;each&nbsp;of&nbsp;these&nbsp;has<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;some&nbsp;property&nbsp;<span class="inlinecode"><span class="id" title="var">P</span></span>,&nbsp;like&nbsp;"x&nbsp;was&nbsp;created&nbsp;by&nbsp;aliens"?<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Well,&nbsp;you&nbsp;probably&nbsp;thought&nbsp;about&nbsp;checking&nbsp;each&nbsp;case&nbsp;separately.&nbsp;This<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;a&nbsp;perfectly&nbsp;sane&nbsp;idea&nbsp;that&nbsp;works&nbsp;for&nbsp;both&nbsp;"heterogenous"&nbsp;collections<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(like&nbsp;the&nbsp;one&nbsp;described&nbsp;above)&nbsp;and&nbsp;"homogenous"&nbsp;ones&nbsp;(like&nbsp;Coq's&nbsp;types).<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;However,&nbsp;it&nbsp;is&nbsp;based&nbsp;on&nbsp;an&nbsp;implicit&nbsp;assumption&nbsp;which&nbsp;we&nbsp;have&nbsp;to&nbsp;uncover.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;assumption&nbsp;says&nbsp;that&nbsp;our&nbsp;collection&nbsp;is&nbsp;finite.&nbsp;But&nbsp;what&nbsp;if&nbsp;the<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;collection&nbsp;is&nbsp;infinite?<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;we&nbsp;have&nbsp;an&nbsp;infinite&nbsp;amount&nbsp;of&nbsp;heterogenous&nbsp;objects&nbsp;and&nbsp;we&nbsp;want&nbsp;to<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;done&nbsp;with&nbsp;our&nbsp;proving&nbsp;in&nbsp;finite&nbsp;time&nbsp;and&nbsp;using&nbsp;finite&nbsp;resources,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;we're&nbsp;doomed.&nbsp;What,&nbsp;however,&nbsp;if&nbsp;the&nbsp;objects&nbsp;are&nbsp;homogenous,&nbsp;if<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;they&nbsp;share&nbsp;an&nbsp;"inner&nbsp;nature"?<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Well,&nbsp;then&nbsp;we&nbsp;no&nbsp;longer&nbsp;need&nbsp;to&nbsp;consider&nbsp;each&nbsp;object&nbsp;separately&nbsp;—&nbsp;it<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;suffices&nbsp;to&nbsp;consider&nbsp;just&nbsp;that&nbsp;"inner&nbsp;nature".&nbsp;Having&nbsp;said&nbsp;this,&nbsp;what<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;the&nbsp;collections&nbsp;of&nbsp;interest&nbsp;are&nbsp;Coq&nbsp;types?&nbsp;Our&nbsp;situation&nbsp;is&nbsp;not<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;hopeless,&nbsp;at&nbsp;least&nbsp;in&nbsp;the&nbsp;case&nbsp;of&nbsp;inductive&nbsp;types.<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;fact,&nbsp;inductive&nbsp;types&nbsp;are&nbsp;collections&nbsp;of&nbsp;trees&nbsp;made&nbsp;by&nbsp;applying<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;their&nbsp;constructors&nbsp;a&nbsp;finite&nbsp;number&nbsp;of&nbsp;times.&nbsp;This&nbsp;fits&nbsp;the&nbsp;description<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;"inner&nbsp;nature"&nbsp;perfectly.<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;We&nbsp;are&nbsp;interested&nbsp;in&nbsp;proving&nbsp;that&nbsp;all&nbsp;terms&nbsp;of&nbsp;a&nbsp;type&nbsp;<span class="inlinecode"><span class="id" title="var">T</span></span>&nbsp;have&nbsp;some<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;property&nbsp;<span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>.&nbsp;In&nbsp;the&nbsp;standard&nbsp;case&nbsp;we&nbsp;can&nbsp;do&nbsp;this&nbsp;by<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;proving&nbsp;that&nbsp;the&nbsp;bases&nbsp;cases&nbsp;have&nbsp;the&nbsp;property&nbsp;and&nbsp;that&nbsp;this&nbsp;type's<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;constructors&nbsp;preserve&nbsp;this&nbsp;property.<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;the&nbsp;less&nbsp;standard&nbsp;case,&nbsp;we&nbsp;can&nbsp;find&nbsp;other&nbsp;ways&nbsp;of&nbsp;generating&nbsp;all<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;terms&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">T</span></span>,&nbsp;like&nbsp;<span class="inlinecode">0</span>,&nbsp;<span class="inlinecode">1</span>&nbsp;and&nbsp;<span class="inlinecode">+</span> <span class="inlinecode">2</span>&nbsp;for&nbsp;<span class="inlinecode"><span class="id" title="var">nat</span></span>.&nbsp;*)</span><br/>
+    Say we have a collection which consists of an old dishwasher, the
+    number π, some weird symbols written on a clay tablet and your
+    granny's graduation hat. How could we prove that each of these has
+    some property <span class="inlinecode"><span class="id" title="var">P</span></span>, like "x was created by aliens"?
 
 <div class="paragraph"> </div>
 
-    
+    Well, you probably thought about checking each case separately. This
+    is a perfectly sane idea that works for both "heterogenous" collections
+    (like the one described above) and "homogenous" ones (like Coq's types).
+    However, it is based on an implicit assumption which we have to uncover.
+    This assumption says that our collection is finite. But what if the
+    collection is infinite?
+
 <div class="paragraph"> </div>
 
-<a name="lab153"></a><h4 class="section">Exercise</h4>
+    If we have an infinite amount of heterogenous objects and we want to
+    be done with our proving in finite time and using finite resources,
+    then we're doomed. What, however, if the objects are homogenous, if
+    they share an "inner nature"?
+
+<div class="paragraph"> </div>
+
+    Well, then we no longer need to consider each object separately — it
+    suffices to consider just that "inner nature". Having said this, what
+    if the collections of interest are Coq types? Our situation is not
+    hopeless, at least in the case of inductive types.
+
+<div class="paragraph"> </div>
+
+    In fact, inductive types are collections of trees made by applying
+    their constructors a finite number of times. This fits the description
+    of "inner nature" perfectly.
+
+<div class="paragraph"> </div>
+
+    We are interested in proving that all terms of a type <span class="inlinecode"><span class="id" title="var">T</span></span> have some
+    property <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">T</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. In the standard case we can do this by
+    proving that the bases cases have the property and that this type's
+    constructors preserve this property.
+
+<div class="paragraph"> </div>
+
+    In the less standard case, we can find other ways of generating all
+    terms of <span class="inlinecode"><span class="id" title="var">T</span></span>, like <span class="inlinecode">0</span>, <span class="inlinecode">1</span> and <span class="inlinecode">+</span> <span class="inlinecode">2</span> for <span class="inlinecode"><span class="id" title="var">nat</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab154"></a><h4 class="section">Exercise</h4>
 
 <div class="paragraph"> </div>
 
@@ -867,7 +876,7 @@ It's basically the same story as before, but it has recursion. First
 </div>
 
 <div class="doc">
-<a name="lab154"></a><h1 class="section">On induction principles</h1>
+<a name="lab155"></a><h1 class="section">On induction principles</h1>
 
 <div class="paragraph"> </div>
 
