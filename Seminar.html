@@ -1439,7 +1439,7 @@ The last thing left is to pack the above lemma into a case analysis
 <div class="paragraph"> </div>
 
  Let's get back to inductive propositions. They differ from ordinary
-    inductive types in another way that we haven't yet describe. 
+    inductive types in another way we haven't described yet. 
 </div>
 <div class="code">
 
@@ -1489,8 +1489,8 @@ The last thing left is to pack the above lemma into a case analysis
 
 <div class="doc">
 As you see, the induction principles for <span class="inlinecode"><span class="id" title="var">Empty_set</span></span>, <span class="inlinecode"><span class="id" title="var">unit</span></span>, <span class="inlinecode"><span class="id" title="var">bool</span></span>
-    and <span class="inlinecode"><span class="id" title="var">nat</span></span> are very different from these of <span class="inlinecode"><span class="id" title="var">False</span></span>, <span class="inlinecode"><span class="id" title="var">True</span></span>, <span class="inlinecode"><span class="id" title="var">VerTrue</span></span>
-    and <span class="inlinecode"><span class="id" title="var">TheTruest</span></span>, respectively. Why is this?
+    and <span class="inlinecode"><span class="id" title="var">nat</span></span> are very different from these for <span class="inlinecode"><span class="id" title="var">False</span></span>, <span class="inlinecode"><span class="id" title="var">True</span></span>, <span class="inlinecode"><span class="id" title="var">VeryTrue</span></span>
+    and <span class="inlinecode"><span class="id" title="var">TheTruest</span></span>, respectively. But why?
 
 <div class="paragraph"> </div>
 
@@ -1502,22 +1502,22 @@ As you see, the induction principles for <span class="inlinecode"><span class="i
 
 <div class="paragraph"> </div>
 
-    We can generate maximal principles by using the command <span class="inlinecode"><span class="id" title="keyword">Scheme</span></span>.
-    By the way, here's a joke: Scheme is not a programming language,
-    <span class="inlinecode"><span class="id" title="keyword">Scheme</span></span> is just a Coq command for generating induction principles. 
+    We can generate maximal principles with the command <span class="inlinecode"><span class="id" title="keyword">Scheme</span></span>. By the
+    way, here's a joke: Scheme is not a programming language, <span class="inlinecode"><span class="id" title="keyword">Scheme</span></span> is
+    just a Coq command for generating induction principles. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Scheme</span> <a name="Empty_set_ind_max"><span class="id" title="definition">Empty_set_ind_max</span></a> := <span class="id" title="keyword">Induction</span> <span class="id" title="keyword">for</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span>.<br/>
+<span class="id" title="keyword">Scheme</span> <a name="False_ind_max"><span class="id" title="definition">False_ind_max</span></a> := <span class="id" title="keyword">Induction</span> <span class="id" title="keyword">for</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span>.<br/>
 <span class="id" title="keyword">Scheme</span> <a name="True_ind_max"><span class="id" title="definition">True_ind_max</span></a> := <span class="id" title="keyword">Induction</span> <span class="id" title="keyword">for</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span>.<br/>
 <span class="id" title="keyword">Scheme</span> <a name="VeryTrue_ind_max"><span class="id" title="definition">VeryTrue_ind_max</span></a> := <span class="id" title="keyword">Induction</span> <span class="id" title="keyword">for</span> <a class="idref" href="Seminar.html#VeryTrue"><span class="id" title="inductive">VeryTrue</span></a> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span>.<br/>
 <span class="id" title="keyword">Scheme</span> <a name="TheTruest_ind_max"><span class="id" title="definition">TheTruest_ind_max</span></a> := <span class="id" title="keyword">Induction</span> <span class="id" title="keyword">for</span> <a class="idref" href="Seminar.html#TheTruest"><span class="id" title="inductive">TheTruest</span></a> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#Empty_set_ind_max"><span class="id" title="definition">Empty_set_ind_max</span></a>.<br/>
-<span class="comment">(*&nbsp;===&gt;&nbsp;Empty_set_ind_max<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;(P&nbsp;:&nbsp;Empty_set&nbsp;-&gt;&nbsp;Prop)&nbsp;(e&nbsp;:&nbsp;Empty_set),&nbsp;P&nbsp;e&nbsp;*)</span><br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#False_ind_max"><span class="id" title="definition">False_ind_max</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;False_ind_max<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;(P&nbsp;:&nbsp;False&nbsp;-&gt;&nbsp;Prop)&nbsp;(f&nbsp;:&nbsp;False),&nbsp;P&nbsp;f&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#True_ind_max"><span class="id" title="definition">True_ind_max</span></a>.<br/>
@@ -1551,16 +1551,82 @@ Compare these carefully with the principles for <span class="inlinecode"><span c
 
     For example, the minimal principle for <span class="inlinecode"><span class="id" title="var">True</span></span> suffices to only prove
     propositions (<span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>) and not predicates (<span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">True</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>).
-    So, why does Coq generate principless that are less general than they
-    could be?
+    So, why does Coq generate the less general minimal principles than the
+    more general maximal ones for propositions?
 
 <div class="paragraph"> </div>
 
     To answer this question, first we have to notice that there's other
-    side to the coin: maximal principles are more general than minimal
-    ones, but they are more complex. So, the question boils down to why
-    we would prefer simple, but less general principles over more complex
-    and more general ones. 
+    side to the coin: maximal principles are more complex than minimal
+    principles. So, the question boils down to why we would prefer simpler,
+    but less general principles over more complex and more general ones.
+
+<div class="paragraph"> </div>
+
+    The simpler answer is: we don't care about generality. The more precise
+    answer we have already seen is: proof irrelevance. Even though Coq is
+    not proof irrelevant by default — we saw we have to explicitly assume
+    irrelevance if we want it — it is proof irrelevant at the philosophical
+    level.
+
+<div class="paragraph"> </div>
+
+    This is because we can't use proofs to construct programs. We can only
+    use proofs to construct other proofs and, as we saw, when it comes to
+    proofs the only thing that matters is whether they exist or not. In
+    other words, Coq's philosophical proof irrelevance comes from the fact
+    that it was designed to allow the actual proof irrelevance we saw before.
+
+<div class="paragraph"> </div>
+
+    Coq knows that most likely we won't care about properties of proofs, so
+    by default it generates us the minimal principles.
+
+<div class="paragraph"> </div>
+
+    To finish the comparison, let's have a look at the minimal principles
+    that we can generate for <span class="inlinecode"><span class="id" title="var">Empty_set</span></span>, <span class="inlinecode"><span class="id" title="var">unit</span></span>, <span class="inlinecode"><span class="id" title="var">bool</span></span> and <span class="inlinecode"><span class="id" title="var">nat</span></span> using
+    the <span class="inlinecode"><span class="id" title="keyword">Scheme</span></span> command. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Scheme</span> <a name="Empty_set_ind_min"><span class="id" title="definition">Empty_set_ind_min</span></a> := <span class="id" title="var">Minimality</span> <span class="id" title="keyword">for</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span>.<br/>
+<span class="id" title="keyword">Scheme</span> <a name="unit_ind_min"><span class="id" title="definition">unit_ind_min</span></a> := <span class="id" title="var">Minimality</span> <span class="id" title="keyword">for</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span>.<br/>
+<span class="id" title="keyword">Scheme</span> <a name="bool_ind_min"><span class="id" title="definition">bool_ind_min</span></a> := <span class="id" title="var">Minimality</span> <span class="id" title="keyword">for</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span>.<br/>
+<span class="id" title="keyword">Scheme</span> <a name="nat_ind_min"><span class="id" title="definition">nat_ind_min</span></a> := <span class="id" title="var">Minimality</span> <span class="id" title="keyword">for</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#Empty_set_ind_min"><span class="id" title="definition">Empty_set_ind_min</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;Empty_set_ind_min<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;P&nbsp;:&nbsp;Prop,&nbsp;Empty_set&nbsp;-&gt;&nbsp;P&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#unit_ind_min"><span class="id" title="definition">unit_ind_min</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;unit_ind_min<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;P&nbsp;:&nbsp;Prop,&nbsp;P&nbsp;-&gt;&nbsp;unit&nbsp;-&gt;&nbsp;P&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#bool_ind_min"><span class="id" title="definition">bool_ind_min</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;bool_ind_min<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;P&nbsp;:&nbsp;Prop,&nbsp;P&nbsp;-&gt;&nbsp;P&nbsp;-&gt;&nbsp;bool&nbsp;-&gt;&nbsp;P&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#nat_ind_min"><span class="id" title="definition">nat_ind_min</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;nat_ind_min<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;P&nbsp;:&nbsp;Prop,&nbsp;P&nbsp;-&gt;&nbsp;(nat&nbsp;-&gt;&nbsp;P&nbsp;-&gt;&nbsp;P)&nbsp;-&gt;&nbsp;nat&nbsp;-&gt;&nbsp;P&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+As you see, they are quite useless. 
+<div class="paragraph"> </div>
+
+ TODO: I should probably change these examples to <span class="inlinecode"><span class="id" title="var">prod</span></span>, <span class="inlinecode"><span class="id" title="var">sum</span></span>. Also,
+    I should discuss dependent eliminators in general, not just induction
+    principles, because then the minimal prinicples for stuff like <span class="inlinecode"><span class="id" title="var">nat</span></span>
+    will make more sense. 
 <div class="paragraph"> </div>
 
 <a name="lab161"></a><h1 class="section">Parameters and indices</h1>
