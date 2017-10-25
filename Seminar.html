@@ -592,7 +592,7 @@ This proposition is false because its only constructor takes a proof
 </div>
 
 <div class="doc">
-<a name="lab153"></a><h1 class="section">Induction</h1>
+<a name="lab153"></a><h1 class="section">Induction and induction principles for types</h1>
 
 <div class="paragraph"> </div>
 
@@ -1250,13 +1250,219 @@ Don't wory if you don't understand these principles yet. We will come
     types. 
 <div class="paragraph"> </div>
 
-<a name="lab158"></a><h1 class="section">Maximal and minimal principles</h1>
+<a name="lab158"></a><h1 class="section">Induction principles for type families</h1>
 
 <div class="paragraph"> </div>
 
- Let's compare the induction principles for <span class="inlinecode"><span class="id" title="var">prod</span></span> and <span class="inlinecode"><span class="id" title="var">sum</span></span> with <span class="inlinecode"><span class="id" title="var">and</span></span>
-    and <span class="inlinecode"><span class="id" title="var">or</span></span>, their counterparts living in <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. Before we start, I have
-    to admit that I lied to you once more.
+ Now that we know how to define parametric and indexed families of types
+    and how to derive standard recursion principles for ordinary inductive
+    types, the next natural question to consider is how to derive induction
+    principles for families of types. Let's take the next step on our path
+    to enlightenment.
+
+<div class="paragraph"> </div>
+
+    Let's start by looking at parametric families. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Module</span> <a name="MonomorphicList"><span class="id" title="module">MonomorphicList</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We will make a new module in order not pollute the global namespace.
+    The name <span class="inlinecode"><span class="id" title="var">MonomorphicList</span></span> means that we're going to define lists
+    that can hold elements of only a single type. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a name="MonomorphicList.A"><span class="id" title="axiom">A</span></a> : <span class="id" title="keyword">Type</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We will call this type <span class="inlinecode"><span class="id" title="var">A</span></span>. The command <span class="inlinecode"><span class="id" title="keyword">Parameter</span></span> is a synonym of
+    <span class="inlinecode"><span class="id" title="keyword">Axiom</span></span>, <span class="inlinecode"><span class="id" title="keyword">Hypothesis</span></span> and a few more. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="MonomorphicList.listA"><span class="id" title="inductive">listA</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MonomorphicList.nilA"><span class="id" title="constructor">nilA</span></a> : <a class="idref" href="Seminar.html#listA"><span class="id" title="inductive">listA</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="MonomorphicList.consA"><span class="id" title="constructor">consA</span></a> : <a class="idref" href="Seminar.html#MonomorphicList.A"><span class="id" title="axiom">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#listA"><span class="id" title="inductive">listA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#listA"><span class="id" title="inductive">listA</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="var">listA</span></span> is just like <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">A</span></span> (note the lack of space in the first
+    name), but it's not parametric. Rather, the <span class="inlinecode"><span class="id" title="var">A</span></span> is fixed. Let's
+    compare the induction principle for <span class="inlinecode"><span class="id" title="var">listA</span></span> with that of <span class="inlinecode"><span class="id" title="var">list</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#MonomorphicList.listA_ind"><span class="id" title="definition">listA_ind</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;listA_ind&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;P&nbsp;:&nbsp;listA&nbsp;-&gt;&nbsp;Prop,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;nilA&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(forall&nbsp;(a&nbsp;:&nbsp;A)&nbsp;(l&nbsp;:&nbsp;listA),&nbsp;P&nbsp;l&nbsp;-&gt;&nbsp;P&nbsp;(consA&nbsp;a&nbsp;l))&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;l&nbsp;:&nbsp;listA,&nbsp;P&nbsp;l&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#list_ind"><span class="id" title="definition">list_ind</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;list_ind&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(P&nbsp;:&nbsp;list&nbsp;A&nbsp;-&gt;&nbsp;Prop),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;nil&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(forall&nbsp;(a&nbsp;:&nbsp;A)&nbsp;(l&nbsp;:&nbsp;list&nbsp;A),&nbsp;P&nbsp;l&nbsp;-&gt;&nbsp;P&nbsp;(a&nbsp;::&nbsp;l)*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The principle <span class="inlinecode"><span class="id" title="var">listA_ind</span></span> says that in order to prove that all <span class="inlinecode"><span class="id" title="var">listA</span></span>s
+    have some property <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">listA</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, it is necessary to prove that
+    <span class="inlinecode"><span class="id" title="var">P</span></span> holds for <span class="inlinecode"><span class="id" title="var">nilA</span></span> and that if it holds for <span class="inlinecode"><span class="id" title="var">l</span></span>, then it holds for
+    <span class="inlinecode"><span class="id" title="var">consA</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> where <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> is arbitrary. Not a big surprise.
+
+<div class="paragraph"> </div>
+
+    If we look at the principle for <span class="inlinecode"><span class="id" title="var">list</span></span>, it says nearly the same. The
+    only difference is that the type <span class="inlinecode"><span class="id" title="var">A</span></span> is not fixed. It is a parameter
+    and this is reflected in the principle: the first quantifier says
+    <span class="inlinecode"><span class="id" title="keyword">forall</span></span> <span class="inlinecode">(<span class="id" title="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Type</span>)</span>.
+
+<div class="paragraph"> </div>
+
+    When it comes to induction principles for parametric families, this is
+    it: quantifiers have to first quantify over the parameters of the type
+    family. The rest of the principle is as usual. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Seminar.html#MonomorphicList"><span class="id" title="module">MonomorphicList</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We have described only maximal principles for parametric families, but
+    don't worry: the minimal ones work exactly the same way, so let's move
+    on to indexed families. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Module</span> <a name="IndexedList"><span class="id" title="module">IndexedList</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="IndexedList.ilist"><span class="id" title="inductive">ilist</span></a> : <span class="id" title="keyword">Type</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="IndexedList.inil"><span class="id" title="constructor">inil</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="Seminar.html#ilist"><span class="id" title="inductive">ilist</span></a> <a class="idref" href="Seminar.html#A"><span class="id" title="variable">A</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="IndexedList.icons"><span class="id" title="constructor">icons</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, <a class="idref" href="Seminar.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#ilist"><span class="id" title="inductive">ilist</span></a> <a class="idref" href="Seminar.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#ilist"><span class="id" title="inductive">ilist</span></a> <a class="idref" href="Seminar.html#A"><span class="id" title="variable">A</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We will continue the above comparison by looking at the induction
+    principle of a polymorphic list type, but written using indices
+    instead of parameters. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#IndexedList.icons"><span class="id" title="constructor">icons</span></a> <span class="id" title="var">_</span> 5 (<a class="idref" href="Seminar.html#IndexedList.icons"><span class="id" title="constructor">icons</span></a> <span class="id" title="var">_</span> 42 (<a class="idref" href="Seminar.html#IndexedList.inil"><span class="id" title="constructor">inil</span></a> <span class="id" title="var">_</span>)).<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;icons&nbsp;nat&nbsp;5&nbsp;(icons&nbsp;nat&nbsp;42&nbsp;(inil&nbsp;nat))&nbsp;:&nbsp;ilist&nbsp;nat&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="var">Fail</span> <span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#IndexedList.icons"><span class="id" title="constructor">icons</span></a> <span class="id" title="var">_</span> 42 (<a class="idref" href="Seminar.html#IndexedList.icons"><span class="id" title="constructor">icons</span></a> <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> (<a class="idref" href="Seminar.html#IndexedList.inil"><span class="id" title="constructor">inil</span></a> <span class="id" title="var">_</span>)).<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;The&nbsp;term&nbsp;"icons&nbsp;bool&nbsp;true&nbsp;(inil&nbsp;bool)"&nbsp;has&nbsp;type&nbsp;"ilist&nbsp;bool"<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;it&nbsp;is&nbsp;expected&nbsp;to&nbsp;have&nbsp;type&nbsp;"ilist&nbsp;nat".&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This type is just like the ordinary <span class="inlinecode"><span class="id" title="var">list</span></span>: we can have lists of
+    elements of any type we like, but we can't put elements of different
+    types in the same list. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#IndexedList.ilist_ind"><span class="id" title="definition">ilist_ind</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;ilist_ind&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;P&nbsp;:&nbsp;forall&nbsp;T&nbsp;:&nbsp;Type,&nbsp;ilist&nbsp;T&nbsp;-&gt;&nbsp;Prop,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(forall&nbsp;A&nbsp;:&nbsp;Type,&nbsp;P&nbsp;A&nbsp;(inil&nbsp;A))&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(forall&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(a&nbsp;:&nbsp;A)&nbsp;(i&nbsp;:&nbsp;ilist&nbsp;A),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;A&nbsp;i&nbsp;-&gt;&nbsp;P&nbsp;A&nbsp;(icons&nbsp;A&nbsp;a&nbsp;i))&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;(T&nbsp;:&nbsp;Type)&nbsp;(i&nbsp;:&nbsp;ilist&nbsp;T),&nbsp;P&nbsp;T&nbsp;i&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The principle is much more complex than that for ordinary <span class="inlinecode"><span class="id" title="var">list</span></span>s.
+    First thing to notice is that there is no quantification over the
+    type <span class="inlinecode"><span class="id" title="var">T</span></span> at the beginning of the principle: <span class="inlinecode"><span class="id" title="var">T</span></span> in theory can be
+    different each time it appears, so we can't quantify it once and
+    for all (even if in reality it is always the same).
+
+<div class="paragraph"> </div>
+
+    Because of this, we havy to quantify over it each time separately.
+    This can be seen in the type of the predicate <span class="inlinecode"><span class="id" title="var">P</span></span>. It is a predicate
+    on <span class="inlinecode"><span class="id" title="var">ilist</span></span> <span class="inlinecode"><span class="id" title="var">T</span></span>, but in order to be well-typed it has to quantify over
+    <span class="inlinecode"><span class="id" title="var">T</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Type</span></span>.
+
+<div class="paragraph"> </div>
+
+    Then the principle looks very similar to that of <span class="inlinecode"><span class="id" title="var">list</span></span>, but as we said
+    before, the case for each constructor has to quantify over <span class="inlinecode"><span class="id" title="var">T</span></span> (here
+    called <span class="inlinecode"><span class="id" title="var">A</span></span>) separately. The end of the principle is also similar, but
+    once again a quantification over <span class="inlinecode"><span class="id" title="var">T</span></span> appears.
+
+<div class="paragraph"> </div>
+
+    This is it: induction principles for indexed families are about having
+    to quantify over the indices separately each time they appear somewhere. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Seminar.html#IndexedList"><span class="id" title="module">IndexedList</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The last thing are definitions having both parameters and indices. They
+    adhere to the above rules: in their principles parameters are quantified
+    over right at the start and the indices are quantified over separately
+    each time they appear. 
+<div class="paragraph"> </div>
+
+<a name="lab159"></a><h1 class="section">Maximal and minimal principles</h1>
+
+<div class="paragraph"> </div>
+
+ If you look carefully at the induction principle for <span class="inlinecode"><span class="id" title="var">le</span></span>, it seems not
+    to follow the rules we saw above. This is because propositions (and all
+    families of propositions) are treated a bit differently from ordinary
+    types (and type families). Our goal in this subchapter will be to learn
+    about this difference.
+
+<div class="paragraph"> </div>
+
+    Let's compare the induction principles for <span class="inlinecode"><span class="id" title="var">prod</span></span> and <span class="inlinecode"><span class="id" title="var">sum</span></span> (which live
+    in <span class="inlinecode"><span class="id" title="keyword">Type</span></span>) with <span class="inlinecode"><span class="id" title="var">and</span></span> and <span class="inlinecode"><span class="id" title="var">or</span></span>, their counterparts living in <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>.
+    Before we start, I have to admit that I lied to you once more.
 
 <div class="paragraph"> </div>
 
@@ -1450,24 +1656,30 @@ We now see another side of the coin: the maximal principles are not
     default. We instead prefer minimal principles. 
 <div class="paragraph"> </div>
 
-<a name="lab159"></a><h4 class="section">Exercise</h4>
+<a name="lab160"></a><h4 class="section">Exercise</h4>
 
 <div class="paragraph"> </div>
 
  Come up with a (metatheoretical) algorithm that can derive a minimal
     principle from a maximal one. Start by comparing maximal and minimal
-    principles for some types other than <span class="inlinecode"><span class="id" title="var">prod</span></span> and <span class="inlinecode"><span class="id" title="var">sum</span></span>. 
-<div class="paragraph"> </div>
-
-<a name="lab160"></a><h1 class="section">Induction principles for type families</h1>
+    principles for some types other than <span class="inlinecode"><span class="id" title="var">prod</span></span> and <span class="inlinecode"><span class="id" title="var">sum</span></span>. Make sure it
+    also works for indexed families.
 
 <div class="paragraph"> </div>
 
-<a name="lab161"></a><h1 class="section">Functions and functional relations</h1>
+    Do you now understand why the induction principle for <span class="inlinecode"><span class="id" title="var">le</span></span> looks the
+    way it does? 
+<div class="paragraph"> </div>
+
+<a name="lab161"></a><h1 class="section">Mutual induction (TODO)</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab162"></a><h1 class="section">Custom induction principles</h1>
+<a name="lab162"></a><h1 class="section">Functions and functional relations (TODO)</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab163"></a><h1 class="section">Custom induction principles</h1>
 
 <div class="paragraph"> </div>
 
@@ -1840,7 +2052,7 @@ We can replace the command <span class="inlinecode"><span class="id" title="keyw
     (and many other things, too). 
 <div class="paragraph"> </div>
 
-<a name="lab163"></a><h4 class="section">Exercise</h4>
+<a name="lab164"></a><h4 class="section">Exercise</h4>
 
 <div class="paragraph"> </div>
 
@@ -1866,7 +2078,7 @@ We can replace the command <span class="inlinecode"><span class="id" title="keyw
 </div>
 
 <div class="doc">
-<a name="lab164"></a><h4 class="section">Exercise</h4>
+<a name="lab165"></a><h4 class="section">Exercise</h4>
 
 </div>
 <div class="code">
@@ -1917,7 +2129,7 @@ We can replace the command <span class="inlinecode"><span class="id" title="keyw
 </div>
 
 <div class="doc">
-<a name="lab165"></a><h1 class="section">Case analysis on non-inductive types</h1>
+<a name="lab166"></a><h1 class="section">Case analysis on non-inductive types</h1>
 
 <div class="paragraph"> </div>
 
@@ -2087,26 +2299,22 @@ The last thing left is to pack the above lemma into a case analysis
     not with some other method. 
 <div class="paragraph"> </div>
 
-<a name="lab166"></a><h4 class="section">Exercise</h4>
+<a name="lab167"></a><h4 class="section">Exercise</h4>
 
 <div class="paragraph"> </div>
 
  Try to come up with such a property. 
 <div class="paragraph"> </div>
 
-<a name="lab167"></a><h1 class="section">Mutual induction</h1>
+<a name="lab168"></a><h1 class="section">Technical shortcomings of <span class="inlinecode"><span class="id" title="tactic">induction</span></span> (TODO)</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab168"></a><h1 class="section">Technical shortcomings of <span class="inlinecode"><span class="id" title="tactic">induction</span></span></h1>
+<a name="lab169"></a><h1 class="section">Inversion (TODO)</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab169"></a><h1 class="section">Inversion</h1>
-
-<div class="paragraph"> </div>
-
-<a name="lab170"></a><h1 class="section">Equalities</h1>
+<a name="lab170"></a><h1 class="section">Equalities (TODO)</h1>
 
 </div>
 <div class="code">
