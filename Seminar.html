@@ -1675,6 +1675,203 @@ We now see another side of the coin: the maximal principles are not
 
 <div class="paragraph"> </div>
 
+ There's one more kind of induction we haven't covered yet: mutual
+    induction. It is a very straightforward generalization of ordinary
+    induction.
+
+<div class="paragraph"> </div>
+
+    When we define and inductive type (or an inductive family), we can
+    make references to everything we have defined before and also to the
+    thing we are currently defining. But we are defining only one thing
+    at time. Recall the definition of <span class="inlinecode"><span class="id" title="var">even</span></span>: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="Seminar.html#even"><span class="id" title="inductive">even</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;Inductive&nbsp;even&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;Prop&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;even0&nbsp;:&nbsp;even&nbsp;0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;evenSS&nbsp;:&nbsp;forall&nbsp;n&nbsp;:&nbsp;nat,&nbsp;even&nbsp;n&nbsp;-&gt;&nbsp;even&nbsp;(S&nbsp;(S&nbsp;n))&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We have a predicate for even numbers, but what about odd numbers? 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="odd"><span class="id" title="inductive">odd</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="odd1"><span class="id" title="constructor">odd1</span></a> : <a class="idref" href="Seminar.html#odd"><span class="id" title="inductive">odd</span></a> 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="oddSS"><span class="id" title="constructor">oddSS</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="Seminar.html#odd"><span class="id" title="inductive">odd</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#odd"><span class="id" title="inductive">odd</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Looks fine. These definitions say that an even number is either zero
+    or <span class="inlinecode">2</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">n</span></span>, where <span class="inlinecode"><span class="id" title="var">n</span></span> is even and that an odd number is either one or
+    <span class="inlinecode">2</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">n</span></span>, where <span class="inlinecode"><span class="id" title="var">n</span></span> is odd.
+
+<div class="paragraph"> </div>
+
+    In English we can give a different, but equivalent definition of both
+    even and odd numbers at once:
+<ul class="doclist">
+<li> 0 is even
+
+</li>
+<li> if n is even, then n + 1 is odd
+
+</li>
+<li> if n is odd, then n + 1 is even 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ In the above paragraph, we defined evenness and oddness not separately,
+    but together. This kind of definition is not specific to English (or any
+    other natural language for that matter) — it is also possible to use it
+    in Coq and it's called mutual induction. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="even'"><span class="id" title="inductive">even'</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="even'_0"><span class="id" title="constructor">even'_0</span></a> : <a class="idref" href="Seminar.html#even'"><span class="id" title="inductive">even'</span></a> 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="even'_S"><span class="id" title="constructor">even'_S</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="Seminar.html#odd'"><span class="id" title="inductive">odd'</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#even'"><span class="id" title="inductive">even'</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a>)<br/>
+<br/>
+<span class="id" title="keyword">with</span> <a name="odd'"><span class="id" title="inductive">odd'</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="odd'_S"><span class="id" title="constructor">odd'_S</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="Seminar.html#even'"><span class="id" title="inductive">even'</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#odd'"><span class="id" title="inductive">odd'</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+In definitions by mutual induction the first definition is introduced
+    by the keyword <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> and each subsequent one by the keyword <span class="inlinecode"><span class="id" title="keyword">with</span></span>.
+    The dot we have to put only after the last definition finishes. It's
+    just like the ordinary <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> definitions, but in the constructors
+    of a type <span class="inlinecode"><span class="id" title="var">T</span></span> we can reference all the other types that we are defining
+    simultaneously.
+
+<div class="paragraph"> </div>
+
+    The inductive definition of <span class="inlinecode"><span class="id" title="var">even'</span></span> and <span class="inlinecode"><span class="id" title="var">odd'</span></span> mimics what we have seen
+    above (we just have to call our predicates <span class="inlinecode"><span class="id" title="var">even'</span></span> and <span class="inlinecode"><span class="id" title="var">odd'</span></span> because
+    the names <span class="inlinecode"><span class="id" title="var">even</span></span> and <span class="inlinecode"><span class="id" title="var">odd</span></span> are already taken).
+
+<div class="paragraph"> </div>
+
+    Let's see how good this definition is when compared to the previous
+    non-inductive definitions. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="even_2n"><span class="id" title="lemma">even_2n</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="Seminar.html#even"><span class="id" title="inductive">even</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">*</span></a> <a class="idref" href="Seminar.html#k"><span class="id" title="variable">k</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The ordinary one is easy. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="even'_2n"><span class="id" title="lemma">even'_2n</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="Seminar.html#even'"><span class="id" title="inductive">even'</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">*</span></a> <a class="idref" href="Seminar.html#k"><span class="id" title="variable">k</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> 1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span> 0. <span class="id" title="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">trivial</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This proof attempt fails because we lack the necessary inductive
+    hypothesis saying something alone the lines of
+    <span class="inlinecode"><span class="id" title="keyword">forall</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span>,</span> <span class="inlinecode"><span class="id" title="var">odd'</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode"><span class="id" title="var">k</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span>,</span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode">2</span> <span class="inlinecode">*</span> <span class="inlinecode"><span class="id" title="var">k</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span>. Let's
+    try to prove this as a theorem. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="odd'_2n_1"><span class="id" title="lemma">odd'_2n_1</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="Seminar.html#odd'"><span class="id" title="inductive">odd'</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">*</span></a> <a class="idref" href="Seminar.html#k"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 1.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> 1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span> 0. <span class="id" title="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">trivial</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We have the same problem here. An inductive hypothesis is missing that
+    would look just like the theorem <span class="inlinecode"><span class="id" title="var">even'_2n</span></span> we wanted to prove above.
+    So, if the induction doesn't work as well as we would like it to, let's
+    check the induction principles of <span class="inlinecode"><span class="id" title="var">even'</span></span> and <span class="inlinecode"><span class="id" title="var">odd'</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Seminar.html#even'_ind"><span class="id" title="definition">even'_ind</span></a>.<br/>
+<span class="comment">(*&nbsp;===&gt;&nbsp;even'_ind&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;P&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;Prop,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;0&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(forall&nbsp;n&nbsp;:&nbsp;nat,&nbsp;odd'&nbsp;n&nbsp;-&gt;&nbsp;P&nbsp;(S&nbsp;n))&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;n&nbsp;:&nbsp;nat,&nbsp;even'&nbsp;n&nbsp;-&gt;&nbsp;P&nbsp;n&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A careful glance reveals that there's no induction in this induction
+    principle! If you check <span class="inlinecode"><span class="id" title="var">odd'_ind</span></span>, you will see the same thing: no
+    induction there.
+
+<div class="paragraph"> </div>
+
+    This doesn't have any deep philosophical reasons. It's just that for
+    some mystical reason Coq by default decides to generate nonmutual
+    induction principles even for mutually inductive types. We can easily
+    fix it. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Scheme</span> <a name="even'_odd'_ind"><span class="id" title="definition">even'_odd'_ind</span></a> := <span class="id" title="keyword">Induction</span> <span class="id" title="keyword">for</span> <a class="idref" href="Seminar.html#even'"><span class="id" title="inductive">even'</span></a> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span><br/>
+<span class="id" title="keyword">with</span> <a name="odd'_even'_ind"><span class="id" title="definition">odd'_even'_ind</span></a> := <span class="id" title="keyword">Induction</span> <span class="id" title="keyword">for</span> <a class="idref" href="Seminar.html#odd'"><span class="id" title="inductive">odd'</span></a> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="even'_2n"><span class="id" title="lemma">even'_2n</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="Seminar.html#even'"><span class="id" title="inductive">even'</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">*</span></a> <a class="idref" href="Seminar.html#k"><span class="id" title="variable">k</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> 1 <span class="id" title="keyword">using</span> <a class="idref" href="Seminar.html#even'_odd'_ind"><span class="id" title="definition">even'_odd'_ind</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">with</span> (<span class="id" title="var">P0</span> := <span class="id" title="keyword">fun</span> (<span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<span class="id" title="var">H</span> : <a class="idref" href="Seminar.html#odd'"><span class="id" title="inductive">odd'</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a>) =&gt; <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="Seminar.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">*</span></a> <a class="idref" href="Seminar.html#k"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 1).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span> 0. <span class="id" title="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">IHeven'</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">k</span> <span class="id" title="var">IH</span>]. <span class="id" title="tactic">exists</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">k</span>). <span class="id" title="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">IHeven'</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">k</span> <span class="id" title="var">IH</span>]. <span class="id" title="tactic">exists</span> <span class="id" title="var">k</span>. <span class="id" title="tactic">omega</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+It was much easier this time. To prove the theorem 
+<div class="paragraph"> </div>
+
 <a name="lab162"></a><h1 class="section">Functions and functional relations (TODO)</h1>
 
 <div class="paragraph"> </div>
