@@ -3443,15 +3443,239 @@ The technique presented above allows us to explain the paradoxical fact
 
  <span class="inlinecode"><span class="id" title="tactic">induction</span></span> is a very smart tactic: it can introduce quantified
     variables into the context, infer the predicate we're trying to
-    prove and many more. But there is one thing when it's behaviour
-    is really stupid and unexpected. Let's see an example. 
+    prove and many more. But there is one situation in which its
+    behaviour is really stupid and unexpected.
+
+<div class="paragraph"> </div>
+
+    Let's see a somewhat complicated example, taken from Coq'Art.
+    We will define a simple imperative programming language and
+    then try to prove a fact by induction. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Theorem</span> <a name="pair_bool"><span class="id" title="lemma">pair_bool</span></a> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">b</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>) (<span class="id" title="var">p</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#d19c7eafd0e2d195d10df94b392087b5"><span class="id" title="notation">*</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><a class="idref" href="Seminar.html#b"><span class="id" title="variable">b</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a> <a class="idref" href="Seminar.html#b"><span class="id" title="variable">b</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#32263a1c8b01baecdff9deb038955bc9"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="Seminar.html#p"><span class="id" title="variable">p</span></a>.<br/>
+<span class="id" title="keyword">Section</span> <a name="little_semantics"><span class="id" title="section">little_semantics</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Axioms</span> <a name="Var"><span class="id" title="axiom">Var</span></a> <a name="aExp"><span class="id" title="axiom">aExp</span></a> <a name="bExp"><span class="id" title="axiom">bExp</span></a> : <span class="id" title="keyword">Set</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Note: there's a reason for using <span class="inlinecode"><span class="id" title="keyword">Axioms</span></span> instead of, say, <span class="inlinecode"><span class="id" title="keyword">Variables</span></span>,
+    that will be explained later.
+
+<div class="paragraph"> </div>
+
+    We will use <span class="inlinecode"><span class="id" title="var">Var</span></span> to represent variables, <span class="inlinecode"><span class="id" title="var">aExp</span></span> for arithmetic
+    expressions and <span class="inlinecode"><span class="id" title="var">bExp</span></span> for boolean expressions.
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="instr"><span class="id" title="inductive">instr</span></a> : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="Skip"><span class="id" title="constructor">Skip</span></a> : <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="Assign"><span class="id" title="constructor">Assign</span></a> : <a class="idref" href="Seminar.html#Var"><span class="id" title="axiom">Var</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#aExp"><span class="id" title="axiom">aExp</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="Seq"><span class="id" title="constructor">Seq</span></a> : <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="While"><span class="id" title="constructor">While</span></a> : <a class="idref" href="Seminar.html#bExp"><span class="id" title="axiom">bExp</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+There are three kinds of instructions: the empty instruction <span class="inlinecode"><span class="id" title="var">Skip</span></span>,
+    assignment <span class="inlinecode"><span class="id" title="var">Assign</span></span> and the while loop <span class="inlinecode"><span class="id" title="var">While</span></span>. They can be sequenced
+    using <span class="inlinecode"><span class="id" title="var">Seq</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Axiom</span><br/>
+&nbsp;&nbsp;(<a name="state"><span class="id" title="axiom">state</span></a> : <span class="id" title="keyword">Set</span>)<br/>
+&nbsp;&nbsp;(<a name="update"><span class="id" title="axiom">update</span></a> : <a class="idref" href="Seminar.html#state"><span class="id" title="variable">state</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#Var"><span class="id" title="axiom">Var</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="Seminar.html#state"><span class="id" title="variable">state</span></a>)<br/>
+&nbsp;&nbsp;(<a name="evalA"><span class="id" title="axiom">evalA</span></a> : <a class="idref" href="Seminar.html#state"><span class="id" title="variable">state</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#aExp"><span class="id" title="axiom">aExp</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>)<br/>
+&nbsp;&nbsp;(<a name="evalB"><span class="id" title="axiom">evalB</span></a> : <a class="idref" href="Seminar.html#state"><span class="id" title="variable">state</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#bExp"><span class="id" title="axiom">bExp</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We also assume <span class="inlinecode"><span class="id" title="var">state</span></span> for representing the state of programs. This state
+    will be updated with <span class="inlinecode"><span class="id" title="var">update</span></span>. We can "evaluate" arithmetic expressions
+    using <span class="inlinecode"><span class="id" title="var">evalA</span></span> and boolean expressions using <span class="inlinecode"><span class="id" title="var">evalB</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="exec"><span class="id" title="inductive">exec</span></a> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="execSkip"><span class="id" title="constructor">execSkip</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">s</span> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a>, <a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s"><span class="id" title="variable">s</span></a> <a class="idref" href="Seminar.html#Skip"><span class="id" title="constructor">Skip</span></a> <a class="idref" href="Seminar.html#s"><span class="id" title="variable">s</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="execAssign"><span class="id" title="constructor">execAssign</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a>) (<span class="id" title="var">v</span> : <a class="idref" href="Seminar.html#Var"><span class="id" title="axiom">Var</span></a>) (<span class="id" title="var">a</span> : <a class="idref" href="Seminar.html#aExp"><span class="id" title="axiom">aExp</span></a>) (<span class="id" title="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#evalA"><span class="id" title="axiom">evalA</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="Seminar.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="Seminar.html#k"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#update"><span class="id" title="axiom">update</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="Seminar.html#v"><span class="id" title="variable">v</span></a> <a class="idref" href="Seminar.html#k"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="Seminar.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> (<a class="idref" href="Seminar.html#Assign"><span class="id" title="constructor">Assign</span></a> <a class="idref" href="Seminar.html#v"><span class="id" title="variable">v</span></a> <a class="idref" href="Seminar.html#a"><span class="id" title="variable">a</span></a>) <a class="idref" href="Seminar.html#s2"><span class="id" title="variable">s2</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="execSeq"><span class="id" title="constructor">execSeq</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">s1</span> <span class="id" title="var">s2</span> <span class="id" title="var">s3</span> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a>) (<span class="id" title="var">i1</span> <span class="id" title="var">i2</span> : <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="Seminar.html#i1"><span class="id" title="variable">i1</span></a> <a class="idref" href="Seminar.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="Seminar.html#i2"><span class="id" title="variable">i2</span></a> <a class="idref" href="Seminar.html#s3"><span class="id" title="variable">s3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> (<a class="idref" href="Seminar.html#Seq"><span class="id" title="constructor">Seq</span></a> <a class="idref" href="Seminar.html#i1"><span class="id" title="variable">i1</span></a> <a class="idref" href="Seminar.html#i2"><span class="id" title="variable">i2</span></a>) <a class="idref" href="Seminar.html#s3"><span class="id" title="variable">s3</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="execWhileTrue"><span class="id" title="constructor">execWhileTrue</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">s1</span> <span class="id" title="var">s2</span> <span class="id" title="var">s3</span> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a>) (<span class="id" title="var">i</span> : <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a>) (<span class="id" title="var">be</span> : <a class="idref" href="Seminar.html#bExp"><span class="id" title="axiom">bExp</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#evalB"><span class="id" title="axiom">evalB</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="Seminar.html#be"><span class="id" title="variable">be</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="Seminar.html#i"><span class="id" title="variable">i</span></a> <a class="idref" href="Seminar.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s2"><span class="id" title="variable">s2</span></a> (<a class="idref" href="Seminar.html#While"><span class="id" title="constructor">While</span></a> <a class="idref" href="Seminar.html#be"><span class="id" title="variable">be</span></a> <a class="idref" href="Seminar.html#i"><span class="id" title="variable">i</span></a>) <a class="idref" href="Seminar.html#s3"><span class="id" title="variable">s3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> (<a class="idref" href="Seminar.html#While"><span class="id" title="constructor">While</span></a> <a class="idref" href="Seminar.html#be"><span class="id" title="variable">be</span></a> <a class="idref" href="Seminar.html#i"><span class="id" title="variable">i</span></a>) <a class="idref" href="Seminar.html#s3"><span class="id" title="variable">s3</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="execWhileFalse"><span class="id" title="constructor">execWhileFalse</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">s</span> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a>) (<span class="id" title="var">i</span> : <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a>) (<span class="id" title="var">be</span> : <a class="idref" href="Seminar.html#bExp"><span class="id" title="axiom">bExp</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#evalB"><span class="id" title="axiom">evalB</span></a> <a class="idref" href="Seminar.html#s"><span class="id" title="variable">s</span></a> <a class="idref" href="Seminar.html#be"><span class="id" title="variable">be</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s"><span class="id" title="variable">s</span></a> (<a class="idref" href="Seminar.html#While"><span class="id" title="constructor">While</span></a> <a class="idref" href="Seminar.html#be"><span class="id" title="variable">be</span></a> <a class="idref" href="Seminar.html#i"><span class="id" title="variable">i</span></a>) <a class="idref" href="Seminar.html#s"><span class="id" title="variable">s</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This is the relation that describes how to execute programs. <span class="inlinecode"><span class="id" title="var">Skip</span></span> does
+    nothing, <span class="inlinecode"><span class="id" title="var">Assign</span></span> and <span class="inlinecode"><span class="id" title="var">While</span></span> work as expected. <span class="inlinecode"><span class="id" title="var">Seq</span></span> <span class="inlinecode"><span class="id" title="var">i1</span></span> <span class="inlinecode"><span class="id" title="var">i2</span></span> means "execute
+    i1 and then i2". 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a> <a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We want to prove a rule for while from Hoare logic. It says, roughly,
+    that if we execute a while loop and if a loop invariant <span class="inlinecode"><span class="id" title="var">P</span></span> holds
+    before the loop and after each iteration, then after the last iteration
+    <span class="inlinecode"><span class="id" title="var">P</span></span> also holds and moreover the condition of the while loop is false
+    (for otherwise the loop wouldn't have terminated). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="HoareWhileRule"><span class="id" title="lemma">HoareWhileRule</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">P</span> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span>) (<span class="id" title="var">b</span> : <a class="idref" href="Seminar.html#bExp"><span class="id" title="axiom">bExp</span></a>) (<span class="id" title="var">i</span> : <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a>) (<span class="id" title="var">s</span> <span class="id" title="var">s'</span> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><span class="id" title="keyword">forall</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a>, <a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#evalB"><span class="id" title="axiom">evalB</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="Seminar.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="Seminar.html#i"><span class="id" title="variable">i</span></a> <a class="idref" href="Seminar.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Seminar.html#s2"><span class="id" title="variable">s2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Seminar.html#s"><span class="id" title="variable">s</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s"><span class="id" title="variable">s</span></a> (<a class="idref" href="Seminar.html#While"><span class="id" title="constructor">While</span></a> <a class="idref" href="Seminar.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="Seminar.html#i"><span class="id" title="variable">i</span></a>) <a class="idref" href="Seminar.html#s'"><span class="id" title="variable">s'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Seminar.html#s'"><span class="id" title="variable">s'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="Seminar.html#evalB"><span class="id" title="axiom">evalB</span></a> <a class="idref" href="Seminar.html#s'"><span class="id" title="variable">s'</span></a> <a class="idref" href="Seminar.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-<span class="id" title="keyword">Abort</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">H1</span>.<br/>
+<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">H1</span>.<br/>
+<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">subst</span>.<br/>
+<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">remember</span> (<a class="idref" href="Seminar.html#While"><span class="id" title="constructor">While</span></a> <span class="id" title="var">b</span> <span class="id" title="var">i</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">w</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">inversion</span> <span class="id" title="var">Heqw</span>; <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">eauto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We attempt to prove the theorem by induction on the hypothesis
+    <span class="inlinecode"><span class="id" title="var">H1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">exec</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">(<span class="id" title="var">While</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">i</span>)</span> <span class="inlinecode"><span class="id" title="var">s'</span></span> as this seems to be the only reasonable
+    option. However, we fail miserably: <span class="inlinecode"><span class="id" title="tactic">induction</span></span> <span class="inlinecode"><span class="id" title="var">H1</span></span> gives us 5 subgoals
+    that we can't solve.
+
+<div class="paragraph"> </div>
+
+    Clearly <span class="inlinecode"><span class="id" title="var">H1</span></span> could have been created only with the constructors
+    <span class="inlinecode"><span class="id" title="var">execWhileTrue</span></span> and <span class="inlinecode"><span class="id" title="var">execWhileFalse</span></span>, but <span class="inlinecode"><span class="id" title="tactic">induction</span></span> wants us to
+    consider all 5 constructors. If we try <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, the same happens,
+    but when we use <span class="inlinecode"><span class="id" title="tactic">inversion</span></span>, we get only 2 subgoals as expected. Why
+    is this so?
+
+<div class="paragraph"> </div>
+
+    It's all very simple: if we do induction on a term whose type contains
+    non-variables, <span class="inlinecode"><span class="id" title="tactic">induction</span></span> and <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> both mess up and "forget"
+    the form of this particular term, leaving us with unprovable subgoals.
+
+<div class="paragraph"> </div>
+
+    In our case, the type of <span class="inlinecode"><span class="id" title="var">H1</span></span> is <span class="inlinecode"><span class="id" title="var">exec</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">(<span class="id" title="var">While</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">i</span>)</span> <span class="inlinecode"><span class="id" title="var">s'</span></span>. The arguments
+    of <span class="inlinecode"><span class="id" title="var">exec</span></span> are <span class="inlinecode"><span class="id" title="var">s</span></span>, <span class="inlinecode"><span class="id" title="var">While</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">i</span></span> and <span class="inlinecode"><span class="id" title="var">s'</span></span>, of which <span class="inlinecode"><span class="id" title="var">s</span></span> and <span class="inlinecode"><span class="id" title="var">s'</span></span> are
+    variables and <span class="inlinecode"><span class="id" title="var">While</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">i</span></span> is not. So, both <span class="inlinecode"><span class="id" title="tactic">induction</span></span> and <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>
+    forget all information regarding the term <span class="inlinecode"><span class="id" title="var">While</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">i</span></span>.
+
+<div class="paragraph"> </div>
+
+    The situation is easy to deal with: we have to replace the problematic
+    term <span class="inlinecode"><span class="id" title="var">While</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">i</span></span> with a fresh variable <span class="inlinecode"><span class="id" title="var">w</span></span>, keeping an equality saying
+    that <span class="inlinecode"><span class="id" title="var">w</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">While</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">i</span></span>. This little bookkeeping saves us from losing
+    the desired information.
+
+<div class="paragraph"> </div>
+
+    Two questions remain: why <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> succeeds, when <span class="inlinecode"><span class="id" title="tactic">induction</span></span> and
+    <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> fail? The answer is: <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> was crafted specially for
+    not losing information in such cases. So, why doesn't <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> and
+    <span class="inlinecode"><span class="id" title="tactic">induction</span></span> work that way?
+
+<div class="paragraph"> </div>
+
+    As for <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, if you want it not to lose information, you can
+    use <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> anyway. As for <span class="inlinecode"><span class="id" title="tactic">induction</span></span>: it is supposed to be a
+    basic and simple tactic, whereas <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> tends to generate very
+    large proofterms. For example, in the above proofscript, after <span class="inlinecode"><span class="id" title="tactic">intros</span></span>
+    the proofterm is only 4 lines long, but after <span class="inlinecode"><span class="id" title="tactic">intros</span>.</span> <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> <span class="inlinecode"><span class="id" title="var">H1</span></span> it
+    is 214 lines long (you can check this yourself with the command <span class="inlinecode"><span class="id" title="keyword">Show</span></span>
+    <span class="inlinecode"><span class="id" title="keyword">Proof</span></span>). This is the price of <span class="inlinecode"><span class="id" title="tactic">inversion</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab175"></a><h4 class="section">Exercise</h4>
+
+<div class="paragraph"> </div>
+
+ Write a tactic <span class="inlinecode"><span class="id" title="var">replace_nonvars</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> that replaces all nonvariables
+    with variables together with the appropriate equalities. Combine
+    this tactic with the tactic <span class="inlinecode"><span class="id" title="var">generalize_IH</span></span> you implemented in one
+    of the earlier exercises and some more tinkering to get a tactic
+    <span class="inlinecode"><span class="id" title="var">ind</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span>, which:
+<ul class="doclist">
+<li> generalizes the inductive hypothesis
+
+</li>
+<li> replace nonvariables with variables
+
+</li>
+<li> does induction
+
+</li>
+<li> inverses and substitutes all necessary equalities
+
+</li>
+<li> cleans the mess it may have created in the context
+
+</li>
+<li> finishes off easy subgoals with some basic automation 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Your tactic should be able to solve <span class="inlinecode"><span class="id" title="var">HoareWhilRule'</span></span> as shown below.
+    How big is the proofterm it generates? Measure it in lines (mine is
+    314 lines). 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="HoareWhileRule'"><span class="id" title="lemma">HoareWhileRule'</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">P</span> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span>) (<span class="id" title="var">b</span> : <a class="idref" href="Seminar.html#bExp"><span class="id" title="axiom">bExp</span></a>) (<span class="id" title="var">i</span> : <a class="idref" href="Seminar.html#instr"><span class="id" title="inductive">instr</span></a>) (<span class="id" title="var">s</span> <span class="id" title="var">s'</span> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><span class="id" title="keyword">forall</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="Seminar.html#state"><span class="id" title="axiom">state</span></a>, <a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#evalB"><span class="id" title="axiom">evalB</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="Seminar.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="Seminar.html#i"><span class="id" title="variable">i</span></a> <a class="idref" href="Seminar.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Seminar.html#s2"><span class="id" title="variable">s2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Seminar.html#s"><span class="id" title="variable">s</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Seminar.html#exec"><span class="id" title="inductive">exec</span></a> <a class="idref" href="Seminar.html#s"><span class="id" title="variable">s</span></a> (<a class="idref" href="Seminar.html#While"><span class="id" title="constructor">While</span></a> <a class="idref" href="Seminar.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="Seminar.html#i"><span class="id" title="variable">i</span></a>) <a class="idref" href="Seminar.html#s'"><span class="id" title="variable">s'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Seminar.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Seminar.html#s'"><span class="id" title="variable">s'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="Seminar.html#evalB"><span class="id" title="axiom">evalB</span></a> <a class="idref" href="Seminar.html#s'"><span class="id" title="variable">s'</span></a> <a class="idref" href="Seminar.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">ind</span> <span class="id" title="var">H1</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Seminar.html#little_semantics"><span class="id" title="section">little_semantics</span></a>.<br/>
 </div>
