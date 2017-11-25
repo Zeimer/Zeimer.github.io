@@ -77,7 +77,7 @@ Zdefiniuj funkcję <span class="inlinecode"><span class="id" title="var">length<
 </div>
 
 <div class="doc">
-<a name="lab204"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">app</span></span></h3>
+<a name="lab210"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">app</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -103,7 +103,8 @@ Zdefiniuj funkcję <span class="inlinecode"><span class="id" title="var">length<
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#l1"><span class="id" title="variable">l1</span></a> <a class="idref" href="X3.html#1a1c7f13320341c3638e9edcc3e6389d"><span class="id" title="notation">++</span></a> <a class="idref" href="X3.html#1a1c7f13320341c3638e9edcc3e6389d"><span class="id" title="notation">(</span></a><a class="idref" href="X3.html#l2"><span class="id" title="variable">l2</span></a> <a class="idref" href="X3.html#1a1c7f13320341c3638e9edcc3e6389d"><span class="id" title="notation">++</span></a> <a class="idref" href="X3.html#l3"><span class="id" title="variable">l3</span></a><a class="idref" href="X3.html#1a1c7f13320341c3638e9edcc3e6389d"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="X3.html#1a1c7f13320341c3638e9edcc3e6389d"><span class="id" title="notation">(</span></a><a class="idref" href="X3.html#l1"><span class="id" title="variable">l1</span></a> <a class="idref" href="X3.html#1a1c7f13320341c3638e9edcc3e6389d"><span class="id" title="notation">++</span></a> <a class="idref" href="X3.html#l2"><span class="id" title="variable">l2</span></a><a class="idref" href="X3.html#1a1c7f13320341c3638e9edcc3e6389d"><span class="id" title="notation">)</span></a> <a class="idref" href="X3.html#1a1c7f13320341c3638e9edcc3e6389d"><span class="id" title="notation">++</span></a> <a class="idref" href="X3.html#l3"><span class="id" title="variable">l3</span></a>.<br/>
 
 <br/>
-<span class="id" title="keyword">Theorem</span> <a name="app_length"><span class="id" title="lemma">app_length</span></a> : <span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l1</span> <span class="id" title="var">l2</span> : <a class="idref" href="X3.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" title="variable">A</span></a>),<br/>
+<span class="id" title="keyword">Theorem</span> <a name="app_length"><span class="id" title="lemma">app_length</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l1</span> <span class="id" title="var">l2</span> : <a class="idref" href="X3.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="X3.html#A"><span class="id" title="variable">A</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="X3.html#length"><span class="id" title="definition">length</span></a> (<a class="idref" href="X3.html#l1"><span class="id" title="variable">l1</span></a> <a class="idref" href="X3.html#1a1c7f13320341c3638e9edcc3e6389d"><span class="id" title="notation">++</span></a> <a class="idref" href="X3.html#l2"><span class="id" title="variable">l2</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="X3.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="X3.html#l1"><span class="id" title="variable">l1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="X3.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="X3.html#l2"><span class="id" title="variable">l2</span></a>.<br/>
 
 <br/>
@@ -280,7 +281,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab205"></a><h3 class="section"><span class="inlinecode"><span class="id" title="tactic">repeat</span></span> (TODO: nastąpiła duplikacja)</h3>
+<a name="lab211"></a><h3 class="section"><span class="inlinecode"><span class="id" title="tactic">repeat</span></span> (TODO: nastąpiła duplikacja)</h3>
 
 <div class="paragraph"> </div>
 
@@ -303,7 +304,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab206"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">nth</span></span></h3>
+<a name="lab212"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">nth</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -360,7 +361,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab207"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">head</span></span> i <span class="inlinecode"><span class="id" title="var">last</span></span></h3>
+<a name="lab213"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">head</span></span> i <span class="inlinecode"><span class="id" title="var">last</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -390,7 +391,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab208"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">tail</span></span> i <span class="inlinecode"><span class="id" title="var">init</span></span></h3>
+<a name="lab214"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">tail</span></span> i <span class="inlinecode"><span class="id" title="var">init</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -406,7 +407,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab209"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">take</span></span> i <span class="inlinecode"><span class="id" title="var">drop</span></span></h3>
+<a name="lab215"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">take</span></span> i <span class="inlinecode"><span class="id" title="var">drop</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -510,7 +511,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab210"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">filter</span></span></h3>
+<a name="lab216"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">filter</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -583,7 +584,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab211"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">takeWhile</span></span> i <span class="inlinecode"><span class="id" title="var">dropWhile</span></span></h3>
+<a name="lab217"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">takeWhile</span></span> i <span class="inlinecode"><span class="id" title="var">dropWhile</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -639,7 +640,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab212"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">partition</span></span></h3>
+<a name="lab218"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">partition</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -658,7 +659,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab213"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">zip</span></span></h3>
+<a name="lab219"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">zip</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -741,7 +742,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab214"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">intersperse</span></span></h3>
+<a name="lab220"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">intersperse</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -786,7 +787,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab215"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">replicate</span></span></h3>
+<a name="lab221"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">replicate</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -886,7 +887,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab216"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">zipWith</span></span></h3>
+<a name="lab222"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">zipWith</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -905,7 +906,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab217"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">unzip</span></span> (odtąd TODO!)</h3>
+<a name="lab223"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">unzip</span></span> (odtąd TODO!)</h3>
 
 <div class="paragraph"> </div>
 
@@ -930,7 +931,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab218"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">find</span></span></h3>
+<a name="lab224"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">find</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -952,7 +953,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab219"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">findIndex</span></span></h3>
+<a name="lab225"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">findIndex</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -972,7 +973,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab220"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">findIndices</span></span></h3>
+<a name="lab226"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">findIndices</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -987,7 +988,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">join</span
 </div>
 
 <div class="doc">
-<a name="lab221"></a><h3 class="section">Zwijanie</h3>
+<a name="lab227"></a><h3 class="section">Zwijanie</h3>
 
 </div>
 <div class="code">
@@ -1064,7 +1065,7 @@ Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"
 </div>
 
 <div class="doc">
-<a name="lab222"></a><h3 class="section">Dziwne (TODO)</h3>
+<a name="lab228"></a><h3 class="section">Dziwne (TODO)</h3>
 
 </div>
 <div class="code">
@@ -1094,7 +1095,7 @@ Nie będę na razie tłumaczył, jaka ideologia stoi za <span class="inlinecode"
 </div>
 
 <div class="doc">
-<a name="lab223"></a><h3 class="section">Niestandardowe reguły indukcyjne</h3>
+<a name="lab229"></a><h3 class="section">Niestandardowe reguły indukcyjne</h3>
 
 <div class="paragraph"> </div>
 

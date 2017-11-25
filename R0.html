@@ -205,18 +205,44 @@
 <div class="paragraph"> </div>
 
 <a name="lab7"></a><h1 class="section">Literatura</h1>
- Mimo, iż Coq liczy sobie dobre 27 lat, przystępnej literatury na
-    jego temat jest jak na lekarstwo, choć stan ten na szczęście
-    ulega ostatnio szybkim zmianom. Z dostępnych pozycji polecenia
+
+<div class="paragraph"> </div>
+
+<a name="lab8"></a><h2 class="section">Książki</h2>
+
+<div class="paragraph"> </div>
+
+ Mimo, iż Coq liczy sobie dobre 27 lat, książek na jego temat zaczęło
+    przybywać dopiero od kilku lat. Z dostępnych pozycji polecenia
     godne są:
 <ul class="doclist">
-<li> Software Foundations Benjamina Pierce'a — książka dwuczęściowa,
-      zawierająca dobre wprowadzenie do języka Coq (aczkolwiek
-      pomijająca niektóre mechanizmy, jak klasy, oraz skupiająca
-      się moim zdaniem zbyt mało na automatyzacji) oraz część
-      dotyczącą teorii języków programowania, definiowania ich
-      składni i semantyki w Coqu oraz dowodzenia ich własności.
-      Dostępna za darmo tutaj: cis.upenn.edu/~bcpierce/sf/current
+<li> Software Foundations — trzytomowa seria dostępna za darmo
+      tutaj: https://softwarefoundations.cis.upenn.edu/
+      W jej skład wchodzą:
+<ul class="doclist">
+<li> Logical Foundations, której głównym autorem jest Benjamin
+        Pierce — bardzo przystępne acz niekompletne wprowadzenie do
+        Coqa. Omawia podstawy programowania funkcyjnego, rekursję i
+        indukcję strukturalną, polimorfizm, podstawy logiki i prostą
+        automatyzację.
+
+</li>
+<li> Programming Language Foundations, której głównym autorem jest
+        Benjamin Pierce — wprowadzenie do teorii języków programowania.
+        Omawia definiowanie ich składni i semantyki, dowodzenie ich
+        własności oraz podstawy systemów typów i proste optymalizacje.
+        Zawiera też kilka rozdziałów na temat bardziej zaawansowanej
+        automatyzacji.
+
+</li>
+<li> Verified Functional Algorithms, której autorem jest Andrew
+        Appel — jak sama nazwa wskazuje skupia się ona na algorytmach,
+        adaptowaniu ich do realiów języków funkcyjnych oraz weryfikacją
+        poprawności ich działania. Nie jest ona jeszcze dopracowana, ale
+        pewnie zmieni się to w przyszłości.
+
+</li>
+</ul>
 
 </li>
 <li> Coq'Art, której autorami są Yves Bertot oraz Pierre Castéran —
@@ -224,24 +250,16 @@
       miejsca rachunkowi konstrukcj i aspektom teoretycznym, zawiera
       także rozdziały dotyczące automatyzacji, silnej specyfikacji,
       koindukcji, zaawansowanej rekurencji i reflekcji. Wersja
-      angielska jest płatna, zaś wersja francuska jest dostępna za
-      darmo tu: labri.fr/perso/casteran/CoqArt
+      francuska jest dostępna za darmo pod adresem
+      https://www.labri.fr/perso/casteran/CoqArt/
+      Wersję angielską można za darmo pobrać z rosyjskich stron z
+      książkami, ale broń Boże tego nie rób! Piractwo to grzech.
 
 </li>
-<li> Certified Programming with Dependent Types Adama Chlipali —
-      książka dla zaawansowanych, traktująca o praktycznym użyciu
-      typów zależnych oraz kładąca bardzo mocny nacisk na
+<li> Certified Programming with Dependent Types autorstwa Adama
+      Chlipali — książka dla zaawansowanych, traktująca o praktycznym
+      użyciu typów zależnych oraz kładąca bardzo mocny nacisk na
       automatyzację, dostępna za darmo tu: adam.chlipala.net/cpdt
-
-</li>
-<li> Verified Functional Algorithms, której autorem jest Andrew
-      Appel, to trzecia część cyklu Software Foundations. Jak sama
-      nazwa wskazuje skupia się ona na algorytmach, adaptowaniu ich
-      do realiów języków funkcyjnych oraz weryfikacją poprawności
-      ich działania. Analiza algorytmów jest odsunięta na dalszy
-      plan, gdyż jest niemożliwe, aby w Coqu formalnie udowodnić
-      złożoność jakiegoś algorytmu. Dostępna jest za darmo tutaj:
-      https://www.cs.princeton.edu/~appel/vfa/
 
 </li>
 <li> Mathematical Components Book, dostępna za darmo tutaj:
@@ -273,7 +291,12 @@
       17 -&gt; 29 -&gt; 13 -&gt; 12 -&gt; (3) -&gt; (6) -&gt; 7 -&gt; 8 -&gt; 9 -&gt; 10 -&gt; 21 -&gt;
       22 -&gt; 25 -&gt; 26 -&gt; 27 -&gt; 18 -&gt; 19 -&gt; 20 -&gt; 24 -&gt; 23 -&gt; (11) -&gt;
       (14) -&gt; (15) -&gt; (16) -&gt; (28) -&gt; (30), gdzie nawiasy okrągłe
-      oznaczają rozdziały opcjonalne (niezbyt ciekawe lub nieprzydatne) 
+      oznaczają rozdziały opcjonalne (niezbyt ciekawe lub nieprzydatne)
+
+</li>
+<li> Formal Reasoning About Programs — powstająca książka Adama
+      Chlipali. Nie wiem o czym jest i nie polecam czytać dopóki jest
+      oznaczona jako draft. Dostępna tu: http://adam.chlipala.net/frap/ 
 </li>
 </ul>
 
@@ -284,7 +307,60 @@
     Manual 
 <div class="paragraph"> </div>
 
-<a name="lab8"></a><h1 class="section">Sprawy techniczne</h1>
+<a name="lab9"></a><h2 class="section">Blogi</h2>
+
+<div class="paragraph"> </div>
+
+ W Internecie można też dokopać się do blogów, na których przynajmniej
+    część postów dotyczy Coqa. Nie czytam ich, bo póki co nie mam na to
+    czasu, więc wszystkie linki wrzucam w ciemno, żebyś nie musiał sam
+    szukać:
+<ul class="doclist">
+<li> http://www.cis.upenn.edu/~aarthur/poleiro/
+
+</li>
+<li> http://coq-blog.clarus.me/
+
+</li>
+<li> https://gmalecha.github.io/
+
+</li>
+<li> http://seb.mondet.org/blog/index.html
+
+</li>
+<li> https://pjreddie.com/coq-tactics/ (uwaga na swoje zdrowie psychiczne)
+
+</li>
+<li> http://gallium.inria.fr/blog/
+
+</li>
+<li> http://ilyasergey.net/pnp/
+
+</li>
+<li> https://homes.cs.washington.edu/~jrw12/blog 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a name="lab10"></a><h2 class="section">Inne</h2>
+
+<div class="paragraph"> </div>
+
+ Coq ma też swój subreddit na Reddicie (można tu znaleźć różne rzeczy, w
+    tym linki do prac naukowych) oraz tag na StackOverflow, gdzie można
+    zadawać i odpowiadać na pytania:
+<ul class="doclist">
+<li> https://www.reddit.com/r/Coq/
+
+</li>
+<li> https://stackoverflow.com/questions/tagged/coq 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a name="lab11"></a><h1 class="section">Sprawy techniczne</h1>
  Kurs ten tworzę z myślą o osobach, które potrafią programować w
     jakimś języku imperatywnym oraz znają podstawy logiki klasycznej,
     ale będę się starał uczynić go jak najbardziej zrozumiałym dla
