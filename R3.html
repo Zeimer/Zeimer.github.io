@@ -265,7 +265,8 @@ Ilość celów możemy policzyć za pomocą taktyki <span class="inlinecode"><s
 W Ltacu, podobnie jak w języku Gallina, mamy do dyspozycji konstrukt
     <span class="inlinecode"><span class="id" title="keyword">let</span></span>. Za jego pomocą możemy nadać nazwę dowolnemu wyrażeniu języka
     Ltac. Jego działanie jest podobne jak w języku Gallina, a więc nie
-    ma co się nad nim rozwodzić.
+    ma co się nad nim rozwodzić. Jest też konstrukt <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">rec</span></span>, który
+    odpowiada <span class="inlinecode"><span class="id" title="keyword">fix</span></span>owi Galliny.
 
 <div class="paragraph"> </div>
 
@@ -342,69 +343,198 @@ Dowolną taktykę, której możemy użyć w dowodzie, możemy też nazwać
 
  Poznałeś już kombinator alternatywy <span class="inlinecode">||</span>. Nie jest to jednak jedyny
     kombinator służący do wyrażania tej idei — są jeszcze kombinatory <span class="inlinecode">+</span>
-    oraz <span class="inlinecode"><span class="id" title="var">tryif</span></span> <span class="inlinecode"><span class="id" title="var">t1</span></span> <span class="inlinecode"><span class="id" title="keyword">then</span></span> <span class="inlinecode"><span class="id" title="var">t2</span></span> <span class="inlinecode"><span class="id" title="keyword">else</span></span> <span class="inlinecode"><span class="id" title="var">t2</span></span>. Różnią się one działaniem — <span class="inlinecode">||</span> jest
+    oraz <span class="inlinecode"><span class="id" title="var">tryif</span></span> <span class="inlinecode"><span class="id" title="var">t1</span></span> <span class="inlinecode"><span class="id" title="keyword">then</span></span> <span class="inlinecode"><span class="id" title="var">t2</span></span> <span class="inlinecode"><span class="id" title="keyword">else</span></span> <span class="inlinecode"><span class="id" title="var">t3</span></span>. Różnią się one działaniem — <span class="inlinecode">||</span> jest
     left-biased, podczas gdy <span class="inlinecode">+</span> nie jest biased i może powodować
     backtracking.
 
 <div class="paragraph"> </div>
 
-    Nie przestrasz się tych dziwnych słów. Ich znaczenie jest dobrze widoczne
-    na poniższym przykładzie. 
+    Nie przestrasz się tych dziwnych słów. Stojące za nimi idee są z grubsza
+    bardzo proste. Wcześniej dowiedziałeś się, że taktyka może zawieść lub
+    zakończyć się sukcesem. W rzeczywistości sprawa jest nieco bardziej
+    ogólna: każda taktyka może zakończyć się dowolną ilością sukcesów. Zero
+    sukcesów oznacza, że taktyka zawodzi. Większość taktyk, które dotychczas
+    poznaliśmy, mogła zakończyć się co najwyżej jednym sukcesem. Są jednak i
+    takie, które mogą zakończyć się dwoma lub więcej sukcesami.
+
+<div class="paragraph"> </div>
+
+    Proces dowodzenia za pomocą taktyk można zobrazować za pomocą procesu
+    przeszukiwania drzewa, którego wierzchołkami są częściowo skonstruowane
+    prooftermy, zaś krawędziami — sukcesy pochodzące od wywoływania taktyk.
+    Liśćmi są prooftermy (dowód się udał) lub ślepe zaułki (dowód się nie
+    udał).
+
+<div class="paragraph"> </div>
+
+    W takiej wizualizacji taktyka może wyzwalać backtracking, jeżeli jej
+    użycie prowadzi do powstania rozgałęzienia w drzewie. Samo drzewo
+    przeszukiwane jest w głąb, a backtracking polega na tym, że jeżeli
+    trafimy na ślepy zaułek (dowód się nie powiódł), to cofamy się (ang.
+    "to backtrack" — cofać się) do ostatniego punktu rozgałęzienia i
+    próbujemy pójść inną gałęzią.
+
+<div class="paragraph"> </div>
+
+    Tę intuicję dobrze widać na poniższym przykładzie. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Ltac</span> <span class="id" title="var">existNatFrom</span> <span class="id" title="var">n</span> :=<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">exists</span> <span class="id" title="var">n</span> || <span class="id" title="var">existNatFrom</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n</span>).<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">existsNatFrom</span> <span class="id" title="var">n</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exists</span> <span class="id" title="var">n</span> || <span class="id" title="var">existsNatFrom</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n</span>).<br/>
 
 <br/>
-<span class="id" title="keyword">Ltac</span> <span class="id" title="var">existNat</span> := <span class="id" title="var">existNatFrom</span> <span class="id" title="var">O</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">existsNat</span> := <span class="id" title="var">existsNatFrom</span> <span class="id" title="var">O</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">m</span><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="R3.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 1.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="R3.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 42.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">Fail</span> (<span class="id" title="var">existNat</span>; <span class="id" title="tactic">reflexivity</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> (<span class="id" title="var">existsNat</span>; <span class="id" title="tactic">reflexivity</span>).<br/>
 <span class="id" title="keyword">Abort</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">Ltac</span> <span class="id" title="var">existNatFrom'</span> <span class="id" title="var">n</span> :=<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">exists</span> <span class="id" title="var">n</span> + <span class="id" title="var">existNatFrom'</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n</span>).<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">existsNatFrom'</span> <span class="id" title="var">n</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exists</span> <span class="id" title="var">n</span> + <span class="id" title="var">existsNatFrom'</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n</span>).<br/>
 
 <br/>
-<span class="id" title="keyword">Ltac</span> <span class="id" title="var">existNat'</span> := <span class="id" title="var">existNatFrom'</span> <span class="id" title="var">O</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">existsNat'</span> := <span class="id" title="var">existsNatFrom'</span> <span class="id" title="var">O</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">m</span><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="R3.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 15.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="R3.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 42.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">existNat'</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">existsNat'</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-Idea stojąca za tajemniczym słowem "backtracking" jest prosta. Wcześniej
-    dowiedziałeś się, że taktyka może zawieść lub zakończyć się sukcesem. W
-    rzeczywistości sprawa jest nieco bardziej ogólna: każda taktyka może
-    zakończyć się dowolną ilością sukcesów. 0 sukcesów oznacza, że taktyka
-    zawodzi. Większość taktyk, które dotychczas poznaliśmy, mogła zakończyć
-    się co najwyżej 1 sukcesem. Są jednak i takie, które mogą zakończyć się
-    dwoma lub więcej sukcesami.
+Próba użycia taktyki <span class="inlinecode"><span class="id" title="var">existsNat</span></span>, która używa kombinatora <span class="inlinecode">||</span>, do
+    udowodnienia, że <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span>,</span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode">42</span> kończy się niepowodzeniem.
+    Jest tak, gdyż <span class="inlinecode">||</span> nie może powodować backtrackingu — jeżeli taktyka
+    <span class="inlinecode"><span class="id" title="var">t1</span></span> dokona postępu, to wtedy <span class="inlinecode"><span class="id" title="var">t1</span></span> <span class="inlinecode">||</span> <span class="inlinecode"><span class="id" title="var">t2</span></span> ma taki sam efekt, jak <span class="inlinecode"><span class="id" title="var">t1</span></span>,
+    a w przeciwnym wypadku taki sam jak <span class="inlinecode"><span class="id" title="var">t2</span></span>. Nawet jeżeli zarówno <span class="inlinecode"><span class="id" title="var">t1</span></span>
+    jak i <span class="inlinecode"><span class="id" title="var">t2</span></span> zakończą się sukcesami, to sukcesy <span class="inlinecode"><span class="id" title="var">t1</span></span> <span class="inlinecode">||</span> <span class="inlinecode"><span class="id" title="var">t2</span></span> będą sukcesami
+    tylko <span class="inlinecode"><span class="id" title="var">t1</span></span>.
 
 <div class="paragraph"> </div>
 
-    "Backtracking" oznacza z ang. cofnięcie się. Polega na tym, że 
+    Na mocy powyższych rozważań możemy skonkludować, że taktyka <span class="inlinecode"><span class="id" title="var">existsNat</span></span>
+    ma co najwyżej jeden sukces i działa jak <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> dla pewnej liczby
+    naturalnej <span class="inlinecode"><span class="id" title="var">n</span></span>. Ponieważ użycie <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">0</span> na celu <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span>,</span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode">42</span>
+    dokonuje postępu, to taktyka <span class="inlinecode"><span class="id" title="var">existsNat</span></span> ma taki sam efekt, jak <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">0</span>.
+    Próba użycia <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> zawodzi, a ponieważ nie ma już więcej sukcesów
+    pochodzących od <span class="inlinecode"><span class="id" title="var">existsNat</span></span> do wypróbowania, nie wyzwala backtrackingu.
+    Wobec tego cała taktyka <span class="inlinecode"><span class="id" title="var">existsNat</span>;</span> <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> kończy się porażką.
+
 <div class="paragraph"> </div>
 
-<a name="lab154"></a><h1 class="section">Dopasowanie celu</h1>
+    Inaczej sytuacja wygląda w przypadku <span class="inlinecode"><span class="id" title="var">existsNat'</span></span>, która bazuje na
+    kombinatorze <span class="inlinecode">+</span>. Sukcesy <span class="inlinecode"><span class="id" title="var">t1</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">t2</span></span> to wszystkie sukcesy <span class="inlinecode"><span class="id" title="var">t1</span></span>, po
+    których następują wszystkie sukcesy <span class="inlinecode"><span class="id" title="var">t2</span></span>. Wobec tego zbiór sukcesów
+    <span class="inlinecode"><span class="id" title="var">existsNat'</span></span> jest nieskończony i wygląda tak: <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">0</span>, <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">1</span>,
+    <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">2</span>... Użycie taktyki <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>, które kończy się porażką
+    wyzwala backtracking, więc całe wykonanie taktyki można zobrazować tak:
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">0;</span> <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> — porażka
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">1;</span> <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> — porażka
+
+</li>
+<li> ...
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">42;</span> <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> — sukces 
+</li>
+</ul>
 
 <div class="paragraph"> </div>
 
-<a name="lab155"></a><h1 class="section">Dopasowanie termu</h1>
+ Na koniec zaznaczyć należy, że backtracking nie jest za darmo — im go
+    więcej, tym więcej rozgałęzień w naszym drzewie poszukiwań, a zatem
+    tym więcej czasu zajmie wykonanie taktyki. W przypadku użycia taktyk
+    takich jak <span class="inlinecode"><span class="id" title="var">existsNat</span></span>, które mają nieskończony zbiór sukcesów, dowód
+    może nie zostać znaleziony nigdy, nawet jeżeli istnieje. 
+<div class="paragraph"> </div>
+
+<a name="lab154"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
-<a name="lab156"></a><h1 class="section">Inne wesołe rzeczy</h1>
+ Przepisz taktykę <span class="inlinecode"><span class="id" title="var">existsNat'</span></span> za pomocą konstruktu <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">rec</span></span> —
+    całość ma wyglądać tak: <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span> <span class="inlinecode"><span class="id" title="var">existsNat''</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">rec</span></span> <span class="inlinecode">...</span> 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="R3.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 42.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">existsNat''</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab155"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Udowodnij poniższe twierdzenie za pomocą pojedynczej taktyki, która
+    generuje wszystkie możliwe listy wartości boolowskich. Całość zrób za
+    pomocą konstruktu <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">rec</span></span> w miejscu, tj. bez użycia komendy <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#"><span class="id" title="library">List</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">l</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="R3.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 3.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab156"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Znajdź taki trywialnie prawdziwy cel i taką taktykę, która wywołuje
+    <span class="inlinecode"><span class="id" title="var">existsNat'</span></span>, że taktyka ta nie skończy pracy i nigdy nie znajdzie
+    dowodu, mimo że dla człowieka znalezienie dowodu jest banalne. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab157"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Zbadaj samodzielnie na podstawie dokumentacji, jak działa kombinator
+    <span class="inlinecode"><span class="id" title="var">tryif</span></span> <span class="inlinecode"><span class="id" title="var">t1</span></span> <span class="inlinecode"><span class="id" title="keyword">then</span></span> <span class="inlinecode"><span class="id" title="var">t2</span></span> <span class="inlinecode"><span class="id" title="keyword">else</span></span> <span class="inlinecode"><span class="id" title="var">t3</span></span>. Wymyśl jakiś mądry przykład, który dobrze
+    ukazuje jego działanie w kontraście do <span class="inlinecode">||</span> i <span class="inlinecode">+</span>. 
+<div class="paragraph"> </div>
+
+<a name="lab158"></a><h1 class="section">Dopasowanie celu</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab159"></a><h1 class="section">Dopasowanie termu</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab160"></a><h1 class="section">Inne wesołe rzeczy</h1>
 
 </div>
 <div class="code">
