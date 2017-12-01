@@ -521,23 +521,367 @@ Próba użycia taktyki <span class="inlinecode"><span class="id" title="var">exi
 
 <div class="paragraph"> </div>
 
+ Napisz taktykę <span class="inlinecode"><span class="id" title="var">search</span></span>, która potrafi udowodnić poniższe twierdzenia.
+    Użyj rekursji, ale nie używaj konstruktu <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">rec</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="search"><span class="id" title="section">search</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Hypotheses</span> <a name="search.A"><span class="id" title="variable">A</span></a> <a name="search.B"><span class="id" title="variable">B</span></a> <a name="search.C"><span class="id" title="variable">C</span></a> <a name="search.D"><span class="id" title="variable">D</span></a> <a name="search.E"><span class="id" title="variable">E</span></a> <a name="search.F"><span class="id" title="variable">F</span></a> <a name="search.G"><span class="id" title="variable">G</span></a> <a name="search.H"><span class="id" title="variable">H</span></a> <a name="search.I"><span class="id" title="variable">I</span></a> <a name="search.J"><span class="id" title="variable">J</span></a> : <span class="id" title="keyword">Prop</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="search_0"><span class="id" title="lemma">search_0</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="R3.html#search.I"><span class="id" title="variable">I</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#search.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.B"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.D"><span class="id" title="variable">D</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.E"><span class="id" title="variable">E</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.F"><span class="id" title="variable">F</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.G"><span class="id" title="variable">G</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.I"><span class="id" title="variable">I</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.J"><span class="id" title="variable">J</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">search</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="search_1"><span class="id" title="lemma">search_1</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="R3.html#search.I"><span class="id" title="variable">I</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(((((((</span></a><a class="idref" href="R3.html#search.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.D"><span class="id" title="variable">D</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.E"><span class="id" title="variable">E</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.F"><span class="id" title="variable">F</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.G"><span class="id" title="variable">G</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.I"><span class="id" title="variable">I</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.J"><span class="id" title="variable">J</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">search</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="search_2"><span class="id" title="lemma">search_2</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="R3.html#search.F"><span class="id" title="variable">F</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#search.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">((</span></a><a class="idref" href="R3.html#search.D"><span class="id" title="variable">D</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.E"><span class="id" title="variable">E</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#search.F"><span class="id" title="variable">F</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.G"><span class="id" title="variable">G</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">))</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.H"><span class="id" title="variable">H</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.I"><span class="id" title="variable">I</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.J"><span class="id" title="variable">J</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">search</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="search_3"><span class="id" title="lemma">search_3</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#search.J"><span class="id" title="variable">J</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.J"><span class="id" title="variable">J</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">((</span></a><a class="idref" href="R3.html#search.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.D"><span class="id" title="variable">D</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#search.E"><span class="id" title="variable">E</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.E"><span class="id" title="variable">E</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">))))</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">search</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="search_4"><span class="id" title="lemma">search_4</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="R3.html#search.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#search.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.B"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.D"><span class="id" title="variable">D</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.E"><span class="id" title="variable">E</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.F"><span class="id" title="variable">F</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.G"><span class="id" title="variable">G</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.I"><span class="id" title="variable">I</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.J"><span class="id" title="variable">J</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">search</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="search_5"><span class="id" title="lemma">search_5</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="R3.html#search.D"><span class="id" title="variable">D</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a><a class="idref" href="R3.html#search.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">((</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a><a class="idref" href="R3.html#search.B"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#search.I"><span class="id" title="variable">I</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#search.I"><span class="id" title="variable">I</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#search.J"><span class="id" title="variable">J</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#search.J"><span class="id" title="variable">J</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">))</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#search.D"><span class="id" title="variable">D</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a><a class="idref" href="R3.html#search.D"><span class="id" title="variable">D</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~~</span></a><a class="idref" href="R3.html#search.D"><span class="id" title="variable">D</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.B"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#search.B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">))</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">search</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="search_6"><span class="id" title="lemma">search_6</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~~</span></a><a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~~~</span></a><a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">((</span></a><a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a><a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a><a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~</span></a><a class="idref" href="R3.html#search.C"><span class="id" title="variable">C</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">))</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">search</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="R3.html#search"><span class="id" title="section">search</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab158"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
  Zbadaj samodzielnie na podstawie dokumentacji, jak działa kombinator
     <span class="inlinecode"><span class="id" title="var">tryif</span></span> <span class="inlinecode"><span class="id" title="var">t1</span></span> <span class="inlinecode"><span class="id" title="keyword">then</span></span> <span class="inlinecode"><span class="id" title="var">t2</span></span> <span class="inlinecode"><span class="id" title="keyword">else</span></span> <span class="inlinecode"><span class="id" title="var">t3</span></span>. Wymyśl jakiś mądry przykład, który dobrze
     ukazuje jego działanie w kontraście do <span class="inlinecode">||</span> i <span class="inlinecode">+</span>. 
 <div class="paragraph"> </div>
 
-<a name="lab158"></a><h1 class="section">Dopasowanie celu</h1>
+<a name="lab159"></a><h1 class="section">Dopasowanie kontekstu i celu</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab159"></a><h1 class="section">Dopasowanie termu</h1>
+ Chyba najważniejszym konstruktem Ltaca jest <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode"><span class="id" title="keyword">goal</span></span>, który próbuje
+    dopasować kontekst oraz cel do podanych wzorców. Mają one postać
+    <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" title="var">kontekst</span></span> <span class="inlinecode">|-</span> <span class="inlinecode"><span class="id" title="var">cel</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" title="var">taktyka</span></span> lub podkreślnika, który oznacza "dopasuj
+    cokolwiek".
 
 <div class="paragraph"> </div>
 
-<a name="lab160"></a><h1 class="section">Inne wesołe rzeczy</h1>
+    Wyrażenie <span class="inlinecode"><span class="id" title="var">kontekst</span></span> jest listą hipotez, których szukamy w kontekście,
+    tzn. jest postaci <span class="inlinecode"><span class="id" title="var">x_1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A_1</span>,</span> <span class="inlinecode"><span class="id" title="var">x_2</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A_2</span>...</span>, gdzie <span class="inlinecode"><span class="id" title="var">A_1</span></span> jest wzorcem
+    dopasowującym typ pierwszej hipotezy, a <span class="inlinecode"><span class="id" title="var">x_1</span></span> oznacza nazwę, którą
+    nadajemy jej jedynie na potrzeby tego konkretnego dopasowania — nie musi
+    być ona taka sama jak rzeczywista nazwa występująca w twierdzeniu.
+
+<div class="paragraph"> </div>
+
+    Wyrażenie <span class="inlinecode"><span class="id" title="var">cel</span></span> jest wzorcem dopasowującym typ, który reprezentuje nasz
+    cel. Po strzałce <span class="inlinecode">=&gt;</span> następuje taktyka, której chcemy użyć, jeżeli dany
+    wzorzec zostanie dopasowany.
+
+<div class="paragraph"> </div>
+
+    Wzorce dopasowujące typ wyglądają prawie tak samo jak termy, ale mogą
+    występować w nich dwa rodzaje zmiennych: zwykłe i egzystencjalne. Te
+    pierwsze dopasowują faktycznie obecne w kontekście zmienne, zaś te
+    drugie — dowolne termy.
+
+<div class="paragraph"> </div>
+
+    Koniec wesołej pisaninki, zobaczmy w końcu przykłady! 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="Match"><span class="id" title="section">Match</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#S"><span class="id" title="variable">S</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <span class="id" title="keyword">Prop</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+W powyższym przykładzie szukamy w celu zdań logicznych, czyli termów
+    typu <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> i wypisujemy je. Nazwy szukanych obiektów są lokalne dla
+    każdej gałęzi dopasowania i nie muszą pokrywać się z rzeczywistymi
+    nazwami termów w kontekście. W naszym przypadku nazywamy szukane przez
+    nas zdanie <span class="inlinecode"><span class="id" title="var">x</span></span>, choć zdania obecne w naszym kontekście tak naprawdę
+    nazywają się <span class="inlinecode"><span class="id" title="var">P</span></span>, <span class="inlinecode"><span class="id" title="var">Q</span></span>, <span class="inlinecode"><span class="id" title="var">R</span></span> oraz <span class="inlinecode"><span class="id" title="var">S</span></span>.
+
+<div class="paragraph"> </div>
+
+    Przeszukiwanie kontekstu odbywa się w kolejności od najnowszego do
+    najstarszego. Do wzorca <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> najpierw próbujemy dopasować
+    <span class="inlinecode"><span class="id" title="var">H1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">R</span></span>, ale <span class="inlinecode"><span class="id" title="var">R</span></span> nie jest <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, więc dopasowanie zawodzi. Podobnie
+    dla <span class="inlinecode"><span class="id" title="var">H0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> oraz <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span>. Następnie natrafiamy na <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, które
+    pasuje do wzorca. Dzięki temu na prawo od strzałki <span class="inlinecode">=&gt;</span> nazwa <span class="inlinecode"><span class="id" title="var">x</span></span>
+    odnosi się do dopasowanego zdania <span class="inlinecode"><span class="id" title="var">S</span></span>. Za pomocą taktyki <span class="inlinecode"><span class="id" title="tactic">idtac</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>
+    wyświetlamy <span class="inlinecode"><span class="id" title="var">x</span></span> i faktycznie odnosi się on do <span class="inlinecode"><span class="id" title="var">S</span></span>. Po skutecznym
+    dopasowaniu i wykonaniu taktyki <span class="inlinecode"><span class="id" title="tactic">idtac</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> cały <span class="inlinecode"><span class="id" title="keyword">match</span></span> kończy się
+    sukcesem. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#S"><span class="id" title="variable">S</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <span class="id" title="keyword">Prop</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">fail</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+W tym przykładzie podobnie jak wyżej szukamy w kontekście zdań logicznych,
+    ale taktyka po prawej od <span class="inlinecode">=&gt;</span> zawodzi. <span class="inlinecode"><span class="id" title="keyword">match</span></span> działa tutaj następująco:
+<ul class="doclist">
+<li> próbujemy do wzorca <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> dopasować <span class="inlinecode"><span class="id" title="var">H1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">R</span></span>, ale bez powodzenia
+      i podobnie dla <span class="inlinecode"><span class="id" title="var">H0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> oraz <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span>.
+
+</li>
+<li> znajdujemy dopasowanie <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. Taktyka <span class="inlinecode"><span class="id" title="tactic">idtac</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> wypisuje do okna
+      Messages wiadomość "S" i kończy się sukcesem, ale <span class="inlinecode"><span class="id" title="tactic">fail</span></span> zawodzi.
+
+</li>
+<li> Wobec powyższego próbujemy kolejnego dopasowania, tym razem <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>,
+      które pasuje. <span class="inlinecode"><span class="id" title="tactic">idtac</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> wypisuje na ekran "R", ale <span class="inlinecode"><span class="id" title="tactic">fail</span></span> znów
+      zawodzi.
+
+</li>
+<li> Próbujemy kolejno dopasowań <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> i <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, w wyniku których
+      wypisane zostaje "Q" oraz "P", ale również w tych dwóch przypadkach
+      taktyka <span class="inlinecode"><span class="id" title="tactic">fail</span></span> zawodzi.
+
+</li>
+<li> Nie ma więcej potencjalnych dopasowań, więc cały <span class="inlinecode"><span class="id" title="keyword">match</span></span> zawodzi. 
+</li>
+</ul>
 
 </div>
 <div class="code">
 
 <br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#S"><span class="id" title="variable">S</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="keyword">match</span> <span class="id" title="var">reverse</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <span class="id" title="keyword">Prop</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">fail</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Ten przykład jest podobny do ostatniego, ale <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode"><span class="id" title="var">reverse</span></span> przeszukuje
+    kontekst w kolejności od najstarszego do najnowszego. Dzięki temu od razu
+    natrafiamy na dopasowanie <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, potem na <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> etc. Na samym
+    końcu próbujemy do <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> dopasować <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span>, <span class="inlinecode"><span class="id" title="var">H0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> i <span class="inlinecode"><span class="id" title="var">H1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">R</span></span>, co
+    kończy się niepowodzeniem.
+
+<div class="paragraph"> </div>
+
+    Zauważmy, że w dwóch ostatnich przykładach nie wystąpił backtracking —
+    <span class="inlinecode"><span class="id" title="keyword">match</span></span> nigdy nie wyzwala backtrackingu. Obserwowane działanie <span class="inlinecode"><span class="id" title="keyword">match</span></span>a
+    wynika stąd, że jeżeli taktyka po prawej od <span class="inlinecode">=&gt;</span> zawiedzie, to następuje
+    próba znalezienia jakiegoś innego dopasowania wzorca <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. Dopiero
+    gdy taktyka na prawo od <span class="inlinecode">=&gt;</span> zawiedzie dla wszystkich możliwych takich
+    dopasowań, cały <span class="inlinecode"><span class="id" title="keyword">match</span></span> zawodzi. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#S"><span class="id" title="variable">S</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <span class="id" title="keyword">Prop</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>; <span class="id" title="tactic">fail</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Ten przykład potwierdza naszą powyższą obserwację dotyczącą backtrackingu.
+    Mamy tutaj identyczne dopasowanie jak w pierwszym przykładzie — wypisuje
+    ono <span class="inlinecode"><span class="id" title="var">S</span></span> i kończy się sukcesem, ale tuż po nim następuje taktyka <span class="inlinecode"><span class="id" title="tactic">fail</span></span>,
+    przez co cała taktyka <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode">...;</span> <span class="inlinecode"><span class="id" title="tactic">fail</span></span> zawodzi. Jak widać, nie następuje
+    próba ponownego dopasownia wzorca <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#S"><span class="id" title="variable">S</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">lazymatch</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <span class="id" title="keyword">Prop</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">fail</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Konstrukt <span class="inlinecode"><span class="id" title="keyword">lazymatch</span></span> różni się od <span class="inlinecode"><span class="id" title="keyword">match</span></span>a tym, że jeżeli taktyka na
+    prawo od <span class="inlinecode">=&gt;</span> zawiedzie, to alternatywne dopasowania wzorca po lewej
+    nie będą rozważane i nastąpi przejście do kolejnej gałęzi dopasowania.
+    W naszym przypadku nie ma kolejnych gałęzi, więc po pierwszym dopasowaniu
+    <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> do <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> i wypisaniu "S" cały <span class="inlinecode"><span class="id" title="keyword">lazymatch</span></span> zawodzi. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#S"><span class="id" title="variable">S</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span><br/>
+&nbsp;&nbsp;<span class="id" title="var">multimatch</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <span class="id" title="keyword">Prop</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>; <span class="id" title="tactic">fail</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="var">multimatch</span></span> to wariant <span class="inlinecode"><span class="id" title="keyword">match</span></span>a, który wyzwala backtracking. W powyższym
+    przykładzie działa on następująco:
+<ul class="doclist">
+<li> do wzorca <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> dopasowujemy <span class="inlinecode"><span class="id" title="var">H1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">R</span></span>, a następnie <span class="inlinecode"><span class="id" title="var">H0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> i
+      <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span>, co się rzecz jasna nie udaje.
+
+</li>
+<li> Znajdujemy dopasowanie <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> i cały <span class="inlinecode"><span class="id" title="var">multimatch</span></span> kończy się
+      sukcesem.
+
+</li>
+<li> Taktyka <span class="inlinecode"><span class="id" title="tactic">fail</span></span> zawodzi i wobec tego cała taktyka <span class="inlinecode"><span class="id" title="var">multimatch</span></span> <span class="inlinecode">...;</span> <span class="inlinecode"><span class="id" title="tactic">fail</span></span>
+      taże zawodzi.
+
+</li>
+<li> Następuje nawrót do <span class="inlinecode"><span class="id" title="var">multimatch</span></span>a i znów próbujemy znaleźć dopasowanie
+      wzorca <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. Znajdujemy <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, <span class="inlinecode"><span class="id" title="var">multimatch</span></span> kończy się
+      sukcesem, ale <span class="inlinecode"><span class="id" title="tactic">fail</span></span> zawodzi.
+
+</li>
+<li> Następują kolejne nawroty i dopasowania do wzorca. Ostatecznie po
+      wyczerpaniu się wszystkich możliwość cała taktyka zawodzi. 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#S"><span class="id" title="variable">S</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <span class="id" title="keyword">Prop</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">multimatch</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <span class="id" title="keyword">Prop</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <span class="id" title="keyword">Prop</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="var">multimatch</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <span class="id" title="keyword">Prop</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Przyjrzyjmy się jeszcze różnicy w zachowaniach <span class="inlinecode"><span class="id" title="keyword">match</span></span>a i <span class="inlinecode"><span class="id" title="var">multimatch</span></span>a
+    w połączeniu z kombinatorem <span class="inlinecode"><span class="id" title="tactic">repeat</span></span>. Bez <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> oba dopasowania
+    zachowują się identycznie. Użycie <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> przed <span class="inlinecode"><span class="id" title="keyword">match</span></span> nie zmienia w
+    tym konkretnym wypadku jego działania, ale w przypadku <span class="inlinecode"><span class="id" title="var">multimatch</span></span>a
+    użycie <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> ujawnia wszystkie jego sukcesy. 
+<div class="paragraph"> </div>
+
+<a name="lab160"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Napisz taktykę <span class="inlinecode"><span class="id" title="var">my_assumption</span></span>, która działa tak samo, jak <span class="inlinecode"><span class="id" title="tactic">assumption</span></span>.
+    Nie używaj <span class="inlinecode"><span class="id" title="tactic">assumption</span></span> — użyj <span class="inlinecode"><span class="id" title="keyword">match</span></span>a. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">my_assumption</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="R3.html#Match"><span class="id" title="section">Match</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab161"></a><h1 class="section">Dopasowanie termu</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab162"></a><h1 class="section">Inne wesołe rzeczy</h1>
+
+</div>
+<div class="code">
 </div>
