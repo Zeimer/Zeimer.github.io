@@ -4093,8 +4093,11 @@ Konstruktor <span class="inlinecode"><span class="id" title="var">vnil</span></s
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Inductive</span> <a name="sigT"><span class="id" title="inductive">sigT</span></a> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">P</span> : <a class="idref" href="R2.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Type</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <a name="existT"><span class="id" title="constructor">existT</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">P</span> <a class="idref" href="R2.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R2.html#sigT"><span class="id" title="inductive">sigT</span></a> <span class="id" title="var">A</span> <span class="id" title="var">P</span>.<br/>
+<span class="id" title="keyword">Module</span> <a name="sigma"><span class="id" title="module">sigma</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="sigma.sigT"><span class="id" title="inductive">sigT</span></a> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">P</span> : <a class="idref" href="R2.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="sigma.existT"><span class="id" title="constructor">existT</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">P</span> <a class="idref" href="R2.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R2.html#sigT"><span class="id" title="inductive">sigT</span></a> <span class="id" title="var">A</span> <span class="id" title="var">P</span>.<br/>
 
 <br/>
 </div>
@@ -4149,11 +4152,11 @@ Typ <span class="inlinecode"><span class="id" title="var">sigT</span></span> rep
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Inductive</span> <a name="sig"><span class="id" title="inductive">sig</span></a> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">P</span> : <a class="idref" href="R2.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span>) : <span class="id" title="keyword">Type</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <a name="exist"><span class="id" title="constructor">exist</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">P</span> <a class="idref" href="R2.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R2.html#sig"><span class="id" title="inductive">sig</span></a> <span class="id" title="var">A</span> <span class="id" title="var">P</span>.<br/>
+<span class="id" title="keyword">Inductive</span> <a name="sigma.sig"><span class="id" title="inductive">sig</span></a> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">P</span> : <a class="idref" href="R2.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span>) : <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="sigma.exist"><span class="id" title="constructor">exist</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">P</span> <a class="idref" href="R2.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R2.html#sig"><span class="id" title="inductive">sig</span></a> <span class="id" title="var">A</span> <span class="id" title="var">P</span>.<br/>
 
 <br/>
-<span class="id" title="var">Arguments</span> <a class="idref" href="R2.html#exist"><span class="id" title="constructor">exist</span></a> [<span class="id" title="var">A</span>] [<span class="id" title="var">P</span>] <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="R2.html#sigma.exist"><span class="id" title="constructor">exist</span></a> [<span class="id" title="var">A</span>] [<span class="id" title="var">P</span>] <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
 
 <br/>
 </div>
@@ -4167,10 +4170,10 @@ Typ <span class="inlinecode"><span class="id" title="var">sig</span></span> <spa
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Definition</span> <a name="even_nat"><span class="id" title="definition">even_nat</span></a> : <span class="id" title="keyword">Type</span> := <a class="idref" href="R2.html#sig"><span class="id" title="inductive">sig</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="R2.html#even"><span class="id" title="inductive">even</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a name="sigma.even_nat"><span class="id" title="definition">even_nat</span></a> : <span class="id" title="keyword">Type</span> := <a class="idref" href="R2.html#sigma.sig"><span class="id" title="inductive">sig</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="R2.html#even"><span class="id" title="inductive">even</span></a>.<br/>
 
 <br/>
-<span class="id" title="keyword">Definition</span> <a name="even_four"><span class="id" title="definition">even_four</span></a> : <a class="idref" href="R2.html#even_nat"><span class="id" title="definition">even_nat</span></a> := <a class="idref" href="R2.html#exist"><span class="id" title="constructor">exist</span></a> 4 <a class="idref" href="R2.html#four_is_even"><span class="id" title="lemma">four_is_even</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a name="sigma.even_four"><span class="id" title="definition">even_four</span></a> : <a class="idref" href="R2.html#sigma.even_nat"><span class="id" title="definition">even_nat</span></a> := <a class="idref" href="R2.html#sigma.exist"><span class="id" title="constructor">exist</span></a> 4 <a class="idref" href="R2.html#four_is_even"><span class="id" title="lemma">four_is_even</span></a>.<br/>
 
 <br/>
 </div>
@@ -4192,9 +4195,9 @@ Typ <span class="inlinecode"><span class="id" title="var">even_nat</span></span>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Definition</span> <a name="even_42"><span class="id" title="definition">even_42</span></a> : <a class="idref" href="R2.html#sig"><span class="id" title="inductive">sig</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="R2.html#even"><span class="id" title="inductive">even</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a name="sigma.even_42"><span class="id" title="definition">even_42</span></a> : <a class="idref" href="R2.html#sigma.sig"><span class="id" title="inductive">sig</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="R2.html#even"><span class="id" title="inductive">even</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="R2.html#exist"><span class="id" title="constructor">exist</span></a> 42). <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">constructor</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="R2.html#sigma.exist"><span class="id" title="constructor">exist</span></a> 42). <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">constructor</span>.<br/>
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
@@ -4240,8 +4243,16 @@ Definiowanie wartości typu <span class="inlinecode"><span class="id" title="var
     jest listą posortowaną. Następnie zdefiniuj typ list liczb naturalnych
     posortowanych według relacji <span class="inlinecode">&lt;=</span> i skonstruuj term tego typu
     odpowiadający liście <span class="inlinecode">[42;</span> <span class="inlinecode">666;</span> <span class="inlinecode">1337]</span>. 
-<div class="paragraph"> </div>
+</div>
+<div class="code">
 
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="R2.html#sigma"><span class="id" title="module">sigma</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
 <a name="lab130"></a><h2 class="section">Rozstrzygalność</h2>
 
 </div>
@@ -5147,7 +5158,6 @@ Póki co wydaje mi się, że udowodnienie słuszności tej reguły będzie dla
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;Type,&nbsp;B&nbsp;:&nbsp;Type,&nbsp;x&nbsp;:&nbsp;A&nbsp;|-&nbsp;e&nbsp;:&nbsp;B,&nbsp;t&nbsp;:&nbsp;A<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;-----------------------------------------<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;x&nbsp;:&nbsp;A&nbsp;=&gt;&nbsp;e)&nbsp;t&nbsp;≡&nbsp;e{x/t}<br/>
-<br/>
 *)</span><br/>
 
 <br/>
@@ -5267,11 +5277,107 @@ Wygląda dużo bardziej znajomo, prawda?
 </div>
 
 <div class="doc">
-<a name="lab148"></a><h3 class="section">Reguły unikalności (TODO)</h3>
+<a name="lab148"></a><h3 class="section">Reguły unikalności</h3>
 
 <div class="paragraph"> </div>
 
-<a name="lab149"></a><h1 class="section">Rekursja</h1>
+ Kolejną odpowiedzią na pytanie o związki między regułami wprowadzania
+    i eliminacji są reguły unikalności. Są one dualne do reguł obliczania
+    i określają, w jaki sposób reguły wprowadzania działają na obiekty
+    pochodzące od reguł eliminacji. Przyjrzyjmy się przykładowi. 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;Type,&nbsp;B&nbsp;:&nbsp;Type,&nbsp;f&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;B<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;------------------------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;x&nbsp;:&nbsp;A&nbsp;=&gt;&nbsp;f&nbsp;x)&nbsp;≡&nbsp;f<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Powyższa reguła unikalności dla funkcji jest nazywana "redukcją eta".
+    Stwierdza ona, że funkcja stworzona za pomocą abstrakcji <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span>,
+    której ciałem jest aplikacja <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> jest definicyjnie równa funkcji <span class="inlinecode"><span class="id" title="var">f</span></span>.
+    Regułą wprowadzania dla funkcji jest oczywiście abstrakcja, a regułą
+    eliminacji — aplikacja.
+
+<div class="paragraph"> </div>
+
+    Reguły unikalności różnią się jednak dość mocno od reguł obliczania,
+    gdyż zamiast równości definicyjnej ≡ mogą czasem używać standardowej,
+    zdaniowej równości Coqa, czyli <span class="inlinecode">=</span>. Nie do końca pasuje też do nich
+    stwierdzenie, że określają działanie reguł wprowadzania na reguły
+    eliminacji, gdyż zamiast reguł eliminacji mogą w nich występować
+    inne byty, zdefiniowane jednak za pomocą reguł eliminacji. Zobaczmy
+    o co chodzi na przykładzie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;Type,&nbsp;B&nbsp;:&nbsp;Type,&nbsp;p&nbsp;:&nbsp;A&nbsp;*&nbsp;B<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;--------------------------------<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(fst&nbsp;p,&nbsp;snd&nbsp;p)&nbsp;=&nbsp;p<br/>
+*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Powyższa reguła głosi, że para, której pierwszym elementem jest pierwszy
+    element pary <span class="inlinecode"><span class="id" title="var">p</span></span>, a drugim elementem — drugi element pary <span class="inlinecode"><span class="id" title="var">p</span></span>, jest w
+    istocie równa parze <span class="inlinecode"><span class="id" title="var">p</span></span>. W Coqu możemy ją wyrazić (i udowodnić) tak: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="prod_uniq"><span class="id" title="lemma">prod_uniq</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">p</span> : <a class="idref" href="R2.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#d19c7eafd0e2d195d10df94b392087b5"><span class="id" title="notation">*</span></a> <a class="idref" href="R2.html#B"><span class="id" title="variable">B</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#fst"><span class="id" title="definition">fst</span></a> <a class="idref" href="R2.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> <a class="idref" href="R2.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R2.html#p"><span class="id" title="variable">p</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">p</span>. <span class="id" title="var">cbn</span>. <span class="id" title="tactic">trivial</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Podsumowując, reguły unikalności występują w dwóch rodzajach:
+<ul class="doclist">
+<li> dane nam z góry, niemożliwe do wyrażenia bezpośrednio w Coqu i
+      używające równości definicyjnej, jak w przypadku redukcji eta
+      dla funkcji
+
+</li>
+<li> możliwe do wyrażenia i udowodnienia w Coqu, używające zwykłej
+      równości, jak dla produktów i w ogólności dla typów induktywnych 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a name="lab149"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Sformułuj reguły unikalności dla funkcji zależnych (<span class="inlinecode"><span class="id" title="keyword">forall</span></span>), sum
+    zależnych (<span class="inlinecode"><span class="id" title="var">sigT</span></span>) i <span class="inlinecode"><span class="id" title="var">unit</span></span> (zapisz je w notacji z poziomą kreską).
+    Zdecyduj, gdzie w powyższej klasyfikacji mieszczą się te reguły.
+    Jeżeli to możliwe, wyraź je i udowodnij w Coqu. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab150"></a><h1 class="section">Rekursja</h1>
 
 <div class="paragraph"> </div>
 
@@ -5309,7 +5415,7 @@ Wygląda dużo bardziej znajomo, prawda?
 
 <div class="paragraph"> </div>
 
-<a name="lab150"></a><h2 class="section">Rekursja ogólna</h2>
+<a name="lab151"></a><h2 class="section">Rekursja ogólna</h2>
 
 <div class="paragraph"> </div>
 
@@ -5349,7 +5455,7 @@ Aby chronić nas przed tą katastrofą, Coq nakłada na rekurencję
     Innymi słowy, dozwolona jest jedynie rekursja strukturalna. 
 <div class="paragraph"> </div>
 
-<a name="lab151"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
+<a name="lab152"></a><h2 class="section">Rekursja strukturalna (todo)</h2>
 
 <div class="paragraph"> </div>
 
@@ -5406,7 +5512,7 @@ Możemy zaobserwować parę rzeczy. Pierwsza, techniczna sprawa: po
 
 <div class="paragraph"> </div>
 
-<a name="lab152"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab153"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
