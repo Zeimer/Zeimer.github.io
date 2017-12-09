@@ -1313,43 +1313,8 @@ Identyczność jest idempotentna — niezrobienie niczego dowolną ilość
 <div class="doc">
 Jeżeli chodzi o składanie funkcji idempotentnych, sytuacja jest podobna
     do tej, jaka jest udziałem inwolucji. 
-<div class="paragraph"> </div>
-
-<a name="lab284"></a><h1 class="section">Uogólniona idempotencja</h1>
-
-<div class="paragraph"> </div>
-
- Podobnie jak w przypadku inwolutywności, pojęcie idempotencji możemy
-    uogólnić na pojęcie idempotencji rzędu n — po zaaplikowaniu funkcji
-    n razy kolejne aplikacje przestają mieć jakiekolwiek efekty. 
 </div>
 <div class="code">
-
-<br/>
-<span class="id" title="keyword">Definition</span> <a name="gen_idempotent"><span class="id" title="definition">gen_idempotent</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<span class="id" title="var">f</span> : <a class="idref" href="X4.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X4.html#A"><span class="id" title="variable">A</span></a>)<br/>
-&nbsp;&nbsp;: <span class="id" title="keyword">Prop</span> := <span class="id" title="keyword">forall</span> <span class="id" title="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="X4.html#iter"><span class="id" title="definition">iter</span></a> (<a class="idref" href="X4.html#k"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="X4.html#n"><span class="id" title="variable">n</span></a>) <a class="idref" href="X4.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="X4.html#iter"><span class="id" title="definition">iter</span></a> <a class="idref" href="X4.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="X4.html#f"><span class="id" title="variable">f</span></a>.<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-Zdaje mi się ono jednak być mocno bezużyteczne. TODO: wymyślić jakieś
-    przykłady. 
-<div class="paragraph"> </div>
-
-<a name="lab285"></a><h1 class="section">Punkty stałe</h1>
-
-<div class="paragraph"> </div>
-
- Kolejnym ważnym pojęciem jest pojęcie punktu stałego (ang. "fixed point",
-    często skracane do "fixpoint"). Właśnie od niego bierze się nazwa
-    komendy <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span>, służącej do definiowania funkcji rekurencyjnych. 
-</div>
-<div class="code">
-
-<br/>
-<span class="id" title="keyword">Definition</span> <a name="fixpoint"><span class="id" title="definition">fixpoint</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">f</span> : <a class="idref" href="X4.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="X4.html#A"><span class="id" title="variable">A</span></a>) (<span class="id" title="var">x</span> : <a class="idref" href="X4.html#A"><span class="id" title="variable">A</span></a>)<br/>
-&nbsp;&nbsp;: <span class="id" title="keyword">Prop</span> := <a class="idref" href="X4.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="X4.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="X4.html#x"><span class="id" title="variable">x</span></a>.<br/>
 
 <br/>
 </div>

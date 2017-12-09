@@ -456,7 +456,65 @@ Próba użycia taktyki <span class="inlinecode"><span class="id" title="var">exi
     więcej, tym więcej rozgałęzień w naszym drzewie poszukiwań, a zatem
     tym więcej czasu zajmie wykonanie taktyki. W przypadku użycia taktyk
     takich jak <span class="inlinecode"><span class="id" title="var">existsNat</span></span>, które mają nieskończony zbiór sukcesów, dowód
-    może nie zostać znaleziony nigdy, nawet jeżeli istnieje. 
+    może nie zostać znaleziony nigdy, nawet jeżeli istnieje.
+
+<div class="paragraph"> </div>
+
+    Jednym ze sposobów radzenia sobie z tym problemem może być kombinator
+    <span class="inlinecode"><span class="id" title="var">once</span></span>, który ogranicza liczbę sukcesów taktyki do co najwyżej jednego,
+    zapobiegając w ten sposób potencjalnemu wyzwoleniu backtrackingu. Innymi
+    słowy, <span class="inlinecode"><span class="id" title="var">once</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> zawsze ma 0 lub 1 sukcesów. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="R3.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 42.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="var">once</span> <span class="id" title="var">existsNat'</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Powyżej byliśmy w stanie udowodnić to twierdzenie za pomocą taktyki
+    <span class="inlinecode"><span class="id" title="var">existsNat'</span></span>, gdyż jej 42  sukces pozwalał taktyce <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>
+    uporać się z celem. Jednak jeżeli użyjemy na tej taktyce kombinatora
+    <span class="inlinecode"><span class="id" title="var">once</span></span>, to zbiór jej sukcesów zostanie obcięty do co najwyżej jednego
+
+<div class="paragraph"> </div>
+
+    Skoro <span class="inlinecode"><span class="id" title="var">existsNat'</span></span> było równoważne któremuś z <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">0</span>, <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">1</span>,
+    <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">2</span>, ..., to <span class="inlinecode"><span class="id" title="var">once</span></span> <span class="inlinecode"><span class="id" title="var">existsNat'</span></span> jest równoważne <span class="inlinecode"><span class="id" title="tactic">exists</span></span> <span class="inlinecode">0</span>, a
+    zatem zawodzi.
+
+<div class="paragraph"> </div>
+
+    Innym sposobem okiełznywania backtrackingu jest kombinator <span class="inlinecode"><span class="id" title="var">exactly_once</span></span>,
+    który pozwala upewnić się, że dana taktyka ma dokładnie jeden sukces.
+    Jeżeli <span class="inlinecode"><span class="id" title="var">t</span></span> zawodzi, to <span class="inlinecode"><span class="id" title="var">exactly_once</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> zawodzi tak jak <span class="inlinecode"><span class="id" title="var">t</span></span>. Jeżeli <span class="inlinecode"><span class="id" title="var">t</span></span>
+    ma jeden sukces, <span class="inlinecode"><span class="id" title="var">exactly_once</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> działa tak jak <span class="inlinecode"><span class="id" title="var">t</span></span>. Jeżeli <span class="inlinecode"><span class="id" title="var">t</span></span> ma dwa
+    lub więcej sukcesów, <span class="inlinecode"><span class="id" title="var">exactly_once</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> zawodzi. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">exists</span></a> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="R3.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 42.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">exactly_once</span> <span class="id" title="var">existsNat</span>.<br/>
+<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="var">exactly_once</span> <span class="id" title="var">existsNat'</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Taktyka <span class="inlinecode"><span class="id" title="var">existsNat</span></span>, zrobiona kombinatorem alternatywy <span class="inlinecode">||</span>, ma dokładnie
+    jeden sukces, a więc <span class="inlinecode"><span class="id" title="var">exactly_once</span></span> <span class="inlinecode"><span class="id" title="var">existsNat</span></span> działa tak jak <span class="inlinecode"><span class="id" title="var">existsNat</span></span>.
+    Z drugiej strony taktyka <span class="inlinecode"><span class="id" title="var">existsNat'</span></span>, zrobiona mogącym dokonywać nawrotów
+    kombinatorem alternatywy <span class="inlinecode">+</span>, ma wiele sukcesów i wobec tego
+    <span class="inlinecode"><span class="id" title="var">exactly_once</span></span> <span class="inlinecode"><span class="id" title="var">existsNat'</span></span> zawodzi. 
 <div class="paragraph"> </div>
 
 <a name="lab157"></a><h4 class="section">Ćwiczenie</h4>
@@ -610,28 +668,23 @@ Próba użycia taktyki <span class="inlinecode"><span class="id" title="var">exi
 
 <div class="paragraph"> </div>
 
-    Wzorce dopasowujące typ wyglądają prawie tak samo jak termy, ale mogą
-    występować w nich dwa rodzaje zmiennych: zwykłe i egzystencjalne. Te
-    pierwsze dopasowują faktycznie obecne w kontekście zmienne, zaś te
-    drugie — dowolne termy.
+    Wzorce dopasowujące typ wyglądają prawie tak samo jak wzorce, których
+    używamy w definicjach przez pattern matching, ale nazwy zmiennych
+    muszą być poprzedzone symbolem <span class="inlinecode">?</span>, zaś same wzorce mogą być nieliniowe,
+    czyli te same zmienne mogą występować w wielu różnych miejscach.
 
 <div class="paragraph"> </div>
 
-    Koniec wesołej pisaninki, zobaczmy w końcu przykłady! 
+    Uff, koniec wesołej pisaninki — zobaczmy w końcu przykłady! 
+<div class="paragraph"> </div>
+
+<a name="lab163"></a><h2 class="section">Dopasowanie kontekstu</h2>
+
 </div>
 <div class="code">
 
 <br/>
 <span class="id" title="keyword">Section</span> <a name="Match"><span class="id" title="section">Match</span></a>.<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-<a name="lab163"></a><h2 class="section">Dopasowanie kontekstu</h2>
-
-</div>
-<div class="code">
 
 <br/>
 <span class="id" title="keyword">Goal</span><br/>
@@ -656,11 +709,11 @@ W powyższym przykładzie szukamy w celu zdań logicznych, czyli termów
 
 <div class="paragraph"> </div>
 
-    Przeszukiwanie kontekstu odbywa się w kolejności od najnowszego do
-    najstarszego. Do wzorca <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> najpierw próbujemy dopasować
-    <span class="inlinecode"><span class="id" title="var">H1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">R</span></span>, ale <span class="inlinecode"><span class="id" title="var">R</span></span> nie jest <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, więc dopasowanie zawodzi. Podobnie
-    dla <span class="inlinecode"><span class="id" title="var">H0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> oraz <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span>. Następnie natrafiamy na <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, które
-    pasuje do wzorca. Dzięki temu na prawo od strzałki <span class="inlinecode">=&gt;</span> nazwa <span class="inlinecode"><span class="id" title="var">x</span></span>
+    Przeszukiwanie obiektów w kontekście odbywa się w kolejności od
+    najnowszego do najstarszego. Do wzorca <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> najpierw próbujemy
+    dopasować <span class="inlinecode"><span class="id" title="var">H1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">R</span></span>, ale <span class="inlinecode"><span class="id" title="var">R</span></span> to nie <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, więc dopasowanie zawodzi.
+    Podobnie dla <span class="inlinecode"><span class="id" title="var">H0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> oraz <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span>. Następnie natrafiamy na <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>,
+    które pasuje do wzorca. Dzięki temu na prawo od strzałki <span class="inlinecode">=&gt;</span> nazwa <span class="inlinecode"><span class="id" title="var">x</span></span>
     odnosi się do dopasowanego zdania <span class="inlinecode"><span class="id" title="var">S</span></span>. Za pomocą taktyki <span class="inlinecode"><span class="id" title="tactic">idtac</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>
     wyświetlamy <span class="inlinecode"><span class="id" title="var">x</span></span> i faktycznie odnosi się on do <span class="inlinecode"><span class="id" title="var">S</span></span>. Po skutecznym
     dopasowaniu i wykonaniu taktyki <span class="inlinecode"><span class="id" title="tactic">idtac</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> cały <span class="inlinecode"><span class="id" title="keyword">match</span></span> kończy się
@@ -817,9 +870,9 @@ Konstrukt <span class="inlinecode"><span class="id" title="keyword">lazymatch</s
       taże zawodzi.
 
 </li>
-<li> Następuje nawrót do <span class="inlinecode"><span class="id" title="var">multimatch</span></span>a i znów próbujemy znaleźć dopasowanie
-      wzorca <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. Znajdujemy <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, <span class="inlinecode"><span class="id" title="var">multimatch</span></span> kończy się
-      sukcesem, ale <span class="inlinecode"><span class="id" title="tactic">fail</span></span> zawodzi.
+<li> Następuje nawrót i znów próbujemy znaleźć dopasowanie wzorca <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>.
+      Znajdujemy <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, <span class="inlinecode"><span class="id" title="var">multimatch</span></span> kończy się sukcesem, ale <span class="inlinecode"><span class="id" title="tactic">fail</span></span>
+      zawodzi.
 
 </li>
 <li> Następują kolejne nawroty i dopasowania do wzorca. Ostatecznie po
@@ -857,10 +910,16 @@ Przyjrzyjmy się jeszcze różnicy w zachowaniach <span class="inlinecode"><spa
     w połączeniu z kombinatorem <span class="inlinecode"><span class="id" title="tactic">repeat</span></span>. Bez <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> oba dopasowania
     zachowują się identycznie. Użycie <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> przed <span class="inlinecode"><span class="id" title="keyword">match</span></span> nie zmienia w
     tym konkretnym wypadku jego działania, ale w przypadku <span class="inlinecode"><span class="id" title="var">multimatch</span></span>a
-    użycie <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> ujawnia wszystkie jego sukcesy. 
+    użycie <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> ujawnia wszystkie jego sukcesy.
+
 <div class="paragraph"> </div>
 
-<a name="lab164"></a><h2 class="section">Dopasowanie celu i zmienne egzystencjalne</h2>
+    Źródło różnego zachowania <span class="inlinecode"><span class="id" title="keyword">match</span></span>a i <span class="inlinecode"><span class="id" title="var">multimatch</span></span>a, jeżeli chodzi o
+    backtracking, jest bardzo proste: tak naprawdę <span class="inlinecode"><span class="id" title="keyword">match</span></span> jest jedynie
+    skrótem dla <span class="inlinecode"><span class="id" title="var">once</span></span> <span class="inlinecode"><span class="id" title="var">multimatch</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab164"></a><h2 class="section">Dopasowanie celu</h2>
 
 </div>
 <div class="code">
