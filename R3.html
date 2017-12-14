@@ -664,7 +664,7 @@ Taktyka <span class="inlinecode"><span class="id" title="var">existsNat</span></
 
     Zamiast wzorców postaci <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" title="var">kontekst</span></span> <span class="inlinecode">|-</span> <span class="inlinecode"><span class="id" title="var">cel</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" title="var">taktyka</span></span> możemy też używać
     wzorców postaci <span class="inlinecode">|</span> <span class="inlinecode">|-</span> <span class="inlinecode"><span class="id" title="var">cel</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" title="var">taktyka</span></span>, które dopasowują jedynie cel, zaś
-    kontekst ignorują; wzorców postac <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" title="var">kontekst</span></span> <span class="inlinecode">|-</span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" title="var">taktyka</span></span>, które
+    kontekst ignorują; wzorców postaci <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" title="var">kontekst</span></span> <span class="inlinecode">|-</span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" title="var">taktyka</span></span>, które
     dopasowują jedynie kontekst, a cel ignorują; oraz wzorca <span class="inlinecode"><span class="id" title="var">_</span></span>, który
     oznacza "dopasuj cokolwiek".
 
@@ -1003,8 +1003,234 @@ Pozostało nam jedynie zademonstrować działanie wzorca <span class="inlinecode
     nich (tak jak <span class="inlinecode"><span class="id" title="var">_</span></span>) pasuje do wszystkiego. 
 <div class="paragraph"> </div>
 
-<a name="lab163"></a><h1 class="section">Wzorce i zmienne unifikacyjne</h1>
+<a name="lab163"></a><h1 class="section">Wzorce i unifikacja</h1>
 
+<div class="paragraph"> </div>
+
+ Skoro wiemy już jak działa dopasowywanie kontekstu do wzorca, czas
+    nauczyć się jak dokładnie działają wzorce oraz czym są zmienne
+    unifikacyjne i sama unifikacja.
+
+<div class="paragraph"> </div>
+
+    Przede wszystkim, jak przekonaliśmy się wyżej, termy są wzorcami.
+    Termy nie zawierają zmiennych unifikacyjnych, a wzorce będące
+    termami dopasowują się tylko do identycznych termów. Dopasowanie
+    takie nie wiąże żadnych nowych zmiennych. Zobaczmy to na przykładzie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">p</span> : <span class="id" title="var">P</span> |- <span class="id" title="var">P</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <span class="id" title="var">Q</span> =&gt; <span class="id" title="tactic">left</span>; <span class="id" title="tactic">assumption</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Powyższy <span class="inlinecode"><span class="id" title="keyword">match</span></span> nie zawiera zmiennych unifikacyjnych i działa w
+    następujący sposób:
+<ul class="doclist">
+<li> szukamy w kontekście obiektu <span class="inlinecode"><span class="id" title="var">p</span></span>, którego typ pasuje do wzorca <span class="inlinecode"><span class="id" title="var">P</span></span>.
+      Obiekt, który nazywamy <span class="inlinecode"><span class="id" title="var">p</span></span> w rzeczywistości nie musi nazywać się <span class="inlinecode"><span class="id" title="var">p</span></span>,
+      ale jego typem rzeczywiście musi być <span class="inlinecode"><span class="id" title="var">P</span></span>. W szczególności, wzorzec
+      <span class="inlinecode"><span class="id" title="var">P</span></span> nie pasuje do <span class="inlinecode"><span class="id" title="var">Q</span></span>, gdyż <span class="inlinecode"><span class="id" title="var">P</span></span> i <span class="inlinecode"><span class="id" title="var">Q</span></span> nie są konwertowalne.
+
+</li>
+<li> jednocześnie żądamy, by cel był postaci <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">\/</span> <span class="inlinecode"><span class="id" title="var">Q</span></span>, gdzie zarówno <span class="inlinecode"><span class="id" title="var">P</span></span>
+      jak i <span class="inlinecode"><span class="id" title="var">Q</span></span> odnoszą się do obiektów z kontekstu, które rzeczywiście tak
+      się nazywają.
+
+</li>
+<li> jeżeli powyższe wzorce zostaną dopasowane, to używamy taktyki <span class="inlinecode"><span class="id" title="tactic">left</span>;</span>
+      <span class="inlinecode"><span class="id" title="tactic">assumption</span></span>, która rozwiązuje cel. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Zobaczmy, co się stanie, jeżeli w powyższym przykładzie zmienimy nazwy
+    hipotez. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#B"><span class="id" title="variable">B</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">p</span> : <span class="id" title="var">P</span> |- <span class="id" title="var">P</span> \/ <span class="id" title="var">Q</span> =&gt; <span class="id" title="tactic">left</span>; <span class="id" title="tactic">assumption</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">p</span> : <span class="id" title="var">A</span> |- <span class="id" title="var">A</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <span class="id" title="var">B</span> =&gt; <span class="id" title="tactic">left</span>; <span class="id" title="tactic">assumption</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Tutaj zamiast <span class="inlinecode"><span class="id" title="var">P</span></span> mamy <span class="inlinecode"><span class="id" title="var">A</span></span>, zaś zamiast <span class="inlinecode"><span class="id" title="var">Q</span></span> jest <span class="inlinecode"><span class="id" title="var">B</span></span>. <span class="inlinecode"><span class="id" title="keyword">match</span></span> identyczny
+    jak poprzednio tym razem zawodzi. Dzieje się tak, gdyż <span class="inlinecode"><span class="id" title="var">P</span></span> odnosi się
+    tu do obiektu z kontekstu, który nazywa się <span class="inlinecode"><span class="id" title="var">P</span></span>. Niestety, w kontekście
+    nie ma obiektu o takiej nazwie, o czym Coq skrzętnie nas informuje.
+
+<div class="paragraph"> </div>
+
+    W <span class="inlinecode"><span class="id" title="keyword">match</span></span>u w celu oraz po prawej stronie od <span class="inlinecode">:</span> w hipotezie nie możemy
+    za pomocą nazwy <span class="inlinecode"><span class="id" title="var">P</span></span> dopasować obiektu, który nazywa się <span class="inlinecode"><span class="id" title="var">A</span></span>. Dopasować
+    <span class="inlinecode"><span class="id" title="var">A</span></span> możemy jednak używając wzorca <span class="inlinecode"><span class="id" title="var">A</span></span>. Ale co, gdybyśmy nie wiedzieli,
+    jak dokładnie nazywa się poszukiwany obiekt? 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> <a class="idref" href="R3.html#B"><span class="id" title="variable">B</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">p</span> : ?<span class="id" title="var">P</span> |- ?<span class="id" title="var">P</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#7a45dffb109c3069e5c675be68643e60"><span class="id" title="notation">\/</span></a> ?<span class="id" title="var">Q</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">P</span>; <span class="id" title="tactic">idtac</span> <span class="id" title="var">Q</span>; <span class="id" title="tactic">left</span>; <span class="id" title="tactic">assumption</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jeżeli chcemy dopasować term o nieznanej nam nazwie (lub term, którego
+    podtermy mają nieznane nazwy) musimy użyć zmiennych unifikacyjnych.
+    Wizualnie można rozpoznać je po tym, że ich nazwy zaczynają się od
+    znaku <span class="inlinecode">?</span>. Zmienna unifkacyjna <span class="inlinecode">?<span class="id" title="var">x</span></span> pasuje do dowolnego termu, a
+    udane dopasowanie sprawia, że po prawej stronie strzałki <span class="inlinecode">=&gt;</span> możemy
+    do dopasowanego termu odnosić się za pomocą nazwy <span class="inlinecode"><span class="id" title="var">x</span></span>.
+
+<div class="paragraph"> </div>
+
+    Powyższe dopasowanie działa w następujący sposób:
+<ul class="doclist">
+<li> próbujemy dopasować wzorzec <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode">:</span> <span class="inlinecode">?<span class="id" title="var">P</span></span> do najświeższej hipotezy w
+      kontekście, czyli <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span>. <span class="inlinecode"><span class="id" title="var">p</span></span> jest nazwą tymczasową i wobec tego
+      pasuje do <span class="inlinecode"><span class="id" title="var">H</span></span>, zaś zmienna unifikacyjna <span class="inlinecode">?<span class="id" title="var">P</span></span> pasuje do dowolnego
+      termu, a zatem pasuje także do <span class="inlinecode"><span class="id" title="var">A</span></span>.
+
+</li>
+<li> dopasowanie hipotezy kończy się sukcesem i wskutek tego zmienna
+      unifikacyjna <span class="inlinecode">?<span class="id" title="var">P</span></span> zostaje związana z termem <span class="inlinecode"><span class="id" title="var">A</span></span>. Od teraz w dalszych
+      wzorcach będzie ona pasować jedynie do termu <span class="inlinecode"><span class="id" title="var">A</span></span>.
+
+</li>
+<li> następuje próba dopasowania celu do wzorca <span class="inlinecode">?<span class="id" title="var">P</span></span> <span class="inlinecode">\/</span> <span class="inlinecode">?<span class="id" title="var">Q</span></span>. Ponieważ
+      <span class="inlinecode">?<span class="id" title="var">P</span></span> zostało związane z <span class="inlinecode"><span class="id" title="var">A</span></span>, to wzorzec <span class="inlinecode">?<span class="id" title="var">P</span></span> <span class="inlinecode">\/</span> <span class="inlinecode">?<span class="id" title="var">Q</span></span> oznacza tak
+      naprawdę <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">\/</span> <span class="inlinecode">?<span class="id" title="var">Q</span></span>. Zmienna unifikacyjna <span class="inlinecode">?<span class="id" title="var">Q</span></span> nie została wcześniej
+      związana i wobec tego pasuje do wszystkiego.
+
+</li>
+<li> wobec tego <span class="inlinecode">?<span class="id" title="var">Q</span></span> w szczególności pasuje do <span class="inlinecode"><span class="id" title="var">B</span></span>, a zatem wzorzec
+      <span class="inlinecode">?<span class="id" title="var">P</span></span> <span class="inlinecode">\/</span> <span class="inlinecode">?<span class="id" title="var">Q</span></span> pasuje do <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">\/</span> <span class="inlinecode"><span class="id" title="var">B</span></span> i całe dopasowanie kończy się
+      sukcesem. W jego wyniku <span class="inlinecode">?<span class="id" title="var">Q</span></span> zostaje związane z <span class="inlinecode"><span class="id" title="var">B</span></span>.
+
+</li>
+<li> zostaje wykonana taktyka <span class="inlinecode"><span class="id" title="tactic">idtac</span></span> <span class="inlinecode"><span class="id" title="var">P</span>;</span> <span class="inlinecode"><span class="id" title="tactic">idtac</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>, która potwierdza, że
+      zmienna unifikacyjna <span class="inlinecode">?<span class="id" title="var">P</span></span> została związana z <span class="inlinecode"><span class="id" title="var">A</span></span>, a <span class="inlinecode">?<span class="id" title="var">Q</span></span> z <span class="inlinecode"><span class="id" title="var">B</span></span>,
+      wobec czego na prawo od <span class="inlinecode">=&gt;</span> faktycznie możemy do <span class="inlinecode"><span class="id" title="var">A</span></span> i <span class="inlinecode"><span class="id" title="var">B</span></span> odwoływać
+      się odpowiednio jako <span class="inlinecode"><span class="id" title="var">P</span></span> i <span class="inlinecode"><span class="id" title="var">Q</span></span>.
+
+</li>
+<li> taktyka <span class="inlinecode"><span class="id" title="tactic">left</span>;</span> <span class="inlinecode"><span class="id" title="tactic">assumption</span></span> rozwiązuje cel. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Podkreślmy raz jeszcze, że zmienne unifikacyjne mogą występać tylko we
+    wzorcach, a więc w hipotezach po prawej stronie dwukropka <span class="inlinecode">:</span> oraz w
+    celu. Błędem byłoby napisanie w hipotezie <span class="inlinecode">?<span class="id" title="var">p</span></span> <span class="inlinecode">:</span> <span class="inlinecode">?<span class="id" title="var">P</span></span>. Podobnie błędem
+    byłoby użycie nazwy <span class="inlinecode">?<span class="id" title="var">P</span></span> na prawo od strzałki <span class="inlinecode">=&gt;</span>.
+
+<div class="paragraph"> </div>
+
+    Zauważmy też, że w danej gałęzi <span class="inlinecode"><span class="id" title="keyword">match</span></span>a każda zmienna unifikacyjna może
+    wystąpić więcej niż jeden raz. Wzorce, w których zmienne unifikacyjne
+    występują więcej niż raz to wzorce nieliniowe. Możemy skontrastować je
+    ze wzorcami liniowymi, w których każda zmienna może wystąpić co najwyżej
+    raz.
+
+<div class="paragraph"> </div>
+
+    Wzorcami liniowymi są wzorce, których używamy podczas definiowania
+    zwykłych funkcji przez dopasowanie do wzorca (zauważmy jednak, że
+    tamtejsze zmienne unifikacyjne nie zaczynają się od <span class="inlinecode">?</span>). Ograniczenie
+    do wzorców liniowych jest spowodowane faktem, że nie zawsze możliwe
+    jest stwierdzenie, czy dwa dowolne termy do siebie pasują.
+
+<div class="paragraph"> </div>
+
+    Język termów Coqa w celu uniknięcia sprzeczności musi być zupełnie
+    nieskazitelny i musi zakazywać używania wzorców nieliniowych. Język
+    Ltac, który nie może sam z siebie wyczarować sprzeczności, może sobie
+    pozwolić na więcej i wobec tego wzorce nieliniowe są legalne. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">[</span></a>2<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#145bedf8a5d4a541831f3f70db03085c"><span class="id" title="notation">[]</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |- ?<span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |- <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#cons"><span class="id" title="constructor">cons</span></a> ?<span class="id" title="var">h</span> <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">h</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |- 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed5"><span class="id" title="notation">::</span></a> <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> ?<span class="id" title="var">l</span> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">l</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |- <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">[</span></a>?<span class="id" title="var">x</span><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#145bedf8a5d4a541831f3f70db03085c"><span class="id" title="notation">[]</span></a> =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zauważmy, że nie musimy używać zmiennych unifikacyjnych do dopasowywania
+    całych termów — w pierwszym z powyższych przykładów używamy zmiennej <span class="inlinecode">?<span class="id" title="var">x</span></span>,
+    aby dopasować jedynie lewą stronę równania, które jest celem.
+
+<div class="paragraph"> </div>
+
+    Ze zmiennych unifikacyjnych oraz stałych, zmiennych i funkcji (a więc
+    także konstruktorów) możemy budować wzorce dopasowujące termy o różnych
+    fikuśnych kształtach.
+
+<div class="paragraph"> </div>
+
+    W drugim przykładzie wzorzec <span class="inlinecode"><span class="id" title="var">cons</span></span> <span class="inlinecode">?<span class="id" title="var">h</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">nil</span></span> dopasowuje równanie,
+    którego lewa strona jest listą niepustą o dowolnej głowie, do której
+    możemy się odnosić jako <span class="inlinecode"><span class="id" title="var">h</span></span>, oraz dowolnym ogonie, do którego nie
+    chcemy móc się odnosić. Prawa strona tego równania jest listą pustą.
+
+<div class="paragraph"> </div>
+
+    Wzorce radzą sobie bez problemu także z notacjami. Wzorzec <span class="inlinecode">2</span> <span class="inlinecode">::</span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">=</span> <span class="inlinecode">?<span class="id" title="var">l</span></span>
+    dopasowuje równanie, którego lewa strona jest listą, której głowa to <span class="inlinecode">2</span>,
+    zaś ogon jest dowolny, a prawa strona jest dowolną listą, do której
+    będziemy się mogli odwoływać po prawej stronie <span class="inlinecode">=&gt;</span> jako <span class="inlinecode"><span class="id" title="var">l</span></span>.
+
+<div class="paragraph"> </div>
+
+    Ostatni wzorzec pasuje do równania, którego lewa strona jest singletonem
+    (listą jednoelementową) zawierającym wartość, do której będziemy mogli
+    odnosić się za pomocą nazwy <span class="inlinecode"><span class="id" title="var">x</span></span>, zaś prawą stroną jest lista pusta. 
 </div>
 <div class="code">
 
@@ -1044,6 +1270,14 @@ Pozostało nam jedynie zademonstrować działanie wzorca <span class="inlinecode
 <div class="paragraph"> </div>
 
 <a name="lab166"></a><h1 class="section">Inne wesołe rzeczy</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab167"></a><h1 class="section">Przydatne taktyki</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab168"></a><h1 class="section">Mniej przydatne taktyki</h1>
 
 </div>
 <div class="code">
