@@ -1003,7 +1003,42 @@ Pozostało nam jedynie zademonstrować działanie wzorca <span class="inlinecode
     nich (tak jak <span class="inlinecode"><span class="id" title="var">_</span></span>) pasuje do wszystkiego. 
 <div class="paragraph"> </div>
 
-<a name="lab163"></a><h1 class="section">Wzorce i unifikacja</h1>
+<a name="lab163"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Napisz taktykę <span class="inlinecode"><span class="id" title="var">destr_and</span></span>, która rozbija wszystkie koniunkcje, które
+    znajdzie w kontekście, a następnie udowodni cel, jeżeli zachodzi on na
+    mocy założenia.
+
+<div class="paragraph"> </div>
+
+    Dla przykładu, kontekst <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">/\</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">/\</span> <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">|-</span> <span class="inlinecode"><span class="id" title="var">_</span></span> powinien zostać
+    przekształcony w <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span>,</span> <span class="inlinecode"><span class="id" title="var">H0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">Q</span>,</span> <span class="inlinecode"><span class="id" title="var">H1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">R</span></span>.
+
+<div class="paragraph"> </div>
+
+    Jeżeli to możliwe, nie używaj kombinatora <span class="inlinecode">;</span>. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="destr_and_1"><span class="id" title="definition">destr_and_1</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">destr_and</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="destr_and_2"><span class="id" title="definition">destr_and_2</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#S"><span class="id" title="variable">S</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">destr_and</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab164"></a><h1 class="section">Wzorce i unifikacja</h1>
 
 <div class="paragraph"> </div>
 
@@ -1231,16 +1266,9 @@ Zauważmy, że nie musimy używać zmiennych unifikacyjnych do dopasowywania
     Ostatni wzorzec pasuje do równania, którego lewa strona jest singletonem
     (listą jednoelementową) zawierającym wartość, do której będziemy mogli
     odnosić się za pomocą nazwy <span class="inlinecode"><span class="id" title="var">x</span></span>, zaś prawą stroną jest lista pusta. 
-</div>
-<div class="code">
+<div class="paragraph"> </div>
 
-<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-<a name="lab164"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab165"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -1259,25 +1287,104 @@ Zauważmy, że nie musimy używać zmiennych unifikacyjnych do dopasowywania
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+</div>
+
+<div class="doc">
+<a name="lab166"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Napisz taktykę <span class="inlinecode"><span class="id" title="var">forward</span></span>, która wyspecjalizuje wszystkie znalezione w
+    kontekście implikacje, o ile oczywiście ich przesłanki również będą
+    znajdowały się w kontekście, a następnie rozwiąże cel, jeżeli jest on
+    prawdziwy na mocy założenia.
+
+<div class="paragraph"> </div>
+
+    Dla przykładu, kontekst <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="var">Q</span>,</span> <span class="inlinecode"><span class="id" title="var">H0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="var">R</span>,</span> <span class="inlinecode"><span class="id" title="var">H1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">|-</span> <span class="inlinecode"><span class="id" title="var">_</span></span>
+    powinien zostać przekształcony w <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">Q</span>,</span> <span class="inlinecode"><span class="id" title="var">H0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">R</span>,</span> <span class="inlinecode"><span class="id" title="var">H1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">|-</span> <span class="inlinecode"><span class="id" title="var">_</span></span>.
+
+<div class="paragraph"> </div>
+
+    Wskazówka: przydatna będzie taktyka <span class="inlinecode"><span class="id" title="tactic">specialize</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="forward_1"><span class="id" title="definition">forward_1</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">forward</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="forward_2"><span class="id" title="definition">forward_2</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R3.html#S"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">forward</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="R3.html#Match"><span class="id" title="section">Match</span></a>.<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-<a name="lab165"></a><h1 class="section">Dopasowanie termu</h1>
+<a name="lab167"></a><h1 class="section">Narzędzia przydatne przy dopasowywaniu</h1>
 
-<div class="paragraph"> </div>
+</div>
+<div class="code">
 
-<a name="lab166"></a><h1 class="section">Inne wesołe rzeczy</h1>
+<br/>
 
-<div class="paragraph"> </div>
+<br/>
+</div>
 
-<a name="lab167"></a><h1 class="section">Przydatne taktyki</h1>
+<div class="doc">
+<a name="lab168"></a><h1 class="section">Dopasowanie termu</h1>
 
-<div class="paragraph"> </div>
+</div>
+<div class="code">
 
-<a name="lab168"></a><h1 class="section">Mniej przydatne taktyki</h1>
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab169"></a><h1 class="section">Inne wesołe rzeczy</h1>
+
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab170"></a><h1 class="section">Przydatne taktyki</h1>
+
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab171"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki</h1>
+
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab172"></a><h1 class="section">Mniej przydatne taktyki</h1>
 
 </div>
 <div class="code">
