@@ -1331,6 +1331,150 @@ Zauważmy, że nie musimy używać zmiennych unifikacyjnych do dopasowywania
 <div class="doc">
 <a name="lab167"></a><h1 class="section">Narzędzia przydatne przy dopasowywaniu</h1>
 
+<div class="paragraph"> </div>
+
+ Poznawszy już konstrukt <span class="inlinecode"><span class="id" title="keyword">match</span></span> i jego warianty oraz sposób dopasowywania
+    wzorców i rolę unifikacji oraz zmiennych unifikacyjnych w tym procesie,
+    czas rzucić okiem na kilka niezwykle przydatnych narzędzi, które uczynią
+    nasze życie dopasowywacza łatwiejszym. 
+<div class="paragraph"> </div>
+
+<a name="lab168"></a><h2 class="section">Dopasowanie podtermu</h2>
+
+<div class="paragraph"> </div>
+
+ Pierwszym z nich jest wyrażenie <span class="inlinecode"><span class="id" title="keyword">context</span></span> <span class="inlinecode"><span class="id" title="var">ident</span></span> <span class="inlinecode">[<span class="id" title="var">term</span>]</span>, dzięki któremu
+    możemy tworzyć wzorce dopasowujące podtermy danego termu. Zobaczmy jego
+    działanie na przykładzie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="R3.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R3.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R3.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R3.html#c"><span class="id" title="variable">c</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" title="keyword">context</span> <span class="id" title="var">G</span> [?<span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> ?<span class="id" title="var">y</span>] =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">G</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="var">multimatch</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" title="keyword">context</span> <span class="id" title="var">G</span> [?<span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> ?<span class="id" title="var">y</span>] =&gt; <span class="id" title="tactic">idtac</span> <span class="id" title="var">G</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+W powyższym przykładzie naszym celem jest znalezienie wszystkich równań,
+    które są podtermami naszego celu. Dopasowanie wzorca <span class="inlinecode"><span class="id" title="keyword">context</span></span> <span class="inlinecode"><span class="id" title="var">G</span></span> <span class="inlinecode">[?<span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode">?<span class="id" title="var">y</span>]</span>
+    przebiega w następujący sposób:
+<ul class="doclist">
+<li> w celu wyszukiwae są wszystkie podtermy postaci <span class="inlinecode">?<span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode">?<span class="id" title="var">y</span></span>. Są trzy
+      takie: <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">b</span></span>, <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">c</span></span> oraz <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">c</span></span>
+
+</li>
+<li> wzorzec <span class="inlinecode">?<span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode">?<span class="id" title="var">y</span></span> zostaje zunifikowany z pierwszym pasującym podtermem,
+      czyli <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">b</span></span>. W wyniku dopasowania zmienna unifikacyjna <span class="inlinecode">?<span class="id" title="var">x</span></span> zostaje
+      związana z <span class="inlinecode"><span class="id" title="var">a</span></span>, zaś <span class="inlinecode">?<span class="id" title="var">y</span></span> z <span class="inlinecode"><span class="id" title="var">b</span></span>
+
+</li>
+<li> cały term, którego podterm został dopasowany do wzorca, zostaje
+      związany ze zmienną <span class="inlinecode"><span class="id" title="var">G</span></span>, przy czym jego dopasowany podterm zostaje
+      specjalnie zaznaczony (po wypisaniu w jego miejscu widać napis "?M-1")
+
+</li>
+<li> zostaje wykonana taktyka <span class="inlinecode"><span class="id" title="tactic">idtac</span></span> <span class="inlinecode"><span class="id" title="var">G</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Druga z powyższych taktyk działa podobnie, ale dzięki zastosowaniu
+    <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> <span class="inlinecode"><span class="id" title="var">multimatch</span></span> ujawnia nam ona wszystkie podtermy pasujące do wzorca
+    <span class="inlinecode">?<span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode">?<span class="id" title="var">y</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab169"></a><h2 class="section">Generowanie nieużywanych nazw</h2>
+
+<div class="paragraph"> </div>
+
+ Drugim przydatnym narzędziem jest konstrukt <span class="inlinecode"><span class="id" title="tactic">fresh</span></span>, który pozwala nam
+    wygenerować nazwę, której nie nosi jeszcze żadna zmienna. Dzięki temu
+    możemy uniknąć konfliktów nazw, gdy używamy taktyk takich jak <span class="inlinecode"><span class="id" title="tactic">intros</span></span>
+    czy <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, które pozwalają nam nazywać obiekty. Przyjrzyjmy się
+    następującemu przykładowi. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Specif.html#5bf2050e90b21ebc82dc5463d1ba338e"><span class="id" title="notation">{</span></a><a class="idref" href="R3.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R3.html#y"><span class="id" title="variable">y</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Specif.html#5bf2050e90b21ebc82dc5463d1ba338e"><span class="id" title="notation">}</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Specif.html#5bf2050e90b21ebc82dc5463d1ba338e"><span class="id" title="notation">+</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Specif.html#5bf2050e90b21ebc82dc5463d1ba338e"><span class="id" title="notation">{</span></a><a class="idref" href="R3.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#32263a1c8b01baecdff9deb038955bc9"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="R3.html#y"><span class="id" title="variable">y</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Specif.html#5bf2050e90b21ebc82dc5463d1ba338e"><span class="id" title="notation">}</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="var">Fail</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> "y" <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">y</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">x</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">x0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">y</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">y</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Mamy w kontekście obiekt <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> i chcielibyśmy wprowadzić do niego
+    kolejny. Cóż, nie jest to żaden problem — wystarczy nazwać go dowolną
+    nazwą różną od "x". Ale co, jeżeli nie wiemy, jak nazywają się obiekty
+    znajdujące się w kontekście?
+
+<div class="paragraph"> </div>
+
+    Przy intensywnym posługiwaniu się taktykami i automatyzacją jest to nader
+    częsta możliwość: gdy dopasujemy kontekst za pomocą <span class="inlinecode"><span class="id" title="keyword">match</span></span>a, nie znamy
+    oryginalnych nazw dopasowanych termów — możemy odwoływać się do nich
+    tylko za pomocą nazw lokalnych, wprowadzonych na potrzeby danego wzorca.
+
+<div class="paragraph"> </div>
+
+    Za odsięczą przychodzi nam generator świeżych nazw o wdzięcznej nazwie
+    <span class="inlinecode"><span class="id" title="tactic">fresh</span></span>. Zazwyczaj będziemy się nim posługiwać w następujący sposób:
+    <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">var</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">arg_1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">arg_N</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode">...</span>. Tutaj <span class="inlinecode"><span class="id" title="var">var</span></span> jest zmienną
+    języka <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span>, której wartością jest świeżo wygenerowana nazwa.
+
+<div class="paragraph"> </div>
+
+    Powyższe cztery taktyki działają tak:
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> generuje świeżą nazwę, domyślnie
+      jest nią "H". Nazwa ta staje się wartością Ltacowej zmiennej <span class="inlinecode"><span class="id" title="var">x</span></span>. Owa
+      zmienna jest argumentem taktyk <span class="inlinecode"><span class="id" title="tactic">intro</span></span>, dzięki czemu wprowadzony do
+      kontekstu obiekt typu <span class="inlinecode"><span class="id" title="var">nat</span></span> zostaje nazwany "H".
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode">&quot;<span class="id" title="var">y</span>&quot;</span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — jeżeli <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> dostanie jaki argument
+      ciąg znaków, to wygeneruje nazwę zaczynają się od tego ciągu, która nie
+      jest jeszcze zajęta. Ponieważ nazwa "y" jest wolna, właśnie tak zostaje
+      nazwany wprowadzany obiekt.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — tutaj mamy mały zamęt. Pierwszy i trzeci
+      <span class="inlinecode"><span class="id" title="var">x</span></span> jest zmienną Ltaca, zaś drugi odnosi się do obiektu z kontekstu.
+      Jeżeli <span class="inlinecode"><span class="id" title="var">arg</span></span> jest obiektem z kontekstu, to <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">arg</span></span> tworzy świeżą
+      nazwę zaczynają się od nazwy, jaką <span class="inlinecode"><span class="id" title="var">arg</span></span> nosi w kontekście. Tutaj nie
+      ma to znaczenia, gdyż <span class="inlinecode"><span class="id" title="var">x</span></span> nazywa się po prostu "x" i wobec <span class="inlinecode"><span class="id" title="tactic">fresh</span></span>
+      generuje nazwę "x0", ale mechanism ten działa tak samo w przypadku
+      zmiennych unifikacyjnych.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> — jak widać, argumentem <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> może też
+      być nazwa zmiennej nie odnoszącej się zupełnie do niczego. W naszym
+      przypadku nie ma w kontekście zmiennej <span class="inlinecode"><span class="id" title="var">y</span></span>, a <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> generuje na jej
+      podstawie świeżą nazwę "y". 
+</li>
+</ul>
+
 </div>
 <div class="code">
 
@@ -1340,7 +1484,7 @@ Zauważmy, że nie musimy używać zmiennych unifikacyjnych do dopasowywania
 </div>
 
 <div class="doc">
-<a name="lab168"></a><h1 class="section">Dopasowanie termu</h1>
+<a name="lab170"></a><h1 class="section">Dopasowanie termu</h1>
 
 </div>
 <div class="code">
@@ -1351,7 +1495,7 @@ Zauważmy, że nie musimy używać zmiennych unifikacyjnych do dopasowywania
 </div>
 
 <div class="doc">
-<a name="lab169"></a><h1 class="section">Inne wesołe rzeczy</h1>
+<a name="lab171"></a><h1 class="section">Inne wesołe rzeczy</h1>
 
 </div>
 <div class="code">
@@ -1362,7 +1506,7 @@ Zauważmy, że nie musimy używać zmiennych unifikacyjnych do dopasowywania
 </div>
 
 <div class="doc">
-<a name="lab170"></a><h1 class="section">Przydatne taktyki</h1>
+<a name="lab172"></a><h1 class="section">Przydatne taktyki</h1>
 
 </div>
 <div class="code">
@@ -1373,7 +1517,7 @@ Zauważmy, że nie musimy używać zmiennych unifikacyjnych do dopasowywania
 </div>
 
 <div class="doc">
-<a name="lab171"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki</h1>
+<a name="lab173"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki</h1>
 
 </div>
 <div class="code">
@@ -1384,7 +1528,7 @@ Zauważmy, że nie musimy używać zmiennych unifikacyjnych do dopasowywania
 </div>
 
 <div class="doc">
-<a name="lab172"></a><h1 class="section">Mniej przydatne taktyki</h1>
+<a name="lab174"></a><h1 class="section">Mniej przydatne taktyki</h1>
 
 </div>
 <div class="code">
