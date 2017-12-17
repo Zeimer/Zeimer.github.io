@@ -158,6 +158,9 @@ Komenda <span class="inlinecode"><span class="id" title="var">Focus</span></span
 &nbsp;&nbsp;1-2, 3: <span class="id" title="tactic">assumption</span>.<br/>
 <span class="id" title="keyword">Restart</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">destruct</span> 1 <span class="id" title="keyword">as</span> [<span class="id" title="var">H</span> [<span class="id" title="var">H'</span> <span class="id" title="var">H''</span>]]. <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;1-3: <span class="id" title="tactic">assumption</span>.<br/>
+<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> 1 <span class="id" title="keyword">as</span> [<span class="id" title="var">H</span> [<span class="id" title="var">H'</span> <span class="id" title="var">H''</span>]]. <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="tactic">assumption</span>.<br/>
 <span class="id" title="keyword">Restart</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">destruct</span> 1 <span class="id" title="keyword">as</span> [<span class="id" title="var">H</span> [<span class="id" title="var">H'</span> <span class="id" title="var">H''</span>]]. <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>.<br/>
@@ -168,32 +171,41 @@ Komenda <span class="inlinecode"><span class="id" title="var">Focus</span></span
 </div>
 
 <div class="doc">
-Selektory przydają się głównie gdy chcemy napisać taktykę rozwiązującą
-    wszystkie cele i sprawdzamy jej działanie na każdym celu z osobna. 
+Zauważmy, że powyższe selektory działają jedynie, gdy zostaną umieszczone
+    przed wszystkimi taktykami, których dotyczą. Próba użycia ich jako
+    argumenty dla innych taktyk jest błędem.
+
+<div class="paragraph"> </div>
+
+    Dla przykładu, w czwartym z powyższych dowodów nie możemy napisać
+    <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> <span class="inlinecode"><span class="id" title="tactic">split</span>;</span> <span class="inlinecode">1-3:</span> <span class="inlinecode"><span class="id" title="tactic">assumption</span></span>, gdyż kończy się to błędem składni
+    (nie wspominając o tym, że jest to bez sensu, gdyż dla uzyskania
+    pożądanego efektu wystarczy napisać <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> <span class="inlinecode"><span class="id" title="tactic">split</span>;</span> <span class="inlinecode"><span class="id" title="tactic">assumption</span></span>. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">idtac</span> <span class="id" title="var">n</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">idtac</span> <span class="id" title="var">n</span>.<br/>
-<span class="id" title="keyword">Abort</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> 1 <span class="id" title="keyword">as</span> [<span class="id" title="var">H</span> [<span class="id" title="var">H'</span> <span class="id" title="var">H''</span>]].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>; <span class="id" title="var">only</span> 1-3: <span class="id" title="tactic">assumption</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-Ilość celów możemy policzyć za pomocą taktyki <span class="inlinecode"><span class="id" title="var">numgoals</span></span>. Liczy ona
-    wszystkie cele, na które działa, więc jeżeli nie użyjemy żadnego
-    selektora, zwróci ona 1. Nie jest ona zbyt użyteczna (poza bardzo
-    skomplikowanymi taktykami, które z jakichś powodów nie operują tylko na
-    jednym celu, lecz na wszystkich).
+Nie wszystko jednak stracone! Żeby móc używać wyrażeń zawierających
+    selektory jako argumenty taktyk, możemy posłużyć się słowem <span class="inlinecode"><span class="id" title="var">only</span></span>.
+    Mimo tego, i tak nie możemy napisać <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> <span class="inlinecode"><span class="id" title="tactic">split</span>;</span> <span class="inlinecode"><span class="id" title="var">only</span></span> <span class="inlinecode"><span class="id" title="var">all</span>:</span> <span class="inlinecode">...</span>,
+    gdyż kończy się to błędem skadni.
 
 <div class="paragraph"> </div>
 
-    Z wiązaniem <span class="inlinecode"><span class="id" title="keyword">let</span></span> w kontekście taktyk spotkamy się już niedługo. 
+    Jeżeli wątpisz w użyteczność selektorów... cóż, nie dziwię ci się.
+    Selektory przydają się głównie gdy chcemy napisać taktykę rozwiązującą
+    wszystkie cele i sprawdzamy jej działanie na każdym celu z osobna. W
+    pozostałych przypadkach są tylko zbędnym balastem. 
 <div class="paragraph"> </div>
 
 <a name="lab155"></a><h1 class="section">Podstawy języka Ltac</h1>
@@ -1417,7 +1429,7 @@ W powyższym przykładzie naszym celem jest znalezienie wszystkich równań,
 &nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">y</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">x</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">x0</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">y</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">y</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">y</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
 <span class="id" title="keyword">Abort</span>.<br/>
 
 <br/>
@@ -1438,10 +1450,11 @@ Mamy w kontekście obiekt <span class="inlinecode"><span class="id" title="var">
 
 <div class="paragraph"> </div>
 
-    Za odsięczą przychodzi nam generator świeżych nazw o wdzięcznej nazwie
+    Z odsięczą przychodzi nam generator świeżych nazw o wdzięcznej nazwie
     <span class="inlinecode"><span class="id" title="tactic">fresh</span></span>. Zazwyczaj będziemy się nim posługiwać w następujący sposób:
-    <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">var</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">arg_1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">arg_N</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode">...</span>. Tutaj <span class="inlinecode"><span class="id" title="var">var</span></span> jest zmienną
-    języka <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span>, której wartością jest świeżo wygenerowana nazwa.
+    <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">var</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">arg_1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">arg_N</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span>. Tutaj <span class="inlinecode"><span class="id" title="var">var</span></span> jest zmienną
+    języka <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span>, której wartością jest świeżo wygenerowana nazwa, a <span class="inlinecode"><span class="id" title="var">t</span></span>
+    to jakaś taktyka, która w dowolny sposób korzysta z <span class="inlinecode"><span class="id" title="var">var</span></span>.
 
 <div class="paragraph"> </div>
 
@@ -1449,32 +1462,129 @@ Mamy w kontekście obiekt <span class="inlinecode"><span class="id" title="var">
 <ul class="doclist">
 <li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> generuje świeżą nazwę, domyślnie
       jest nią "H". Nazwa ta staje się wartością Ltacowej zmiennej <span class="inlinecode"><span class="id" title="var">x</span></span>. Owa
-      zmienna jest argumentem taktyk <span class="inlinecode"><span class="id" title="tactic">intro</span></span>, dzięki czemu wprowadzony do
+      zmienna jest argumentem taktyki <span class="inlinecode"><span class="id" title="tactic">intro</span></span>, dzięki czemu wprowadzony do
       kontekstu obiekt typu <span class="inlinecode"><span class="id" title="var">nat</span></span> zostaje nazwany "H".
 
 </li>
-<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode">&quot;<span class="id" title="var">y</span>&quot;</span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — jeżeli <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> dostanie jaki argument
-      ciąg znaków, to wygeneruje nazwę zaczynają się od tego ciągu, która nie
-      jest jeszcze zajęta. Ponieważ nazwa "y" jest wolna, właśnie tak zostaje
-      nazwany wprowadzany obiekt.
+<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode">&quot;<span class="id" title="var">y</span>&quot;</span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — jeżeli <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> dostanie jako argument
+      ciąg znaków, to wygeneruje nazwę zaczynającą się od tego ciągu, która
+      nie jest jeszcze zajęta. Ponieważ nazwa "y" jest wolna, właśnie tak
+      zostaje nazwany wprowadzany obiekt.
 
 </li>
 <li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — tutaj mamy mały zamęt. Pierwszy i trzeci
       <span class="inlinecode"><span class="id" title="var">x</span></span> jest zmienną Ltaca, zaś drugi odnosi się do obiektu z kontekstu.
       Jeżeli <span class="inlinecode"><span class="id" title="var">arg</span></span> jest obiektem z kontekstu, to <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">arg</span></span> tworzy świeżą
-      nazwę zaczynają się od nazwy, jaką <span class="inlinecode"><span class="id" title="var">arg</span></span> nosi w kontekście. Tutaj nie
-      ma to znaczenia, gdyż <span class="inlinecode"><span class="id" title="var">x</span></span> nazywa się po prostu "x" i wobec <span class="inlinecode"><span class="id" title="tactic">fresh</span></span>
-      generuje nazwę "x0", ale mechanism ten działa tak samo w przypadku
-      zmiennych unifikacyjnych.
+      nazwę zaczynającą się od nazwy, jaką <span class="inlinecode"><span class="id" title="var">arg</span></span> nosi w kontekście. Tutaj
+      nie  ma to znaczenia, gdyż <span class="inlinecode"><span class="id" title="var">x</span></span> nazywa się po prostu "x" i wobec tego
+      <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> generuje nazwę "x0", ale mechanizm ten działa tak samo w
+      przypadku zmiennych unifikacyjnych.
 
 </li>
-<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> — jak widać, argumentem <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> może też
-      być nazwa zmiennej nie odnoszącej się zupełnie do niczego. W naszym
+<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — jak widać, argumentem <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> może też
+      być nazwa zmiennej nie odnosząca się zupełnie do niczego. W naszym
       przypadku nie ma w kontekście zmiennej <span class="inlinecode"><span class="id" title="var">y</span></span>, a <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> generuje na jej
       podstawie świeżą nazwę "y". 
 </li>
 </ul>
 
+<div class="paragraph"> </div>
+
+<a name="lab170"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">fail</span></span> (znowu)</h2>
+
+<div class="paragraph"> </div>
+
+ Taktykę <span class="inlinecode"><span class="id" title="tactic">fail</span></span> już poznaliśmy, ale nie w jej pełnej krasie. Czas więc
+    odkryć resztę jej możliwości. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="tactic">fail</span> "Hoho, czego się spodziewałeś?" 1.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Pierwsza z nich nie jest zbyt spektakularna — możemy do <span class="inlinecode"><span class="id" title="tactic">fail</span></span> przekazać
+    jako argumenty ciągi znaków lub termy, co spowoduje wyświetlenie ich w
+    oknie wiadomości.
+
+<div class="paragraph"> </div>
+
+    Drugą, znacznie ważniejszą możliwością, jaką daje nam taktyka <span class="inlinecode"><span class="id" title="tactic">fail</span></span>,
+    jest kontrola "poziomu porażki". Dzięki niemu zyskujemy władzę nad
+    tym, jak "mocno" taktyka <span class="inlinecode"><span class="id" title="tactic">fail</span></span> zawodzi. Domyśnie wynosi on 0. Użycie
+    taktyki <span class="inlinecode"><span class="id" title="tactic">fail</span></span> (która wobec tego oznacza to samo, co <span class="inlinecode"><span class="id" title="tactic">fail</span></span> <span class="inlinecode">0</span>) powouje
+    przerwanie wykonywania obecnej gałęzi <span class="inlinecode"><span class="id" title="keyword">match</span></span>a i przejście do następnej.
+    Użycie taktyki <span class="inlinecode"><span class="id" title="tactic">fail</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>, gdzie n nie jest równe 0, powoduje opuszczenie
+    całego obecnego <span class="inlinecode"><span class="id" title="keyword">match</span></span>a (tj. wszystkich gałęzi) lub bloku <span class="inlinecode"><span class="id" title="tactic">do</span></span>/<span class="inlinecode"><span class="id" title="tactic">repeat</span></span>
+    i wywołanie <span class="inlinecode"><span class="id" title="tactic">fail</span></span> <span class="inlinecode">(<span class="id" title="var">n</span></span> <span class="inlinecode">-</span> <span class="inlinecode">1)</span>.
+
+<div class="paragraph"> </div>
+
+    Przyjrzyjmy się temu zachowaniu na przykładzie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> "first branch"; <span class="id" title="tactic">fail</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> "second branch"<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> "first branch"; <span class="id" title="tactic">fail</span> 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> "second branch"<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> "first branch"; <span class="id" title="tactic">fail</span> 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> "second branch"<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="tactic">try</span> <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> "first branch"; <span class="id" title="tactic">fail</span> 2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">idtac</span> "second branch"<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Cztery powyższe dopasowania działają następująco:
+<ul class="doclist">
+<li> W pierwszym dopasowana jest pierwsza gałąź. Wyświetlona zostaje
+      wiadomość, po czym taktyka <span class="inlinecode"><span class="id" title="tactic">fail</span></span> zawodzi i następuje przejście
+      do kolejnej gałęzi. Tutaj też wypisana zostaje wiadomość i cała
+      taktyka <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode">...</span> kończy się sukcesem.
+
+</li>
+<li> W drugim przypadku dopasowana jest pierwsza gałąź, która wypisuje
+      wiadomość, ale taktyka <span class="inlinecode"><span class="id" title="tactic">fail</span></span> <span class="inlinecode">1</span> powoduje, że cały <span class="inlinecode"><span class="id" title="keyword">match</span></span> zawodzi
+      i druga gałąź nie jest w ogóle dopasowywana.
+
+</li>
+<li> Trzeci przypadek jest podobny do drugiego. <span class="inlinecode"><span class="id" title="tactic">fail</span></span> <span class="inlinecode">1</span> powoduje, że
+      cały <span class="inlinecode"><span class="id" title="keyword">match</span></span> zawodzi, ale dzięki kombinatorowi <span class="inlinecode"><span class="id" title="tactic">try</span></span> cała taktyka
+      <span class="inlinecode"><span class="id" title="tactic">try</span></span> <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode">...</span> kończy się sukcesem.
+
+</li>
+<li> Czwarta taktyka jest podobna do trzeciej, ale tym razem po udanym
+      dopasowaniu pierwszej gałęzi taktyka <span class="inlinecode"><span class="id" title="tactic">fail</span></span> <span class="inlinecode">2</span> powoduje, że cały
+      <span class="inlinecode"><span class="id" title="keyword">match</span></span> zawodzi. Następnie ma miejsce wywołanie taktyki <span class="inlinecode"><span class="id" title="tactic">fail</span></span> <span class="inlinecode">1</span>,
+      które powoduje, że nawet mimo użycia kombinatora <span class="inlinecode"><span class="id" title="tactic">try</span></span> cała taktyka
+      <span class="inlinecode"><span class="id" title="tactic">try</span></span> <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode">...</span> zawodzi. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a name="lab171"></a><h1 class="section">Dopasowanie termu</h1>
+
 </div>
 <div class="code">
 
@@ -1484,7 +1594,141 @@ Mamy w kontekście obiekt <span class="inlinecode"><span class="id" title="var">
 </div>
 
 <div class="doc">
-<a name="lab170"></a><h1 class="section">Dopasowanie termu</h1>
+<a name="lab172"></a><h1 class="section">Inne wesołe rzeczy</h1>
+
+<div class="paragraph"> </div>
+
+ Ten podrozdział będzie wesołą zbieraninką różnych niezbyt przydatnych
+    (przynajmniej dla mnie) konstruktów języka Ltac, które nie zostały
+    dotychczas omówione. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">idtac</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">idtac</span> <span class="id" title="var">n</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Ilość celów możemy policzyć za pomocą taktyki <span class="inlinecode"><span class="id" title="var">numgoals</span></span>. Liczy ona
+    wszystkie cele, na które działa, więc jeżeli nie użyjemy żadnego
+    selektora, zwróci ona 1. Nie jest ona zbyt użyteczna (poza bardzo
+    skomplikowanymi taktykami, które z jakichś powodów nie operują tylko na
+    jednym celu, lecz na wszystkich). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="keyword">in</span> <span class="id" title="var">guard</span> <span class="id" title="var">n</span> &gt; 2.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="var">all</span>: <span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="keyword">in</span> <span class="id" title="var">guard</span> <span class="id" title="var">n</span> &lt; 2.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Taktyka <span class="inlinecode"><span class="id" title="var">guard</span></span> <span class="inlinecode"><span class="id" title="var">cond</span></span> pozwala nam dokonywać prostych testów na liczbach
+    całkowitych Ltaca. Jeżeli warunek zachodzi, taktyka ta zachowuje się
+    jak <span class="inlinecode"><span class="id" title="tactic">idtac</span></span>, czyli kończy się sukcesem i nie robi nic więcej. Jeżeli
+    warunek nie zachodzi, taktyka zawodzi.
+
+<div class="paragraph"> </div>
+
+    W powyższym przykładzie taktyka <span class="inlinecode"><span class="id" title="var">guard</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">&gt;</span> <span class="inlinecode">2</span> kończy się sukcesem,
+    gdyż są 3 cele, a 3 &gt; 2, zaś taktyka <span class="inlinecode"><span class="id" title="var">guard</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">&lt;</span> <span class="inlinecode">2</span> zawodzi, bo są
+    3 cele, a nie jest prawdą, że 3 &lt; 2. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="even"><span class="id" title="inductive">even</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="even0"><span class="id" title="constructor">even0</span></a> : <a class="idref" href="R3.html#even"><span class="id" title="inductive">even</span></a> 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a name="evenSS"><span class="id" title="constructor">evenSS</span></a> : <span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="R3.html#even"><span class="id" title="inductive">even</span></a> <a class="idref" href="R3.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#even"><span class="id" title="inductive">even</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="R3.html#n"><span class="id" title="variable">n</span></a>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="R3.html#even"><span class="id" title="inductive">even</span></a> 42.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="var">timeout</span> 1 <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">constructor</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="R3.html#even"><span class="id" title="inductive">even</span></a> 1338.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="var">timeout</span> 1 <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">constructor</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Kombinator <span class="inlinecode"><span class="id" title="var">timeout</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> pozwala nam sprawić, żeby taktyka t zawiodła,
+    jeżeli jej wykonanie będzie zajmowało dłużej, niż n sekund. Nie jest on
+    zbyt przydatny, gdyż szybkość wykonania danej taktyki jest kwestią mocno
+    zależną on sprzętu. Jak można przeczytać w manualu, kombinator ten bywa
+    przydatny głównie przy debugowaniu i nie zaleca się, żeby występował w
+    finalnych dowodach, gdyż może powodować problemy z przenośnością.
+
+<div class="paragraph"> </div>
+
+    W powyższym przykładzie taktyka <span class="inlinecode"><span class="id" title="var">timeout</span></span> <span class="inlinecode">1</span> <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> <span class="inlinecode"><span class="id" title="tactic">constructor</span></span> kończy się
+    sukcesem, gdyż udowodnienie <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode">42</span> zajmuje jej mniej, niż 1 sekundę
+    (przynajmniej na moim komputerze; na twoim taktyka ta może zawieść), ale
+    już udowodnienie <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode">1338</span> trwa więcej niż jedną sekundę i wobec tego
+    taktyka <span class="inlinecode"><span class="id" title="var">timeout</span></span> <span class="inlinecode">1</span> <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> <span class="inlinecode"><span class="id" title="tactic">constructor</span></span> dla tego celu zawodzi (przynajmniej
+    u mnie; jeżeli masz mocny komputer, u ciebie może zadziałać).
+
+<div class="paragraph"> </div>
+
+    Co więcej, kombinator <span class="inlinecode"><span class="id" title="var">timeout</span></span> może zachowywać się różnie dla tego samego
+    celu nawet na tym samym komputerze. Na przykład przed chwilą taktyka ta
+    zakończyłą się na moim komputerze sukcesem, mimo że dotychczas zawsze
+    zawodziła). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="R3.html#even"><span class="id" title="inductive">even</span></a> 666.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">time</span> <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">constructor</span>.<br/>
+<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Time</span> <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">constructor</span>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Kolejnym kombinatorem jest <span class="inlinecode"><span class="id" title="var">time</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span>, który odpala taktykę <span class="inlinecode"><span class="id" title="var">t</span></span>, a następnie
+    wyświetla informację o czasie, jaki zajęło jej wykonanie. Czas ten jest
+    czasem rzeczywistym, tzn. zależy od mocy twojego komputera. Nie jest zbyt
+    stały — zazwyczaj różni się od jednego mierzenia do drugiego, czasem
+    nawet dość znacznie.
+
+<div class="paragraph"> </div>
+
+    Alternatywą dla taktyki <span class="inlinecode"><span class="id" title="var">time</span></span> jest komenda <span class="inlinecode"><span class="id" title="keyword">Time</span></span>, która robi dokładnie
+    to samo. Jeżeli stoisz przed wyborem między tymi dwoma — wybierz komendę
+    <span class="inlinecode"><span class="id" title="keyword">Time</span></span>, gdyż komendy zachowują się zazwyczaj w sposób znacznie bardziej
+    przewidywalny od taktyk. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab173"></a><h1 class="section">Przydatne taktyki</h1>
 
 </div>
 <div class="code">
@@ -1495,7 +1739,7 @@ Mamy w kontekście obiekt <span class="inlinecode"><span class="id" title="var">
 </div>
 
 <div class="doc">
-<a name="lab171"></a><h1 class="section">Inne wesołe rzeczy</h1>
+<a name="lab174"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki</h1>
 
 </div>
 <div class="code">
@@ -1506,29 +1750,7 @@ Mamy w kontekście obiekt <span class="inlinecode"><span class="id" title="var">
 </div>
 
 <div class="doc">
-<a name="lab172"></a><h1 class="section">Przydatne taktyki</h1>
-
-</div>
-<div class="code">
-
-<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-<a name="lab173"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki</h1>
-
-</div>
-<div class="code">
-
-<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-<a name="lab174"></a><h1 class="section">Mniej przydatne taktyki</h1>
+<a name="lab175"></a><h1 class="section">Mniej przydatne taktyki</h1>
 
 </div>
 <div class="code">
