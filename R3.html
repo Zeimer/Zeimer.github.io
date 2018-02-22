@@ -128,8 +128,8 @@ Komenda <span class="inlinecode"><span class="id" title="var">Focus</span></span
 <li> <span class="inlinecode"><span class="id" title="var">a</span>-<span class="id" title="var">b</span>:</span> <span class="inlinecode"><span class="id" title="var">t</span></span> — użyj taktyki t na wszystkich celach o numerach od a do b
 
 </li>
-<li> <span class="inlinecode"><span class="id" title="var">a1</span>-<span class="id" title="var">b1</span>,</span> <span class="inlinecode"><span class="id" title="var">a2</span>-<span class="id" title="var">b2</span>,</span> <span class="inlinecode">...,</span> <span class="inlinecode"><span class="id" title="var">aN</span>-<span class="id" title="var">bN</span>:</span> <span class="inlinecode"><span class="id" title="var">t</span></span> — użyj taktyki <span class="inlinecode"><span class="id" title="var">t</span></span> na wszystkich celach
-      o numerach od a1 do b1, od a2 do b2, ..., od aN do bN (zamiast aK-bK
+<li> <span class="inlinecode"><span class="id" title="var">a_1</span>-<span class="id" title="var">b_1</span>,</span> <span class="inlinecode">...,</span> <span class="inlinecode"><span class="id" title="var">a_n</span>-<span class="id" title="var">b_n</span>:</span> <span class="inlinecode"><span class="id" title="var">t</span></span> — użyj taktyki <span class="inlinecode"><span class="id" title="var">t</span></span> na wszystkich celach
+      o numerach od a_1 do b_1, ..., od a_n do b_n (zamiast a_i-b_i
       możemy też użyć pojedynczej liczby)
 
 </li>
@@ -198,14 +198,58 @@ Zauważmy, że powyższe selektory działają jedynie, gdy zostaną umieszczone
 Nie wszystko jednak stracone! Żeby móc używać wyrażeń zawierających
     selektory jako argumenty taktyk, możemy posłużyć się słowem <span class="inlinecode"><span class="id" title="var">only</span></span>.
     Mimo tego, i tak nie możemy napisać <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> <span class="inlinecode"><span class="id" title="tactic">split</span>;</span> <span class="inlinecode"><span class="id" title="var">only</span></span> <span class="inlinecode"><span class="id" title="var">all</span>:</span> <span class="inlinecode">...</span>,
-    gdyż kończy się to błędem skadni.
+    gdyż kończy się to błędem skadni. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="keyword">Prop</span>, <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R3.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">/\</span></a> <a class="idref" href="R3.html#S"><span class="id" title="variable">S</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">revgoals</span>. <span class="id" title="var">all</span>: <span class="id" title="var">revgoals</span>. <span class="id" title="var">all</span>: <span class="id" title="var">revgoals</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">swap</span> 1 3. <span class="id" title="var">all</span>: <span class="id" title="var">swap</span> 1 3. <span class="id" title="var">all</span>: <span class="id" title="var">swap</span> 1 3.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cycle</span> 42. <span class="id" title="var">all</span>: <span class="id" title="var">cycle</span> 3. <span class="id" title="var">all</span>: <span class="id" title="var">cycle</span> -3.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Jest jeszcze kilka innych taktyk do żonglowania celami. Pamiętaj, że
+    wszystkie z nich działają na liście celów wybranych selektorami —
+    domyślnie wybrany jest tylko cel numer 1 i wtedy taktyki te nie mają
+    żadnego skutku.
 
 <div class="paragraph"> </div>
 
-    Jeżeli wątpisz w użyteczność selektorów... cóż, nie dziwię ci się.
-    Selektory przydają się głównie gdy chcemy napisać taktykę rozwiązującą
-    wszystkie cele i sprawdzamy jej działanie na każdym celu z osobna. W
-    pozostałych przypadkach są tylko zbędnym balastem. 
+    <span class="inlinecode"><span class="id" title="var">revgoals</span></span> odwraca kolejność celów, na których działa. W naszym przypadku
+    <span class="inlinecode"><span class="id" title="var">revgoals</span></span> nie robi nic (odwraca kolejność celu <span class="inlinecode"><span class="id" title="var">P</span></span> na <span class="inlinecode"><span class="id" title="var">P</span></span>), natomiast
+    <span class="inlinecode"><span class="id" title="var">all</span>:</span> <span class="inlinecode"><span class="id" title="var">revgoals</span></span> zamienia kolejność celów z <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">S</span></span> na
+    <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">P</span></span>.
+
+<div class="paragraph"> </div>
+
+    <span class="inlinecode"><span class="id" title="var">swap</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> zamienia miejscami cele n-ty i m-ty. W przykładzie <span class="inlinecode"><span class="id" title="var">swap</span></span> <span class="inlinecode">1</span> <span class="inlinecode">3</span>
+    nic nie robi, gdyś domyślnie wybrany jest tylko cel numer 1, a zatem nie
+    można zamienić go miejscami z celem nr 3, którego nie ma. <span class="inlinecode"><span class="id" title="var">all</span>:</span> <span class="inlinecode"><span class="id" title="var">swap</span></span> <span class="inlinecode">1</span> <span class="inlinecode">3</span>
+    zamienia kolejność celów z <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">S</span></span> na <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">S</span></span>.
+
+<div class="paragraph"> </div>
+
+    <span class="inlinecode"><span class="id" title="var">cycle</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> przesuwa cele cyklicznie o <span class="inlinecode"><span class="id" title="var">n</span></span> do przodu (lub do tyłu, jeżeli
+    argument jest liczbą ujemną). W naszym przykładzie <span class="inlinecode"><span class="id" title="var">cycle</span></span> <span class="inlinecode">42</span> nic nie robi
+    (przesuwa cyklicznie cel <span class="inlinecode"><span class="id" title="var">P</span></span> o 42 miejsca, co daje w wyniku <span class="inlinecode"><span class="id" title="var">P</span></span>), zaś
+    <span class="inlinecode"><span class="id" title="var">all</span>:</span> <span class="inlinecode"><span class="id" title="var">cycle</span></span> <span class="inlinecode">3</span> zamienia kolejność celów z <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">S</span></span> na
+    <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">—</span> <span class="inlinecode"><span class="id" title="var">R</span></span>.
+
+<div class="paragraph"> </div>
+
+    Taktyki te nie są zbyt użyteczne, a przynajmniej ja nigdy ich nie użyłem,
+    ale dla kompletności wypadało o nich wspomnieć. Jeżeli wątpisz w
+    użyteczność selektorów... cóż, nie dziwię ci się. Selektory przydają się
+    głównie gdy chcemy napisać taktykę rozwiązującą wszystkie cele i
+    sprawdzamy jej działanie na każdym celu z osobna. W pozostałych przypadkach
+    są tylko zbędnym balastem. 
 <div class="paragraph"> </div>
 
 <a name="lab154"></a><h1 class="section">Podstawy języka Ltac</h1>
@@ -1669,22 +1713,22 @@ W powyższym przykładzie naszym celem jest znalezienie wszystkich równań,
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="var">Fail</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">H</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> "y" <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">y</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">x</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">x0</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">y</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> "y" <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">x</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">y</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
 <span class="id" title="keyword">Abort</span>.<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-Mamy w kontekście obiekt <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> i chcielibyśmy wprowadzić do niego
-    kolejny. Cóż, nie jest to żaden problem — wystarczy nazwać go dowolną
-    nazwą różną od "x". Ale co, jeżeli nie wiemy, jak nazywają się obiekty
-    znajdujące się w kontekście?
+Mamy w kontekście liczbę naturalną <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> i chcielibyśmy wprowadzić
+    do niego kolejną. Cóż, nie jest to żaden problem — wystarczy nazwać go
+    dowolną nazwą różną od "x". Ale co, jeżeli nie wiemy, jak nazywają się
+    obiekty znajdujące się w kontekście?
 
 <div class="paragraph"> </div>
 
