@@ -61,7 +61,7 @@ Stare powiedzenie głosi: nie wymyślaj koła na nowo. Aby uczynić zadość
 <li> taktyki służące do rozumowania na temat relacji równoważności
 
 </li>
-<li> taktyki służące do przeprowadzania obliczeń (TODO: oby)
+<li> taktyki służące do przeprowadzania obliczeń
 
 </li>
 <li> procedury decyzyjne, które potrafią zupełnie same rozwiązać cele
@@ -1353,25 +1353,11 @@ Użycie <span class="inlinecode"><span class="id" title="tactic">intros</span></
 </div>
 
 <div class="doc">
-<a name="lab211"></a><h1 class="section">Taktyki dla redukcji i obliczeń (TODO)</h1>
+<a name="lab211"></a><h1 class="section">Taktyki dla równości i równoważności</h1>
 
 <div class="paragraph"> </div>
 
- Omówić następujące rzeczy:
-<ul class="doclist">
-<li> <span class="inlinecode"><span class="id" title="var">cbn</span></span>, <span class="inlinecode"><span class="id" title="tactic">cbv</span></span>, <span class="inlinecode"><span class="id" title="tactic">simpl</span></span>, <span class="inlinecode"><span class="id" title="tactic">hnf</span></span>, <span class="inlinecode"><span class="id" title="tactic">compute</span></span>, <span class="inlinecode"><span class="id" title="keyword">vm_compute</span></span>,
-      <span class="inlinecode"><span class="id" title="var">native_compute</span></span>, <span class="inlinecode"><span class="id" title="tactic">lazy</span></span>, <span class="inlinecode"><span class="id" title="tactic">red</span></span> i inne taktyki do redukcji.
-
-</li>
-</ul>
-
-<div class="paragraph"> </div>
-
-<a name="lab212"></a><h1 class="section">Taktyki dla równości i równoważności</h1>
-
-<div class="paragraph"> </div>
-
-<a name="lab213"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>, <span class="inlinecode"><span class="id" title="tactic">symmetry</span></span> i <span class="inlinecode"><span class="id" title="tactic">transitivity</span></span></h2>
+<a name="lab212"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>, <span class="inlinecode"><span class="id" title="tactic">symmetry</span></span> i <span class="inlinecode"><span class="id" title="tactic">transitivity</span></span></h2>
 
 </div>
 <div class="code">
@@ -1535,7 +1521,7 @@ Dzięki powyższym twierdzeniom możemy teraz posługiwać się taktykami
     z relacjami równoważności. 
 <div class="paragraph"> </div>
 
-<a name="lab214"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">f_equal</span></span></h2>
+<a name="lab213"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">f_equal</span></span></h2>
 
 </div>
 <div class="code">
@@ -1565,7 +1551,7 @@ Dzięki powyższym twierdzeniom możemy teraz posługiwać się taktykami
     ale nie potrafi rozwiązać tych, które zachodzą na mocy założenia. 
 <div class="paragraph"> </div>
 
-<a name="lab215"></a><h4 class="section">Ćwiczenie (my_f_equal)</h4>
+<a name="lab214"></a><h4 class="section">Ćwiczenie (my_f_equal)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1619,7 +1605,7 @@ Dzięki powyższym twierdzeniom możemy teraz posługiwać się taktykami
 </div>
 
 <div class="doc">
-<a name="lab216"></a><h4 class="section">Ćwiczenie (właściwości <span class="inlinecode"><span class="id" title="tactic">f_equal</span></span>)</h4>
+<a name="lab215"></a><h4 class="section">Ćwiczenie (właściwości <span class="inlinecode"><span class="id" title="tactic">f_equal</span></span>)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1786,7 +1772,7 @@ Voilà! Teraz możemy używać taktyki <span class="inlinecode"><span class="id
     sposób rozumowania jest poprawny. 
 <div class="paragraph"> </div>
 
-<a name="lab217"></a><h4 class="section">Ćwiczenie (f_equiv_filter)</h4>
+<a name="lab216"></a><h4 class="section">Ćwiczenie (f_equiv_filter)</h4>
 
 </div>
 <div class="code">
@@ -1823,7 +1809,7 @@ Oto niezbyt mądry sposób na zapisanie funkcji identycznościowej na
 </div>
 
 <div class="doc">
-<a name="lab218"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">rewrite</span></span></h2>
+<a name="lab217"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">rewrite</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1954,48 +1940,33 @@ Pozostałe warianty taktyki <span class="inlinecode"><span class="id" title="tac
     <span class="inlinecode"><span class="id" title="var">t_2</span></span>. Zauważmy, że <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> znaczy to samo, co <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="tactic">at</span></span> <span class="inlinecode">1</span>. 
 <div class="paragraph"> </div>
 
-<a name="lab219"></a><h4 class="section">Ćwiczenie (ssreflektowe rewrite)</h4>
+<a name="lab218"></a><h1 class="section">Taktyki dla redukcji i obliczeń (TODO)</h1>
 
 <div class="paragraph"> </div>
 
- W bibliotece SSReflect jest dostępna inna, niekompatybilna ze standardową
-    taktyka <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>. Jest ona warta uwagi, gdyż:
+ Omówić następujące rzeczy:
 <ul class="doclist">
-<li> daje jeszcze większą kontrolę nad przepisywaniem, niż standardowa
-      taktyka <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>
+<li> <span class="inlinecode"><span class="id" title="var">cbn</span></span>, <span class="inlinecode"><span class="id" title="tactic">cbv</span></span>, <span class="inlinecode"><span class="id" title="tactic">simpl</span></span>, <span class="inlinecode"><span class="id" title="tactic">hnf</span></span>, <span class="inlinecode"><span class="id" title="tactic">compute</span></span>, <span class="inlinecode"><span class="id" title="keyword">vm_compute</span></span>,
+      <span class="inlinecode"><span class="id" title="var">native_compute</span></span>, <span class="inlinecode"><span class="id" title="tactic">lazy</span></span>, <span class="inlinecode"><span class="id" title="tactic">red</span></span> i inne taktyki do redukcji.
 
-</li>
-<li> pozwala łączyć kroki przepisywania z odwijaniem definicji i wykonywaniem
-      obliczeń, a więc zastępuje taktyki <span class="inlinecode"><span class="id" title="tactic">unfold</span></span>, <span class="inlinecode"><span class="id" title="tactic">fold</span></span>, <span class="inlinecode"><span class="id" title="tactic">change</span></span>, <span class="inlinecode"><span class="id" title="tactic">replace</span></span>,
-      <span class="inlinecode"><span class="id" title="var">cbn</span></span>, <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> etc.
-
-</li>
-<li> daje większe możliwości radzenia sobie z generowanymi przez siebie
-      podcelami 
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
- Przyjrzyj się tej taktyce (od wersji 8.6 Coqa jest ona dostępna także w
-    bibliotece standardowej, ale wciąż nie jest kompatybilna ze standardowym
-    <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>m):
-    https://coq.inria.fr/refman/ssreflect.html#hevea_tactic265 
-<div class="paragraph"> </div>
-
-<a name="lab220"></a><h1 class="section">Automatyzacja</h1>
+<a name="lab219"></a><h1 class="section">Automatyzacja</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab221"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">auto</span></span> i <span class="inlinecode"><span class="id" title="tactic">trivial</span></span> (TODO)</h2>
+<a name="lab220"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">auto</span></span> i <span class="inlinecode"><span class="id" title="tactic">trivial</span></span> (TODO)</h2>
 
 <div class="paragraph"> </div>
 
-<a name="lab222"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span> i <span class="inlinecode"><span class="id" title="var">autounfold</span></span>. (TODO)</h2>
+<a name="lab221"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span> i <span class="inlinecode"><span class="id" title="var">autounfold</span></span> (TODO)</h2>
 
 <div class="paragraph"> </div>
 
-<a name="lab223"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">btauto</span></span></h2>
+<a name="lab222"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">btauto</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2009,7 +1980,7 @@ Pozostałe warianty taktyki <span class="inlinecode"><span class="id" title="tac
     potrafi ona wprowadzać zmiennych do kontekstu. 
 <div class="paragraph"> </div>
 
-<a name="lab224"></a><h4 class="section">Ćwiczenie (my_btauto)</h4>
+<a name="lab223"></a><h4 class="section">Ćwiczenie (my_btauto)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2101,7 +2072,7 @@ Przetestuj działanie swoich taktyk na reszcie twierdzeń z rozdziału
 </div>
 
 <div class="doc">
-<a name="lab225"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">congruence</span></span></h2>
+<a name="lab224"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">congruence</span></span></h2>
 
 </div>
 <div class="code">
@@ -2140,14 +2111,14 @@ Przetestuj działanie swoich taktyk na reszcie twierdzeń z rozdziału
     że konstruktory są injektywne i potrafi odróżnić <span class="inlinecode"><span class="id" title="var">true</span></span> od <span class="inlinecode"><span class="id" title="var">false</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab226"></a><h4 class="section">Ćwiczenie (congruence)</h4>
+<a name="lab225"></a><h4 class="section">Ćwiczenie (congruence)</h4>
 
 <div class="paragraph"> </div>
 
  Udowodnij przykłady <span class="inlinecode"><span class="id" title="var">congruence_1</span></span> i <span class="inlinecode"><span class="id" title="var">congruence_2</span></span> ręcznie. 
 <div class="paragraph"> </div>
 
-<a name="lab227"></a><h4 class="section">Ćwiczenie (discriminate)</h4>
+<a name="lab226"></a><h4 class="section">Ćwiczenie (discriminate)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2164,6 +2135,16 @@ Przetestuj działanie swoich taktyk na reszcie twierdzeń z rozdziału
 </div>
 
 <div class="doc">
+<a name="lab227"></a><h4 class="section">Ćwiczenie (injection i simplify_eq)</h4>
+
+<div class="paragraph"> </div>
+
+ Kolejne dwie taktyki do walki z konstruktorami typów induktywnych to
+    <span class="inlinecode"><span class="id" title="tactic">injection</span></span> i <span class="inlinecode"><span class="id" title="var">simplify_eq</span></span>. Przeczytaj ich opisy w manualu. Zbadaj,
+    czy są one w jakikolwiek sposób przydatne (wskazówka: porównaj je z
+    taktykami <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> i <span class="inlinecode"><span class="id" title="tactic">congruence</span></span>. 
+<div class="paragraph"> </div>
+
 <a name="lab228"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">decide</span></span> <span class="inlinecode"><span class="id" title="var">equality</span></span></h2>
 
 </div>
@@ -2212,7 +2193,15 @@ Zanim przejdziesz dalej, udowodnij ręcznie powyższe twierdzenie. Przyznasz,
 </div>
 
 <div class="doc">
-<a name="lab229"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">omega</span></span> i <span class="inlinecode"><span class="id" title="tactic">abstract</span></span></h2>
+<a name="lab229"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Pokrewną taktyce <span class="inlinecode"><span class="id" title="var">decide</span></span> <span class="inlinecode"><span class="id" title="var">equality</span></span> jest taktyka <span class="inlinecode"><span class="id" title="var">compare</span></span>. Przeczytaj
+    w manualu, co robi i jak działa. 
+<div class="paragraph"> </div>
+
+<a name="lab230"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">omega</span></span> i <span class="inlinecode"><span class="id" title="tactic">abstract</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2335,7 +2324,7 @@ Taktyka <span class="inlinecode"><span class="id" title="tactic">abstract</span>
     <span class="inlinecode"><span class="id" title="tactic">abstract</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab230"></a><h2 class="section">Procedury decyzyjne dla logiki</h2>
+<a name="lab231"></a><h2 class="section">Procedury decyzyjne dla logiki</h2>
 
 </div>
 <div class="code">
@@ -2437,7 +2426,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     konstruktywnego rachunku predykatów, z którymi problem ma <span class="inlinecode"><span class="id" title="tactic">intuition</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab231"></a><h4 class="section">Ćwiczenie (my_tauto)</h4>
+<a name="lab232"></a><h4 class="section">Ćwiczenie (my_tauto)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2464,7 +2453,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
 </div>
 
 <div class="doc">
-<a name="lab232"></a><h1 class="section">Pierścienie, ciała i arytmetyka</h1>
+<a name="lab233"></a><h1 class="section">Pierścienie, ciała i arytmetyka</h1>
 
 <div class="paragraph"> </div>
 
@@ -2487,7 +2476,8 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     Ciało (ang. field) to pierścień na sterydach, w którym poza dodawaniem,
     odejmowaniem i mnożeniem jest także dzielenie. Przykładami ciał są
     liczby wymierne oraz liczby rzeczywiste, ale nie liczby naturalne ani
-    całkowite. Je też kiedyś pewnie opiszę.
+    całkowite (bo dzielenie naturalne/całkowitoliczbowe nie jest odwrotnością
+    mnożenia). Je też kiedyś pewnie opiszę.
 
 <div class="paragraph"> </div>
 
@@ -2497,7 +2487,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     ciałach. 
 <div class="paragraph"> </div>
 
-<a name="lab233"></a><h4 class="section">Ćwiczenie (pierścienie i ciała)</h4>
+<a name="lab234"></a><h4 class="section">Ćwiczenie (pierścienie i ciała)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2505,10 +2495,194 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     https://coq.inria.fr/refman/ring.html 
 <div class="paragraph"> </div>
 
-<a name="lab234"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki</h1>
+<a name="lab235"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki</h1>
+
+<div class="paragraph"> </div>
+
+ TODO: napisać o co chodzi ze zmiennymi egzystencjalnymi. Opisać taktykę
+    <span class="inlinecode"><span class="id" title="tactic">evar</span></span> i wspomnieć o taktykach takich jak <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>, <span class="inlinecode"><span class="id" title="tactic">econstructor</span></span>,
+    <span class="inlinecode"><span class="id" title="tactic">eexists</span></span>, <span class="inlinecode"><span class="id" title="var">edestruct</span></span>, <span class="inlinecode"><span class="id" title="var">erewrite</span></span> etc., a także taktykę <span class="inlinecode"><span class="id" title="var">shelve</span></span>
+    i komendę <span class="inlinecode"><span class="id" title="var">Unshelve</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab236"></a><h1 class="section">Taktyki do radzenia sobie z typami zależnymi</h1>
+
+<div class="paragraph"> </div>
+
+ TODO: opisać taktyki <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">induction</span></span>, <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">inversion</span></span>,
+    <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">destruction</span></span>, <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> etc. 
+<div class="paragraph"> </div>
+
+<a name="lab237"></a><h1 class="section">Dodatkowe ćwiczenia</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab238"></a><h4 class="section">Ćwiczenie (assert)</h4>
+
+<div class="paragraph"> </div>
+
+ Znasz już taktyki <span class="inlinecode"><span class="id" title="tactic">assert</span></span>, <span class="inlinecode"><span class="id" title="tactic">cut</span></span> i <span class="inlinecode"><span class="id" title="tactic">specialize</span></span>. Okazuje się, że dwie
+    ostatnie są jedynie wariantami taktyki <span class="inlinecode"><span class="id" title="tactic">assert</span></span>. Przeczytaj w manualu
+    opis taktyki <span class="inlinecode"><span class="id" title="tactic">assert</span></span> i wszystkich jej wariantów. 
+<div class="paragraph"> </div>
+
+<a name="lab239"></a><h4 class="section">Ćwiczenie (easy i now)</h4>
+
+<div class="paragraph"> </div>
+
+ Taktykami, których nie miałem nigdy okazji użyć, są <span class="inlinecode"><span class="id" title="var">easy</span></span> i jej
+    wariant <span class="inlinecode"><span class="id" title="var">now</span></span>. Przeczytaj ich opisy w manualu. Zbadaj, czy są do
+    czegokolwiek przydatne oraz czy są wygodne w porównaniu z innymi
+    taktykami służącymi do podobnych celów. 
+<div class="paragraph"> </div>
+
+<a name="lab240"></a><h4 class="section">Ćwiczenie (inversion_sigma)</h4>
+
+<div class="paragraph"> </div>
+
+ Przeczytaj w manualu o wariantach taktyki <span class="inlinecode"><span class="id" title="tactic">inversion</span></span>. Szczególnie
+    interesująca wydaje się taktyka <span class="inlinecode"><span class="id" title="var">inversion_sigma</span></span>, która pojawiła
+    się w wersji 8.7 Coqa. Zbadaj ją. Wymyśl jakiś przykład jej użycia. 
+<div class="paragraph"> </div>
+
+<a name="lab241"></a><h4 class="section">Ćwiczenie (pattern)</h4>
+
+<div class="paragraph"> </div>
+
+ Przypomnijmy, że podstawą wszelkich obliczeń w Coqu jest redkucja
+    beta. Redukuje ona aplikację funkcji, np. <span class="inlinecode">(<span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode">2</span> <span class="inlinecode">*</span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode">42</span>
+    betaredukuje się do <span class="inlinecode">2</span> <span class="inlinecode">*</span> <span class="inlinecode">42</span>. Jej wykonywanie jest jednym z głównych
+    zadań taktyk obliczeniowych.
+
+<div class="paragraph"> </div>
+
+    Przeciwieństwem redukcji beta jest ekspansja beta. Pozwala ona zamienić
+    dowolny term na aplikację jakiejś funkcji do jakiegoś argumentu, np.
+    term <span class="inlinecode">2</span> <span class="inlinecode">*</span> <span class="inlinecode">42</span> można betaekspandować do <span class="inlinecode">(<span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode">2</span> <span class="inlinecode">*</span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode">42</span>.
+
+<div class="paragraph"> </div>
+
+    O ile redukcja beta jest trywialna do automatycznego wykonania, o tyle
+    ekspansja beta już nie, gdyż występuje tu duża dowolność. Dla przykładu,
+    term <span class="inlinecode">2</span> <span class="inlinecode">*</span> <span class="inlinecode">42</span> można też betaekspandować do <span class="inlinecode">(<span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">*</span> <span class="inlinecode">42)</span> <span class="inlinecode">2</span>.
+
+<div class="paragraph"> </div>
+
+    Ekspansję beta implementuje taktyka <span class="inlinecode"><span class="id" title="tactic">pattern</span></span>. Rozumowanie za jej pomocą
+    nie jest zbyt częstne, ale niemniej jednak kilka razy mi się przydało.
+    Przeczytaj opis taktyki <span class="inlinecode"><span class="id" title="tactic">pattern</span></span> w manuaulu.
+
+<div class="paragraph"> </div>
+
+    TODO: być może ćwiczenie to warto byłoby rozszerzyć do pełnoprawnego
+    podrozdziału. 
+<div class="paragraph"> </div>
+
+<a name="lab242"></a><h4 class="section">Ćwiczenie (arytmetyka)</h4>
+
+<div class="paragraph"> </div>
+
+ Poza taktykami radzącymi sobie z pierścieniami i ciałami jest też wiele
+    taktyk do walki z arytmetyką. Poza omówioną już taktyką <span class="inlinecode"><span class="id" title="tactic">omega</span></span> są to
+    <span class="inlinecode"><span class="id" title="var">lia</span></span>, <span class="inlinecode"><span class="id" title="var">nia</span></span>, <span class="inlinecode"><span class="id" title="var">lra</span></span>, <span class="inlinecode"><span class="id" title="var">nra</span></span>. Nazwy taktyk można zdekodować w następujący
+    sposób:
+<ul class="doclist">
+<li> l — linear
+
+</li>
+<li> n — nonlinar
+
+</li>
+<li> i — integer
+
+</li>
+<li> r — real/rational
+
+</li>
+<li> a — arithmetic 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Spróbuj ogarnąć, co one robią:
+    https://coq.inria.fr/refman/micromega.html 
+<div class="paragraph"> </div>
+
+<a name="lab243"></a><h4 class="section">Ćwiczenie (wyższa magia)</h4>
+
+<div class="paragraph"> </div>
+
+ Spróbuj ogarnąć, co robią taktyki <span class="inlinecode"><span class="id" title="var">nsatz</span></span>, <span class="inlinecode"><span class="id" title="var">psatz</span></span> i <span class="inlinecode"><span class="id" title="tactic">fourier</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab244"></a><h1 class="section">Inne języki taktyk</h1>
+
+<div class="paragraph"> </div>
+
+ TODO: napisać coś. 
+<div class="paragraph"> </div>
+
+<a name="lab245"></a><h4 class="section">Ćwiczenie (ssreflect)</h4>
+
+<div class="paragraph"> </div>
+
+ ssreflect to język taktyk oparty na <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span>u, ale mocno od niego odmienny,
+    zarówno pod względem filozoficznym jak i praktycznym. Dysponuje on swoim
+    własnym zestawem taktyk, bardzo mocno różniących się od taktyk opisanych
+    w niniejszym rozdziale.
+
+<div class="paragraph"> </div>
+
+    Od wersji 8.7 Coqa język ten jet dostępny w bibliotece standardowej, mimo
+    że nie jest z nią w pełni kompatybilny. Poświęcony mu rozdział manuala
+    dostępny jest tu: https://coq.inria.fr/refman/ssreflect.html
+
+<div class="paragraph"> </div>
+
+    Najbardziej wartościowym moim zdaniem elementem języka ssreflect jest
+    taktyka <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>, dużo potężniejsza od tej opisanej w tym rozdziale.
+    Jest ona warta uwagi, gdyż:
+<ul class="doclist">
+<li> daje jeszcze większą kontrolę nad przepisywaniem, niż standardowa
+      taktyka <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>
+
+</li>
+<li> pozwala łączyć kroki przepisywania z odwijaniem definicji i wykonywaniem
+      obliczeń, a więc zastępuje taktyki <span class="inlinecode"><span class="id" title="tactic">unfold</span></span>, <span class="inlinecode"><span class="id" title="tactic">fold</span></span>, <span class="inlinecode"><span class="id" title="tactic">change</span></span>, <span class="inlinecode"><span class="id" title="tactic">replace</span></span>,
+      <span class="inlinecode"><span class="id" title="var">cbn</span></span>, <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> etc.
+
+</li>
+<li> daje większe możliwości radzenia sobie z generowanymi przez siebie
+      podcelami 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Jeżeli nie chce ci się czytać na temat języka ssreflect, zapoznaj się
+    chociaż z jego taktyką <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>:
+    https://coq.inria.fr/refman/ssreflect.html#hevea_tactic265 
+<div class="paragraph"> </div>
+
+<a name="lab246"></a><h1 class="section">Konkluzja</h1>
+
+<div class="paragraph"> </div>
+
+ TODO: napisać coś. TODO: więcej linków.
+
+<div class="paragraph"> </div>
+
+    Jeżeli uważasz moje opisy taktyk za upośledzone, nie jesteś jeszcze
+    stracony! Opisy niektórych taktyk dostępne są też tu:
+<ul class="doclist">
+<li> pjreddie.com/coq-tactics/
+
+</li>
+<li> cs.cornell.edu/courses/cs3110/2017fa/a5/coq-tactics-cheatsheet.html 
+</li>
+</ul>
 
 </div>
 <div class="code">
-
-<br/>
 </div>
