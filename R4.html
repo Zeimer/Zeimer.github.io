@@ -22,16 +22,9 @@
 
 <div class="doc">
 
-</div>
-<div class="code">
+<div class="paragraph"> </div>
 
-<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-Stare powiedzenie głosi: nie wymyślaj koła na nowo. Aby uczynić zadość
+ Stare powiedzenie głosi: nie wymyślaj koła na nowo. Aby uczynić zadość
     duchom przodków, którzy je wymyślili (zarówno koło, jak i powiedzenie),
     w niniejszym rozdziale zapoznamy się z różnymi przydatnymi taktykami,
     które prędzej czy później i tak sami byśmy wymyślili, gdyby zaszła taka
@@ -2495,21 +2488,21 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     https://coq.inria.fr/refman/ring.html 
 <div class="paragraph"> </div>
 
-<a name="lab235"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki</h1>
+<a name="lab235"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki (TODO)</h1>
 
 <div class="paragraph"> </div>
 
- TODO: napisać o co chodzi ze zmiennymi egzystencjalnymi. Opisać taktykę
+ Napisać o co chodzi ze zmiennymi egzystencjalnymi. Opisać taktykę
     <span class="inlinecode"><span class="id" title="tactic">evar</span></span> i wspomnieć o taktykach takich jak <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>, <span class="inlinecode"><span class="id" title="tactic">econstructor</span></span>,
     <span class="inlinecode"><span class="id" title="tactic">eexists</span></span>, <span class="inlinecode"><span class="id" title="var">edestruct</span></span>, <span class="inlinecode"><span class="id" title="var">erewrite</span></span> etc., a także taktykę <span class="inlinecode"><span class="id" title="var">shelve</span></span>
     i komendę <span class="inlinecode"><span class="id" title="var">Unshelve</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab236"></a><h1 class="section">Taktyki do radzenia sobie z typami zależnymi</h1>
+<a name="lab236"></a><h1 class="section">Taktyki do radzenia sobie z typami zależnymi (TODO)</h1>
 
 <div class="paragraph"> </div>
 
- TODO: opisać taktyki <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">induction</span></span>, <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">inversion</span></span>,
+ Opisać taktyki <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">induction</span></span>, <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">inversion</span></span>,
     <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">destruction</span></span>, <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> etc. 
 <div class="paragraph"> </div>
 
@@ -2620,27 +2613,40 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
 
 <div class="paragraph"> </div>
 
- TODO: napisać coś. 
+ Ltac w pewnym sensie nie jest jedynym językiem taktyk, jakiego możemy
+    użyć do dowodzenia w Coqu — są inne. Głównymi konkurentami Ltaca są:
+<ul class="doclist">
+<li> Rtac: gmalecha.github.io/reflections/2016/rtac-technical-overview
+
+</li>
+<li> Mtac: plv.mpi-sws.org/mtac/
+
+</li>
+<li> ssreflect: coq.inria.fr/refman/ssreflect.html oraz
+      math-comp.github.io/math-comp/ 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Pierwsze dwa, <span class="inlinecode"><span class="id" title="var">Rtac</span></span> i <span class="inlinecode"><span class="id" title="var">Mtac</span></span>, faktycznie są osobnymi językami taktyk,
+    znacznie różniącymi się od Ltaca. Nie będziemy się nimi zajmować,
+    gdyż ich droga do praktycznej użyteczności jest jeszcze dość długa.
+
+<div class="paragraph"> </div>
+
+    ssreflect to nieco inna bajka. Nie jest on w zasadzie osobnym językiem
+    taktyk, lecz jest oparty na Ltacu. Różni się on od niego filozofią,
+    podstawowym zestawem taktyk i stylem dowodzenia. Od wersji 8.7 Coqa
+    język ten jet dostępny w bibliotece standardowej, mimo że nie jest z
+    nią w pełni kompatybilny. 
 <div class="paragraph"> </div>
 
 <a name="lab245"></a><h4 class="section">Ćwiczenie (ssreflect)</h4>
 
 <div class="paragraph"> </div>
 
- ssreflect to język taktyk oparty na <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span>u, ale mocno od niego odmienny,
-    zarówno pod względem filozoficznym jak i praktycznym. Dysponuje on swoim
-    własnym zestawem taktyk, bardzo mocno różniących się od taktyk opisanych
-    w niniejszym rozdziale.
-
-<div class="paragraph"> </div>
-
-    Od wersji 8.7 Coqa język ten jet dostępny w bibliotece standardowej, mimo
-    że nie jest z nią w pełni kompatybilny. Poświęcony mu rozdział manuala
-    dostępny jest tu: https://coq.inria.fr/refman/ssreflect.html
-
-<div class="paragraph"> </div>
-
-    Najbardziej wartościowym moim zdaniem elementem języka ssreflect jest
+ Najbardziej wartościowym moim zdaniem elementem języka ssreflect jest
     taktyka <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>, dużo potężniejsza od tej opisanej w tym rozdziale.
     Jest ona warta uwagi, gdyż:
 <ul class="doclist">
@@ -2660,29 +2666,37 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
 
 <div class="paragraph"> </div>
 
- Jeżeli nie chce ci się czytać na temat języka ssreflect, zapoznaj się
-    chociaż z jego taktyką <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>:
-    https://coq.inria.fr/refman/ssreflect.html#hevea_tactic265 
+ Przeczytaj rozdział manuala opisujący język ssreflect. Jeżeli nie
+    chce ci się tego robić, zapoznaj się chociaż z jego taktyką <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>:
+    coq.inria.fr/refman/ssreflect.html#hevea_tactic265 
 <div class="paragraph"> </div>
 
 <a name="lab246"></a><h1 class="section">Konkluzja</h1>
 
 <div class="paragraph"> </div>
 
- TODO: napisać coś. TODO: więcej linków.
-
-<div class="paragraph"> </div>
-
-    Jeżeli uważasz moje opisy taktyk za upośledzone, nie jesteś jeszcze
-    stracony! Opisy niektórych taktyk dostępne są też tu:
+ W niniejszym rozdziale przyjrzeliśmy się bliżej znacznej części Coqowych
+    taktyk. Moje ich opisanie nie jest aż tak kompletne i szczegółowe jak to
+    z manuala, ale nadrabia (mam nadzieję) wplecionymi w tekst przykładami i
+    zadaniami. Jeżeli jednak uważasz je za upośledzone, nie jesteś jeszcze
+    stracony! Alternatywne opisy niektórych taktyk dostępne są też tu:
 <ul class="doclist">
 <li> pjreddie.com/coq-tactics/
 
 </li>
-<li> cs.cornell.edu/courses/cs3110/2017fa/a5/coq-tactics-cheatsheet.html 
+<li> cs.cornell.edu/courses/cs3110/2017fa/a5/coq-tactics-cheatsheet.html
+
+</li>
+<li> typesofnote.com/posts/coq-cheat-sheet.html 
 </li>
 </ul>
 
+<div class="paragraph"> </div>
+
+ Poznawszy podstawy Ltaca oraz całe zoo przeróżnych taktyk, do zostania
+    pełnoprawnym inżynierem dowodu (ang. proof engineer, ukute przez analogię
+    do software engineer) brakuje ci jeszcze tylko umiejętności dowodzenia
+    przez reflekcję, którą zajmiemy się już niedługo. 
 </div>
 <div class="code">
 </div>
