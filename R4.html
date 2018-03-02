@@ -57,9 +57,10 @@
 <li> taktyki służące do przeprowadzania obliczeń
 
 </li>
-<li> procedury decyzyjne, które potrafią zupełnie same rozwiązać cele
-      należące do pewnej konkretnej klasy, np. cele dotyczące funkcji
-      boolowskich albo nierówności liniowych na liczbach całkowitych 
+<li> procedury decyzyjne
+
+</li>
+<li> ogólne taktyki służące do automatyzacji 
 </li>
 </ul>
 
@@ -1947,19 +1948,17 @@ Pozostałe warianty taktyki <span class="inlinecode"><span class="id" title="tac
 
 <div class="paragraph"> </div>
 
-<a name="lab219"></a><h1 class="section">Automatyzacja</h1>
+<a name="lab219"></a><h1 class="section">Procedury decyzyjne</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab220"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">auto</span></span> i <span class="inlinecode"><span class="id" title="tactic">trivial</span></span> (TODO)</h2>
-
+ Procedury decyzyjne to taktyki, które potrafią zupełnie same rozwiązywać
+    cele należące do pewnej konkretnej klasy, np. cele dotyczące funkcji
+    boolowskich albo nierówności liniowych na liczbach całkowitych. W tym
+    podrozdziale omówimy najprzydatniejsze z nich. 
 <div class="paragraph"> </div>
 
-<a name="lab221"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span> i <span class="inlinecode"><span class="id" title="var">autounfold</span></span> (TODO)</h2>
-
-<div class="paragraph"> </div>
-
-<a name="lab222"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">btauto</span></span></h2>
+<a name="lab220"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">btauto</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1973,7 +1972,7 @@ Pozostałe warianty taktyki <span class="inlinecode"><span class="id" title="tac
     potrafi ona wprowadzać zmiennych do kontekstu. 
 <div class="paragraph"> </div>
 
-<a name="lab223"></a><h4 class="section">Ćwiczenie (my_btauto)</h4>
+<a name="lab221"></a><h4 class="section">Ćwiczenie (my_btauto)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2065,7 +2064,7 @@ Przetestuj działanie swoich taktyk na reszcie twierdzeń z rozdziału
 </div>
 
 <div class="doc">
-<a name="lab224"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">congruence</span></span></h2>
+<a name="lab222"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">congruence</span></span></h2>
 
 </div>
 <div class="code">
@@ -2104,14 +2103,14 @@ Przetestuj działanie swoich taktyk na reszcie twierdzeń z rozdziału
     że konstruktory są injektywne i potrafi odróżnić <span class="inlinecode"><span class="id" title="var">true</span></span> od <span class="inlinecode"><span class="id" title="var">false</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab225"></a><h4 class="section">Ćwiczenie (congruence)</h4>
+<a name="lab223"></a><h4 class="section">Ćwiczenie (congruence)</h4>
 
 <div class="paragraph"> </div>
 
  Udowodnij przykłady <span class="inlinecode"><span class="id" title="var">congruence_1</span></span> i <span class="inlinecode"><span class="id" title="var">congruence_2</span></span> ręcznie. 
 <div class="paragraph"> </div>
 
-<a name="lab226"></a><h4 class="section">Ćwiczenie (discriminate)</h4>
+<a name="lab224"></a><h4 class="section">Ćwiczenie (discriminate)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2128,7 +2127,7 @@ Przetestuj działanie swoich taktyk na reszcie twierdzeń z rozdziału
 </div>
 
 <div class="doc">
-<a name="lab227"></a><h4 class="section">Ćwiczenie (injection i simplify_eq)</h4>
+<a name="lab225"></a><h4 class="section">Ćwiczenie (injection i simplify_eq)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2138,7 +2137,7 @@ Przetestuj działanie swoich taktyk na reszcie twierdzeń z rozdziału
     taktykami <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> i <span class="inlinecode"><span class="id" title="tactic">congruence</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab228"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">decide</span></span> <span class="inlinecode"><span class="id" title="var">equality</span></span></h2>
+<a name="lab226"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">decide</span></span> <span class="inlinecode"><span class="id" title="var">equality</span></span></h2>
 
 </div>
 <div class="code">
@@ -2186,7 +2185,7 @@ Zanim przejdziesz dalej, udowodnij ręcznie powyższe twierdzenie. Przyznasz,
 </div>
 
 <div class="doc">
-<a name="lab229"></a><h4 class="section">Ćwiczenie</h4>
+<a name="lab227"></a><h4 class="section">Ćwiczenie</h4>
 
 <div class="paragraph"> </div>
 
@@ -2194,7 +2193,7 @@ Zanim przejdziesz dalej, udowodnij ręcznie powyższe twierdzenie. Przyznasz,
     w manualu, co robi i jak działa. 
 <div class="paragraph"> </div>
 
-<a name="lab230"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">omega</span></span> i <span class="inlinecode"><span class="id" title="tactic">abstract</span></span></h2>
+<a name="lab228"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">omega</span></span> i <span class="inlinecode"><span class="id" title="tactic">abstract</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2317,7 +2316,7 @@ Taktyka <span class="inlinecode"><span class="id" title="tactic">abstract</span>
     <span class="inlinecode"><span class="id" title="tactic">abstract</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab231"></a><h2 class="section">Procedury decyzyjne dla logiki</h2>
+<a name="lab229"></a><h2 class="section">Procedury decyzyjne dla logiki</h2>
 
 </div>
 <div class="code">
@@ -2419,7 +2418,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     konstruktywnego rachunku predykatów, z którymi problem ma <span class="inlinecode"><span class="id" title="tactic">intuition</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab232"></a><h4 class="section">Ćwiczenie (my_tauto)</h4>
+<a name="lab230"></a><h4 class="section">Ćwiczenie (my_tauto)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2446,7 +2445,109 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
 </div>
 
 <div class="doc">
-<a name="lab233"></a><h1 class="section">Pierścienie, ciała i arytmetyka</h1>
+<a name="lab231"></a><h1 class="section">Ogólne taktyki automatyzacyjne</h1>
+
+<div class="paragraph"> </div>
+
+ W tym podrozdziale omówimy pozostałe taktyki przydające się przy
+    automatyzacji. Ich cechą wspólną jest rozszerzalność — za pomocą
+    specjalnych baz podpowiedzi będziemy mogli nauczyć je radzić sobie
+    z każdym celem. 
+<div class="paragraph"> </div>
+
+<a name="lab232"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">auto</span></span> i <span class="inlinecode"><span class="id" title="tactic">trivial</span></span> (TODO)</h2>
+
+<div class="paragraph"> </div>
+
+ <span class="inlinecode"><span class="id" title="tactic">auto</span></span> jest najbardziej ogólną taktyką służącą do automatyzacji. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="auto_ex0"><span class="id" title="definition">auto_ex0</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">P</span> : <span class="id" title="keyword">Prop</span>), <a class="idref" href="R4.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#P"><span class="id" title="variable">P</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="auto_ex1"><span class="id" title="definition">auto_ex1</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> <span class="id" title="var">D</span> <span class="id" title="var">E</span> : <span class="id" title="keyword">Prop</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R4.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R4.html#B"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#C"><span class="id" title="variable">C</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R4.html#C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#D"><span class="id" title="variable">D</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R4.html#D"><span class="id" title="variable">D</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#E"><span class="id" title="variable">E</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#E"><span class="id" title="variable">E</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="auto_ex2"><span class="id" title="definition">auto_ex2</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">x</span> : <a class="idref" href="R4.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="R4.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R4.html#x"><span class="id" title="variable">x</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="auto_ex3"><span class="id" title="definition">auto_ex3</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="R4.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="R4.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R4.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R4.html#x"><span class="id" title="variable">x</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="tactic">auto</span></span> potrafi używać założeń, aplikować hipotezy i zna podstawowe
+    własności równości — całkiem nieźle. Wprawdzie nie wystarczy to do
+    udowodnienia żadnego nietrywialnego twierdzenia, ale przyda się z
+    pewnością do rozwiązywania prostych podcelów generowanych przez
+    inne taktyki. Często spotykanym idiomem jest <span class="inlinecode"><span class="id" title="var">t</span>;</span> <span class="inlinecode"><span class="id" title="tactic">auto</span></span> — "użyj
+    taktyki <span class="inlinecode"><span class="id" title="var">t</span></span> i pozbądź się prostych podcelów za pomocą <span class="inlinecode"><span class="id" title="tactic">auto</span></span>". 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="auto_ex4"><span class="id" title="definition">auto_ex4</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> <span class="id" title="var">D</span> <span class="id" title="var">E</span> <span class="id" title="var">F</span> : <span class="id" title="keyword">Prop</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R4.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R4.html#B"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#C"><span class="id" title="variable">C</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R4.html#C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#D"><span class="id" title="variable">D</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R4.html#D"><span class="id" title="variable">D</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#E"><span class="id" title="variable">E</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="R4.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#F"><span class="id" title="variable">F</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#F"><span class="id" title="variable">F</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">auto</span> 6.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Nietrudno jednak znaleźć cel, z którym <span class="inlinecode"><span class="id" title="tactic">auto</span></span> nie jest w stanie sobie
+    poradzić. Powyższa porażka może się wydawać zaskakująca, gdyż <span class="inlinecode"><span class="id" title="tactic">auto</span></span>
+    potrafiło rozwiązać bliźniaczo podobny cel <span class="inlinecode"><span class="id" title="var">auto_ex1</span></span>. Okazuje się
+    jednak, że zbyt wiele implikacji to dla <span class="inlinecode"><span class="id" title="tactic">auto</span></span> (a przynajmniej jego
+    podstawowego wariantu) mur nie do przejścia.
+
+<div class="paragraph"> </div>
+
+    Wynika to ze sposobu działania tej taktyki. <span class="inlinecode"><span class="id" title="tactic">auto</span></span> szuka dowodu mniej
+    lub bardziej na ślepo — wykonuje pierwszy z brzegu możliwy krok, po
+    czym sprawdza, czy to rozwiązuje cel. Jeżeli nie, wykonuje kolejne
+    kroki, a jeżeli nie da się już nic więcej zrobić, wykonuje nawrót i
+    próbuje dowodzić w inny sposób. 
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="auto_ex5"><span class="id" title="definition">auto_ex5</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> : <a class="idref" href="R4.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="R4.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R4.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R4.html#z"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="R4.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R4.html#z"><span class="id" title="variable">z</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+TODO 
+<div class="paragraph"> </div>
+
+<a name="lab233"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span> i <span class="inlinecode"><span class="id" title="var">autounfold</span></span> (TODO)</h2>
+
+<div class="paragraph"> </div>
+
+<a name="lab234"></a><h1 class="section">Pierścienie, ciała i arytmetyka</h1>
 
 <div class="paragraph"> </div>
 
@@ -2480,7 +2581,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     ciałach. 
 <div class="paragraph"> </div>
 
-<a name="lab234"></a><h4 class="section">Ćwiczenie (pierścienie i ciała)</h4>
+<a name="lab235"></a><h4 class="section">Ćwiczenie (pierścienie i ciała)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2488,7 +2589,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     https://coq.inria.fr/refman/ring.html 
 <div class="paragraph"> </div>
 
-<a name="lab235"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki (TODO)</h1>
+<a name="lab236"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki (TODO)</h1>
 
 <div class="paragraph"> </div>
 
@@ -2498,7 +2599,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     i komendę <span class="inlinecode"><span class="id" title="var">Unshelve</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab236"></a><h1 class="section">Taktyki do radzenia sobie z typami zależnymi (TODO)</h1>
+<a name="lab237"></a><h1 class="section">Taktyki do radzenia sobie z typami zależnymi (TODO)</h1>
 
 <div class="paragraph"> </div>
 
@@ -2506,11 +2607,11 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">destruction</span></span>, <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> etc. 
 <div class="paragraph"> </div>
 
-<a name="lab237"></a><h1 class="section">Dodatkowe ćwiczenia</h1>
+<a name="lab238"></a><h1 class="section">Dodatkowe ćwiczenia</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab238"></a><h4 class="section">Ćwiczenie (assert)</h4>
+<a name="lab239"></a><h4 class="section">Ćwiczenie (assert)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2519,7 +2620,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     opis taktyki <span class="inlinecode"><span class="id" title="tactic">assert</span></span> i wszystkich jej wariantów. 
 <div class="paragraph"> </div>
 
-<a name="lab239"></a><h4 class="section">Ćwiczenie (easy i now)</h4>
+<a name="lab240"></a><h4 class="section">Ćwiczenie (easy i now)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2529,7 +2630,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     taktykami służącymi do podobnych celów. 
 <div class="paragraph"> </div>
 
-<a name="lab240"></a><h4 class="section">Ćwiczenie (inversion_sigma)</h4>
+<a name="lab241"></a><h4 class="section">Ćwiczenie (inversion_sigma)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2538,7 +2639,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     się w wersji 8.7 Coqa. Zbadaj ją. Wymyśl jakiś przykład jej użycia. 
 <div class="paragraph"> </div>
 
-<a name="lab241"></a><h4 class="section">Ćwiczenie (pattern)</h4>
+<a name="lab242"></a><h4 class="section">Ćwiczenie (pattern)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2571,7 +2672,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     podrozdziału. 
 <div class="paragraph"> </div>
 
-<a name="lab242"></a><h4 class="section">Ćwiczenie (arytmetyka)</h4>
+<a name="lab243"></a><h4 class="section">Ćwiczenie (arytmetyka)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2602,14 +2703,14 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     https://coq.inria.fr/refman/micromega.html 
 <div class="paragraph"> </div>
 
-<a name="lab243"></a><h4 class="section">Ćwiczenie (wyższa magia)</h4>
+<a name="lab244"></a><h4 class="section">Ćwiczenie (wyższa magia)</h4>
 
 <div class="paragraph"> </div>
 
  Spróbuj ogarnąć, co robią taktyki <span class="inlinecode"><span class="id" title="var">nsatz</span></span>, <span class="inlinecode"><span class="id" title="var">psatz</span></span> i <span class="inlinecode"><span class="id" title="tactic">fourier</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab244"></a><h1 class="section">Inne języki taktyk</h1>
+<a name="lab245"></a><h1 class="section">Inne języki taktyk</h1>
 
 <div class="paragraph"> </div>
 
@@ -2642,7 +2743,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     nią w pełni kompatybilny. 
 <div class="paragraph"> </div>
 
-<a name="lab245"></a><h4 class="section">Ćwiczenie (ssreflect)</h4>
+<a name="lab246"></a><h4 class="section">Ćwiczenie (ssreflect)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2671,7 +2772,7 @@ Jednak nawet <span class="inlinecode"><span class="id" title="tactic">intuition<
     coq.inria.fr/refman/ssreflect.html#hevea_tactic265 
 <div class="paragraph"> </div>
 
-<a name="lab246"></a><h1 class="section">Konkluzja</h1>
+<a name="lab247"></a><h1 class="section">Konkluzja</h1>
 
 <div class="paragraph"> </div>
 
