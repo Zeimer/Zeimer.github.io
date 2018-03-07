@@ -2789,7 +2789,7 @@ A tak wygląda wersja <span class="inlinecode"><span class="id" title="keyword">
     Jest to dobry moment, by opisać dokładniej działanie taktyki <span class="inlinecode"><span class="id" title="tactic">auto</span></span>.
     <span class="inlinecode"><span class="id" title="tactic">auto</span></span> najpierw próbuje rozwiązać cel za pomocą taktyki <span class="inlinecode"><span class="id" title="tactic">assumption</span></span>.
     Jeżeli się to nie powiedzie, to <span class="inlinecode"><span class="id" title="tactic">auto</span></span> używa taktyki <span class="inlinecode"><span class="id" title="tactic">intros</span></span>, a
-    następnie tymczasowo dodaje do bazy podpowiedzi wszystkie hipotezy.
+    następnie dodaje do tymczasowej bazy podpowiedzi wszystkie hipotezy.
     Następnie przeszukuje ona bazę podpowiedzi dopasowując cel do wzorca
     stowarzyszonego z każdą podpowiedzią, zaczynając od podpowiedzi o
     najmniejszym koszcie (podpowiedzi pochodzące od komend <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Resolve</span></span>
@@ -2822,17 +2822,180 @@ A tak wygląda wersja <span class="inlinecode"><span class="id" title="keyword">
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">trivial</span>. <span class="id" title="keyword">Abort</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Example</span> <a name="trivial_ex5"><span class="id" title="definition">trivial_ex5</span></a> : <a class="idref" href="R4.html#even"><span class="id" title="inductive">even</span></a> 0.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">trivial</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="trivial_ex5'"><span class="id" title="definition">trivial_ex5'</span></a> : <a class="idref" href="R4.html#even"><span class="id" title="inductive">even</span></a> 8.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">trivial</span>. <span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
 </div>
 
 <div class="doc">
-TODO 
+Taktyka <span class="inlinecode"><span class="id" title="tactic">trivial</span></span>, którą już znasz, działa dokładnie tak samo jak <span class="inlinecode"><span class="id" title="tactic">auto</span></span>,
+    ale jest nierekurencyjna. To tłumaczy, dlaczego potrafi ona posługiwać
+    się założeniami i zna właciwości równości, ale nie umie używać implikacji
+    i nie radzi sobie z celami pokroju <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode">8</span>, mimo że potrafi udowodnić
+    <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode">0</span>. 
 <div class="paragraph"> </div>
 
-<a name="lab233"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span> i <span class="inlinecode"><span class="id" title="var">autounfold</span></span> (TODO)</h2>
+<a name="lab233"></a><h4 class="section">Ćwiczenie (auto i trivial)</h4>
 
 <div class="paragraph"> </div>
 
-<a name="lab234"></a><h1 class="section">Pierścienie, ciała i arytmetyka</h1>
+ Przeczytaj w manualu dokładny opis działania taktyk <span class="inlinecode"><span class="id" title="tactic">auto</span></span> oraz <span class="inlinecode"><span class="id" title="tactic">trivial</span></span>:
+    https://coq.inria.fr/refman/tactics.html#hevea_tactic161 
+<div class="paragraph"> </div>
+
+<a name="lab234"></a><h2 class="section"><span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span> i <span class="inlinecode"><span class="id" title="var">autounfold</span></span></h2>
+
+<div class="paragraph"> </div>
+
+ <span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span> to bardzo pożyteczna taktyka umożliwiająca zautomatyzowanie
+    części dowodów opierających się na przepisywaniu.
+
+<div class="paragraph"> </div>
+
+    Dlaczego tylko części? Zastanówmy się, jak zazwyczaj przebiegają dowody
+    przez przepisywanie. W moim odczuciu są dwa rodzaje takich dowodów:
+<ul class="doclist">
+<li> dowody pierwszego rodzaju to te, w których wszystkie przepisania mają
+      charakter upraszczający i dzięki temu możemy przepisywać zupełnie
+      bezmyślnie
+
+</li>
+<li> dowody drugiego rodzaju to te, w których niektóre przepisania nie mają
+      charakteru upraszczającego albo muszą zostać wykonane bardzo precyzyjnie.
+      W takich przypadkach nie możemy przepisywać bezmyślnie, bo grozi to
+      zapętleniem taktyki <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> lub po prostu porażką 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Dowody pierwszego rodzaju ze względu na swoją bezmyślność są dobrymi
+    kandydatami do automatyzacji. Właśnie tutaj do gry wkracza taktyka
+    <span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="autorewrite_ex"><span class="id" title="section">autorewrite_ex</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Variable</span> <a name="autorewrite_ex.A"><span class="id" title="variable">A</span></a> : <span class="id" title="keyword">Type</span>.<br/>
+<span class="id" title="keyword">Variable</span> <a name="autorewrite_ex.l1"><span class="id" title="variable">l1</span></a> <a name="autorewrite_ex.l2"><span class="id" title="variable">l2</span></a> <a name="autorewrite_ex.l3"><span class="id" title="variable">l3</span></a> <a name="autorewrite_ex.l4"><span class="id" title="variable">l4</span></a> <a name="autorewrite_ex.l5"><span class="id" title="variable">l5</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="R4.html#autorewrite_ex.A"><span class="id" title="variable">A</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Zacznijmy od przykładu (a raczej ćwiczenia): udowodnij poniższe
+    twierdzenie. Następnie udowodnij je w jednej linijce. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="autorewrite_intro"><span class="id" title="definition">autorewrite_intro</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="R4.html#autorewrite_ex.l1"><span class="id" title="variable">l1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l2"><span class="id" title="variable">l2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l3"><span class="id" title="variable">l3</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l4"><span class="id" title="variable">l4</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l5"><span class="id" title="variable">l5</span></a>)) <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l5"><span class="id" title="variable">l5</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="R4.html#autorewrite_ex.l1"><span class="id" title="variable">l1</span></a>)) <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">(</span></a><a class="idref" href="R4.html#autorewrite_ex.l3"><span class="id" title="variable">l3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l2"><span class="id" title="variable">l2</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">))</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l4"><span class="id" title="variable">l4</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Ten dowód nie był zbyt twórczy ani przyjemny, prawda? Wyobraź sobie
+    teraz, co by było, gdybyś musiał udowodnić 100 takich twierdzeń (i
+    to w czasach, gdy jeszcze nie można było pisać <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> <span class="inlinecode">?<span class="id" title="var">t_0</span>,</span> <span class="inlinecode">...,</span> <span class="inlinecode">?<span class="id" title="var">t_n</span></span>).
+    Jest to dość ponura wizja. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Hint Rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev_app_distr"><span class="id" title="lemma">rev_app_distr</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev_involutive"><span class="id" title="lemma">rev_involutive</span></a> : <span class="id" title="var">list_rw</span>.<br/>
+<span class="id" title="keyword">Hint Rewrite</span> &lt;- <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#app_assoc"><span class="id" title="lemma">app_assoc</span></a> : <span class="id" title="var">list_rw</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="autorewrite_ex"><span class="id" title="definition">autorewrite_ex</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="R4.html#autorewrite_ex.l1"><span class="id" title="variable">l1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l2"><span class="id" title="variable">l2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l3"><span class="id" title="variable">l3</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l4"><span class="id" title="variable">l4</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l5"><span class="id" title="variable">l5</span></a>)) <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l5"><span class="id" title="variable">l5</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="R4.html#autorewrite_ex.l1"><span class="id" title="variable">l1</span></a>)) <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">(</span></a><a class="idref" href="R4.html#autorewrite_ex.l3"><span class="id" title="variable">l3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l2"><span class="id" title="variable">l2</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">))</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Lists.List.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="R4.html#autorewrite_ex.l4"><span class="id" title="variable">l4</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">autorewrite</span> <span class="id" title="keyword">with</span> <span class="id" title="var">list_rw</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="R4.html#autorewrite_ex"><span class="id" title="section">autorewrite_ex</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Rewrite</span></span> <span class="inlinecode">[&lt;-]</span> <span class="inlinecode"><span class="id" title="var">ident_0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">ident_n</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">db_name</span></span> dodaje
+    podpowiedzi <span class="inlinecode"><span class="id" title="var">ident_0</span></span>, ..., <span class="inlinecode"><span class="id" title="var">ident_n</span></span> do bazy podpowidzi <span class="inlinecode"><span class="id" title="var">db_nam</span></span>.
+    Domyślnie będą one przepisywane z lewa na prawo, chyba że dodamy
+    przełącznik <span class="inlinecode">&lt;-</span> — wtedy wszystkie będą przepisywane z prawa na
+    lewo. W szczególności znaczy to, że jeżeli chcemy niektóre lematy
+    przepisywać w jedną stronę, a inne w drugą, to musimy komendy
+    <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Rewrite</span></span> użyć dwukrotnie.
+
+<div class="paragraph"> </div>
+
+    Sama taktyka <span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> <span class="inlinecode"><span class="id" title="var">db_0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">db_n</span></span> przepisuje lematy ze
+    wszystkich baz podpowiedzi <span class="inlinecode"><span class="id" title="var">db_0</span></span>, ..., <span class="inlinecode"><span class="id" title="var">db_n</span></span> tak długo, jak to
+    tylko możliwe (czyli tak długo, jak przepisywanie skutkuje dokonaniem
+    postępu).
+
+<div class="paragraph"> </div>
+
+    Jest kilka ważnych cech, które powinna posiadać baza podpowiedzi:
+<ul class="doclist">
+<li> przede wszystkim nie może zawierać tego samego twierdzenia do
+      przepisywania w obydwie strony. Jeżeli tak się stanie, taktyka
+      <span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span> się zapętli, gdyż przepisanie tego twierdzenia w
+      jedną lub drugą stronę zawsze będzie możliwe
+
+</li>
+<li> w ogólności, nie może zawierać żadnego zbioru twierdzeń, których
+      przepisywanie powoduje zapętlenie
+
+</li>
+<li> baza powinna być deterministyczna, tzn. jedne przepisania nie
+      powinny blokować kolejnych
+
+</li>
+<li> wszystkie przepisywania powinny być upraszczające 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Oczywiście dwa ostatnie kryteria nie są zbyt ścisłe — ciężko sprawdzić
+    determinizm systemu przepisywania, zaś samo pojęcie "uproszczenia" jest
+    bardzo zwodnicze i niejasne. 
+<div class="paragraph"> </div>
+
+<a name="lab235"></a><h4 class="section">Ćwiczenie (autorewrite)</h4>
+
+<div class="paragraph"> </div>
+
+ Przeczytaj opis taktyki <span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span> w manualu:
+    https://coq.inria.fr/refman/tactics.html#hevea_tactic165 
+<div class="paragraph"> </div>
+
+ TODO 
+<div class="paragraph"> </div>
+
+<a name="lab236"></a><h4 class="section">Ćwiczenie (bazy podpowiedzi)</h4>
+
+<div class="paragraph"> </div>
+
+ Przeczytaj w manualu dokładny opis działania systemu baz podowiedzi
+    oraz komend pozwalających go kontrolować:
+    https://coq.inria.fr/refman/tactics.html#sec415 
+<div class="paragraph"> </div>
+
+<a name="lab237"></a><h1 class="section">Pierścienie, ciała i arytmetyka</h1>
 
 <div class="paragraph"> </div>
 
@@ -2866,7 +3029,7 @@ TODO
     ciałach. 
 <div class="paragraph"> </div>
 
-<a name="lab235"></a><h4 class="section">Ćwiczenie (pierścienie i ciała)</h4>
+<a name="lab238"></a><h4 class="section">Ćwiczenie (pierścienie i ciała)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2874,7 +3037,7 @@ TODO
     https://coq.inria.fr/refman/ring.html 
 <div class="paragraph"> </div>
 
-<a name="lab236"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki (TODO)</h1>
+<a name="lab239"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki (TODO)</h1>
 
 <div class="paragraph"> </div>
 
@@ -2884,7 +3047,7 @@ TODO
     i komendę <span class="inlinecode"><span class="id" title="var">Unshelve</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab237"></a><h1 class="section">Taktyki do radzenia sobie z typami zależnymi (TODO)</h1>
+<a name="lab240"></a><h1 class="section">Taktyki do radzenia sobie z typami zależnymi (TODO)</h1>
 
 <div class="paragraph"> </div>
 
@@ -2892,11 +3055,11 @@ TODO
     <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">destruction</span></span>, <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> etc. 
 <div class="paragraph"> </div>
 
-<a name="lab238"></a><h1 class="section">Dodatkowe ćwiczenia</h1>
+<a name="lab241"></a><h1 class="section">Dodatkowe ćwiczenia</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab239"></a><h4 class="section">Ćwiczenie (assert)</h4>
+<a name="lab242"></a><h4 class="section">Ćwiczenie (assert)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2905,7 +3068,7 @@ TODO
     opis taktyki <span class="inlinecode"><span class="id" title="tactic">assert</span></span> i wszystkich jej wariantów. 
 <div class="paragraph"> </div>
 
-<a name="lab240"></a><h4 class="section">Ćwiczenie (easy i now)</h4>
+<a name="lab243"></a><h4 class="section">Ćwiczenie (easy i now)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2915,7 +3078,7 @@ TODO
     taktykami służącymi do podobnych celów. 
 <div class="paragraph"> </div>
 
-<a name="lab241"></a><h4 class="section">Ćwiczenie (inversion_sigma)</h4>
+<a name="lab244"></a><h4 class="section">Ćwiczenie (inversion_sigma)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2924,7 +3087,7 @@ TODO
     się w wersji 8.7 Coqa. Zbadaj ją. Wymyśl jakiś przykład jej użycia. 
 <div class="paragraph"> </div>
 
-<a name="lab242"></a><h4 class="section">Ćwiczenie (pattern)</h4>
+<a name="lab245"></a><h4 class="section">Ćwiczenie (pattern)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2957,7 +3120,7 @@ TODO
     podrozdziału. 
 <div class="paragraph"> </div>
 
-<a name="lab243"></a><h4 class="section">Ćwiczenie (arytmetyka)</h4>
+<a name="lab246"></a><h4 class="section">Ćwiczenie (arytmetyka)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2988,14 +3151,14 @@ TODO
     https://coq.inria.fr/refman/micromega.html 
 <div class="paragraph"> </div>
 
-<a name="lab244"></a><h4 class="section">Ćwiczenie (wyższa magia)</h4>
+<a name="lab247"></a><h4 class="section">Ćwiczenie (wyższa magia)</h4>
 
 <div class="paragraph"> </div>
 
  Spróbuj ogarnąć, co robią taktyki <span class="inlinecode"><span class="id" title="var">nsatz</span></span>, <span class="inlinecode"><span class="id" title="var">psatz</span></span> i <span class="inlinecode"><span class="id" title="tactic">fourier</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab245"></a><h1 class="section">Inne języki taktyk</h1>
+<a name="lab248"></a><h1 class="section">Inne języki taktyk</h1>
 
 <div class="paragraph"> </div>
 
@@ -3028,7 +3191,7 @@ TODO
     nią w pełni kompatybilny. 
 <div class="paragraph"> </div>
 
-<a name="lab246"></a><h4 class="section">Ćwiczenie (ssreflect)</h4>
+<a name="lab249"></a><h4 class="section">Ćwiczenie (ssreflect)</h4>
 
 <div class="paragraph"> </div>
 
@@ -3057,7 +3220,7 @@ TODO
     coq.inria.fr/refman/ssreflect.html#hevea_tactic265 
 <div class="paragraph"> </div>
 
-<a name="lab247"></a><h1 class="section">Konkluzja</h1>
+<a name="lab250"></a><h1 class="section">Konkluzja</h1>
 
 <div class="paragraph"> </div>
 
