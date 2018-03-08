@@ -1938,16 +1938,6 @@ Pozostałe warianty taktyki <span class="inlinecode"><span class="id" title="tac
 
 <div class="paragraph"> </div>
 
- Omówić następujące rzeczy:
-<ul class="doclist">
-<li> <span class="inlinecode"><span class="id" title="var">cbn</span></span>, <span class="inlinecode"><span class="id" title="tactic">cbv</span></span>, <span class="inlinecode"><span class="id" title="tactic">simpl</span></span>, <span class="inlinecode"><span class="id" title="tactic">hnf</span></span>, <span class="inlinecode"><span class="id" title="tactic">compute</span></span>, <span class="inlinecode"><span class="id" title="keyword">vm_compute</span></span>,
-      <span class="inlinecode"><span class="id" title="var">native_compute</span></span>, <span class="inlinecode"><span class="id" title="tactic">lazy</span></span>, <span class="inlinecode"><span class="id" title="tactic">red</span></span> i inne taktyki do redukcji.
-
-</li>
-</ul>
-
-<div class="paragraph"> </div>
-
 <a name="lab219"></a><h1 class="section">Procedury decyzyjne</h1>
 
 <div class="paragraph"> </div>
@@ -2981,21 +2971,72 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
 
  Przeczytaj opis taktyki <span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span> w manualu:
     https://coq.inria.fr/refman/tactics.html#hevea_tactic165 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="autounfold_ex"><span class="id" title="section">autounfold_ex</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="wut"><span class="id" title="definition">wut</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> := 1.<br/>
+<span class="id" title="keyword">Definition</span> <a name="wut'"><span class="id" title="definition">wut'</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> := 1.<br/>
+
+<br/>
+<span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="R4.html#wut"><span class="id" title="definition">wut</span></a> <a class="idref" href="R4.html#wut'"><span class="id" title="definition">wut'</span></a> : <span class="id" title="var">wut_db</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="autounfold_ex"><span class="id" title="definition">autounfold_ex</span></a> : <a class="idref" href="R4.html#wut"><span class="id" title="definition">wut</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="R4.html#wut'"><span class="id" title="definition">wut'</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">autounfold</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">autounfold</span> <span class="id" title="keyword">with</span> <span class="id" title="var">wut_db</span>.<br/>
+<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Na koniec omówimy taktykę <span class="inlinecode"><span class="id" title="var">autounfold</span></span>. Działa ona na podobnej zasadzie
+    jak <span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span>. Za pomocą komendy <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Unfold</span></span> dodajemy definicje do
+    do bazy podpowiedzi, dzięki czemu taktyka <span class="inlinecode"><span class="id" title="var">autounfold</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> <span class="inlinecode"><span class="id" title="var">db_0</span>,</span> <span class="inlinecode">...,</span> <span class="inlinecode"><span class="id" title="var">db_n</span></span>
+    potrafi odwinąć wszystkie definicje z baz <span class="inlinecode"><span class="id" title="var">db_0</span></span>, ..., <span class="inlinecode"><span class="id" title="var">db_n</span></span>.
+
 <div class="paragraph"> </div>
 
- TODO 
+    Jak pokazuje nasz głupi przykład, jest ona średnio użyteczna, gdyż taktyka
+    <span class="inlinecode"><span class="id" title="tactic">auto</span></span> potrafi (przynajmniej do pewnego stopnia) odwijać definicje. Moim
+    zdaniem najlepiej sprawdza się ona w zestawieniu z taktyką <span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span>
+    i kombinatorem <span class="inlinecode"><span class="id" title="tactic">repeat</span></span>, gdy potrzebujemy na przemian przepisywać lematy
+    i odwijać definicje. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="R4.html#autounfold_ex"><span class="id" title="section">autounfold_ex</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab236"></a><h4 class="section">Ćwiczenie (autounfold)</h4>
+
 <div class="paragraph"> </div>
 
-<a name="lab236"></a><h4 class="section">Ćwiczenie (bazy podpowiedzi)</h4>
+ Przeczytaj w manualu opis taktyki <span class="inlinecode"><span class="id" title="var">autounfold</span></span>:
+    https://coq.inria.fr/refman/tactics.html#hevea_tactic164 
+<div class="paragraph"> </div>
+
+<a name="lab237"></a><h4 class="section">Ćwiczenie (bazy podpowiedzi)</h4>
 
 <div class="paragraph"> </div>
 
- Przeczytaj w manualu dokładny opis działania systemu baz podowiedzi
+ Przeczytaj w manualu dokładny opis działania systemu baz podpowiedzi
     oraz komend pozwalających go kontrolować:
     https://coq.inria.fr/refman/tactics.html#sec415 
 <div class="paragraph"> </div>
 
-<a name="lab237"></a><h1 class="section">Pierścienie, ciała i arytmetyka</h1>
+<a name="lab238"></a><h1 class="section">Pierścienie, ciała i arytmetyka</h1>
 
 <div class="paragraph"> </div>
 
@@ -3029,7 +3070,7 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
     ciałach. 
 <div class="paragraph"> </div>
 
-<a name="lab238"></a><h4 class="section">Ćwiczenie (pierścienie i ciała)</h4>
+<a name="lab239"></a><h4 class="section">Ćwiczenie (pierścienie i ciała)</h4>
 
 <div class="paragraph"> </div>
 
@@ -3037,7 +3078,7 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
     https://coq.inria.fr/refman/ring.html 
 <div class="paragraph"> </div>
 
-<a name="lab239"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki (TODO)</h1>
+<a name="lab240"></a><h1 class="section">Zmienne egzystencjalne i ich taktyki (TODO)</h1>
 
 <div class="paragraph"> </div>
 
@@ -3047,7 +3088,7 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
     i komendę <span class="inlinecode"><span class="id" title="var">Unshelve</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab240"></a><h1 class="section">Taktyki do radzenia sobie z typami zależnymi (TODO)</h1>
+<a name="lab241"></a><h1 class="section">Taktyki do radzenia sobie z typami zależnymi (TODO)</h1>
 
 <div class="paragraph"> </div>
 
@@ -3055,11 +3096,11 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
     <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">destruction</span></span>, <span class="inlinecode"><span class="id" title="tactic">dependent</span></span> <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> etc. 
 <div class="paragraph"> </div>
 
-<a name="lab241"></a><h1 class="section">Dodatkowe ćwiczenia</h1>
+<a name="lab242"></a><h1 class="section">Dodatkowe ćwiczenia</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab242"></a><h4 class="section">Ćwiczenie (assert)</h4>
+<a name="lab243"></a><h4 class="section">Ćwiczenie (assert)</h4>
 
 <div class="paragraph"> </div>
 
@@ -3068,7 +3109,7 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
     opis taktyki <span class="inlinecode"><span class="id" title="tactic">assert</span></span> i wszystkich jej wariantów. 
 <div class="paragraph"> </div>
 
-<a name="lab243"></a><h4 class="section">Ćwiczenie (easy i now)</h4>
+<a name="lab244"></a><h4 class="section">Ćwiczenie (easy i now)</h4>
 
 <div class="paragraph"> </div>
 
@@ -3078,7 +3119,7 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
     taktykami służącymi do podobnych celów. 
 <div class="paragraph"> </div>
 
-<a name="lab244"></a><h4 class="section">Ćwiczenie (inversion_sigma)</h4>
+<a name="lab245"></a><h4 class="section">Ćwiczenie (inversion_sigma)</h4>
 
 <div class="paragraph"> </div>
 
@@ -3087,7 +3128,7 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
     się w wersji 8.7 Coqa. Zbadaj ją. Wymyśl jakiś przykład jej użycia. 
 <div class="paragraph"> </div>
 
-<a name="lab245"></a><h4 class="section">Ćwiczenie (pattern)</h4>
+<a name="lab246"></a><h4 class="section">Ćwiczenie (pattern)</h4>
 
 <div class="paragraph"> </div>
 
@@ -3120,7 +3161,7 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
     podrozdziału. 
 <div class="paragraph"> </div>
 
-<a name="lab246"></a><h4 class="section">Ćwiczenie (arytmetyka)</h4>
+<a name="lab247"></a><h4 class="section">Ćwiczenie (arytmetyka)</h4>
 
 <div class="paragraph"> </div>
 
@@ -3151,14 +3192,14 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
     https://coq.inria.fr/refman/micromega.html 
 <div class="paragraph"> </div>
 
-<a name="lab247"></a><h4 class="section">Ćwiczenie (wyższa magia)</h4>
+<a name="lab248"></a><h4 class="section">Ćwiczenie (wyższa magia)</h4>
 
 <div class="paragraph"> </div>
 
  Spróbuj ogarnąć, co robią taktyki <span class="inlinecode"><span class="id" title="var">nsatz</span></span>, <span class="inlinecode"><span class="id" title="var">psatz</span></span> i <span class="inlinecode"><span class="id" title="tactic">fourier</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab248"></a><h1 class="section">Inne języki taktyk</h1>
+<a name="lab249"></a><h1 class="section">Inne języki taktyk</h1>
 
 <div class="paragraph"> </div>
 
@@ -3191,7 +3232,7 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
     nią w pełni kompatybilny. 
 <div class="paragraph"> </div>
 
-<a name="lab249"></a><h4 class="section">Ćwiczenie (ssreflect)</h4>
+<a name="lab250"></a><h4 class="section">Ćwiczenie (ssreflect)</h4>
 
 <div class="paragraph"> </div>
 
@@ -3220,7 +3261,7 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Hint</span></s
     coq.inria.fr/refman/ssreflect.html#hevea_tactic265 
 <div class="paragraph"> </div>
 
-<a name="lab250"></a><h1 class="section">Konkluzja</h1>
+<a name="lab251"></a><h1 class="section">Konkluzja</h1>
 
 <div class="paragraph"> </div>
 
