@@ -198,6 +198,11 @@ W części dowodów przydadzą nam się fakty dotyczące arytmetyki liczb
 <br/>
 
 <br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">isEmpty_rev</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">isEmpty</span> (<span class="id" title="var">rev</span> <span class="id" title="var">l</span>) = <span class="id" title="var">isEmpty</span> <span class="id" title="var">l</span>.<br/>
+
+<br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">length_rev</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">length</span> (<span class="id" title="var">rev</span> <span class="id" title="var">l</span>) = <span class="id" title="var">length</span> <span class="id" title="var">l</span>.<br/>
@@ -233,9 +238,14 @@ W części dowodów przydadzą nam się fakty dotyczące arytmetyki liczb
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">map</span> <span class="id" title="var">id</span> <span class="id" title="var">l</span> = <span class="id" title="var">l</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">map_comp</span> :<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">map_map</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">B</span>) (<span class="id" title="var">g</span> : <span class="id" title="var">B</span> -&gt; <span class="id" title="var">C</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">map</span> <span class="id" title="var">g</span> (<span class="id" title="var">map</span> <span class="id" title="var">f</span> <span class="id" title="var">l</span>) = <span class="id" title="var">map</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span> =&gt; <span class="id" title="var">g</span> (<span class="id" title="var">f</span> <span class="id" title="var">x</span>)) <span class="id" title="var">l</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">isEmpty_map</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">B</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">isEmpty</span> (<span class="id" title="var">map</span> <span class="id" title="var">f</span> <span class="id" title="var">l</span>) = <span class="id" title="var">isEmpty</span> <span class="id" title="var">l</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">length_map</span> :<br/>
@@ -316,6 +326,15 @@ W części dowodów przydadzą nam się fakty dotyczące arytmetyki liczb
 <div class="code">
 
 <br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">isEmpty_replicate</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">isEmpty</span> (<span class="id" title="var">replicate</span> <span class="id" title="var">n</span> <span class="id" title="var">x</span>) =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0 =&gt; <span class="id" title="var">true</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <span class="id" title="var">false</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">length_replicate</span> :<br/>
@@ -624,6 +643,16 @@ W części dowodów przydadzą nam się fakty dotyczące arytmetyki liczb
 <div class="code">
 
 <br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">take_isEmpty</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">isEmpty</span> (<span class="id" title="var">take</span> <span class="id" title="var">n</span> <span class="id" title="var">l</span> ) = <span class="id" title="var">true</span> &lt;-&gt; <span class="id" title="var">n</span> = 0 \/ <span class="id" title="var">l</span> = [].<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">drop_isEmpty</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">isEmpty</span> (<span class="id" title="var">drop</span> <span class="id" title="var">n</span> <span class="id" title="var">l</span>) = <span class="id" title="var">true</span> &lt;-&gt; <span class="id" title="var">length</span> <span class="id" title="var">l</span> &lt;= <span class="id" title="var">n</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">take_nil</span> :<br/>
@@ -1374,6 +1403,11 @@ W części dowodów przydadzą nam się fakty dotyczące arytmetyki liczb
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">all</span> <span class="id" title="var">p</span> (<span class="id" title="var">join</span> <span class="id" title="var">l</span>) = <span class="id" title="var">all</span> (<span class="id" title="var">all</span> <span class="id" title="var">p</span>) <span class="id" title="var">l</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">isEmpty_join</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">bool</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> (<span class="id" title="var">list</span> <span class="id" title="var">A</span>)),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">isEmpty</span> (<span class="id" title="var">join</span> <span class="id" title="var">l</span>) = <span class="id" title="var">all</span> <span class="id" title="var">isEmpty</span> <span class="id" title="var">l</span>.<br/>
+
+<br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">all_replicate</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">bool</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">all</span> <span class="id" title="var">p</span> (<span class="id" title="var">replicate</span> <span class="id" title="var">n</span> <span class="id" title="var">x</span>) = <span class="id" title="var">orb</span> (<span class="id" title="var">leb</span> <span class="id" title="var">n</span> 0) (<span class="id" title="var">p</span> <span class="id" title="var">x</span>).<br/>
@@ -1613,12 +1647,15 @@ Qed.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
-</div>
-
-<div class="doc">
-TODO: <span class="inlinecode"><span class="id" title="var">findIndex</span></span> i operacje boolowskie. 
-</div>
-<div class="code">
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">findIndex_orb</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">p</span> <span class="id" title="var">q</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">bool</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">findIndex</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span> =&gt; <span class="id" title="var">orb</span> (<span class="id" title="var">p</span> <span class="id" title="var">x</span>) (<span class="id" title="var">q</span> <span class="id" title="var">x</span>)) <span class="id" title="var">l</span> =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">findIndex</span> <span class="id" title="var">p</span> <span class="id" title="var">l</span>, <span class="id" title="var">findIndex</span> <span class="id" title="var">q</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> <span class="id" title="var">n</span>, <span class="id" title="var">Some</span> <span class="id" title="var">m</span> =&gt; <span class="id" title="var">Some</span> (<span class="id" title="var">min</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> <span class="id" title="var">n</span>, <span class="id" title="var">None</span> =&gt; <span class="id" title="var">Some</span> <span class="id" title="var">n</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span>, <span class="id" title="var">Some</span> <span class="id" title="var">m</span> =&gt; <span class="id" title="var">Some</span> <span class="id" title="var">m</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span>, <span class="id" title="var">_</span> =&gt; <span class="id" title="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">findIndex_length</span> :<br/>
@@ -1651,14 +1688,6 @@ TODO: <span class="inlinecode"><span class="id" title="var">findIndex</span></sp
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span>, <span class="id" title="var">Some</span> <span class="id" title="var">n</span> =&gt; <span class="id" title="var">Some</span> (<span class="id" title="var">length</span> <span class="id" title="var">l1</span> + <span class="id" title="var">n</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span>, <span class="id" title="var">_</span> =&gt; <span class="id" title="var">None</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-TODO: niebezpieczne związki <span class="inlinecode"><span class="id" title="var">findIndex</span></span> i <span class="inlinecode"><span class="id" title="var">rev</span></span>. 
-</div>
-<div class="code">
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">findIndex_map</span> :<br/>
@@ -1715,10 +1744,20 @@ TODO: niebezpieczne związki <span class="inlinecode"><span class="id" title="va
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">head</span> <span class="id" title="var">l</span> = <span class="id" title="var">Some</span> <span class="id" title="var">x</span> /\ <span class="id" title="var">p</span> <span class="id" title="var">x</span> = <span class="id" title="var">true</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">findIndex_last</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">bool</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">findIndex</span> <span class="id" title="var">p</span> <span class="id" title="var">l</span> = <span class="id" title="var">Some</span> (<span class="id" title="var">length</span> <span class="id" title="var">l</span> - 1) &lt;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">last</span> <span class="id" title="var">l</span> = <span class="id" title="var">Some</span> <span class="id" title="var">x</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">p</span> <span class="id" title="var">x</span> = <span class="id" title="var">true</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">y</span> : <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">n</span> &lt; <span class="id" title="var">length</span> <span class="id" title="var">l</span> - 1 -&gt; <span class="id" title="var">nth</span> <span class="id" title="var">n</span> <span class="id" title="var">l</span> = <span class="id" title="var">Some</span> <span class="id" title="var">y</span> -&gt; <span class="id" title="var">p</span> <span class="id" title="var">y</span> = <span class="id" title="var">false</span>.<br/>
+
+<br/>
 </div>
 
 <div class="doc">
-TODO: <span class="inlinecode"><span class="id" title="var">findIndex</span></span> i <span class="inlinecode"><span class="id" title="var">last</span></span>, <span class="inlinecode"><span class="id" title="var">init</span></span>, <span class="inlinecode"><span class="id" title="var">tail</span></span> 
+TODO: <span class="inlinecode"><span class="id" title="var">findIndex</span></span> <span class="inlinecode"><span class="id" title="var">init</span></span>, <span class="inlinecode"><span class="id" title="var">tail</span></span> 
 </div>
 <div class="code">
 
@@ -1965,10 +2004,19 @@ TODO: <span class="inlinecode"><span class="id" title="var">findIndex</span></sp
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">findIndices</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> =&gt; <span class="id" title="var">false</span>) <span class="id" title="var">l</span> = [].<br/>
 
 <br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">findIndex_rev</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">bool</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">findIndex</span> <span class="id" title="var">p</span> (<span class="id" title="var">rev</span> <span class="id" title="var">l</span>) = <span class="id" title="var">last</span> (<span class="id" title="var">findIndices</span> <span class="id" title="var">p</span> <span class="id" title="var">l</span>).<br/>
+
+<br/>
 </div>
 
 <div class="doc">
-<a name="lab336"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">elem</span></span></h2>
+<a name="lab336"></a><h1 class="section">Proste predykaty</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab337"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">elem</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2150,10 +2198,16 @@ TODO: <span class="inlinecode"><span class="id" title="var">findIndex</span></sp
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">nth</span> <span class="id" title="var">n</span> <span class="id" title="var">l</span> = <span class="id" title="var">Some</span> <span class="id" title="var">x</span> /\ <span class="id" title="var">p</span> <span class="id" title="var">x</span> = <span class="id" title="var">true</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">isEmpty_bind</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">list</span> <span class="id" title="var">B</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">isEmpty</span> (<span class="id" title="var">bind</span> <span class="id" title="var">f</span> <span class="id" title="var">l</span>) = <span class="id" title="var">true</span> &lt;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">l</span> = [] \/ <span class="id" title="var">l</span> &lt;&gt; [] /\ <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">elem</span> <span class="id" title="var">x</span> <span class="id" title="var">l</span> -&gt; <span class="id" title="var">f</span> <span class="id" title="var">x</span> = [].<br/>
+
+<br/>
 </div>
 
 <div class="doc">
-<a name="lab337"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">In</span></span></h2>
+<a name="lab338"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">In</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2365,7 +2419,7 @@ Powyższa definicja jest bardzo podobna do tej induktywnej. <span class="inlinec
 </div>
 
 <div class="doc">
-<a name="lab338"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">NoDup</span></span></h2>
+<a name="lab339"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">NoDup</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2477,7 +2531,7 @@ Powyższa definicja jest bardzo podobna do tej induktywnej. <span class="inlinec
 </div>
 
 <div class="doc">
-<a name="lab339"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">Dup</span></span></h2>
+<a name="lab340"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">Dup</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2657,7 +2711,7 @@ Powyższa definicja jest bardzo podobna do tej induktywnej. <span class="inlinec
 </div>
 
 <div class="doc">
-<a name="lab340"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">Rep</span></span></h2>
+<a name="lab341"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">Rep</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2822,7 +2876,7 @@ Powyższa definicja jest bardzo podobna do tej induktywnej. <span class="inlinec
 </div>
 
 <div class="doc">
-<a name="lab341"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">Exists</span></span></h2>
+<a name="lab342"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">Exists</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2959,7 +3013,7 @@ Powyższa definicja jest bardzo podobna do tej induktywnej. <span class="inlinec
 </div>
 
 <div class="doc">
-<a name="lab342"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">Forall</span></span></h2>
+<a name="lab343"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">Forall</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -3096,7 +3150,7 @@ Powyższa definicja jest bardzo podobna do tej induktywnej. <span class="inlinec
 </div>
 
 <div class="doc">
-<a name="lab343"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">AtLeast</span></span></h2>
+<a name="lab344"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">AtLeast</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -3278,7 +3332,7 @@ TODO: <span class="inlinecode"><span class="id" title="var">AtLeast</span></span
 </div>
 
 <div class="doc">
-<a name="lab344"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">Exactly</span></span></h2>
+<a name="lab345"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">Exactly</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -3412,7 +3466,7 @@ TODO: <span class="inlinecode"><span class="id" title="var">Exactly_zip</span></
 </div>
 
 <div class="doc">
-<a name="lab345"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">AtMost</span></span> (TODO)</h2>
+<a name="lab346"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">AtMost</span></span> (TODO)</h2>
 
 </div>
 <div class="code">
@@ -3428,7 +3482,7 @@ TODO: <span class="inlinecode"><span class="id" title="var">Exactly_zip</span></
 </div>
 
 <div class="doc">
-<a name="lab346"></a><h2 class="section">Zawieranie</h2>
+<a name="lab347"></a><h2 class="section">Zawieranie</h2>
 
 </div>
 <div class="code">
@@ -3575,7 +3629,7 @@ Przyjrzyjmy się powyższej definicji. Intuicyjnie można ją rozumieć tak,
 </div>
 
 <div class="doc">
-<a name="lab347"></a><h2 class="section">Podlisty jako podtermy (TODO)</h2>
+<a name="lab348"></a><h2 class="section">Podlisty jako podtermy (TODO)</h2>
 
 <div class="paragraph"> </div>
 
@@ -3594,7 +3648,7 @@ Przyjrzyjmy się powyższej definicji. Intuicyjnie można ją rozumieć tak,
 </div>
 
 <div class="doc">
-<a name="lab348"></a><h2 class="section">Palindromy (TODO)</h2>
+<a name="lab349"></a><h2 class="section">Palindromy (TODO)</h2>
 
 <div class="paragraph"> </div>
 
@@ -3621,6 +3675,4 @@ Przyjrzyjmy się powyższej definicji. Intuicyjnie można ją rozumieć tak,
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">Palindrome_spec</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Palindrome</span> <span class="id" title="var">l</span> &lt;-&gt; <span class="id" title="var">l</span> = <span class="id" title="var">rev</span> <span class="id" title="var">l</span>.<br/>
-
-<br/>
 </div>
