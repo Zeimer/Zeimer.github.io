@@ -26,6 +26,8 @@
 <div class="code">
 
 <br/>
+
+<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">X4</span>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">FunctionalExtensionality</span>.<br/>
 
@@ -195,8 +197,9 @@ Uporawszy się z pojęciem "identyczności" relacji możemy przejść dalej,
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Definition</span> <span class="id" title="var">Rcomp</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) (<span class="id" title="var">S</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span>)<br/>
-&nbsp;&nbsp;: <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">C</span> := <span class="id" title="keyword">fun</span> (<span class="id" title="var">a</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">c</span> : <span class="id" title="var">C</span>) =&gt; <span class="id" title="tactic">exists</span> <span class="id" title="var">b</span> : <span class="id" title="var">B</span>, <span class="id" title="var">R</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> /\ <span class="id" title="var">S</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">Rcomp</span><br/>
+&nbsp;&nbsp;{<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) (<span class="id" title="var">S</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span>) : <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">C</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<span class="id" title="var">a</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">c</span> : <span class="id" title="var">C</span>) =&gt; <span class="id" title="tactic">exists</span> <span class="id" title="var">b</span> : <span class="id" title="var">B</span>, <span class="id" title="var">R</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> /\ <span class="id" title="var">S</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">Rid</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} : <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">A</span> := @<span class="id" title="var">eq</span> <span class="id" title="var">A</span>.<br/>
@@ -215,8 +218,9 @@ Podobnie jak w przypadku funkcji, najważniejszą operacją jest składanie
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">Rcomp_assoc</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> <span class="id" title="var">D</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) (<span class="id" title="var">S</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span>) (<span class="id" title="var">T</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">C</span> <span class="id" title="var">D</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Rcomp</span> <span class="id" title="var">R</span> (<span class="id" title="var">Rcomp</span> <span class="id" title="var">S</span> <span class="id" title="var">T</span>) &lt;--&gt; <span class="id" title="var">Rcomp</span> (<span class="id" title="var">Rcomp</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span>) <span class="id" title="var">T</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> <span class="id" title="var">D</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) (<span class="id" title="var">S</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span>) (<span class="id" title="var">T</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">C</span> <span class="id" title="var">D</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Rcomp</span> <span class="id" title="var">R</span> (<span class="id" title="var">Rcomp</span> <span class="id" title="var">S</span> <span class="id" title="var">T</span>) &lt;--&gt; <span class="id" title="var">Rcomp</span> (<span class="id" title="var">Rcomp</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span>) <span class="id" title="var">T</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">Rid_left</span> :<br/>
@@ -260,7 +264,7 @@ Składanie funkcji jest łączne, gdyż złożenie trzech funkcji z dowolnie
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">Rinv_Rcomp</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) (<span class="id" title="var">S</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">same_hrel</span> (<span class="id" title="var">Rinv</span> (<span class="id" title="var">Rcomp</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span>)) (<span class="id" title="var">Rcomp</span> (<span class="id" title="var">Rinv</span> <span class="id" title="var">S</span>) (<span class="id" title="var">Rinv</span> <span class="id" title="var">R</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Rinv</span> (<span class="id" title="var">Rcomp</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span>) &lt;--&gt; <span class="id" title="var">Rcomp</span> (<span class="id" title="var">Rinv</span> <span class="id" title="var">S</span>) (<span class="id" title="var">Rinv</span> <span class="id" title="var">R</span>).<br/>
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">Rinv_Rid</span> :<br/>
@@ -366,7 +370,8 @@ Zacznijmy od relacjowych odpowiedników <span class="inlinecode"><span class="id
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">Ror_comm</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>), <span class="id" title="var">Ror</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> &lt;--&gt; <span class="id" title="var">Ror</span> <span class="id" title="var">S</span> <span class="id" title="var">R</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Ror</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> &lt;--&gt; <span class="id" title="var">Ror</span> <span class="id" title="var">S</span> <span class="id" title="var">R</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">Ror_RTrue_l</span> :<br/>
@@ -413,13 +418,15 @@ To nie wszystkie właściwości tych operacji, ale myślę, że widzisz już,
 <br/>
 <span class="id" title="keyword">Class</span> <span class="id" title="var">LeftUnique</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">left_unique</span> : <span class="id" title="keyword">forall</span> (<span class="id" title="var">a</span> <span class="id" title="var">a'</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">b</span> : <span class="id" title="var">B</span>), <span class="id" title="var">R</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> -&gt; <span class="id" title="var">R</span> <span class="id" title="var">a'</span> <span class="id" title="var">b</span> -&gt; <span class="id" title="var">a</span> = <span class="id" title="var">a'</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">left_unique</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">a</span> <span class="id" title="var">a'</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">b</span> : <span class="id" title="var">B</span>), <span class="id" title="var">R</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> -&gt; <span class="id" title="var">R</span> <span class="id" title="var">a'</span> <span class="id" title="var">b</span> -&gt; <span class="id" title="var">a</span> = <span class="id" title="var">a'</span><br/>
 }.<br/>
 
 <br/>
 <span class="id" title="keyword">Class</span> <span class="id" title="var">RightUnique</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">hrel</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">right_unique</span> : <span class="id" title="keyword">forall</span> (<span class="id" title="var">a</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">b</span> <span class="id" title="var">b'</span> : <span class="id" title="var">B</span>), <span class="id" title="var">R</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> -&gt; <span class="id" title="var">R</span> <span class="id" title="var">a</span> <span class="id" title="var">b'</span> -&gt; <span class="id" title="var">b</span> = <span class="id" title="var">b'</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">right_unique</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">a</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">b</span> <span class="id" title="var">b'</span> : <span class="id" title="var">B</span>), <span class="id" title="var">R</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> -&gt; <span class="id" title="var">R</span> <span class="id" title="var">a</span> <span class="id" title="var">b'</span> -&gt; <span class="id" title="var">b</span> = <span class="id" title="var">b'</span><br/>
 }.<br/>
 
 <br/>
@@ -1320,7 +1327,8 @@ Równość na typie niepustym nie jest antyzwrotna, gdyż jest zwrotna
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">Rcomp_not_Antireflexive</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">exists</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="var">rel</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Antireflexive</span> <span class="id" title="var">R</span> /\ <span class="id" title="var">Antireflexive</span> <span class="id" title="var">S</span> /\ ~ <span class="id" title="var">Antireflexive</span> (<span class="id" title="var">Rcomp</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Antireflexive</span> <span class="id" title="var">R</span> /\ <span class="id" title="var">Antireflexive</span> <span class="id" title="var">S</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;~ <span class="id" title="var">Antireflexive</span> (<span class="id" title="var">Rcomp</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span>).<br/>
 
 <br/>
 <span class="id" title="keyword">Instance</span> <span class="id" title="var">Antireflexive_Rinv</span> :<br/>
@@ -1665,9 +1673,9 @@ Pozostałe operacje (odwracanie, koniunkcja, dysjunkcja, negacja)
 
 <div class="doc">
 Każda relacja na typie pustym jest antysymetryczna. Równość nie jest
-    antysymetryczna, podobnie jak relacja pełna (ale tylko na typie pustym).
-    Relacja pusta jest antysymetryczna, gdyż przesłanka <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> występująca
-    w definicji antysymetrii jest zawsze fałszywa. 
+    antysymetryczna, podobnie jak relacja pełna (ale tylko na typie
+    niepustym). Relacja pusta jest antysymetryczna, gdyż przesłanka <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span>
+    występująca w definicji antysymetrii jest zawsze fałszywa. 
 </div>
 <div class="code">
 
@@ -1676,7 +1684,8 @@ Każda relacja na typie pustym jest antysymetryczna. Równość nie jest
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">Rcomp_not_Antisymmetric</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">exists</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="var">rel</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Antisymmetric</span> <span class="id" title="var">R</span> /\ <span class="id" title="var">Antisymmetric</span> <span class="id" title="var">S</span> /\ ~ <span class="id" title="var">Antisymmetric</span> (<span class="id" title="var">Rcomp</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Antisymmetric</span> <span class="id" title="var">R</span> /\ <span class="id" title="var">Antisymmetric</span> <span class="id" title="var">S</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;~ <span class="id" title="var">Antisymmetric</span> (<span class="id" title="var">Rcomp</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span>).<br/>
 
 <br/>
 <span class="id" title="keyword">Instance</span> <span class="id" title="var">Antisymmetric_Rinv</span> :<br/>
@@ -1691,7 +1700,8 @@ Każda relacja na typie pustym jest antysymetryczna. Równość nie jest
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">Ror_not_Antisymmetric</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">exists</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="var">rel</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Antisymmetric</span> <span class="id" title="var">R</span> /\ <span class="id" title="var">Antisymmetric</span> <span class="id" title="var">S</span> /\ ~ <span class="id" title="var">Antisymmetric</span> (<span class="id" title="var">Ror</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Antisymmetric</span> <span class="id" title="var">R</span> /\ <span class="id" title="var">Antisymmetric</span> <span class="id" title="var">S</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;~ <span class="id" title="var">Antisymmetric</span> (<span class="id" title="var">Ror</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span>).<br/>
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">Rnot_not_Antisymmetric</span> :<br/>
@@ -2086,8 +2096,10 @@ Każda relacja na typie pustym jest antysymetryczna. Równość nie jest
 
 <br/>
 <span class="id" title="keyword">Inductive</span> <span class="id" title="var">symm_clos</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">rel</span> <span class="id" title="var">A</span>) : <span class="id" title="var">rel</span> <span class="id" title="var">A</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">sc_step</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> -&gt; <span class="id" title="var">symm_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">sc_symm</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">symm_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> -&gt; <span class="id" title="var">symm_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">y</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">sc_step</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> -&gt; <span class="id" title="var">symm_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">sc_symm</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">symm_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> -&gt; <span class="id" title="var">symm_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">y</span> <span class="id" title="var">x</span>.<br/>
 
 <br/>
 
@@ -2133,7 +2145,8 @@ Każda relacja na typie pustym jest antysymetryczna. Równość nie jest
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">tc_smallest</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="var">rel</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">subrelation</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> -&gt; <span class="id" title="var">Transitive</span> <span class="id" title="var">S</span> -&gt; <span class="id" title="var">subrelation</span> (<span class="id" title="var">trans_clos</span> <span class="id" title="var">R</span>) <span class="id" title="var">S</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">subrelation</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> -&gt; <span class="id" title="var">Transitive</span> <span class="id" title="var">S</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">subrelation</span> (<span class="id" title="var">trans_clos</span> <span class="id" title="var">R</span>) <span class="id" title="var">S</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">tc_idempotent</span> :<br/>
@@ -2147,10 +2160,14 @@ Każda relacja na typie pustym jest antysymetryczna. Równość nie jest
 
 <br/>
 <span class="id" title="keyword">Inductive</span> <span class="id" title="var">equiv_clos</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">rel</span> <span class="id" title="var">A</span>) : <span class="id" title="var">rel</span> <span class="id" title="var">A</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ec_step</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> -&gt; <span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ec_refl</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">x</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ec_symm</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> -&gt; <span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">y</span> <span class="id" title="var">x</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ec_trans</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> : <span class="id" title="var">A</span>,<br/>
+&nbsp;&nbsp;| <span class="id" title="var">ec_step</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> -&gt; <span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">ec_refl</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">ec_symm</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> -&gt; <span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">y</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">ec_trans</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> : <span class="id" title="var">A</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> -&gt; <span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> -&gt; <span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">z</span>.<br/>
 
 <br/>
@@ -2166,7 +2183,8 @@ Każda relacja na typie pustym jest antysymetryczna. Równość nie jest
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">ec_smallest</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> <span class="id" title="var">S</span> : <span class="id" title="var">rel</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">subrelation</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> -&gt; <span class="id" title="var">Equivalence</span> <span class="id" title="var">S</span> -&gt; <span class="id" title="var">subrelation</span> (<span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span>) <span class="id" title="var">S</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">subrelation</span> <span class="id" title="var">R</span> <span class="id" title="var">S</span> -&gt; <span class="id" title="var">Equivalence</span> <span class="id" title="var">S</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">subrelation</span> (<span class="id" title="var">equiv_clos</span> <span class="id" title="var">R</span>) <span class="id" title="var">S</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">ec_idempotent</span> :<br/>
