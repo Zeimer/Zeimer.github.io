@@ -28,7 +28,7 @@
     as notes for my seminar talk whose topic was "Inductive predicates". It
     is a bit broader than that and covers all forms of structural induction,
     including functional induction, and even more. It does not touch the
-    topic of well-founded induction.
+    topic of well-founded induction, though.
 
 <div class="paragraph"> </div>
 
@@ -3232,8 +3232,8 @@ A different way of solving the same problem is to simply change the
     theorem statement. It is easier and quicker than trying to achieve
     the same effect through <span class="inlinecode"><span class="id" title="tactic">intros</span></span> and <span class="inlinecode"><span class="id" title="tactic">generalize</span></span> <span class="inlinecode"><span class="id" title="tactic">dependent</span></span>, but I
     don't consider it to be a good one. I recommend that the order of
-    quantification over the arguments should follow the order of the
-    arguments in the function's definition. 
+    quantification over the arguments follow the order of the arguments
+    in the function's definition. 
 <div class="paragraph"> </div>
 
 <a name="lab272"></a><h4 class="section">Exercise (easy)</h4>
@@ -3296,7 +3296,7 @@ The first kind of situation in which our induction hypothesis was
 
 <div class="paragraph"> </div>
 
-    The second kind of generalitylessness is more fundamental and arises when
+    The second kind of lack of generality is more fundamental and arises when
     we are trying to prove too weak a theorem. It may appear paradoxical at
     first, but sometimes proving a stronger theorem is easier than proving
     a weaker one. Let's see this in an example. 
