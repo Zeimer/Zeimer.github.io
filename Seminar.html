@@ -1050,6 +1050,10 @@ In the constructors of <span class="inlinecode"><span class="id" title="var">eve
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">c1</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">P</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> -&gt; <span class="id" title="var">P</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>) (2 * <span class="id" title="var">m</span>).<br/>
 
 <br/>
+<span class="comment">(*&nbsp;TODO&nbsp;*)</span><br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">FunInd</span>.<br/>
+
+<br/>
 <span class="id" title="keyword">Function</span> <span class="id" title="var">pow2</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> :=<br/>
 <span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| 0 =&gt; 1<br/>
@@ -2179,7 +2183,7 @@ Div2 is a module that contains the function <span class="inlinecode"><span class
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="keyword">in</span> <span class="id" title="var">div2</span>.<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> <span class="id" title="var">div2</span>.<br/>
 <span class="comment">(*&nbsp;===&gt;&nbsp;=&nbsp;fix&nbsp;div2&nbsp;(n&nbsp;:&nbsp;nat)&nbsp;:&nbsp;nat&nbsp;:=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;n&nbsp;with<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;0&nbsp;=&gt;&nbsp;0<br/>
@@ -2209,11 +2213,11 @@ Note: we use <span class="inlinecode"><span class="id" title="keyword">Eval</spa
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, 0 &lt; <span class="id" title="var">n</span> -&gt; <span class="id" title="var">div2</span> <span class="id" title="var">n</span> &lt; <span class="id" title="var">n</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span>]; <span class="id" title="var">cbn</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">auto</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">n'</span>; <span class="id" title="var">cbn</span> <span class="id" title="keyword">in</span> *; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">n'</span>; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> *; <span class="id" title="tactic">auto</span>.<br/>
 <span class="id" title="keyword">Restart</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| | <span class="id" title="var">n'</span>] <span class="id" title="keyword">using</span> <span class="id" title="var">nat_ind_2</span>; <span class="id" title="var">cbn</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">auto</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">n'</span> <span class="id" title="keyword">as</span> [| [| <span class="id" title="var">n''</span>]]; <span class="id" title="var">cbn</span> <span class="id" title="keyword">in</span> *; <span class="id" title="tactic">auto</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">lt</span> <span class="id" title="keyword">in</span> *. <span class="id" title="tactic">apply</span> <span class="id" title="var">le_n_S</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">le_S</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHn'</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">le_n_S</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">n'</span> <span class="id" title="keyword">as</span> [| [| <span class="id" title="var">n''</span>]]; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> *; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">lt</span> <span class="id" title="tactic">in</span> *. <span class="id" title="tactic">apply</span> <span class="id" title="var">le_n_S</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">le_S</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHn'</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">le_n_S</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">le_0_n</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 
@@ -2257,7 +2261,7 @@ Trying induction on <span class="inlinecode"><span class="id" title="var">n</spa
 </div>
 
 <div class="doc">
-Note: <span class="inlinecode"><span class="id" title="keyword">Compute</span></span> is equivalent to <span class="inlinecode"><span class="id" title="keyword">Eval</span></span> <span class="inlinecode"><span class="id" title="tactic">compute</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span>, but shorter.
+Note: <span class="inlinecode"><span class="id" title="keyword">Compute</span></span> is equivalent to <span class="inlinecode"><span class="id" title="keyword">Eval</span></span> <span class="inlinecode"><span class="id" title="tactic">compute</span></span> <span class="inlinecode"><span class="id" title="tactic">in</span></span>, but shorter.
 
 <div class="paragraph"> </div>
 
@@ -2274,7 +2278,7 @@ Note: <span class="inlinecode"><span class="id" title="keyword">Compute</span></
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">l</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">h</span> <span class="id" title="var">t</span>]; <span class="id" title="var">cbn</span>; <span class="id" title="tactic">intros</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">trivial</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">t</span>; <span class="id" title="var">cbn</span> <span class="id" title="keyword">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">t</span>; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> *.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">trivial</span>.<br/>
 <span class="id" title="keyword">Abort</span>.<br/>
 
@@ -2320,9 +2324,13 @@ The command <span class="inlinecode"><span class="id" title="var">Functional</sp
     fits the shape of our function's recursion. The principle may look
     intimidating, but if you take a closer look, it just repeats the cases
     found in the <span class="inlinecode"><span class="id" title="keyword">match</span></span> in <span class="inlinecode"><span class="id" title="var">swap_blocks</span></span>' definition. We can use it like
-    this: 
+    this (but first we have to import the <span class="inlinecode"><span class="id" title="var">Recdef</span></span> module): 
 </div>
 <div class="code">
+
+<br/>
+<span class="comment">(*&nbsp;TODO&nbsp;*)</span><br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Recdef</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">swap_blocks_involutive</span> :<br/>
@@ -3027,7 +3035,7 @@ Then we prove that <span class="inlinecode"><span class="id" title="var">R_div2'
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">R_div2'_ind</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assumption</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assumption</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">R_div2'_complete</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H1</span>. <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">R_div2'_complete</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H1</span>. <span class="id" title="tactic">assumption</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">R_div2'_correct</span>. <span class="id" title="tactic">trivial</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 
@@ -3072,7 +3080,7 @@ In general to prove <span class="inlinecode"><span class="id" title="var">div2_i
 &nbsp;&nbsp;<span class="id" title="tactic">intro</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">div2_ind'</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n0</span> <span class="id" title="keyword">as</span> [| [| <span class="id" title="var">n'</span>]]; <span class="id" title="var">cbn</span> <span class="id" title="keyword">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n0</span> <span class="id" title="keyword">as</span> [| [| <span class="id" title="var">n'</span>]]; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> *.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">lt_n_S</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">lt_trans</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">S</span> (<span class="id" title="var">S</span> <span class="id" title="var">n'</span>)); <span class="id" title="tactic">omega</span>.<br/>
@@ -3080,7 +3088,7 @@ In general to prove <span class="inlinecode"><span class="id" title="var">div2_i
 &nbsp;&nbsp;<span class="id" title="tactic">intro</span>. <span class="id" title="var">functional</span> <span class="id" title="tactic">induction</span> @<span class="id" title="var">div2</span> <span class="id" title="var">n</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n'</span> <span class="id" title="keyword">as</span> [| [| <span class="id" title="var">n</span>]]; <span class="id" title="var">cbn</span> <span class="id" title="keyword">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n'</span> <span class="id" title="keyword">as</span> [| [| <span class="id" title="var">n</span>]]; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> *.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">lt_n_S</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">lt_trans</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">S</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>)); <span class="id" title="tactic">omega</span>.<br/>

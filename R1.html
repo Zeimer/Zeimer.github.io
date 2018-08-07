@@ -767,7 +767,7 @@ W Coqu negację zdania <span class="inlinecode"><span class="id" title="var">P</
 </div>
 
 <div class="doc">
-Możemy to zrobić przy pomocy komendy <span class="inlinecode"><span class="id" title="var">Locate</span></span>. Wyświetla ona,
+Możemy to zrobić przy pomocy komendy <span class="inlinecode"><span class="id" title="keyword">Locate</span></span>. Wyświetla ona,
     do jakich nazw odwołuje się dana notacja. Negacja w Coqu
     nazywa się <span class="inlinecode"><span class="id" title="var">not</span></span>.
 
@@ -816,7 +816,7 @@ Definicja negacji w Coqu opiera się właśnie na powyższym spostrzeżeniu:
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">P_notP</span> : ~<span class="id" title="var">P</span> -&gt; <span class="id" title="var">P</span> -&gt; <span class="id" title="var">False</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">HnotP</span> <span class="id" title="var">HP</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">not</span> <span class="id" title="keyword">in</span> <span class="id" title="var">HnotP</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">not</span> <span class="id" title="tactic">in</span> <span class="id" title="var">HnotP</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">HnotP</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">assumption</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
@@ -828,8 +828,8 @@ Definicja negacji w Coqu opiera się właśnie na powyższym spostrzeżeniu:
 Taktyka <span class="inlinecode"><span class="id" title="tactic">unfold</span></span> służy do odwijania definicji. W wyniku jej działania
     nazwa zostanie zastąpiona przez jej definicję, ale tylko w celu.
     Jeżeli podana nazwa do niczego się nie odnosi, taktyka zawiedzie. Aby
-    odwinąć definicję w hipotezie, musimy użyć taktyki <span class="inlinecode"><span class="id" title="tactic">unfold</span></span> <span class="inlinecode"><span class="id" title="var">nazwa</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span>
-    <span class="inlinecode"><span class="id" title="var">hipoteza</span></span>, a jeżeli chcemy odwinąć ją wszędzie — <span class="inlinecode"><span class="id" title="tactic">unfold</span></span> <span class="inlinecode"><span class="id" title="var">nazwa</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> *.
+    odwinąć definicję w hipotezie, musimy użyć taktyki <span class="inlinecode"><span class="id" title="tactic">unfold</span></span> <span class="inlinecode"><span class="id" title="var">nazwa</span></span> <span class="inlinecode"><span class="id" title="tactic">in</span></span>
+    <span class="inlinecode"><span class="id" title="var">hipoteza</span></span>, a jeżeli chcemy odwinąć ją wszędzie — <span class="inlinecode"><span class="id" title="tactic">unfold</span></span> <span class="inlinecode"><span class="id" title="var">nazwa</span></span> <span class="inlinecode"><span class="id" title="tactic">in</span></span> *.
 
 <div class="paragraph"> </div>
 

@@ -309,9 +309,9 @@ Jest jeszcze kilka innych taktyk do żonglowania celami. Pamiętaj, że
 <br/>
 <span class="id" title="keyword">Goal</span> <span class="id" title="var">True</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := 42 <span class="id" title="keyword">in</span> <span class="id" title="tactic">pose</span> <span class="id" title="var">x</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="keyword">constr</span>:(42) <span class="id" title="keyword">in</span> <span class="id" title="tactic">pose</span> <span class="id" title="var">x</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">split</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := 42 <span class="id" title="tactic">in</span> <span class="id" title="tactic">pose</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="keyword">constr</span>:(42) <span class="id" title="tactic">in</span> <span class="id" title="tactic">pose</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">split</span> <span class="id" title="tactic">in</span> <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span>.<br/>
 <span class="id" title="keyword">Abort</span>.<br/>
 
 <br/>
@@ -321,13 +321,13 @@ Jest jeszcze kilka innych taktyk do żonglowania celami. Pamiętaj, że
 W Ltacu, podobnie jak w języku Gallina, mamy do dyspozycji konstrukt
     <span class="inlinecode"><span class="id" title="keyword">let</span></span>. Za jego pomocą możemy nadać nazwę dowolnemu wyrażeniu języka
     Ltac. Jego działanie jest podobne jak w języku Gallina, a więc nie
-    ma co się nad nim rozwodzić. Jest też konstrukt <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">rec</span></span>, który
+    ma co się nad nim rozwodzić. Jest też konstrukt <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="keyword">rec</span></span>, który
     odpowiada <span class="inlinecode"><span class="id" title="keyword">fix</span></span>owi Galliny.
 
 <div class="paragraph"> </div>
 
     Spróbujmy dodać do kontekstu liczbę <span class="inlinecode">42</span>, nazwaną dowolnie. Komendą
-    <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode">42</span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">pose</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> nie udaje nam się tego osiągnąć. O przyczynie
+    <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode">42</span> <span class="inlinecode"><span class="id" title="tactic">in</span></span> <span class="inlinecode"><span class="id" title="tactic">pose</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> nie udaje nam się tego osiągnąć. O przyczynie
     niepowodzenia Coq informuje nas wprost: zmienna <span class="inlinecode"><span class="id" title="var">x</span></span> nie jest termem.
     Czym zatem jest? Jak już się rzekło, Ltac posiada wbudowany typ liczb
     całkowitych, które nie są tym samym, co induktywnie zdefiniowane liczby
@@ -344,7 +344,7 @@ W Ltacu, podobnie jak w języku Gallina, mamy do dyspozycji konstrukt
 
 <div class="paragraph"> </div>
 
-    Wyrażenie <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">split</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">idtac</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> pokazuje nam, że taktyki również
+    Wyrażenie <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">split</span></span> <span class="inlinecode"><span class="id" title="tactic">in</span></span> <span class="inlinecode"><span class="id" title="tactic">idtac</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> pokazuje nam, że taktyki również
     są wyrażeniami Ltaca i mogą być przypisywane do zmiennych (a także
     wyświetlane za pomocą taktyki <span class="inlinecode"><span class="id" title="tactic">idtac</span></span>) tak jak każde inne wyrażenie. 
 </div>
@@ -577,8 +577,8 @@ Taktyka <span class="inlinecode"><span class="id" title="var">existsNat</span></
 
 <div class="paragraph"> </div>
 
- Przepisz taktykę <span class="inlinecode"><span class="id" title="var">existsNat'</span></span> za pomocą konstruktu <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">rec</span></span> —
-    całość ma wyglądać tak: <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span> <span class="inlinecode"><span class="id" title="var">existsNat''</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">rec</span></span> <span class="inlinecode">...</span> 
+ Przepisz taktykę <span class="inlinecode"><span class="id" title="var">existsNat'</span></span> za pomocą konstruktu <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="keyword">rec</span></span> —
+    całość ma wyglądać tak: <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span> <span class="inlinecode"><span class="id" title="var">existsNat''</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="keyword">rec</span></span> <span class="inlinecode">...</span> 
 </div>
 <div class="code">
 
@@ -600,7 +600,7 @@ Taktyka <span class="inlinecode"><span class="id" title="var">existsNat</span></
 
  Udowodnij poniższe twierdzenie za pomocą pojedynczej taktyki, która
     generuje wszystkie możliwe listy wartości boolowskich. Całość zrób za
-    pomocą konstruktu <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">rec</span></span> w miejscu, tj. bez użycia komendy <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span>. 
+    pomocą konstruktu <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="keyword">rec</span></span> w miejscu, tj. bez użycia komendy <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span>. 
 </div>
 <div class="code">
 
@@ -638,7 +638,7 @@ Taktyka <span class="inlinecode"><span class="id" title="var">existsNat</span></
 
  Napisz taktykę <span class="inlinecode"><span class="id" title="var">search</span></span>, która potrafi udowodnić cel będący dowolnie
     złożoną dysjunkcją pod warunkiem, że jeden z jej członów zachodzi na
-    mocy założenia. Użyj rekursji, ale nie używaj konstruktu <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">rec</span></span>.
+    mocy założenia. Użyj rekursji, ale nie używaj konstruktu <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="keyword">rec</span></span>.
 
 <div class="paragraph"> </div>
 
@@ -1249,7 +1249,7 @@ Napisz funkcję <span class="inlinecode"><span class="id" title="var">negn</spa
 <br/>
 
 <br/>
-<span class="id" title="keyword">Eval</span> <span class="id" title="var">cbn</span> <span class="id" title="keyword">in</span> <span class="id" title="var">negn</span> 10 <span class="id" title="var">True</span>.<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">negn</span> 10 <span class="id" title="var">True</span>.<br/>
 <span class="comment">(*&nbsp;===&gt;&nbsp;=&nbsp;~&nbsp;~&nbsp;~&nbsp;~&nbsp;~&nbsp;~&nbsp;~&nbsp;~&nbsp;~&nbsp;~&nbsp;True&nbsp;:&nbsp;Prop&nbsp;*)</span><br/>
 
 <br/>
@@ -1712,13 +1712,13 @@ W powyższym przykładzie naszym celem jest znalezienie wszystkich równań,
 <span class="id" title="keyword">Goal</span> <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">nat</span>, {<span class="id" title="var">x</span> = <span class="id" title="var">y</span>} + {<span class="id" title="var">x</span> &lt;&gt; <span class="id" title="var">y</span>}.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="var">Fail</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="tactic">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
 <span class="id" title="keyword">Restart</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> "y" <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> "y" <span class="id" title="tactic">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
 <span class="id" title="keyword">Restart</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">x</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">x</span> <span class="id" title="tactic">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
 <span class="id" title="keyword">Restart</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">y</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>. <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="var">y</span> <span class="id" title="tactic">in</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
 <span class="id" title="keyword">Abort</span>.<br/>
 
 <br/>
@@ -1741,7 +1741,7 @@ Mamy w kontekście liczbę naturalną <span class="inlinecode"><span class="id" 
 
     Z odsięczą przychodzi nam generator świeżych nazw o wdzięcznej nazwie
     <span class="inlinecode"><span class="id" title="tactic">fresh</span></span>. Zazwyczaj będziemy się nim posługiwać w następujący sposób:
-    <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">var</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">arg_1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">arg_N</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span>. Tutaj <span class="inlinecode"><span class="id" title="var">var</span></span> jest zmienną
+    <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">var</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">arg_1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">arg_N</span></span> <span class="inlinecode"><span class="id" title="tactic">in</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span>. Tutaj <span class="inlinecode"><span class="id" title="var">var</span></span> jest zmienną
     języka <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span>, której wartością jest świeżo wygenerowana nazwa, a <span class="inlinecode"><span class="id" title="var">t</span></span>
     to jakaś taktyka, która w dowolny sposób korzysta z <span class="inlinecode"><span class="id" title="var">var</span></span>.
 
@@ -1749,19 +1749,19 @@ Mamy w kontekście liczbę naturalną <span class="inlinecode"><span class="id" 
 
     Powyższe cztery taktyki działają tak:
 <ul class="doclist">
-<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> generuje świeżą nazwę, domyślnie
+<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="tactic">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> generuje świeżą nazwę, domyślnie
       jest nią "H". Nazwa ta staje się wartością Ltacowej zmiennej <span class="inlinecode"><span class="id" title="var">x</span></span>. Owa
       zmienna jest argumentem taktyki <span class="inlinecode"><span class="id" title="tactic">intro</span></span>, dzięki czemu wprowadzony do
       kontekstu obiekt typu <span class="inlinecode"><span class="id" title="var">nat</span></span> zostaje nazwany "H".
 
 </li>
-<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode">&quot;<span class="id" title="var">y</span>&quot;</span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — jeżeli <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> dostanie jako argument
+<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode">&quot;<span class="id" title="var">y</span>&quot;</span> <span class="inlinecode"><span class="id" title="tactic">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — jeżeli <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> dostanie jako argument
       ciąg znaków, to wygeneruje nazwę zaczynającą się od tego ciągu, która
       nie jest jeszcze zajęta. Ponieważ nazwa "y" jest wolna, właśnie tak
       zostaje nazwany wprowadzany obiekt.
 
 </li>
-<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — tutaj mamy mały zamęt. Pierwszy i trzeci
+<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="tactic">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — tutaj mamy mały zamęt. Pierwszy i trzeci
       <span class="inlinecode"><span class="id" title="var">x</span></span> jest zmienną Ltaca, zaś drugi odnosi się do obiektu z kontekstu.
       Jeżeli <span class="inlinecode"><span class="id" title="var">arg</span></span> jest obiektem z kontekstu, to <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">arg</span></span> tworzy świeżą
       nazwę zaczynającą się od nazwy, jaką <span class="inlinecode"><span class="id" title="var">arg</span></span> nosi w kontekście. Tutaj
@@ -1770,7 +1770,7 @@ Mamy w kontekście liczbę naturalną <span class="inlinecode"><span class="id" 
       przypadku zmiennych unifikacyjnych.
 
 </li>
-<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — jak widać, argumentem <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> może też
+<li> <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="tactic">in</span></span> <span class="inlinecode"><span class="id" title="tactic">intro</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> — jak widać, argumentem <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> może też
       być nazwa zmiennej nie odnosząca się zupełnie do niczego. W naszym
       przypadku nie ma w kontekście zmiennej <span class="inlinecode"><span class="id" title="var">y</span></span>, a <span class="inlinecode"><span class="id" title="tactic">fresh</span></span> generuje na jej
       podstawie świeżą nazwę "y". 
@@ -1886,8 +1886,8 @@ Cztery powyższe dopasowania działają następująco:
 <span class="id" title="keyword">Goal</span> <span class="id" title="var">False</span> /\ <span class="id" title="var">False</span> /\ <span class="id" title="var">False</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">idtac</span> <span class="id" title="var">n</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">idtac</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="tactic">in</span> <span class="id" title="tactic">idtac</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="tactic">in</span> <span class="id" title="tactic">idtac</span> <span class="id" title="var">n</span>.<br/>
 <span class="id" title="keyword">Abort</span>.<br/>
 
 <br/>
@@ -1906,8 +1906,8 @@ Ilość celów możemy policzyć za pomocą taktyki <span class="inlinecode"><s
 <span class="id" title="keyword">Goal</span> <span class="id" title="var">False</span> /\ <span class="id" title="var">False</span> /\ <span class="id" title="var">False</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="keyword">in</span> <span class="id" title="var">guard</span> <span class="id" title="var">n</span> &gt; 2.<br/>
-&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="var">all</span>: <span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="keyword">in</span> <span class="id" title="var">guard</span> <span class="id" title="var">n</span> &lt; 2.<br/>
+&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="tactic">in</span> <span class="id" title="var">guard</span> <span class="id" title="var">n</span> &gt; 2.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="var">all</span>: <span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">numgoals</span> <span class="id" title="tactic">in</span> <span class="id" title="var">guard</span> <span class="id" title="var">n</span> &lt; 2.<br/>
 <span class="id" title="keyword">Abort</span>.<br/>
 
 <br/>
