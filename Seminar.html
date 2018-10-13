@@ -268,7 +268,7 @@ Note: module FinFun contains definitions of injections, surjections and
 <div class="doc">
 Even though there are functions going from <span class="inlinecode"><span class="id" title="var">unit</span></span> to <span class="inlinecode"><span class="id" title="var">bool</span></span> and the
     other way around too, they are in no sense equivalences. Particularly,
-    <span class="inlinecode"><span class="id" title="var">unit</span></span> is not in bijction with <span class="inlinecode"><span class="id" title="var">bool</span></span>. 
+    <span class="inlinecode"><span class="id" title="var">unit</span></span> is not in bijection with <span class="inlinecode"><span class="id" title="var">bool</span></span>. 
 </div>
 <div class="code">
 
@@ -521,7 +521,7 @@ However it happens that this proposition is not at all true. How is
 
 <div class="paragraph"> </div>
 
-    But what about nonrecursive constructors? Can a propositiona with a
+    But what about nonrecursive constructors? Can a proposition with a
     nonrecursive constructor be false? 
 </div>
 <div class="code">
@@ -555,7 +555,7 @@ This proposition is false because its only constructor takes a proof
 
 <div class="paragraph"> </div>
 
-    Our voyage into the land of constructors looks rather grimm. We have
+    Our voyage into the land of constructors looks rather grim. We have
     met false propositions with any number of constructors, recursive or
     not. We have also seen that true propositions can have one or more
     constructors.
@@ -586,7 +586,9 @@ This proposition is false because its only constructor takes a proof
 <div class="paragraph"> </div>
 
  Find a simple heuristic for deciding (at the metatheoretical level)
-    whether an inductive proposition can be proven or not. 
+    whether an inductive proposition can be proven or not. Assume that
+    this inductive proposition's constructors can only refer to other
+    inductive propositions. 
 </div>
 <div class="code">
 
@@ -2062,8 +2064,9 @@ This is a nonstandard case analysis principle for <span class="inlinecode"><span
 
 <br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">bool_ind''</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">P</span> : <span class="id" title="var">bool</span> -&gt; <span class="id" title="keyword">Prop</span>), <span class="id" title="var">P</span> <span class="id" title="var">false</span> -&gt; <span class="id" title="var">P</span> <span class="id" title="var">true</span> -&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">b</span> : <span class="id" title="var">bool</span>, <span class="id" title="var">P</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">P</span> : <span class="id" title="var">bool</span> -&gt; <span class="id" title="keyword">Prop</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">P</span> <span class="id" title="var">false</span> -&gt; <span class="id" title="var">P</span> <span class="id" title="var">true</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">b</span> : <span class="id" title="var">bool</span>, <span class="id" title="var">P</span> <span class="id" title="var">b</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">b</span>; <span class="id" title="tactic">assumption</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
