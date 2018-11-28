@@ -25,6 +25,9 @@
 <div class="paragraph"> </div>
 
 <a name="lab1"></a><h1 class="section">Cel</h1>
+
+<div class="paragraph"> </div>
+
  Celem tego kursu jest zapoznanie czytelnika z kilkoma rzeczami:
 <ul class="doclist">
 <li> programowaniem funkcyjnym w duchu Haskella i rodziny ML,
@@ -63,6 +66,9 @@
 <div class="paragraph"> </div>
 
 <a name="lab2"></a><h1 class="section">Wybór</h1>
+
+<div class="paragraph"> </div>
+
  Istnieje wiele środków, które pozwoliłyby nam osiągnąć postawione
     cele, a jako że nie sposób poznać ich wszystkich, musimy dokonać
     wyboru.
@@ -85,7 +91,13 @@
 <div class="paragraph"> </div>
 
 <a name="lab3"></a><h1 class="section">Programowanie i dowodzenie</h1>
+
+<div class="paragraph"> </div>
+
 <a name="lab4"></a><h2 class="section">Alan Turing i jego maszyna</h2>
+
+<div class="paragraph"> </div>
+
  Teoretyczna nauka o obliczeniach powstała niedługo przed wynalezieniem
     pierwszych komputerów. Od samego początku definicji obliczalności
     oraz modeli obliczeń było wiele. Choć pokazano później, że wszystkie
@@ -128,6 +140,9 @@
 <div class="paragraph"> </div>
 
 <a name="lab5"></a><h2 class="section">Alonzo Church i rachunek λ</h2>
+
+<div class="paragraph"> </div>
+
  Innym modelem obliczeń, nieco bardziej abstrakcyjnym czy też
     "software'owym" jest rachunek λ, wymyślony przez Alonzo Churcha.
     Nie stał się tak wpływowy jak maszyny Turinga, mimo że jest równie
@@ -167,6 +182,9 @@
 <div class="paragraph"> </div>
 
 <a name="lab6"></a><h2 class="section">Martin-Löf, Coquand, CoC, CIC i Coq</h2>
+
+<div class="paragraph"> </div>
+
  Kolejnego kroku dokonał Jean-Yves Girard, tworząc System F —
     typowany, polimorficzny rachunek λ, który umożliwia reprezentację
     funkcji generycznych, działających na argumentach dowolnego typu
@@ -204,11 +222,124 @@
     również pożyczonej od Martina-Löfa). 
 <div class="paragraph"> </div>
 
-<a name="lab7"></a><h1 class="section">Literatura</h1>
+<a name="lab7"></a><h1 class="section">Filozofia i matematyka</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab8"></a><h2 class="section">Książki</h2>
+<a name="lab8"></a><h2 class="section">Konstruktywizm</h2>
+
+<div class="paragraph"> </div>
+
+ Po co to wszystko, zapytasz? Czy te rzeczy istnieją tylko dlatego, że
+    kilku dziwnym ludziom się nudziło? Nie do końca. Przyjrzyjmy się pewnemu
+    wesołemu twierdzeniu i jego smutnemu dowodowi.
+
+<div class="paragraph"> </div>
+
+    Twierdzenie: istnieją takie dwie liczby niewymierne a i b, że a ^ b
+    (a podniesione do potęgi b) jest liczbą wymierną.
+
+<div class="paragraph"> </div>
+
+    Dowód: jeżeli √2 ^ √2 jest niewymierny, to niech a = √2 ^ √2, b = √2.
+    Wtedy a ^ b = (√2 ^ √2) ^ √2 = √2 ^ (√2 * √2) = √2 ^ 2 = 2.
+    W przeciwnym wypadku (czyli gdy √2 ^ √2 jest wymierny) niech
+    a = b = √2. Wtedy a ^ b = √2 ^ √2 jest wymierny na mocy założenia.
+
+<div class="paragraph"> </div>
+
+    Fajny dowód, co? To teraz dam ci zagadkę: podaj mi dwie niewymierne
+    liczby a i b takie, że a ^ b jest wymierne. Pewnie zerkasz teraz do
+    dowodu, ale zaraz... cóż to? Jak to możliwe, że ten wredny dowód
+    udowadnia istnienie takich liczb, mimo że nie mówi wprost, co to za
+    liczby?
+
+<div class="paragraph"> </div>
+
+    Tym właśnie jest niekonstruktywizm - możesz pokazać, że coś istnieje,
+    ale bez wskazywania konkretnego obiektu. Możesz np. pokazać, że równanie
+    ma rozwiązanie i wciąż nie wiedzieć, co to za rozwiązanie. Niewesoło,
+    prawda?
+
+<div class="paragraph"> </div>
+
+    Podobnego zdania był dawno temu holenderski matematyk L. E. J. Brouwer.
+    Obraził się on więc na tego typu dowody i postanowił zrobić swoją własną
+    logikę i oprzeć na niej swoją własną, lepszą matematykę. Powstała w ten
+    sposób logika konstruktywna okazała się być mniej więcej tym samym, co
+    wspomniany wyżej rachunek lambda, choć Brouwer jeszcze o tym nie
+    wiedział. 
+<div class="paragraph"> </div>
+
+<a name="lab9"></a><h2 class="section">Praktyka</h2>
+
+<div class="paragraph"> </div>
+
+ W międzyczasie na osiągnięciach wymienionych wyżej panów zaczęto budować
+    wieżę z kości słoniowej. Chociaż nigdy nie dosięgnie ona nieba (można
+    pokazać, że niektóre problemy są niemożliwe do rozwiązania matematycznie
+    ani za pomocą komputerów), to po jakimś czasie zaczęła być przydatna.
+
+<div class="paragraph"> </div>
+
+    W połowie XIX wieku postawiono problem, który można krótko podsumować
+    tak: czy każdą mapę polityczną świata da się pomalować czterema kolorami?
+
+<div class="paragraph"> </div>
+
+    Przez bardzo długi czas próbowano go rozwiązywać na różne sposoby, ale
+    wszystkie one zawodziły. Po ponad stu latach prób problem rozwiązali
+    Appel i Haken pokazując, że każdą mapę da się pomalować czterema kolorami.
+    Popełnili oni jednak grzech bardzo ciężki, gdyż użyli do tego komputerów.
+
+<div class="paragraph"> </div>
+
+    Programy, które napisali, by udowodnić twierdzenie, wiele razy okazały
+    się błędne i musiały być wielokrotnie poprawiane. Sprawiło to, że część
+    matematyków nie uznała ich dowodu, gdyż nie umieli oni ręcznie sprawdzić
+    poprawności wszystkich tych pomocniczych programów.
+
+<div class="paragraph"> </div>
+
+    Po upływie kolejnych 30 latach dowód udało się sformalizować w Coqu,
+    co ostatecznio zamknęło sprawę. Morał płynący z tej historii jest dość
+    prosty:
+<ul class="doclist">
+<li> niektóre twierdzenia można udowodnić jedynie sprawdzając dużą ilość
+      przypadków, co jest trudne dla ludzi
+
+</li>
+<li> można przy dowodzeniu korzystać z komputerów i nie musi to wcale
+      podważać wiary w słuszność dowodu, a może ją wręcz wzmocnić 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a name="lab10"></a><h2 class="section">Homofobia... ekhm, homotopia, czyli quo vadimus?</h2>
+
+<div class="paragraph"> </div>
+
+ To jednak nie koniec niebezpiecznych związków matematyków z komputerami.
+
+<div class="paragraph"> </div>
+
+    Dawno, dawno temu, w nie tak odległej galaktyce (a konkretniej w Rosji)
+    był sobie matematyk nazwiskiem Voevodsky.
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+ TODO 
+<div class="paragraph"> </div>
+
+<a name="lab11"></a><h1 class="section">Literatura</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab12"></a><h2 class="section">Książki</h2>
 
 <div class="paragraph"> </div>
 
@@ -307,7 +438,7 @@
     Manual 
 <div class="paragraph"> </div>
 
-<a name="lab9"></a><h2 class="section">Blogi</h2>
+<a name="lab13"></a><h2 class="section">Blogi</h2>
 
 <div class="paragraph"> </div>
 
@@ -351,7 +482,7 @@
 
 <div class="paragraph"> </div>
 
-<a name="lab10"></a><h2 class="section">Inne</h2>
+<a name="lab14"></a><h2 class="section">Inne</h2>
 
 <div class="paragraph"> </div>
 
@@ -368,7 +499,10 @@
 
 <div class="paragraph"> </div>
 
-<a name="lab11"></a><h1 class="section">Sprawy techniczne</h1>
+<a name="lab15"></a><h1 class="section">Sprawy techniczne</h1>
+
+<div class="paragraph"> </div>
+
  Kurs ten tworzę z myślą o osobach, które potrafią programować w
     jakimś języku imperatywnym oraz znają podstawy logiki klasycznej,
     ale będę się starał uczynić go jak najbardziej zrozumiałym dla
