@@ -50,7 +50,11 @@
 </div>
 
 <div class="doc">
-<a name="lab301"></a><h3 class="section">Definicja i notacje</h3>
+<a name="lab278"></a><h1 class="section">Podstawy</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab279"></a><h2 class="section">Definicja i notacje</h2>
 
 <div class="paragraph"> </div>
 
@@ -68,7 +72,7 @@
 </div>
 
 <div class="doc">
-<a name="lab302"></a><h3 class="section"><span class="inlinecode">0</span> i <span class="inlinecode"><span class="id" title="var">S</span></span></h3>
+<a name="lab280"></a><h2 class="section"><span class="inlinecode">0</span> i <span class="inlinecode"><span class="id" title="var">S</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -96,7 +100,7 @@
 </div>
 
 <div class="doc">
-<a name="lab303"></a><h3 class="section">Poprzednik</h3>
+<a name="lab281"></a><h2 class="section">Poprzednik</h2>
 
 <div class="paragraph"> </div>
 
@@ -118,7 +122,11 @@
 </div>
 
 <div class="doc">
-<a name="lab304"></a><h3 class="section">Dodawanie</h3>
+<a name="lab282"></a><h1 class="section">Proste działania</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab283"></a><h2 class="section">Dodawanie</h2>
 
 <div class="paragraph"> </div>
 
@@ -182,7 +190,53 @@
 </div>
 
 <div class="doc">
-<a name="lab305"></a><h3 class="section">Odejmowanie</h3>
+<a name="lab284"></a><h2 class="section">Alternatywne definicje dodawania</h2>
+
+<div class="paragraph"> </div>
+
+ Udowodnij, że poniższe alternatywne metody zdefiniowania dodawania
+    rzeczywiście definiują dodawanie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">plus'</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> :=<br/>
+<span class="id" title="keyword">match</span> <span class="id" title="var">m</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 =&gt; <span class="id" title="var">n</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">m'</span> =&gt; <span class="id" title="var">S</span> (<span class="id" title="var">plus'</span> <span class="id" title="var">n</span> <span class="id" title="var">m'</span>)<br/>
+<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">plus'_is_plus</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">plus'</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> = <span class="id" title="var">plus</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">plus''</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> :=<br/>
+<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 =&gt; <span class="id" title="var">m</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n'</span> =&gt; <span class="id" title="var">plus''</span> <span class="id" title="var">n'</span> (<span class="id" title="var">S</span> <span class="id" title="var">m</span>)<br/>
+<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">plus''_is_plus</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">plus''</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> = <span class="id" title="var">plus</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">plus'''</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> :=<br/>
+<span class="id" title="keyword">match</span> <span class="id" title="var">m</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 =&gt; <span class="id" title="var">n</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">m'</span> =&gt; <span class="id" title="var">plus'''</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>) <span class="id" title="var">m'</span><br/>
+<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">plus'''_is_plus</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">plus'''</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> = <span class="id" title="var">plus</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab285"></a><h2 class="section">Odejmowanie</h2>
 
 <div class="paragraph"> </div>
 
@@ -242,7 +296,7 @@
 </div>
 
 <div class="doc">
-<a name="lab306"></a><h3 class="section">Mnożenie</h3>
+<a name="lab286"></a><h2 class="section">Mnożenie</h2>
 
 <div class="paragraph"> </div>
 
@@ -317,7 +371,64 @@
 </div>
 
 <div class="doc">
-<a name="lab307"></a><h3 class="section">Porządek <span class="inlinecode">&lt;=</span></h3>
+<a name="lab287"></a><h2 class="section">Potęgowanie</h2>
+
+<div class="paragraph"> </div>
+
+ Zdefiniuj potęgowanie i udowodnij jego właściwości. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_0_r</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> <span class="id" title="var">n</span> 0 = 1.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_0_l</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> 0 (<span class="id" title="var">S</span> <span class="id" title="var">n</span>) = 0.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_1_l</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> 1 <span class="id" title="var">n</span> = 1.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_1_r</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> <span class="id" title="var">n</span> 1 = <span class="id" title="var">n</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_no_neutr_l</span> :<br/>
+&nbsp;&nbsp;~ <span class="id" title="tactic">exists</span> <span class="id" title="var">e</span> : <span class="id" title="var">nat</span>, <span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> <span class="id" title="var">e</span> <span class="id" title="var">n</span> = <span class="id" title="var">n</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_no_annihilator_r</span> :<br/>
+&nbsp;&nbsp;~ <span class="id" title="tactic">exists</span> <span class="id" title="var">a</span> : <span class="id" title="var">nat</span>, <span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> <span class="id" title="var">n</span> <span class="id" title="var">a</span> = <span class="id" title="var">a</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_plus</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">pow</span> <span class="id" title="var">a</span> (<span class="id" title="var">plus</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>) = <span class="id" title="var">mult</span> (<span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span>) (<span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">c</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_mult</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">pow</span> (<span class="id" title="var">mult</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span>) <span class="id" title="var">c</span> = <span class="id" title="var">mult</span> (<span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">c</span>) (<span class="id" title="var">pow</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_pow</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">pow</span> (<span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span>) <span class="id" title="var">c</span> = <span class="id" title="var">pow</span> <span class="id" title="var">a</span> (<span class="id" title="var">mult</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab288"></a><h1 class="section">Porządek</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab289"></a><h2 class="section">Porządek <span class="inlinecode">&lt;=</span></h2>
 
 <div class="paragraph"> </div>
 
@@ -433,10 +544,20 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">n</span> &lt;= <span class="id" title="var">m</span> -&gt; <span class="id" title="tactic">exists</span> <span class="id" title="var">k</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">plus</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span> = <span class="id" title="var">m</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">le_pow_l</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">a</span> &lt;&gt; 0 -&gt; <span class="id" title="var">b</span> &lt;= <span class="id" title="var">c</span> -&gt; <span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> &lt;= <span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">c</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">le_pow_r</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">a</span> &lt;= <span class="id" title="var">b</span> -&gt; <span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">c</span> &lt;= <span class="id" title="var">pow</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>.<br/>
+
+<br/>
 </div>
 
 <div class="doc">
-<a name="lab308"></a><h3 class="section">Porządek <span class="inlinecode"><span class="id" title="var">lt</span></span></h3>
+<a name="lab290"></a><h2 class="section">Porządek <span class="inlinecode">&lt;</span></h2>
 
 </div>
 <div class="code">
@@ -463,11 +584,12 @@
 </div>
 
 <div class="doc">
-<a name="lab309"></a><h3 class="section">Minimum i maksimum</h3>
+<a name="lab291"></a><h2 class="section">Minimum i maksimum</h2>
 
 <div class="paragraph"> </div>
 
- Zdefiniuj minimum i maksimum oraz udowodnij ich właściwości. 
+ Zdefiniuj operacje brania minimum i maksimum z dwóch liczb naturalnych
+    oraz udowodnij ich właściwości. 
 </div>
 <div class="code">
 
@@ -548,70 +670,11 @@
 </div>
 
 <div class="doc">
-<a name="lab310"></a><h3 class="section">Potęgowanie</h3>
+<a name="lab292"></a><h1 class="section">Rozstrzygalność</h1>
 
 <div class="paragraph"> </div>
 
- Zdefiniuj potęgowanie i udowodnij jego właściwości. 
-</div>
-<div class="code">
-
-<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_0_r</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> <span class="id" title="var">n</span> 0 = 1.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_0_l</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> 0 (<span class="id" title="var">S</span> <span class="id" title="var">n</span>) = 0.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_1_l</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> 1 <span class="id" title="var">n</span> = 1.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_1_r</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> <span class="id" title="var">n</span> 1 = <span class="id" title="var">n</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_no_neutr_l</span> :<br/>
-&nbsp;&nbsp;~ <span class="id" title="tactic">exists</span> <span class="id" title="var">e</span> : <span class="id" title="var">nat</span>, <span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> <span class="id" title="var">e</span> <span class="id" title="var">n</span> = <span class="id" title="var">n</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_no_annihilator_r</span> :<br/>
-&nbsp;&nbsp;~ <span class="id" title="tactic">exists</span> <span class="id" title="var">a</span> : <span class="id" title="var">nat</span>, <span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">pow</span> <span class="id" title="var">n</span> <span class="id" title="var">a</span> = <span class="id" title="var">a</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">le_pow_l</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <span class="id" title="var">nat</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">a</span> &lt;&gt; 0 -&gt; <span class="id" title="var">b</span> &lt;= <span class="id" title="var">c</span> -&gt; <span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> &lt;= <span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">c</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">le_pow_r</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <span class="id" title="var">nat</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">a</span> &lt;= <span class="id" title="var">b</span> -&gt; <span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">c</span> &lt;= <span class="id" title="var">pow</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_mult</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <span class="id" title="var">nat</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">pow</span> (<span class="id" title="var">mult</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span>) <span class="id" title="var">c</span> = <span class="id" title="var">mult</span> (<span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">c</span>) (<span class="id" title="var">pow</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>).<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_plus</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <span class="id" title="var">nat</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">pow</span> <span class="id" title="var">a</span> (<span class="id" title="var">plus</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>) = <span class="id" title="var">mult</span> (<span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span>) (<span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">c</span>).<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pow_pow</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <span class="id" title="var">nat</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">pow</span> (<span class="id" title="var">pow</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span>) <span class="id" title="var">c</span> = <span class="id" title="var">pow</span> <span class="id" title="var">a</span> (<span class="id" title="var">mult</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>).<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-<a name="lab311"></a><h3 class="section">Reflekcja</h3>
+<a name="lab293"></a><h2 class="section">Rozstrzygalność porządku</h2>
 
 <div class="paragraph"> </div>
 
@@ -635,7 +698,11 @@
 </div>
 
 <div class="doc">
-Zdefiniuj funkcję <span class="inlinecode"><span class="id" title="var">eqb</span></span>, która sprawdza, czy <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span></span>. 
+<a name="lab294"></a><h2 class="section">Rozstrzygalność równości</h2>
+
+<div class="paragraph"> </div>
+
+ Zdefiniuj funkcję <span class="inlinecode"><span class="id" title="var">eqb</span></span>, która sprawdza, czy <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span></span>. 
 </div>
 <div class="code">
 
@@ -650,53 +717,11 @@ Zdefiniuj funkcję <span class="inlinecode"><span class="id" title="var">eqb</sp
 </div>
 
 <div class="doc">
-<a name="lab312"></a><h3 class="section">Alternatywne definicje dodawania</h3>
+<a name="lab295"></a><h1 class="section">Dzielenie i podzielność</h1>
 
 <div class="paragraph"> </div>
 
- Udowodnij, że poniższe alternatywne metody zdefiniowania dodawania
-    rzeczywiście definiują dodawanie. 
-</div>
-<div class="code">
-
-<br/>
-<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">plus'</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> :=<br/>
-<span class="id" title="keyword">match</span> <span class="id" title="var">m</span> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| 0 =&gt; <span class="id" title="var">n</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">m'</span> =&gt; <span class="id" title="var">S</span> (<span class="id" title="var">plus'</span> <span class="id" title="var">n</span> <span class="id" title="var">m'</span>)<br/>
-<span class="id" title="keyword">end</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">plus'_is_plus</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">plus'</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> = <span class="id" title="var">plus</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">plus''</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> :=<br/>
-<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| 0 =&gt; <span class="id" title="var">m</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n'</span> =&gt; <span class="id" title="var">plus''</span> <span class="id" title="var">n'</span> (<span class="id" title="var">S</span> <span class="id" title="var">m</span>)<br/>
-<span class="id" title="keyword">end</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">plus''_is_plus</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">plus''</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> = <span class="id" title="var">plus</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">plus'''</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> :=<br/>
-<span class="id" title="keyword">match</span> <span class="id" title="var">m</span> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| 0 =&gt; <span class="id" title="var">n</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">m'</span> =&gt; <span class="id" title="var">plus'''</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>) <span class="id" title="var">m'</span><br/>
-<span class="id" title="keyword">end</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">plus'''_is_plus</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">plus'''</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> = <span class="id" title="var">plus</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-<a name="lab313"></a><h3 class="section">Dzielenie przez 2</h3>
+<a name="lab296"></a><h2 class="section">Dzielenie przez 2</h2>
 
 <div class="paragraph"> </div>
 
@@ -775,7 +800,7 @@ Zdefiniuj dzielenie całkowitoliczbowe przez <span class="inlinecode">2</span> o
 </div>
 
 <div class="doc">
-<a name="lab314"></a><h3 class="section">Podzielność</h3>
+<a name="lab297"></a><h2 class="section">Podzielność</h2>
 
 </div>
 <div class="code">
@@ -836,4 +861,6 @@ Zdefiniuj dzielenie całkowitoliczbowe przez <span class="inlinecode">2</span> o
 
 <br/>
 <span class="id" title="keyword">End</span> <span class="id" title="var">MyNat</span>.<br/>
+
+<br/>
 </div>
