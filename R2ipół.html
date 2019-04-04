@@ -1,0 +1,271 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="coqdoc.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="jquery-1.8.3.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="MyStyles.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-88023543-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+<h1 class="libtitle">R2ipół</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+ W poprzednim rozdziale dość dogłębnie zapoznaliśmy się z mechanizmem
+    definiowania induktywnych typów i rodzin typów. Nauczyliśmy się też
+    definiować funkcje operujące na ich elementach za pomocą dopasowania
+    do wzorca oraz rekursji.
+
+<div class="paragraph"> </div>
+
+    Indukcja i rekursja są ze sobą bardzo ściśle powiązane. Obie operają
+    się na autoreferencji, czyli odnoszeniu się do samego siebie:
+<ul class="doclist">
+<li> liczba naturalna to zero lub następnik liczby naturalnej
+
+</li>
+<li> długość listy złożonej z głowy i ogona to jeden plus długość ogona 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Można użyć nawet mocniejszego stwierdzenia: indukcja i rekursja są
+    dokładnie tym samym zjawiskiem. Skoro tak, dlaczego używamy na jego
+    opisanie dwóch różnych słów? Cóż, jest to zaszłość historyczna, jak
+    wiele innych, które napotkaliśmy. Rozróżniamy zdania i typy/specyfikacje,
+    relacje i rodziny typów, dowody i termy/programy etc., choć te pierwsze
+    są specjalnymi przypadkami tych drugich. Podobnie indukcja pojawiła się
+    po raz pierwszy jako technika dowodzenia faktów o liczbach naturalnych,
+    zaś rekursja jako technika pisania programów.
+
+<div class="paragraph"> </div>
+
+    Dla jasności, terminów tych będziemy używać w następujący sposób:
+<ul class="doclist">
+<li> indukcja będzie oznaczać metodę definiowania typów oraz
+      metodę dowodzenia
+
+</li>
+<li> rekursja będzie oznaczać metodę definiowania funkcji 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ Skutki odwoływania się do samego siebie w definicjach typów i
+    funkcji mają jednak inne skutki. W poprzednim rozdziale, w podrozdziale
+    o typach pustych widzieliśmy typ <span class="inlinecode"><span class="id" title="var">InfiniteList</span></span>, którego definicja
+    wyglądała tak: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">InfiniteList</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">InfiniteCons</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">InfiniteList</span> <span class="id" title="var">A</span> -&gt; <span class="id" title="var">InfiniteList</span> <span class="id" title="var">A</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Za pomocą indukcji udało nam się udowodnić, że tym ten nie ma żadnych
+    elementów, czyli jest pusty. Wynika to z faktu, że typy induktywne
+    mają jedynie termy o skończonym rozmiarze, a próba użycia konstruktora
+    <span class="inlinecode"><span class="id" title="var">InfiniteCons</span></span> dowolną ilość razy skutkuje termem, w którym zawsze
+    brakuje nam ogona naszej listy.
+
+<div class="paragraph"> </div>
+
+    Przykład ten pokazuje, że w induktywnych definicjach typów możemy
+    używać
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+ Ogólnie funkcja rekurencyjna to taka, która w swojej definicji odnosi
+    się do samej siebie. Rodzaje rekurencji można podzielić w zależności
+    od tego, w jaki sposób to robi:
+<ul class="doclist">
+<li> Rekursja strukturalna to taka, w której funkcja wywołuje siebie
+      na argumentach będących podtermami poprzednich argumentów
+
+</li>
+<li> Rekursja dobrze ufundowana to taka, w której funkcja wywołuje siebie
+      jedynie na argumentach "mniejszych", gdzie o tym, które argumenty są
+      mniejsze, a które większe, decyduje pewna relacja dobrze ufundowana.
+      Intuicyjnie relacja dobrze ufundowana to taka, że nie możemy
+      w nieskończoność robić wywołań rekurencyjnych na coraz mniejszych
+      argumentach, gdyż w końcu trafimy na najmniejszy.
+
+</li>
+<li> Funkcje f i g są wzajemnie rekurencyjne, gdy funkcja f wywołuje g,
+      a g wywołuje f. To, że f nie wywołuje samej siebie bezpośrednio nie
+      oznacza wcale, że nie jest rekurencyjna. Schemat ten można uogólnić
+      na dowolną ilość funkcji.
+
+</li>
+<li> Rekursja ogólna to taka, w którym funkcja może odwoływać się do
+      samej siebie w dowolny sposób. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a name="lab135"></a><h2 class="section">Rekursja ogólna</h2>
+
+<div class="paragraph"> </div>
+
+ W Coqu rekursja ogólna nie jest dozwolona. Powód jest prozaiczny:
+    jest ona sprzeczna. W celu zobrazowania spróbujmy zdefiniować za
+    pomocą taktyk następującą funkcję rekurencyjną: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">loop</span> (<span class="id" title="var">u</span> : <span class="id" title="var">unit</span>) : <span class="id" title="var">False</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">loop</span>. <span class="id" title="tactic">assumption</span>.<br/>
+<span class="id" title="keyword">Abort</span>. <span class="comment">(*&nbsp;Coq&nbsp;odrzuca&nbsp;komendę&nbsp;<span class="inlinecode"><span class="id" title="keyword">Qed</span>.</span>&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Przyjrzyjmy się uważnie definicji funkcji <span class="inlinecode"><span class="id" title="var">loop</span></span>. Mimo, że udało
+    nam się ujrzeć znajomy napis "No more subgoals", próba użycia
+    komendy <span class="inlinecode"><span class="id" title="keyword">Qed</span></span> kończy się błędem. Gdyby tak się nie stało, możliwe
+    byłoby skonstruowanie dowodu <span class="inlinecode"><span class="id" title="var">False</span></span>: 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*&nbsp;Definition&nbsp;the_universe_explodes&nbsp;:&nbsp;False&nbsp;:=&nbsp;loop&nbsp;tt.&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Aby chronić nas przed tą katastrofą, Coq nakłada na rekurencję
+    ograniczenie: argument główny wywołania rekurencyjnego musi być
+    strukturalnym podtermem argumentu głównego obecnego wywołania.
+    Innymi słowy, dozwolona jest jedynie rekursja strukturalna. 
+<div class="paragraph"> </div>
+
+<a name="lab136"></a><h2 class="section">Rekursja strukturalna</h2>
+
+<div class="paragraph"> </div>
+
+ Przyjrzyjmy się ponownie definicji dodawania: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Print</span> <span class="id" title="var">plus</span>.<br/>
+<span class="comment">(*&nbsp;plus&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;fix&nbsp;plus&nbsp;(n&nbsp;m&nbsp;:&nbsp;nat)&nbsp;{struct&nbsp;n}&nbsp;:&nbsp;nat&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;n&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;0&nbsp;=&gt;&nbsp;m<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;S&nbsp;p&nbsp;=&gt;&nbsp;S&nbsp;(plus&nbsp;p&nbsp;m)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;nat&nbsp;-&gt;&nbsp;nat&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Możemy zaobserwować parę rzeczy. Pierwsza, techniczna sprawa: po
+    <span class="inlinecode">=</span> widzimy nieznany nam konstrukt <span class="inlinecode"><span class="id" title="keyword">fix</span></span>. Pozwala on tworzyć
+    anonimowe funkcje rekruencyjne, tak jak <span class="inlinecode"><span class="id" title="keyword">fun</span></span> pozwala tworzyć
+    anonimowe funkcje nierekurencyjne. Funkcje zdefiniowane komendami 
+    <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span> i <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> są w jęzku termów Coqa reprezentowane
+    odpowiednio za pomocą <span class="inlinecode"><span class="id" title="keyword">fix</span></span> i <span class="inlinecode"><span class="id" title="keyword">fun</span></span>.
+
+<div class="paragraph"> </div>
+
+    Po drugie: za listą argumentów, a przed zwracanym typem, występuje
+    adnotacja <span class="inlinecode">{<span class="id" title="keyword">struct</span></span> <span class="inlinecode"><span class="id" title="var">n</span>}</span>. Wskazuje ona, który z argumentów funkcji
+    jest argumentem głównym. Definiując funkcje rekurencyjne zazwyczaj
+    nie musimy go pisać, gdyż Coq jest w stanie sam wywnioskować, który
+    argument jest główny.
+
+<div class="paragraph"> </div>
+
+    Czym jest argument główny? Aby to zrozumieć, zbadajmy najpierw
+    relację bycia podtermem (dla uproszczenia, skupimy się na termach
+    typów induktywnych). Relację tę opisują dwie proste zasady:
+<ul class="doclist">
+<li> po pierwsze, jeżeli dany term został skonstruowany pewnym konstruktorem,
+      to jego podtermami są rekurencyjne argumenty konstruktora. Przykład:
+      <span class="inlinecode">0</span> jest podtermem <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">0</span>, zaś <span class="inlinecode"><span class="id" title="var">nil</span></span> podtermem <span class="inlinecode"><span class="id" title="var">cons</span></span> <span class="inlinecode">42</span> <span class="inlinecode"><span class="id" title="var">nil</span></span>.
+
+</li>
+<li> po drugie, jeżeli <span class="inlinecode"><span class="id" title="var">t1</span></span> jest podtermem <span class="inlinecode"><span class="id" title="var">t2</span></span>, a <span class="inlinecode"><span class="id" title="var">t2</span></span> podtermem <span class="inlinecode"><span class="id" title="var">t3</span></span>,
+      to <span class="inlinecode"><span class="id" title="var">t1</span></span> jest podtermem <span class="inlinecode"><span class="id" title="var">t3</span></span> — własność ta nazywa się tranzytywnością.
+      Przykład: <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">0</span> jest podtermem <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">0)</span>, a zatem <span class="inlinecode">0</span> jest podtermem
+      <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">0)</span>. Podobnie <span class="inlinecode"><span class="id" title="var">nil</span></span> jest podtermem <span class="inlinecode"><span class="id" title="var">cons</span></span> <span class="inlinecode">666</span> <span class="inlinecode">(<span class="id" title="var">cons</span></span> <span class="inlinecode">42</span> <span class="inlinecode"><span class="id" title="var">nil</span>)</span> 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a name="lab137"></a><h4 class="section">Ćwiczenie</h4>
+
+<div class="paragraph"> </div>
+
+ Zdefiniuj relacje bycia podtermem dla liczb naturalnych i list. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Udowodnij, że przytoczone wyżej przykłady nie są oszustwem.
+    Komenda <span class="inlinecode"><span class="id" title="keyword">Goal</span></span> jest wygodna, gdyż używając jej nie musimy
+    nadawać twierdzeniu nazwy. Użycie <span class="inlinecode"><span class="id" title="keyword">Qed</span></span> zapisze twierdzenie
+    jako <span class="inlinecode"><span class="id" title="var">Unnamed_thm</span></span>, <span class="inlinecode"><span class="id" title="var">Unnamed_thm0</span></span>, <span class="inlinecode"><span class="id" title="var">Unnamed_thm1</span></span> etc. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="var">subterm_nat</span> 0 (<span class="id" title="var">S</span> 0).<br/>
+
+<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="var">subterm_list</span> <span class="id" title="var">nil</span> (<span class="id" title="var">cons</span> 42 <span class="id" title="var">nil</span>).<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+    Argumentem głównym funkcji <span class="inlinecode"><span class="id" title="var">plus</span></span> jest jej pierwszy argument (o czym
+    informuje nas adnotacja <span class="inlinecode">{<span class="id" title="keyword">struct</span></span> <span class="inlinecode"><span class="id" title="var">n</span>}</span>), gdyż to on jest dopasowywany
+    jako pierwszy (i jedyny). W przypadku gdy <span class="inlinecode"><span class="id" title="var">n</span></span> jest równe <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span>, <span class="inlinecode"><span class="id" title="var">plus</span></span>
+    jest wywoływany rekurencyjnie z argumentami <span class="inlinecode"><span class="id" title="var">p</span></span> i <span class="inlinecode"><span class="id" title="var">m</span></span>, co jest dozwolone,
+    gdyż jego argument główny, <span class="inlinecode"><span class="id" title="var">p</span></span>, jest podtermem <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span>. 
+</div>
+<div class="code">
+</div>
