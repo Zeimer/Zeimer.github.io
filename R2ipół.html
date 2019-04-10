@@ -662,7 +662,7 @@ Definicja zdaje się być poprawna: <span class="inlinecode">0</span> to przyp
 Komunikat ten głosi, że argumentem głównym wywołania rekurencyjnego jest
     <span class="inlinecode">0</span>, podczas gdy powinno być nim <span class="inlinecode"><span class="id" title="var">n'</span></span>. Wynika stąd jasno i wyraźnie, że
     jedynymi legalnymi argumentami w wywołaniu rekurencyjnym są te podtermy
-    argumentamu głównego, które zostają ujawnione w wyniku dopasowania do
+    argumentu głównego, które zostają ujawnione w wyniku dopasowania do
     wzorca. Coq nie jest jednak głupi - jest głupszy, niż ci się wydaje, o
     czym świadczy poniższy przykład. 
 </div>
@@ -680,7 +680,9 @@ Komunikat ten głosi, że argumentem głównym wywołania rekurencyjnego jest
 </div>
 
 <div class="doc">
-Tym razem komunikat o błędzie wygląda następująco: 
+Funkcja ta próbuje policzyć n-tą liczbę Fibonacciego:
+    https://en.wikipedia.org/wiki/Fibonacci_number, ale
+    słabo jej to wychodzi, gdyż dostajemy następujący błąd: 
 </div>
 <div class="code">
 
@@ -720,15 +722,161 @@ Mimo, że <span class="inlinecode"><span class="id" title="var">S</span></span> 
 
 <div class="doc">
 Tym razem Coq widzi, że <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span></span> jest podtermem <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span>)</span>, gdyż explicite
-    nadaliśmy temu termowi nazwę <span class="inlinecode"><span class="id" title="var">n''</span></span>, używają do tego klauzli <span class="inlinecode"><span class="id" title="keyword">as</span></span>. Cóż...
-    kto powiedział, że z maszyną łatwo będzie się dogadać? 
-<div class="paragraph"> </div>
-
-<a name="lab142"></a><h1 class="section">Rekursja dobrze ufundowana</h1>
+    nadaliśmy temu termowi nazwę <span class="inlinecode"><span class="id" title="var">n''</span></span>, używając do tego klauzli <span class="inlinecode"><span class="id" title="keyword">as</span></span>.
 
 <div class="paragraph"> </div>
 
-<a name="lab143"></a><h1 class="section">Indukcja funkcyjna</h1>
+    Ufff...  udało nam się przebrnąć przez techniczne detale działania
+    rekursji strukturalnej. Mogłoby się wydawać, że jest ona mechanizmem
+    bardzo upośledzonym, ale z doświadczenia wiesz już, że w praktyce
+    omówione wyżej problemy występują raczej rzadko.
+
+<div class="paragraph"> </div>
+
+    Mogłoby się też wydawać, że skoro wywołania rekurencyjne możemy robić
+    tylko na bezpośrednich podtermach dopasowanych we wzorcu, to nie da się
+    zdefiniować prawie żadnej ciekawej funkcji. Jak zobaczymy w następnym
+    podrozdziale, wcale tak nie jest - dzięki pewnej sztuczce (która jest
+    jednocześnie fundamentalną własnością wszystkich możliwych wszechświatów)
+    za pomocą rekursji strukturalnej można wyrazić rekursję dobrze ufundowaną,
+    która na pierwszy rzut oka jest dużo potężniejsza i daje nam wiele
+    możliwości definiowania różnych ciekawych funkcji. 
+<div class="paragraph"> </div>
+
+<a name="lab142"></a><h4 class="section">Ćwiczenie (dzielenie)</h4>
+
+<div class="paragraph"> </div>
+
+ Zdefiniuj funkcję <span class="inlinecode"><span class="id" title="var">div</span></span>, która implementuje dzielenie całkowitoliczbowe.
+    Żeby uniknąć problemów z dzieleniem przez <span class="inlinecode">0</span>, <span class="inlinecode"><span class="id" title="var">div</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> będziemy
+    interpretować jako <span class="inlinecode"><span class="id" title="var">n</span></span> podzielone przez <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span>, czyli np. <span class="inlinecode"><span class="id" title="var">div</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">0</span>
+    to n/1, <span class="inlinecode"><span class="id" title="var">div</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">1</span> to n/2 etc. Uwaga: to ćwiczenie pojawia się właśnie
+    w tym miejscu nieprzypadkowo. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab143"></a><h1 class="section">Rekursja dobrze ufundowana</h1>
+
+<div class="paragraph"> </div>
+
+ Próba 1: domino 
+<div class="paragraph"> </div>
+
+ Typy induktywne są jak domino - każdy term to jedna kostka, indukcja
+    i rekursja odpowiadają zaś temu co tygryski lubią najbardziej, czyli
+    reakcji łańcuchowej przewracającej wszystkie kostki.
+
+<div class="paragraph"> </div>
+
+    Typ <span class="inlinecode"><span class="id" title="var">unit</span></span> to jedna biedna kostka, zaś <span class="inlinecode"><span class="id" title="var">bool</span></span> to już dwie biedne
+    kostki - <span class="inlinecode"><span class="id" title="var">true</span></span> i <span class="inlinecode"><span class="id" title="var">false</span></span>. W obu przypadkach nie dzieje się nic
+    ciekawego - żeby wszystkie kostki się przewróciły, musimy pchnąć
+    palcem każdą z osobna.
+
+<div class="paragraph"> </div>
+
+    Typ <span class="inlinecode"><span class="id" title="var">nat</span></span> jest już ciekawszy - są dwa rodzaje kostek, <span class="inlinecode">0</span> i <span class="inlinecode"><span class="id" title="var">S</span></span>,
+    a jeżeli pchniemy kostkę <span class="inlinecode">0</span> i między kolejnymi kostkami jest
+    odpowiedni odstęp, to równy szlaczek kolejnych kostek przewracać
+    się będzie do końca świata.
+
+<div class="paragraph"> </div>
+
+    Podobnie dla typu <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">A</span></span> mamy dwa rodzaje kostek - <span class="inlinecode"><span class="id" title="var">nil</span></span> i <span class="inlinecode"><span class="id" title="var">cons</span></span>,
+    ale kostki rodzaju <span class="inlinecode"><span class="id" title="var">cons</span></span> mają różne kolory - są nimi elementy typu
+    <span class="inlinecode"><span class="id" title="var">A</span></span>. Podobnie jak dla <span class="inlinecode"><span class="id" title="var">nat</span></span>, jeżeli pchniemy kostkę <span class="inlinecode"><span class="id" title="var">nil</span></span> i odstępy
+    między kolejnymi kostkami są odpowiednie, to kostki będą przewracać
+    się w nieskończoność. Tym razem jednak zamiast jednego szaroburego
+    szlaczka będzie multum kolorowych szlaczków o wspólnych początkach
+    (no chyba, że <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">unit</span></span> - wtedy dostaniemy taki sam bury szlaczek
+    jak dla <span class="inlinecode"><span class="id" title="var">nat</span></span>).
+
+<div class="paragraph"> </div>
+
+    Powyższe malownicze opisy przewracających się kostek domino bardziej
+    przywodzą mi na myśl indukcję, niż rekursję, chociaż wiemy już, że
+    jest to w sumie to samo. Przyjmują one perspektywę "od przodu" -
+    jeżeli przewrócimy początkową kostkę i niczego nie spartaczyliśmy,
+    kolejne kostki będą przewracać się już same.
+
+<div class="paragraph"> </div>
+
+    Możemy jednak przyjąć inny sposób patrzenia - perspektywę "od tyłu".
+    W tej perspektywie kostka początkowa przewraca się, jeżeli zostanie
+    pchnięta palcem, zaś każda dalsza kostka przewraca się, jeżeli
+    przewracają się wszystkie kostki bezpośrednio ją poprzedzające.
+
+<div class="paragraph"> </div>
+
+    Jeszcze jeden drobny detal: żeby w ogóle móc pchnąć kostki początkowe
+    (w liczbie mnogiej, bo rzecz jasna może być więcej niż jedna), musimy
+    najpierw ustalić, które kostki są tymi początkowymi! Na szczęście nie
+    jest to trudne - są to oczywiście te, których nie poprzedzają inne
+    kostki.
+
+<div class="paragraph"> </div>
+
+    I tutaj następuje pewien trik logiczno-językowo-wyobraźniowy: możemy
+    o kostkach początkowych myśleć, że przewracają się, gdy przewrócą się
+    wszystkie kostki je poprzedzające, których oczywiście nie ma, a nasz
+    palec wyobrażać sobie po prostu jako fizyczną realizację tej pustej
+    prawdy.
+
+<div class="paragraph"> </div>
+
+    W ten oto wesoły sposób udało nam się uzyskać definicję elementu
+    dostępnego oraz relacji dobrze ufundowanej. 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*<br/>
+&nbsp;Inductive&nbsp;Acc&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{R&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;A&nbsp;-&gt;&nbsp;Prop}&nbsp;(x:&nbsp;A)&nbsp;:&nbsp;Prop&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Acc_intro&nbsp;:&nbsp;(forall&nbsp;y:A,&nbsp;R&nbsp;y&nbsp;x&nbsp;-&gt;&nbsp;Acc&nbsp;y)&nbsp;-&gt;&nbsp;Acc&nbsp;x.<br/>
+*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">Acc</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Acc_intro</span> : (<span class="id" title="keyword">forall</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <span class="id" title="var">y</span> <span class="id" title="var">x</span> -&gt; <span class="id" title="var">Acc</span> <span class="id" title="var">R</span> <span class="id" title="var">y</span>) -&gt; <span class="id" title="var">Acc</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Print</span> <span class="id" title="var">Acc</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Scheme</span> <span class="id" title="var">wut</span> := <span class="id" title="keyword">Induction</span> <span class="id" title="keyword">for</span> <span class="id" title="var">Acc</span> <span class="id" title="keyword">Sort</span> <span class="id" title="keyword">Prop</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <span class="id" title="var">wut</span>.<br/>
+<span class="id" title="keyword">Check</span> <span class="id" title="var">Acc_ind</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">well_founded</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">Acc</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">well_founded_rect</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>) (<span class="id" title="keyword">wf</span> : <span class="id" title="var">well_founded</span> <span class="id" title="var">R</span>) (<span class="id" title="var">P</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Type</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, (<span class="id" title="keyword">forall</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <span class="id" title="var">y</span> <span class="id" title="var">x</span> -&gt; <span class="id" title="var">P</span> <span class="id" title="var">y</span>) -&gt; <span class="id" title="var">P</span> <span class="id" title="var">x</span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">P</span> <span class="id" title="var">x</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">R</span> <span class="id" title="keyword">wf</span> <span class="id" title="var">P</span> <span class="id" title="var">IH</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Acc_rect</span> <span class="id" title="keyword">with</span> <span class="id" title="var">R</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">y</span> <span class="id" title="var">H1</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IH</span>. <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="keyword">wf</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab144"></a><h1 class="section">Indukcja funkcyjna</h1>
 
 </div>
 <div class="code">
