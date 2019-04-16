@@ -765,9 +765,6 @@ Tym razem Coq widzi, że <span class="inlinecode"><span class="id" title="var">S
 
 <div class="paragraph"> </div>
 
- Próba 1: domino 
-<div class="paragraph"> </div>
-
  Typy induktywne są jak domino - każdy term to jedna kostka, indukcja
     i rekursja odpowiadają zaś temu co tygryski lubią najbardziej, czyli
     reakcji łańcuchowej przewracającej wszystkie kostki.
@@ -836,7 +833,7 @@ Tym razem Coq widzi, że <span class="inlinecode"><span class="id" title="var">S
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Inductive</span> <span class="id" title="var">Acc</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">Acc</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Type</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Acc_intro</span> : (<span class="id" title="keyword">forall</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <span class="id" title="var">y</span> <span class="id" title="var">x</span> -&gt; <span class="id" title="var">Acc</span> <span class="id" title="var">R</span> <span class="id" title="var">y</span>) -&gt; <span class="id" title="var">Acc</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span>.<br/>
 
 <br/>
@@ -844,7 +841,7 @@ Tym razem Coq widzi, że <span class="inlinecode"><span class="id" title="var">S
 
 <div class="doc">
 Kostki domina reprezentuje typ <span class="inlinecode"><span class="id" title="var">A</span></span>, zaś relacja <span class="inlinecode"><span class="id" title="var">R</span></span> to sposób ułożenia
-    kostek, zaś <span class="inlinecode"><span class="id" title="var">x</span></span> to pewna konkretna kostka domina. Konstruktor <span class="inlinecode"><span class="id" title="var">Acc_intro</span></span>
+    kostek, a <span class="inlinecode"><span class="id" title="var">x</span></span> to pewna konkretna kostka domina. Konstruktor <span class="inlinecode"><span class="id" title="var">Acc_intro</span></span>
     mówi, że kostka <span class="inlinecode"><span class="id" title="var">x</span></span> przewraca się, gdy przewracają się wszystkie kostki
     ją poprzedzające.
 
@@ -857,7 +854,7 @@ Kostki domina reprezentuje typ <span class="inlinecode"><span class="id" title="
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Definition</span> <span class="id" title="var">well_founded</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">well_founded</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">Acc</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span>.<br/>
 
 <br/>
@@ -870,7 +867,18 @@ Układ kostek reprezentowany przez <span class="inlinecode"><span class="id" tit
 <div class="paragraph"> </div>
 
     Mniej poetycko: relacja jest dobrze ufundowana, jeżeli każdy element
-    typu <span class="inlinecode"><span class="id" title="var">A</span></span> jest dostępny. 
+    typu <span class="inlinecode"><span class="id" title="var">A</span></span> jest dostępny.
+
+<div class="paragraph"> </div>
+
+    Uwaga: typem naszej "relacji" nie jest <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, lecz
+    <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="keyword">Type</span></span>, a zatem <span class="inlinecode"><span class="id" title="var">R</span></span> jest tak naprawdę indeksowaną rodziną
+    typów. Różnica między relacją i rodziną typów jest taka, że relacja,
+    gdy dostanie argumenty, zwraca zdanie, czyli coś typu <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, a rodzina
+    typów, gdy dostanie argumenty, zwraca typ, czyli coś typu <span class="inlinecode"><span class="id" title="keyword">Type</span></span>. Tak
+    więc pojęcie rodziny typów jest ogólniejsze niż pojęcie relacji. Ta
+    ogólność przyda się nam za kilka chwil aby nie musieć pisać wszystkiego
+    dwa razy. 
 <div class="paragraph"> </div>
 
 <a name="lab144"></a><h4 class="section">Ćwiczenie (dostępność i ufundowanie)</h4>
@@ -887,17 +895,26 @@ Układ kostek reprezentowany przez <span class="inlinecode"><span class="id" tit
 </div>
 
 <div class="doc">
-Pokaż, że relacja dobrze ufundowana jest antyzwrotna. 
+Pokaż, że relacja dobrze ufundowana jest antyzwrotna oraz zinterpretuj
+    ten fakt (tzn. powiedz, o co tak naprawdę chodzi w tym stwierdzeniu). 
 </div>
 <div class="code">
 
 <br/>
 
 <br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">wf_antirefl</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">well_founded</span> <span class="id" title="var">R</span> -&gt; <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, ~ <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">x</span>.<br/>
+
+<br/>
 </div>
 
 <div class="doc">
-Sprawdź, czy dobrze ufundowane są relacje <span class="inlinecode"><span class="id" title="var">le'</span></span> i <span class="inlinecode"><span class="id" title="var">lt'</span></span>. 
+Sprawdź, czy dobrze ufundowane są relacje <span class="inlinecode"><span class="id" title="var">le'</span></span> i <span class="inlinecode"><span class="id" title="var">lt'</span></span>. Uwaga:
+    pierwsze zadanie jest bardzo łatwe, drugie jest piekielnie trudne.
+    Jeżeli nie potrafisz rozwiązać go formalnie w Coqu, zrób to na
+    kartce nieformalnie - będzie dużo łatwiej.
 </div>
 <div class="code">
 
@@ -915,17 +932,79 @@ Sprawdź, czy dobrze ufundowane są relacje <span class="inlinecode"><span class
 </div>
 
 <div class="doc">
-Czas na twierdzenie... 
+Wiemy już, co to znaczy, że kostka domina jest dostępna (każda kostka
+    ją poprzedzająca jest dostępna, co formalnie wyraża predykat <span class="inlinecode"><span class="id" title="var">Acc</span></span>)
+    oraz że poprawny układ kostek to taki, w którym każda kostka jest
+    dostępna (co formalnie wyraża predykat <span class="inlinecode"><span class="id" title="var">well_founded</span></span>). Możemy teraz
+    przejść do tego, do czego dążyliśmy od samego początku: udowodnić, że
+    jeżeli poprawnie ustawimy kostki, to wszystkie się przewrócą. 
 </div>
 <div class="code">
 
 <br/>
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">well_founded_rect</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">wf</span> : <span class="id" title="var">well_founded</span> <span class="id" title="var">R</span>) (<span class="id" title="var">P</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Type</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, (<span class="id" title="keyword">forall</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <span class="id" title="var">y</span> <span class="id" title="var">x</span> -&gt; <span class="id" title="var">P</span> <span class="id" title="var">y</span>) -&gt; <span class="id" title="var">P</span> <span class="id" title="var">x</span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">P</span> <span class="id" title="var">x</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">R</span> <span class="id" title="keyword">wf</span> <span class="id" title="var">P</span> <span class="id" title="var">IH</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">Acc_rect</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Acc_rect</span> <span class="id" title="keyword">with</span> <span class="id" title="var">R</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">y</span> <span class="id" title="var">H1</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IH</span>. <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="keyword">wf</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">well_founded_ind</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">wf</span> : <span class="id" title="var">well_founded</span> <span class="id" title="var">R</span>) (<span class="id" title="var">P</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Type</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, (<span class="id" title="keyword">forall</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> <span class="id" title="var">y</span> <span class="id" title="var">x</span> -&gt; <span class="id" title="var">P</span> <span class="id" title="var">y</span>) -&gt; <span class="id" title="var">P</span> <span class="id" title="var">x</span>) -&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">P</span> <span class="id" title="var">x</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">R</span> <span class="id" title="keyword">wf</span> <span class="id" title="var">P</span> <span class="id" title="var">H</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">well_founded_rect</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="keyword">wf</span> <span class="id" title="var">_</span> <span class="id" title="var">H</span>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Arith</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">div</span> : <span class="id" title="var">nat</span> -&gt; <span class="id" title="var">nat</span> -&gt; <span class="id" title="var">nat</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span>. <span class="id" title="var">revert</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">well_founded_rect</span> <span class="id" title="var">nat</span> <span class="id" title="var">lt</span> <span class="id" title="var">wf_lt</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> =&gt; <span class="id" title="var">nat</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">IH</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">case_eq</span> (<span class="id" title="var">leb</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>) (<span class="id" title="var">S</span> <span class="id" title="var">k</span>)); <span class="id" title="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> 0.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">S</span> (<span class="id" title="var">IH</span> (<span class="id" title="var">n</span> - <span class="id" title="var">S</span> <span class="id" title="var">k</span>) <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">clear</span> <span class="id" title="var">IH</span>. <span class="id" title="var">revert</span> <span class="id" title="var">k</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span>]; <span class="id" title="var">cbn</span>; <span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">k</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">k'</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">Nat.sub_0_r</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">le_n</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">lt</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">le_trans</span> <span class="id" title="keyword">with</span> <span class="id" title="var">n'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHn'</span>. <span class="id" title="var">cbn</span>. <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">le_S</span>, <span class="id" title="var">le_n</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;apply&nbsp;Nat.sub_lt.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;leb_complete_conv,&nbsp;lt_S_n&nbsp;in&nbsp;H.&nbsp;exact&nbsp;H.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;le_n_S,&nbsp;le_0_n.&nbsp;Show&nbsp;Proof.<br/>
+*)</span><br/>
+&nbsp;<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;lt.&nbsp;clear&nbsp;IH.&nbsp;revert&nbsp;k&nbsp;n0.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;induction&nbsp;n&nbsp;as&nbsp;<span class="inlinecode">|</span> <span class="inlinecode"><span class="id" title="var">n'</span></span>;&nbsp;cbn;&nbsp;intros.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contradiction&nbsp;n0.&nbsp;apply&nbsp;le_n_S,&nbsp;le_0_n.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;le_n_S.&nbsp;apply&nbsp;IHn'.*)</span><br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Print</span> <span class="id" title="var">div</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Compute</span> <span class="id" title="var">div</span> 2 1.<br/>
 
 <br/>
 </div>
