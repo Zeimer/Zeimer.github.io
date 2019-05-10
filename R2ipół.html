@@ -975,75 +975,8 @@ Sprawdź, czy dobrze ufundowana jest następująca relacja porządku:
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Arith</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">Definition</span> <span class="id" title="var">div</span> : <span class="id" title="var">nat</span> -&gt; <span class="id" title="var">nat</span> -&gt; <span class="id" title="var">nat</span>.<br/>
-<span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span>. <span class="id" title="var">revert</span> <span class="id" title="var">n</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">well_founded_rect</span> <span class="id" title="var">nat</span> <span class="id" title="var">lt</span> <span class="id" title="var">wf_lt</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> =&gt; <span class="id" title="var">nat</span>)).<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">IH</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">case_eq</span> (<span class="id" title="var">leb</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>) (<span class="id" title="var">S</span> <span class="id" title="var">k</span>)); <span class="id" title="tactic">intro</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> 0.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">S</span> (<span class="id" title="var">IH</span> (<span class="id" title="var">n</span> - <span class="id" title="var">S</span> <span class="id" title="var">k</span>) <span class="id" title="var">_</span>)).<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">clear</span> <span class="id" title="var">IH</span>. <span class="id" title="var">revert</span> <span class="id" title="var">k</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span>]; <span class="id" title="var">cbn</span>; <span class="id" title="tactic">intros</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">k</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">k'</span>].<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">Nat.sub_0_r</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">le_n</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">lt</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">le_trans</span> <span class="id" title="keyword">with</span> <span class="id" title="var">n'</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHn'</span>. <span class="id" title="var">cbn</span>. <span class="id" title="tactic">assumption</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">le_S</span>, <span class="id" title="var">le_n</span>.<br/>
-
-<br/>
-<span class="comment">(*&nbsp;apply&nbsp;Nat.sub_lt.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;leb_complete_conv,&nbsp;lt_S_n&nbsp;in&nbsp;H.&nbsp;exact&nbsp;H.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;le_n_S,&nbsp;le_0_n.&nbsp;Show&nbsp;Proof.<br/>
-*)</span><br/>
-&nbsp;<span class="comment">(*<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;lt.&nbsp;clear&nbsp;IH.&nbsp;revert&nbsp;k&nbsp;n0.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;induction&nbsp;n&nbsp;as&nbsp;<span class="inlinecode">|</span> <span class="inlinecode"><span class="id" title="var">n'</span></span>;&nbsp;cbn;&nbsp;intros.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contradiction&nbsp;n0.&nbsp;apply&nbsp;le_n_S,&nbsp;le_0_n.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;le_n_S.&nbsp;apply&nbsp;IHn'.*)</span><br/>
-<span class="id" title="keyword">Defined</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Print</span> <span class="id" title="var">div</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Compute</span> <span class="id" title="var">div</span> 2 1.<br/>
-
-<br/>
-<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Recdef</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Function</span> <span class="id" title="var">div</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) {<span class="id" title="keyword">measure</span> <span class="id" title="var">id</span> <span class="id" title="var">n</span>} : <span class="id" title="var">nat</span> :=<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">n</span> &lt;? <span class="id" title="var">S</span> <span class="id" title="var">m</span><br/>
-&nbsp;&nbsp;<span class="id" title="keyword">then</span> <span class="id" title="var">n</span><br/>
-&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="var">S</span> (<span class="id" title="var">div</span> (<span class="id" title="var">n</span> - <span class="id" title="var">m</span>) <span class="id" title="var">m</span>).<br/>
-<span class="id" title="keyword">Proof</span>.<br/>
-<span class="id" title="keyword">Abort</span>.<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-div n m = n/(m + 1) 
-</div>
-<div class="code">
-<span class="id" title="keyword">Definition</span> <span class="id" title="var">div</span> : <span class="id" title="var">nat</span> -&gt; <span class="id" title="var">nat</span> -&gt; <span class="id" title="var">nat</span>.<br/>
-<span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (@<span class="id" title="var">well_founded_induction_type</span> <span class="id" title="var">nat</span> <span class="id" title="var">lt</span> <span class="id" title="var">lt_wf</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span> =&gt; <span class="id" title="var">nat</span> -&gt; <span class="id" title="var">nat</span>)).<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">IH</span> <span class="id" title="var">m</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">le_lt_dec</span> (<span class="id" title="var">S</span> <span class="id" title="var">m</span>) <span class="id" title="var">n</span>).<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Focus</span> 2. <span class="id" title="tactic">exact</span> 0.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">S</span>. <span class="id" title="tactic">refine</span> (<span class="id" title="var">IH</span> (<span class="id" title="var">n</span> - <span class="id" title="var">S</span> <span class="id" title="var">m</span>) <span class="id" title="var">_</span> <span class="id" title="var">m</span>). <span class="id" title="tactic">apply</span> <span class="id" title="var">Nat.sub_lt</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assumption</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">le_n_S</span>, <span class="id" title="var">le_0_n</span>.<br/>
-<span class="id" title="keyword">Defined</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Compute</span> <span class="id" title="var">div</span> 5 0.<br/>
 </div>
 
 <div class="doc">
