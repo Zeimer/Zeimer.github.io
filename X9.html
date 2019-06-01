@@ -147,14 +147,6 @@ Zdefiniuj funkcję <span class="inlinecode"><span class="id" title="var">snoc</s
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">lsim</span> (<span class="id" title="var">app</span> (<span class="id" title="var">snoc</span> <span class="id" title="var">l1</span> <span class="id" title="var">x</span>) <span class="id" title="var">l2</span>) (<span class="id" title="var">app</span> <span class="id" title="var">l1</span> (<span class="id" title="var">cocons</span> <span class="id" title="var">x</span> <span class="id" title="var">l2</span>)).<br/>
 
 <br/>
-<span class="id" title="keyword">CoFixpoint</span> <span class="id" title="var">lmap</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">B</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) : <span class="id" title="var">coList</span> <span class="id" title="var">B</span> :=<br/>
-{|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">uncons</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> =&gt; <span class="id" title="var">None</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">t</span>) =&gt; <span class="id" title="var">Some</span> (<span class="id" title="var">f</span> <span class="id" title="var">h</span>, <span class="id" title="var">lmap</span> <span class="id" title="var">f</span> <span class="id" title="var">t</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
-|}.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">lmap_id</span> :<br/>
@@ -197,36 +189,85 @@ Zdefiniuj funkcję <span class="inlinecode"><span class="id" title="var">snoc</s
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">f</span> <span class="id" title="var">x</span> = <span class="id" title="var">g</span> <span class="id" title="var">x</span>) -&gt; <span class="id" title="var">lsim</span> (<span class="id" title="var">lmap</span> <span class="id" title="var">f</span> <span class="id" title="var">l</span>) (<span class="id" title="var">lmap</span> <span class="id" title="var">g</span> <span class="id" title="var">l</span>).<br/>
 
 <br/>
-<span class="id" title="keyword">CoFixpoint</span> <span class="id" title="var">iterate</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) : <span class="id" title="var">coList</span> <span class="id" title="var">A</span> :=<br/>
-{|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> := <span class="id" title="var">Some</span> (<span class="id" title="var">x</span>, <span class="id" title="var">iterate</span> <span class="id" title="var">f</span> (<span class="id" title="var">f</span> <span class="id" title="var">x</span>));<br/>
-|}.<br/>
 
 <br/>
-<span class="id" title="keyword">CoFixpoint</span> <span class="id" title="var">piterate</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">option</span> <span class="id" title="var">A</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) : <span class="id" title="var">coList</span> <span class="id" title="var">A</span> :=<br/>
-{|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> := <span class="id" title="var">Some</span> (<span class="id" title="var">x</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">f</span> <span class="id" title="var">x</span> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> =&gt; <span class="id" title="var">conil</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> <span class="id" title="var">y</span> =&gt; <span class="id" title="var">piterate</span> <span class="id" title="var">f</span> <span class="id" title="var">y</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>)<br/>
-|}.<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">len_iterate</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">sim</span> (<span class="id" title="var">len</span> (<span class="id" title="var">iterate</span> <span class="id" title="var">f</span> <span class="id" title="var">x</span>)) <span class="id" title="tactic">omega</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">splitAt</span><br/>
+&nbsp;&nbsp;{<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">option</span> (<span class="id" title="var">list</span> <span class="id" title="var">A</span> * <span class="id" title="var">A</span> * <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) :=<br/>
+<span class="id" title="keyword">match</span> <span class="id" title="var">n</span>, <span class="id" title="var">uncons</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span>, <span class="id" title="var">None</span> =&gt; <span class="id" title="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0, <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">t</span>) =&gt; <span class="id" title="var">Some</span> ([], <span class="id" title="var">h</span>, <span class="id" title="var">t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n'</span>, <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">t</span>) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">splitAt</span> <span class="id" title="var">t</span> <span class="id" title="var">n'</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> =&gt; <span class="id" title="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> (<span class="id" title="var">start</span>, <span class="id" title="var">mid</span>, <span class="id" title="var">rest</span>) =&gt; <span class="id" title="var">Some</span> (<span class="id" title="var">h</span> :: <span class="id" title="var">start</span>, <span class="id" title="var">mid</span>, <span class="id" title="var">rest</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">nth</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">option</span> <span class="id" title="var">A</span> :=<br/>
+<span class="id" title="keyword">match</span> <span class="id" title="var">splitAt</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> =&gt; <span class="id" title="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> (<span class="id" title="var">_</span>, <span class="id" title="var">x</span>, <span class="id" title="var">_</span>) =&gt; <span class="id" title="var">Some</span> <span class="id" title="var">x</span><br/>
+<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">take</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">option</span> (<span class="id" title="var">list</span> <span class="id" title="var">A</span>) :=<br/>
+<span class="id" title="keyword">match</span> <span class="id" title="var">splitAt</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> =&gt; <span class="id" title="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> (<span class="id" title="var">l</span>, <span class="id" title="var">_</span>, <span class="id" title="var">_</span>) =&gt; <span class="id" title="var">Some</span> <span class="id" title="var">l</span><br/>
+<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">drop</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">option</span> (<span class="id" title="var">coList</span> <span class="id" title="var">A</span>) :=<br/>
+<span class="id" title="keyword">match</span> <span class="id" title="var">splitAt</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> =&gt; <span class="id" title="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> (<span class="id" title="var">_</span>, <span class="id" title="var">_</span>, <span class="id" title="var">l</span>) =&gt; <span class="id" title="var">Some</span> <span class="id" title="var">l</span><br/>
+<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">fromList</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>) : <span class="id" title="var">coList</span> <span class="id" title="var">A</span> :=<br/>
+<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| [] =&gt; <span class="id" title="var">conil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">h</span> :: <span class="id" title="var">t</span> =&gt; <span class="id" title="var">cocons</span> <span class="id" title="var">h</span> (<span class="id" title="var">fromList</span> <span class="id" title="var">t</span>)<br/>
+<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">insert</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>)<br/>
+&nbsp;&nbsp;: <span class="id" title="var">option</span> (<span class="id" title="var">coList</span> <span class="id" title="var">A</span>) :=<br/>
+<span class="id" title="keyword">match</span> <span class="id" title="var">splitAt</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> =&gt; <span class="id" title="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> (<span class="id" title="var">start</span>, <span class="id" title="var">mid</span>, <span class="id" title="var">rest</span>) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Some</span> (<span class="id" title="var">app</span> (<span class="id" title="var">fromList</span> <span class="id" title="var">start</span>) (<span class="id" title="var">cocons</span> <span class="id" title="var">x</span> (<span class="id" title="var">cocons</span> <span class="id" title="var">mid</span> <span class="id" title="var">rest</span>)))<br/>
+<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">remove</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>)<br/>
+&nbsp;&nbsp;: <span class="id" title="var">option</span> (<span class="id" title="var">coList</span> <span class="id" title="var">A</span>) :=<br/>
+<span class="id" title="keyword">match</span> <span class="id" title="var">splitAt</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> =&gt; <span class="id" title="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> (<span class="id" title="var">start</span>, <span class="id" title="var">_</span>, <span class="id" title="var">rest</span>) =&gt; <span class="id" title="var">Some</span> (<span class="id" title="var">app</span> (<span class="id" title="var">fromList</span> <span class="id" title="var">start</span>) <span class="id" title="var">rest</span>)<br/>
+<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+TODO: zip, unzip 
+</div>
+<div class="code">
+
+<br/>
 
 <br/>
 <span class="comment">(*<br/>
 Require&nbsp;Import&nbsp;CoqBookPL.book.X7.<br/>
-<br/>
-Fixpoint&nbsp;splitAt<br/>
-&nbsp;&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;(l&nbsp;:&nbsp;coList&nbsp;A)&nbsp;(n&nbsp;:&nbsp;nat)&nbsp;:&nbsp;option&nbsp;(list&nbsp;A&nbsp;*&nbsp;A&nbsp;*&nbsp;coList&nbsp;A)&nbsp;:=<br/>
-match&nbsp;n,&nbsp;uncons&nbsp;l&nbsp;with<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;_,&nbsp;None&nbsp;=&gt;&nbsp;None<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;0,&nbsp;Some&nbsp;(h,&nbsp;t)&nbsp;=&gt;&nbsp;Some&nbsp;(<span class="inlinecode"></span>,&nbsp;h,&nbsp;t)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;S&nbsp;n',&nbsp;Some&nbsp;(h,&nbsp;t)&nbsp;=&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;splitAt&nbsp;t&nbsp;n'&nbsp;with<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;None&nbsp;=&gt;&nbsp;None<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Some&nbsp;(start,&nbsp;mid,&nbsp;rest)&nbsp;=&gt;&nbsp;Some&nbsp;(h&nbsp;::&nbsp;start,&nbsp;mid,&nbsp;rest)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end<br/>
-end.<br/>
 <br/>
 CoFixpoint&nbsp;fromStream&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;(s&nbsp;:&nbsp;Stream&nbsp;A)&nbsp;:&nbsp;coList&nbsp;A&nbsp;:=<br/>
 {|<br/>
@@ -273,63 +314,15 @@ CoFixpoint&nbsp;takeWhile&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;(f&nbsp;:&nbsp;A&nbsp;-
 *)</span><br/>
 
 <br/>
-<span class="id" title="keyword">CoFixpoint</span> <span class="id" title="var">scan</span><br/>
-&nbsp;&nbsp;{<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">B</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="var">B</span>) (<span class="id" title="var">b</span> : <span class="id" title="var">B</span>) : <span class="id" title="var">coList</span> <span class="id" title="var">B</span> :=<br/>
-{|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">uncons</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> =&gt; <span class="id" title="var">None</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">t</span>) =&gt; <span class="id" title="var">Some</span> (<span class="id" title="var">b</span>, <span class="id" title="var">scan</span> <span class="id" title="var">t</span> <span class="id" title="var">f</span> (<span class="id" title="var">f</span> <span class="id" title="var">b</span> <span class="id" title="var">h</span>))<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>;<br/>
-|}.<br/>
 
 <br/>
-<span class="id" title="keyword">CoFixpoint</span> <span class="id" title="var">intersperse</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) : <span class="id" title="var">coList</span> <span class="id" title="var">A</span> :=<br/>
-{|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">uncons</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> =&gt; <span class="id" title="var">None</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">t</span>) =&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">uncons</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> =&gt; <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">t</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> (<span class="id" title="var">h'</span>, <span class="id" title="var">t'</span>) =&gt; <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">cocons</span> <span class="id" title="var">x</span> (<span class="id" title="var">intersperse</span> <span class="id" title="var">x</span> <span class="id" title="var">t</span>))<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>;<br/>
-|}.<br/>
 
 <br/>
-</div>
-
-<div class="doc">
-TODO: zip, unzip 
-</div>
-<div class="code">
 
 <br/>
-<span class="comment">(*<br/>
-CoFixpoint&nbsp;join&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;(l&nbsp;:&nbsp;coList&nbsp;(coList&nbsp;A))&nbsp;:&nbsp;coList&nbsp;A&nbsp;:=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;uncons&nbsp;l&nbsp;with<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;None&nbsp;=&gt;&nbsp;conil<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Some&nbsp;(h,&nbsp;t)&nbsp;=&gt;&nbsp;app&nbsp;h&nbsp;(join&nbsp;t)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end.<br/>
-*)</span><br/>
-
-<br/>
-<span class="id" title="keyword">Inductive</span> <span class="id" title="var">Finite</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} : <span class="id" title="var">coList</span> <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Finite_None</span> :<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> <span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>, <span class="id" title="var">uncons</span> <span class="id" title="var">l</span> = <span class="id" title="var">None</span> -&gt; <span class="id" title="var">Finite</span> <span class="id" title="var">l</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Finite_Some</span> :<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> <span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> <span class="id" title="var">l</span> = <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">t</span>) -&gt; <span class="id" title="var">Finite</span> <span class="id" title="var">t</span> -&gt; <span class="id" title="var">Finite</span> <span class="id" title="var">l</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">CoInductive</span> <span class="id" title="var">Infinite</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
-{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">h</span> : <span class="id" title="var">A</span>;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">p</span> : <span class="id" title="var">uncons</span> <span class="id" title="var">l</span> = <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">t</span>);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">inf'</span> : <span class="id" title="var">Infinite</span> <span class="id" title="var">t</span>;<br/>
-}.<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Finite_not_Infinite</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Finite</span> <span class="id" title="var">l</span> -&gt; <span class="id" title="var">Infinite</span> <span class="id" title="var">l</span> -&gt; <span class="id" title="var">False</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">sim_Infinite</span> :<br/>
@@ -337,9 +330,14 @@ CoFixpoint&nbsp;join&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;(l&nbsp;:&nbsp;coList&nbsp;(
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">lsim</span> <span class="id" title="var">l1</span> <span class="id" title="var">l2</span> -&gt; <span class="id" title="var">Infinite</span> <span class="id" title="var">l1</span> -&gt; <span class="id" title="var">Infinite</span> <span class="id" title="var">l2</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Finite_not_Infinite</span> :<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">len_Finite</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Finite</span> <span class="id" title="var">l</span> -&gt; <span class="id" title="var">Infinite</span> <span class="id" title="var">l</span> -&gt; <span class="id" title="var">False</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Finite</span> <span class="id" title="var">l</span> -&gt; <span class="id" title="var">len</span> <span class="id" title="var">l</span> &lt;&gt; <span class="id" title="tactic">omega</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">len_Infinite</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">len</span> <span class="id" title="var">l</span> = <span class="id" title="tactic">omega</span> -&gt; <span class="id" title="var">Infinite</span> <span class="id" title="var">l</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">Finite_snoc</span> :<br/>
@@ -392,52 +390,47 @@ CoFixpoint&nbsp;join&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;(l&nbsp;:&nbsp;coList&nbsp;(
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Finite</span> (<span class="id" title="var">piterate</span> <span class="id" title="var">f</span> <span class="id" title="var">x</span>) -&gt; <span class="id" title="tactic">exists</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">f</span> <span class="id" title="var">x</span> = <span class="id" title="var">None</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">CoInductive</span> <span class="id" title="var">Rev</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">l</span> <span class="id" title="var">r</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Infinite_splitAt</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Infinite</span> <span class="id" title="var">l</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span> (<span class="id" title="var">start</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">rest</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">splitAt</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> = <span class="id" title="var">Some</span> (<span class="id" title="var">start</span>, <span class="id" title="var">x</span>, <span class="id" title="var">rest</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Finite_zipW_l</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">B</span> -&gt; <span class="id" title="var">C</span>) (<span class="id" title="var">l1</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">l2</span> : <span class="id" title="var">coList</span> <span class="id" title="var">B</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Finite</span> <span class="id" title="var">l1</span> -&gt; <span class="id" title="var">Finite</span> (<span class="id" title="var">zipW</span> <span class="id" title="var">f</span> <span class="id" title="var">l1</span> <span class="id" title="var">l2</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Finite_zipW_r</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">B</span> -&gt; <span class="id" title="var">C</span>) (<span class="id" title="var">l1</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">l2</span> : <span class="id" title="var">coList</span> <span class="id" title="var">B</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Finite</span> <span class="id" title="var">l2</span> -&gt; <span class="id" title="var">Finite</span> (<span class="id" title="var">zipW</span> <span class="id" title="var">f</span> <span class="id" title="var">l1</span> <span class="id" title="var">l2</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Infinite_zipW_l</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">B</span> -&gt; <span class="id" title="var">C</span>) (<span class="id" title="var">l1</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">l2</span> : <span class="id" title="var">coList</span> <span class="id" title="var">B</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Infinite</span> (<span class="id" title="var">zipW</span> <span class="id" title="var">f</span> <span class="id" title="var">l1</span> <span class="id" title="var">l2</span>) -&gt; <span class="id" title="var">Infinite</span> <span class="id" title="var">l1</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Infinite_zipW_r</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">B</span> -&gt; <span class="id" title="var">C</span>) (<span class="id" title="var">l1</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">l2</span> : <span class="id" title="var">coList</span> <span class="id" title="var">B</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Infinite</span> (<span class="id" title="var">zipW</span> <span class="id" title="var">f</span> <span class="id" title="var">l1</span> <span class="id" title="var">l2</span>) -&gt; <span class="id" title="var">Infinite</span> <span class="id" title="var">l1</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">Exists</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">P</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>) : <span class="id" title="var">coList</span> <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Exists_hd</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> <span class="id" title="var">l</span> = <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">t</span>) -&gt; <span class="id" title="var">P</span> <span class="id" title="var">h</span> -&gt; <span class="id" title="var">Exists</span> <span class="id" title="var">P</span> <span class="id" title="var">l</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Exists_tl</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> <span class="id" title="var">l</span> = <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">t</span>) -&gt; <span class="id" title="var">Exists</span> <span class="id" title="var">P</span> <span class="id" title="var">t</span> -&gt; <span class="id" title="var">Exists</span> <span class="id" title="var">P</span> <span class="id" title="var">l</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">CoInductive</span> <span class="id" title="keyword">All</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">P</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Rev'</span> :<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">uncons</span> <span class="id" title="var">l</span> = <span class="id" title="var">None</span> /\ <span class="id" title="var">uncons</span> <span class="id" title="var">r</span> = <span class="id" title="var">None</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\/<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span> (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">tl</span> <span class="id" title="var">tr</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> <span class="id" title="var">l</span> = <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">tl</span>) /\ <span class="id" title="var">r</span> = <span class="id" title="var">snoc</span> <span class="id" title="var">tr</span> <span class="id" title="var">h</span> /\ <span class="id" title="var">Rev</span> <span class="id" title="var">tl</span> <span class="id" title="var">tr</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">All'</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> <span class="id" title="var">l</span> = <span class="id" title="var">None</span> \/<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span> (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> <span class="id" title="var">l</span> = <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">t</span>) /\ <span class="id" title="var">P</span> <span class="id" title="var">h</span> /\ <span class="id" title="keyword">All</span> <span class="id" title="var">P</span> <span class="id" title="var">t</span>;<br/>
 }.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Rev_wut</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l</span> <span class="id" title="var">r</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Infinite</span> <span class="id" title="var">l</span> -&gt; <span class="id" title="var">Infinite</span> <span class="id" title="var">r</span> -&gt; <span class="id" title="var">Rev</span> <span class="id" title="var">l</span> <span class="id" title="var">r</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Rev_Finite</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l</span> <span class="id" title="var">r</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Rev</span> <span class="id" title="var">l</span> <span class="id" title="var">r</span> -&gt; <span class="id" title="var">Finite</span> <span class="id" title="var">r</span> -&gt; <span class="id" title="var">Finite</span> <span class="id" title="var">l</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Rev_Finite</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l</span> <span class="id" title="var">r</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Rev</span> <span class="id" title="var">l</span> <span class="id" title="var">r</span> -&gt; <span class="id" title="var">Finite</span> <span class="id" title="var">l</span> -&gt; <span class="id" title="var">Finite</span> <span class="id" title="var">r</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Infinite_Rev</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l</span> <span class="id" title="var">r</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Rev</span> <span class="id" title="var">l</span> <span class="id" title="var">r</span> -&gt; <span class="id" title="var">Infinite</span> <span class="id" title="var">l</span> -&gt; <span class="id" title="var">Infinite</span> <span class="id" title="var">r</span>.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Finite_cocons</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">coList</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Finite</span> <span class="id" title="var">l</span> -&gt; <span class="id" title="var">Finite</span> (<span class="id" title="var">cocons</span> <span class="id" title="var">x</span> <span class="id" title="var">l</span>).<br/>
-
-<br/>
-<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">fromList</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>) : <span class="id" title="var">coList</span> <span class="id" title="var">A</span> :=<br/>
-{|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">uncons</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| [] =&gt; <span class="id" title="var">None</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">h</span> :: <span class="id" title="var">t</span> =&gt; <span class="id" title="var">Some</span> (<span class="id" title="var">h</span>, <span class="id" title="var">fromList</span> <span class="id" title="var">t</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
-|}.<br/>
-
-<br/>
-<span class="id" title="keyword">Lemma</span> <span class="id" title="var">fromList_inj</span>  :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">forall</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Set</span>} (<span class="id" title="var">l1</span> <span class="id" title="var">l2</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fromList</span> <span class="id" title="var">l1</span> = <span class="id" title="var">fromList</span> <span class="id" title="var">l2</span> -&gt; <span class="id" title="var">l1</span> = <span class="id" title="var">l2</span>.<br/>
 </div>
