@@ -8756,6 +8756,11 @@ Przyjrzyjmy się powyższej definicji. Intuicyjnie można ją rozumieć tak,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Permutation</span> <span class="id" title="var">l</span> (<span class="id" title="var">replicate</span> (<span class="id" title="var">count</span> <span class="id" title="var">p</span> <span class="id" title="var">l</span>) <span class="id" title="var">x</span> ++ <span class="id" title="var">b</span> ++ <span class="id" title="var">e</span>).<br/>
 
 <br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Permutation_count_conv</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">l1</span> <span class="id" title="var">l2</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">forall</span> <span class="id" title="var">p</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">bool</span>, <span class="id" title="var">count</span> <span class="id" title="var">p</span> <span class="id" title="var">l1</span> = <span class="id" title="var">count</span> <span class="id" title="var">p</span> <span class="id" title="var">l2</span>) -&gt; <span class="id" title="var">Permutation</span> <span class="id" title="var">l1</span> <span class="id" title="var">l2</span>.<br/>
+
+<br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">Permutation_filter</span> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">bool</span>) (<span class="id" title="var">l1</span> <span class="id" title="var">l2</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Permutation</span> <span class="id" title="var">l1</span> <span class="id" title="var">l2</span> -&gt; <span class="id" title="var">Permutation</span> (<span class="id" title="var">filter</span> <span class="id" title="var">p</span> <span class="id" title="var">l1</span>) (<span class="id" title="var">filter</span> <span class="id" title="var">p</span> <span class="id" title="var">l2</span>).<br/>
@@ -8792,6 +8797,11 @@ Przyjrzyjmy się powyższej definicji. Intuicyjnie można ją rozumieć tak,
 &nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">l1</span> <span class="id" title="var">l2</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Permutation</span> (<span class="id" title="var">intersperse</span> <span class="id" title="var">x</span> <span class="id" title="var">l1</span>) (<span class="id" title="var">intersperse</span> <span class="id" title="var">x</span> <span class="id" title="var">l2</span>) &lt;-&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Permutation</span> <span class="id" title="var">l1</span> <span class="id" title="var">l2</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">Permutation_pmap</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">option</span> <span class="id" title="var">B</span>) (<span class="id" title="var">l1</span> <span class="id" title="var">l2</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Permutation</span> <span class="id" title="var">l1</span> <span class="id" title="var">l2</span> -&gt; <span class="id" title="var">Permutation</span> (<span class="id" title="var">pmap</span> <span class="id" title="var">f</span> <span class="id" title="var">l1</span>) (<span class="id" title="var">pmap</span> <span class="id" title="var">f</span> <span class="id" title="var">l2</span>).<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">Permutation_elem</span> :<br/>

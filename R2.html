@@ -4397,7 +4397,7 @@ Powyższa komenda mówi Coqowi, żeby nie generował automatycznie reguł
 <div class="paragraph"> </div>
 
  Zanim jednak wyjaśnimy, co to za stfur, przypomnijmy sobie różne,
-    coraz bardziej skomplikowane sposoby definiowania przez indukcję.
+    coraz bardziej innowacyjne sposoby definiowania przez indukcję.
     Przypomnimy sobie też, jak sformułować ich reguły rekursji oraz
     indukcji. 
 <div class="paragraph"> </div>
@@ -5001,9 +5001,9 @@ Po powtórce nadszedł czas nowości. Zacznijmy od nazwy, która jest iście
 
 <div class="paragraph"> </div>
 
-    Nazwa ta rzuca sporo światła: indukcja-indukcja to jednoczesne połączenie
-    i uogólnienie mechanizmów definiowania typów wzajemnie induktywnych oraz
-    indeksowanych typów induktywnych.
+    Ta alternatywna nazwa rzuca sporo światła: indukcja-indukcja to jednoczesne
+    połączenie i uogólnienie mechanizmów definiowania typów wzajemnie induktywnych
+    oraz indeksowanych typów induktywnych.
 
 <div class="paragraph"> </div>
 
@@ -5054,7 +5054,9 @@ Po powtórce nadszedł czas nowości. Zacznijmy od nazwy, która jest iście
 <div class="doc">
 Jako się już wcześniej rzekło, indukcja-indukcja nie jest wspierana
     przez Coqa - powyższa definicja kończy się informacją o błędzie: Coq
-    nie widzi <span class="inlinecode"><span class="id" title="var">slist</span></span>, kiedy czyta indeksy <span class="inlinecode"><span class="id" title="var">ok</span></span>.
+    nie widzi <span class="inlinecode"><span class="id" title="var">slist</span></span> kiedy czyta indeksy <span class="inlinecode"><span class="id" title="var">ok</span></span> właśnie dlatego, że nie
+    dopuszcza on możliwości jednoczesnego definiowania rodziny (w tym
+    wypadku relacji) <span class="inlinecode"><span class="id" title="var">ok</span></span> wraz z jednym z jej indeksów, <span class="inlinecode"><span class="id" title="var">slist</span></span>.
 
 <div class="paragraph"> </div>
 
@@ -5068,7 +5070,7 @@ Jako się już wcześniej rzekło, indukcja-indukcja nie jest wspierana
     Zamysłem powyższego przykładu było zdefiniowanie typu list posortowanych
     <span class="inlinecode"><span class="id" title="var">slist</span></span> <span class="inlinecode"><span class="id" title="var">R</span></span>, gdzie <span class="inlinecode"><span class="id" title="var">R</span></span> pełni rolę relacji porządku, jednocześnie z relacją
     <span class="inlinecode"><span class="id" title="var">ok</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="var">slist</span></span> <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, gdzie <span class="inlinecode"><span class="id" title="var">ok</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> wyraża, że dostawienie <span class="inlinecode"><span class="id" title="var">x</span></span>
-    na początek listy <span class="inlinecode"><span class="id" title="var">l</span></span> daje listę posortowaną.
+    na początek listy posortowanej <span class="inlinecode"><span class="id" title="var">l</span></span> daje listę posortowaną.
 
 <div class="paragraph"> </div>
 
@@ -5084,9 +5086,9 @@ Jako się już wcześniej rzekło, indukcja-indukcja nie jest wspierana
 <li> <span class="inlinecode"><span class="id" title="var">snil</span></span> to lista pusta
 
 </li>
-<li> <span class="inlinecode"><span class="id" title="var">scons</span></span> robi listę z głowy <span class="inlinecode"><span class="id" title="var">h</span></span> i ogona <span class="inlinecode"><span class="id" title="var">t</span></span> pod warunkiem, że dostanie
-      też dowód zdania <span class="inlinecode"><span class="id" title="var">ok</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> mówiącego, że można dostawić <span class="inlinecode"><span class="id" title="var">h</span></span> na początek
-      listy <span class="inlinecode"><span class="id" title="var">t</span></span> 
+<li> <span class="inlinecode"><span class="id" title="var">scons</span></span> robi posortowaną listę z głowy <span class="inlinecode"><span class="id" title="var">h</span></span> i ogona <span class="inlinecode"><span class="id" title="var">t</span></span> pod warunkiem, że
+      dostanie też dowód zdania <span class="inlinecode"><span class="id" title="var">ok</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> mówiącego, że można dostawić <span class="inlinecode"><span class="id" title="var">h</span></span> na
+      początek listy <span class="inlinecode"><span class="id" title="var">t</span></span> 
 </li>
 </ul>
 
@@ -5098,11 +5100,303 @@ Jako się już wcześniej rzekło, indukcja-indukcja nie jest wspierana
 
 </li>
 <li> jeżeli mamy listę <span class="inlinecode"><span class="id" title="var">scons</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> oraz element <span class="inlinecode"><span class="id" title="var">x</span></span>, o którym wiemy,
-      że jest mniejsze od <span class="inlinecode"><span class="id" title="var">h</span></span>, tzn. <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span>, to <span class="inlinecode"><span class="id" title="var">x</span></span> może zostać dostawiony
+      że jest mniejszy od <span class="inlinecode"><span class="id" title="var">h</span></span>, tzn. <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span>, to <span class="inlinecode"><span class="id" title="var">x</span></span> może zostać dostawiony
       do listy <span class="inlinecode"><span class="id" title="var">scons</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> 
 </li>
 </ul>
 
+<div class="paragraph"> </div>
+
+ Jak powinny wyglądać reguły rekursji oraz indukcji? Na szczęście wciąż
+    działają schematy, które wypracowaliśmy dotychczas.
+
+<div class="paragraph"> </div>
+
+    Reguła rekursji mówi, że jeżeli znajdziemy w typie <span class="inlinecode"><span class="id" title="var">P</span></span> coś o kształcie
+    <span class="inlinecode"><span class="id" title="var">slist</span></span> <span class="inlinecode"><span class="id" title="var">R</span></span>, a w relacji <span class="inlinecode"><span class="id" title="var">Q</span></span> coś o kształcie <span class="inlinecode"><span class="id" title="var">ok</span></span>, to możemy zdefiniować
+    funkcję <span class="inlinecode"><span class="id" title="var">slist</span></span> <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="var">P</span></span> oraz <span class="inlinecode"><span class="id" title="keyword">forall</span></span> <span class="inlinecode">(<span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span>)</span> <span class="inlinecode">(<span class="id" title="var">l</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">slist</span></span> <span class="inlinecode"><span class="id" title="var">R</span>),</span> <span class="inlinecode"><span class="id" title="var">ok</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="var">Q</span></span>.
+
+<div class="paragraph"> </div>
+
+    Regułe indukcji można uzyskać dodając tyle zależności, ile tylko zdołamy
+    unieść.
+
+<div class="paragraph"> </div>
+
+    Zobaczmy więc, jak zrealizować to wszystko za pomocą aksjomatów. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Axioms</span><br/>
+&nbsp;&nbsp;(<span class="id" title="var">slist</span> : <span class="id" title="keyword">forall</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>}, (<span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>) -&gt; <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;(<span class="id" title="var">ok</span> : <span class="id" title="keyword">forall</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>}, <span class="id" title="var">A</span> -&gt; <span class="id" title="var">slist</span> <span class="id" title="var">R</span> -&gt; <span class="id" title="keyword">Prop</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Najpierw musimy zadeklarować <span class="inlinecode"><span class="id" title="var">slist</span></span>, gdyż wymaga tego typ <span class="inlinecode"><span class="id" title="var">ok</span></span>. Obie
+    definicje wyglądają dokładnie tak, jak nagłówki w powyższej definicji
+    odrzuconej przez Coqa.
+
+<div class="paragraph"> </div>
+
+    Widać też, że gdybyśmy chcieli zdefiniować rodziny <span class="inlinecode"><span class="id" title="var">A</span></span> i <span class="inlinecode"><span class="id" title="var">B</span></span>, które są
+    nawzajem swoimi indeksami, to nie moglibyśmy tego zrobić nawet za pomocą
+    aksjomatów. Rodzi to pytanie o to, które dokładnie definicje przez
+    indukcję-indukcję są legalne. Odpowiedź brzmi: nie wiem, ale może kiedyś
+    się dowiem. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Axioms</span><br/>
+&nbsp;&nbsp;(<span class="id" title="var">snil</span> : <span class="id" title="keyword">forall</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>}, <span class="id" title="var">slist</span> <span class="id" title="var">R</span>)<br/>
+&nbsp;&nbsp;(<span class="id" title="var">scons</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>} (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ok</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> -&gt; <span class="id" title="var">slist</span> <span class="id" title="var">R</span>)<br/>
+&nbsp;&nbsp;(<span class="id" title="var">ok_snil</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>} (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>), <span class="id" title="var">ok</span> <span class="id" title="var">x</span> (@<span class="id" title="var">snil</span> <span class="id" title="var">_</span> <span class="id" title="var">R</span>))<br/>
+&nbsp;&nbsp;(<span class="id" title="var">ok_scons</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">ok</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">x</span> : <span class="id" title="var">A</span>), <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">h</span> -&gt; <span class="id" title="var">ok</span> <span class="id" title="var">x</span> (<span class="id" title="var">scons</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Następnie definiujemy konstruktory: najpierw konstruktory <span class="inlinecode"><span class="id" title="var">slist</span></span>, a potem
+    <span class="inlinecode"><span class="id" title="var">ok</span></span>. Musimy to zrobić w tej kolejności, bo konstruktor <span class="inlinecode"><span class="id" title="var">ok_snil</span></span> odnosi
+    się do <span class="inlinecode"><span class="id" title="var">snil</span></span>, a <span class="inlinecode"><span class="id" title="var">ok_scons</span></span> do <span class="inlinecode"><span class="id" title="var">scons</span></span>.
+
+<div class="paragraph"> </div>
+
+    Znowu widzimy, że gdyby konstruktory obu typów odnosiły się do siebie
+    nawzajem, to nie moglibyśmy zdefiniować takiego typu aksjomatycznie. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Axiom</span><br/>
+&nbsp;&nbsp;(<span class="id" title="var">ind</span> : <span class="id" title="keyword">forall</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">P</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span> -&gt; <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Q</span> : <span class="id" title="keyword">forall</span> (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>), <span class="id" title="var">ok</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> -&gt; <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Psnil</span> : <span class="id" title="var">P</span> <span class="id" title="var">snil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Pscons</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">ok</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">P</span> <span class="id" title="var">t</span> -&gt; <span class="id" title="var">Q</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span> -&gt; <span class="id" title="var">P</span> (<span class="id" title="var">scons</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Qok_snil</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">Q</span> <span class="id" title="var">x</span> <span class="id" title="var">snil</span> (<span class="id" title="var">ok_snil</span> <span class="id" title="var">x</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Qok_scons</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">ok</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">H</span> : <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">h</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">P</span> <span class="id" title="var">t</span> -&gt; <span class="id" title="var">Q</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span> -&gt; <span class="id" title="var">Q</span> <span class="id" title="var">x</span> (<span class="id" title="var">scons</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span>) (<span class="id" title="var">ok_scons</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span> <span class="id" title="var">x</span> <span class="id" title="var">H</span>)),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">f</span> : (<span class="id" title="keyword">forall</span> <span class="id" title="var">l</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>, <span class="id" title="var">P</span> <span class="id" title="var">l</span>) &amp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">g</span> : (<span class="id" title="keyword">forall</span> (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">ok</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span>), <span class="id" title="var">Q</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span>) &amp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">f</span> <span class="id" title="var">snil</span> = <span class="id" title="var">Psnil</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">forall</span> (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">ok</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">f</span> (<span class="id" title="var">scons</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span>) = <span class="id" title="var">Pscons</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span> (<span class="id" title="var">f</span> <span class="id" title="var">t</span>) (<span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span>)) /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">g</span> <span class="id" title="var">x</span> <span class="id" title="var">snil</span> (<span class="id" title="var">ok_snil</span> <span class="id" title="var">x</span>) = <span class="id" title="var">Qok_snil</span> <span class="id" title="var">x</span>) /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">forall</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">ok</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">H</span> : <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">h</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">g</span> <span class="id" title="var">x</span> (<span class="id" title="var">scons</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span>) (<span class="id" title="var">ok_scons</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span> <span class="id" title="var">x</span> <span class="id" title="var">H</span>) =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Qok_scons</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span> <span class="id" title="var">x</span> <span class="id" title="var">H</span> (<span class="id" title="var">f</span> <span class="id" title="var">t</span>) (<span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}}).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Ugh, co za potfur. Spróbujmy rozłożyć go na czynniki pierwsze.
+
+<div class="paragraph"> </div>
+
+    Przede wszystkim, żeby za dużo nie pisać, zobaczymy tylko regułę indukcji.
+    Teoretycznie powinny to być dwie reguły (tak jak w przypadku <span class="inlinecode"><span class="id" title="var">Smok</span></span>a i
+    <span class="inlinecode"><span class="id" title="var">Zmok</span></span>a) - jedna dla <span class="inlinecode"><span class="id" title="var">slist</span></span> i jedna dla <span class="inlinecode"><span class="id" title="var">ok</span></span>, ale żeby za dużo nie
+    pisać, możemy zapisać je razem.
+
+<div class="paragraph"> </div>
+
+    Typ <span class="inlinecode"><span class="id" title="var">A</span></span> i relacja <span class="inlinecode"><span class="id" title="var">R</span></span> są parametrami obu definicji, więc skwantyfikowane
+    są na samym początku. Nasza reguła pozwala nam zdefiniować przez wzajemną
+    rekursję dwie funkcje, <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">forall</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">slist</span></span> <span class="inlinecode"><span class="id" title="var">R</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> oraz
+    <span class="inlinecode"><span class="id" title="var">g</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">forall</span></span> <span class="inlinecode">(<span class="id" title="var">h</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span>)</span> <span class="inlinecode">(<span class="id" title="var">t</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">slist</span></span> <span class="inlinecode"><span class="id" title="var">R</span>)</span> <span class="inlinecode">(<span class="id" title="var">p</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">ok</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode"><span class="id" title="var">t</span>),</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span>. Tak więc <span class="inlinecode"><span class="id" title="var">P</span></span>
+    to kodziedzina <span class="inlinecode"><span class="id" title="var">f</span></span>, a <span class="inlinecode"><span class="id" title="var">Q</span></span> - <span class="inlinecode"><span class="id" title="var">g</span></span>.
+
+<div class="paragraph"> </div>
+
+    Teraz potrzebujemy rozważyć wszystkie możliwe przypadki - tak jak przy
+    pattern matchingu. Przypadek <span class="inlinecode"><span class="id" title="var">snil</span></span> jest dość banalny. Przypadek <span class="inlinecode"><span class="id" title="var">scons</span></span>
+    jest trochę cięższy. Przede wszystkim chcemy, żeby konkluzja była postaci
+    <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">(<span class="id" title="var">scons</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">p</span>)</span>, ale jak powinny wyglądać hipotezy indukcyjne?
+
+<div class="paragraph"> </div>
+
+    Jedyna słuszna odpowiedź brzmi: odpowiadają one typom wszystkich możliwych
+    wywołań rekurencyjnych <span class="inlinecode"><span class="id" title="var">f</span></span> i <span class="inlinecode"><span class="id" title="var">g</span></span> na strukturalnych podtermach <span class="inlinecode"><span class="id" title="var">scons</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span>.
+    Jedynymi typami spełniającymi te warunki są <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> oraz <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span>, więc
+    dajemy je sobie jako hipotezy indukcyjne.
+
+<div class="paragraph"> </div>
+
+    Przypadki dla <span class="inlinecode"><span class="id" title="var">Q</span></span> wyglądają podobnie: <span class="inlinecode"><span class="id" title="var">ok_snil</span></span> jest banalne, a w przypadku
+    <span class="inlinecode"><span class="id" title="var">ok_scons</span></span> konkluzja musi być jedynej słusznej postaci, a hipotezami
+    indukcyjnymi jest wszystko, co pasuje.
+
+<div class="paragraph"> </div>
+
+    W efekcie otrzymujemy dwie funkcje, <span class="inlinecode"><span class="id" title="var">f</span></span> i <span class="inlinecode"><span class="id" title="var">g</span></span>. Tym razem następuje jednak
+    mały twist: ponieważ nasza definicja jest aksjomatyczna, zagwarantować
+    musimy sobie także reguły obliczania, które dotychczas były przemilczywane,
+    bo wynikały z definicji przez dopasowanie do wzorca. Teraz wszystkie te
+    "dopasowania" musimy napisać ręcznie w postaci odpowiednio skwantyfikowanych
+    równań. Widzimy więc, że <span class="inlinecode"><span class="id" title="var">Psnil</span></span>, <span class="inlinecode"><span class="id" title="var">Pscons</span></span>, <span class="inlinecode"><span class="id" title="var">Qok_snil</span></span> i <span class="inlinecode"><span class="id" title="var">Qok_scons</span></span>
+    odpowiadają klauzulom w dopasowaniu do wzorca.
+
+<div class="paragraph"> </div>
+
+    Ufff... udało się. Tak spreparowaną definicją aksjomatyczną możemy się
+    jako-tako posługiwać: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">rec'</span><br/>
+&nbsp;&nbsp;{<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>}<br/>
+&nbsp;&nbsp;(<span class="id" title="var">P</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">snil'</span> : <span class="id" title="var">P</span>) (<span class="id" title="var">scons'</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">P</span> -&gt; <span class="id" title="var">P</span>) :<br/>
+&nbsp;&nbsp;{<span class="id" title="var">f</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span> -&gt; <span class="id" title="var">P</span> &amp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">f</span> <span class="id" title="var">snil</span> = <span class="id" title="var">snil'</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">ok</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">f</span> (<span class="id" title="var">scons</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span>) = <span class="id" title="var">scons'</span> <span class="id" title="var">h</span> (<span class="id" title="var">f</span> <span class="id" title="var">t</span>)<br/>
+&nbsp;&nbsp;}.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span><br/>
+&nbsp;&nbsp;(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">A</span> <span class="id" title="var">R</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> =&gt; <span class="id" title="var">P</span>) (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> =&gt; <span class="id" title="var">True</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">snil'</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">h</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">t</span> <span class="id" title="var">_</span> =&gt; <span class="id" title="var">scons'</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> =&gt; <span class="id" title="var">I</span>) (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> =&gt; <span class="id" title="var">I</span>)<br/>
+&nbsp;&nbsp;)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">as</span> (<span class="id" title="var">f</span> &amp; <span class="id" title="var">g</span> &amp; <span class="id" title="var">H1</span> &amp; <span class="id" title="var">H2</span> &amp; <span class="id" title="var">H3</span> &amp; <span class="id" title="var">H4</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exists</span> <span class="id" title="var">f</span>. <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <span class="id" title="var">H2</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Możemy na przykład dość łatwo zdefiniować niezależnych rekursor tylko dla
+    <span class="inlinecode"><span class="id" title="var">slist</span></span>, nie odnoszący się w żaden sposób do <span class="inlinecode"><span class="id" title="var">ok</span></span>. Widzimy jednak, że
+    "programowanie" w taki aksjomatyczny sposób jest dość ciężkie - zamiast
+    eleganckich dopasowań do wzorca musimy ręcznie wpisywać argumenty do
+    reguły indukcyjnej. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">List</span>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">toList'</span><br/>
+&nbsp;&nbsp;{<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>} :<br/>
+&nbsp;&nbsp;{<span class="id" title="var">f</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span> -&gt; <span class="id" title="var">list</span> <span class="id" title="var">A</span> &amp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">f</span> <span class="id" title="var">snil</span> = [] /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">forall</span> (<span class="id" title="var">h</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">ok</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">f</span> (<span class="id" title="var">scons</span> <span class="id" title="var">h</span> <span class="id" title="var">t</span> <span class="id" title="var">p</span>) = <span class="id" title="var">h</span> :: <span class="id" title="var">f</span> <span class="id" title="var">t</span><br/>
+&nbsp;&nbsp;}.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<span class="id" title="var">rec'</span> (<span class="id" title="var">list</span> <span class="id" title="var">A</span>) [] <span class="id" title="var">cons</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">toList</span><br/>
+&nbsp;&nbsp;{<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">R</span> : <span class="id" title="var">A</span> -&gt; <span class="id" title="var">A</span> -&gt; <span class="id" title="keyword">Prop</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">slist</span> <span class="id" title="var">R</span>) : <span class="id" title="var">list</span> <span class="id" title="var">A</span> :=<br/>
+<span class="id" title="keyword">match</span> @<span class="id" title="var">toList'</span> <span class="id" title="var">A</span> <span class="id" title="var">R</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">existT</span> <span class="id" title="var">_</span> <span class="id" title="var">f</span> <span class="id" title="var">_</span> =&gt; <span class="id" title="var">f</span> <span class="id" title="var">l</span><br/>
+<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Używająnie takieg rekursora jest już dużo prostsze, co ilustruje powyższy
+    przykład funkcji, która zapomina o tym, że lista jest posortowana i daje
+    nam zwykłą listę.
+
+<div class="paragraph"> </div>
+
+    Przykładowe posortowane listy wyglądają tak: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">slist_01</span> : <span class="id" title="var">slist</span> <span class="id" title="var">le</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">scons</span> 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">scons</span> 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">snil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">ok_snil</span> 1))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">ok_scons</span> 1 <span class="id" title="var">snil</span> (<span class="id" title="var">ok_snil</span> 1) 0 (<span class="id" title="var">le_S</span> 0 0 (<span class="id" title="var">le_n</span> 0))).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Niezbyt piękna, prawda? 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Compute</span> <span class="id" title="var">toList</span> <span class="id" title="var">slist_01</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Utrapieniem jest też to, że nasza funkcja się nie oblicza. Jest tak dlatego,
+    że została zdefiniowana za pomocą reguły indukcji, która jest aksjomatem.
+    Aksjomaty zaś, jak wiadomo (albo i nie - TODO) się nie obliczają.
+
+<div class="paragraph"> </div>
+
+    Wyniku powyższego wywołania nie będę nawet wklejał, gdyż jest naprawdę
+    ohydny. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">toList_slist_01_result</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="var">toList</span> <span class="id" title="var">slist_01</span> = [0; 1].<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">toList</span>, <span class="id" title="var">slist_01</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">toList'</span> <span class="id" title="keyword">as</span> (<span class="id" title="var">f</span> &amp; <span class="id" title="var">H1</span> &amp; <span class="id" title="var">H2</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> 2!<span class="id" title="var">H2</span>, <span class="id" title="var">H1</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Najlepsze, co możemy osiągnąć, mając taką definicję, to udowodnienie, że
+    jej wynik faktycznie jest taki, jak się spodziewamy.
+
+<div class="paragraph"> </div>
+
+    Cóż, to by było na tyle w temacie indukcji-indukcji. Brak Coqowego wsparcia
+    dla niej niestety wydatnie ogranicza praktyczne możliwości posługiwania się
+    nią. Jednak uszy do góry - istnieją już języki, które sobie z nią radzą.
+    Jednym z nich jest wspomniana we wstępie Agda, którą można znaleźć tu:
+    
 </div>
 <div class="code">
 
