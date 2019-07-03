@@ -1245,7 +1245,7 @@ Zauważmy, że użycie taktyki <span class="inlinecode"><span class="id" title="
 </div>
 
 <div class="doc">
-<a name="lab37"></a><h1 class="section">Konstruktywny rachunek predykatów</h1>
+<a name="lab37"></a><h1 class="section">Konstruktywny rachunek kwantyfikatorów</h1>
 
 </div>
 <div class="code">
@@ -1265,11 +1265,11 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">End</span></sp
 
 <div class="paragraph"> </div>
 
-    Zajmiemy się teraz konstruktywnym rachunkiem predykatów. Jest on
+    Zajmiemy się teraz konstruktywnym rachunkiem kwantyfikatorów. Jest on
     rozszerzeniem omówionego przed chwilą konstruktywnego rachunku zdań
-    o predykaty oraz kwantyfikatory, które pozwolą
-    nam wyrażać takie zależności jak "każdy" oraz "istnieje". Predykaty
-    możemy interpretować jako "właściwości obiektów". 
+    o kwantyfikatory, które pozwolą nam wyrażać takie zależności jak "każdy"
+    oraz "istnieje", oraz o predykaty i relacje, które mózemy interpretować
+    odpowiednio jako właściwości obiektów oraz zależności między obiektami. 
 <div class="paragraph"> </div>
 
 <a name="lab38"></a><h2 class="section">Kwantyfikacja uniwersalna</h2>
@@ -2339,13 +2339,13 @@ W praktyce komenda <span class="inlinecode"><span class="id" title="keyword">Hyp
     mimo że nie napisaliśmy jej explicite. 
 <div class="paragraph"> </div>
 
-<a name="lab61"></a><h2 class="section">Konstruktywny rachunek predykatów</h2>
+<a name="lab61"></a><h2 class="section">Konstruktywny rachunek kwantyfikatorów</h2>
 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Section</span> <span class="id" title="var">exercises_predicate</span>.<br/>
+<span class="id" title="keyword">Section</span> <span class="id" title="var">QuantifiersExercises</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Variable</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>.<br/>
@@ -2426,19 +2426,19 @@ W praktyce komenda <span class="inlinecode"><span class="id" title="keyword">Hyp
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">R</span> -&gt; <span class="id" title="var">P</span> <span class="id" title="var">x</span>) &lt;-&gt; (<span class="id" title="var">R</span> -&gt; <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span>, <span class="id" title="var">P</span> <span class="id" title="var">x</span>).<br/>
 
 <br/>
-<span class="id" title="keyword">End</span> <span class="id" title="var">exercises_predicate</span>.<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="var">QuantifiersExercises</span>.<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-<a name="lab65"></a><h2 class="section">Klasyczny rachunek zdań (i predykatów)</h2>
+<a name="lab65"></a><h2 class="section">Klasyczny rachunek zdań (i kwantyfikatorów)</h2>
 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Section</span> <span class="id" title="var">exercises_classical</span>.<br/>
+<span class="id" title="keyword">Section</span> <span class="id" title="var">ClassicalExercises</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Classical</span>.<br/>
@@ -2492,7 +2492,7 @@ Komenda <span class="inlinecode"><span class="id" title="keyword">Require</span>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">peirce</span> : ((<span class="id" title="var">P</span> -&gt; <span class="id" title="var">Q</span>) -&gt; <span class="id" title="var">P</span>) -&gt; <span class="id" title="var">P</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">End</span> <span class="id" title="var">exercises_classical</span>.<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="var">ClassicalExercises</span>.<br/>
 
 <br/>
 </div>
